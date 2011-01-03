@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'WebTest' target in the 'WebTest' project
+//
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import <WebAppKit/WebAppKit.h>
+#endif

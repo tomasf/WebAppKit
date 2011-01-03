@@ -1,0 +1,652 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
+		E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = E21702C912C92C5800DCE8FD /* TFRegex.h */; };
+		E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = E21702CA12C92C5800DCE8FD /* TFRegex.m */; };
+		E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D22AF12BC53CE00277F2E /* WAUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D22B012BC53CE00277F2E /* WAUtilities.m */; };
+		E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231712BC5D4500277F2E /* FMDatabase.h */; };
+		E21D231E12BC5D4500277F2E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231812BC5D4500277F2E /* FMDatabase.m */; };
+		E21D231F12BC5D4500277F2E /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231912BC5D4500277F2E /* FMDatabaseAdditions.h */; };
+		E21D232012BC5D4500277F2E /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231A12BC5D4500277F2E /* FMDatabaseAdditions.m */; };
+		E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231B12BC5D4500277F2E /* FMResultSet.h */; };
+		E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231C12BC5D4500277F2E /* FMResultSet.m */; };
+		E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21D233112BC5E6A00277F2E /* libsqlite3.dylib */; };
+		E21D234512BC607200277F2E /* WASessionStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D234312BC607200277F2E /* WASessionStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E21D234612BC607200277F2E /* WASessionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D234412BC607200277F2E /* WASessionStore.m */; };
+		E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = E21E76A812C03DC80082E402 /* WALocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = E21E76A912C03DC80082E402 /* WALocalization.m */; };
+		E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E260B0F912CCB99F0084FC05 /* libcrypto.dylib */; };
+		E26154D712B3CCED0040B002 /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E26154D612B3CCED0040B002 /* 404.html */; };
+		E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */; };
+		E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0FA12C3A80C006BA324 /* WACometStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2B7A0FD12C3A80C006BA324 /* WACometStream.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A0FB12C3A80C006BA324 /* WACometStream.m */; };
+		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
+		E2B7A17212C3AC71006BA324 /* ParseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B7A17112C3AC71006BA324 /* ParseKit.framework */; };
+		E2B7A1AB12C3AC7C006BA324 /* ParseKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2B7A17112C3AC71006BA324 /* ParseKit.framework */; };
+		E2B7A20B12C3B1A2006BA324 /* CometPrefix.html in Resources */ = {isa = PBXBuildFile; fileRef = E2B7A20A12C3B1A2006BA324 /* CometPrefix.html */; };
+		E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */; };
+		E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6512B2FE2400219BF5 /* WAFoundationExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5312B2FE2400219BF5 /* WAFoundationExtras.m */; };
+		E2D88B6612B2FE2400219BF5 /* WAApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5412B2FE2400219BF5 /* WAApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6712B2FE2400219BF5 /* WAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5512B2FE2400219BF5 /* WAApplication.m */; };
+		E2D88B6812B2FE2400219BF5 /* WAServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5612B2FE2400219BF5 /* WAServerConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6912B2FE2400219BF5 /* WAServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5712B2FE2400219BF5 /* WAServerConnection.m */; };
+		E2D88B6A12B2FE2400219BF5 /* WARequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5812B2FE2400219BF5 /* WARequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6B12B2FE2400219BF5 /* WARequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5912B2FE2400219BF5 /* WARequest.m */; };
+		E2D88B6C12B2FE2400219BF5 /* WARequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5A12B2FE2400219BF5 /* WARequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6D12B2FE2400219BF5 /* WARequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5B12B2FE2400219BF5 /* WARequestHandler.m */; };
+		E2D88B6E12B2FE2400219BF5 /* WAResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5C12B2FE2400219BF5 /* WAResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B6F12B2FE2400219BF5 /* WAResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5D12B2FE2400219BF5 /* WAResponse.m */; };
+		E2D88B7012B2FE2400219BF5 /* WARoute.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5E12B2FE2400219BF5 /* WARoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B7112B2FE2400219BF5 /* WARoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5F12B2FE2400219BF5 /* WARoute.m */; };
+		E2D88B7212B2FE2400219BF5 /* WAServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B6012B2FE2400219BF5 /* WAServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D88B7312B2FE2400219BF5 /* WAServer.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B6112B2FE2400219BF5 /* WAServer.m */; };
+		E2D88B7E12B2FE5E00219BF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D88B7D12B2FE5E00219BF5 /* Foundation.framework */; };
+		E2D88B8212B2FE6500219BF5 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D88B8112B2FE6500219BF5 /* CoreFoundation.framework */; };
+		E2D88B8812B2FE7300219BF5 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D88B8712B2FE7300219BF5 /* CoreServices.framework */; };
+		E2D88B9112B2FE8100219BF5 /* WebAppKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B9012B2FE8100219BF5 /* WebAppKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2E876C712B3167400558845 /* WADirectoryHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2E876C512B3167400558845 /* WADirectoryHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2E876C812B3167400558845 /* WADirectoryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E876C612B3167400558845 /* WADirectoryHandler.m */; };
+		E2E877AF12B3CC3900558845 /* WAStaticFileHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2E877AD12B3CC3900558845 /* WAStaticFileHandler.h */; };
+		E2E877B012B3CC3900558845 /* WAStaticFileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */; };
+		E2EAEED212B986A500097E0B /* WATemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAEED012B986A500097E0B /* WATemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2EAEED312B986A500097E0B /* WATemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAEED112B986A500097E0B /* WATemplate.m */; };
+		E2EAEEDD12B98D5100097E0B /* FScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAEEDC12B98D5100097E0B /* FScript.framework */; };
+		E2EAEF0A12B98D7500097E0B /* FScript.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAEEDC12B98D5100097E0B /* FScript.framework */; };
+		E2EAEFEF12B999FF00097E0B /* WAModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAEFED12B999FF00097E0B /* WAModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2EAEFF012B999FF00097E0B /* WAModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAEFEE12B999FF00097E0B /* WAModule.m */; };
+		E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */; };
+		E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAF09812B9AB4800097E0B /* CoreData.framework */; };
+		E2EAF1C312BADEE600097E0B /* WASession.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF1C112BADEE600097E0B /* WASession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2EAF1C412BADEE600097E0B /* WASession.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF1C212BADEE600097E0B /* WASession.m */; };
+		E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF1C512BAE00B00097E0B /* WACookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF1C612BAE00B00097E0B /* WACookie.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2EAEF0F12B98D9300097E0B /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2B7A1AB12C3AC7C006BA324 /* ParseKit.framework in Copy Frameworks */,
+				E2EAEF0A12B98D7500097E0B /* FScript.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebAppKit_Prefix.pch; sourceTree = "<group>"; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		8DC2EF5B0486A6940098B216 /* WebAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		E21702C212C9286800DCE8FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		E21702C912C92C5800DCE8FD /* TFRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFRegex.h; sourceTree = "<group>"; };
+		E21702CA12C92C5800DCE8FD /* TFRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFRegex.m; sourceTree = "<group>"; };
+		E21D22AF12BC53CE00277F2E /* WAUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAUtilities.h; path = Source/WAUtilities.h; sourceTree = "<group>"; };
+		E21D22B012BC53CE00277F2E /* WAUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAUtilities.m; path = Source/WAUtilities.m; sourceTree = "<group>"; };
+		E21D231712BC5D4500277F2E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		E21D231812BC5D4500277F2E /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		E21D231912BC5D4500277F2E /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		E21D231A12BC5D4500277F2E /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		E21D231B12BC5D4500277F2E /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		E21D231C12BC5D4500277F2E /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		E21D233112BC5E6A00277F2E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/local/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E21D234312BC607200277F2E /* WASessionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASessionStore.h; path = Source/WASessionStore.h; sourceTree = "<group>"; };
+		E21D234412BC607200277F2E /* WASessionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASessionStore.m; path = Source/WASessionStore.m; sourceTree = "<group>"; };
+		E21E76A812C03DC80082E402 /* WALocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WALocalization.h; path = Source/WALocalization.h; sourceTree = "<group>"; };
+		E21E76A912C03DC80082E402 /* WALocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WALocalization.m; path = Source/WALocalization.m; sourceTree = "<group>"; };
+		E260B0F912CCB99F0084FC05 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
+		E26154D612B3CCED0040B002 /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
+		E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometHandler.h; path = Source/WACometHandler.h; sourceTree = "<group>"; };
+		E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACometHandler.m; path = Source/WACometHandler.m; sourceTree = "<group>"; };
+		E2B7A0FA12C3A80C006BA324 /* WACometStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometStream.h; path = Source/WACometStream.h; sourceTree = "<group>"; };
+		E2B7A0FB12C3A80C006BA324 /* WACometStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACometStream.m; path = Source/WACometStream.m; sourceTree = "<group>"; };
+		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
+		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
+		E2B7A17112C3AC71006BA324 /* ParseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseKit.framework; path = Frameworks/ParseKit.framework; sourceTree = "<group>"; };
+		E2B7A20A12C3B1A2006BA324 /* CometPrefix.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CometPrefix.html; sourceTree = "<group>"; };
+		E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAFoundationExtras.h; path = Source/WAFoundationExtras.h; sourceTree = "<group>"; };
+		E2D88B5312B2FE2400219BF5 /* WAFoundationExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAFoundationExtras.m; path = Source/WAFoundationExtras.m; sourceTree = "<group>"; };
+		E2D88B5412B2FE2400219BF5 /* WAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAApplication.h; path = Source/WAApplication.h; sourceTree = "<group>"; };
+		E2D88B5512B2FE2400219BF5 /* WAApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAApplication.m; path = Source/WAApplication.m; sourceTree = "<group>"; };
+		E2D88B5612B2FE2400219BF5 /* WAServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAServerConnection.h; path = Source/WAServerConnection.h; sourceTree = "<group>"; };
+		E2D88B5712B2FE2400219BF5 /* WAServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAServerConnection.m; path = Source/WAServerConnection.m; sourceTree = "<group>"; };
+		E2D88B5812B2FE2400219BF5 /* WARequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WARequest.h; path = Source/WARequest.h; sourceTree = "<group>"; };
+		E2D88B5912B2FE2400219BF5 /* WARequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WARequest.m; path = Source/WARequest.m; sourceTree = "<group>"; };
+		E2D88B5A12B2FE2400219BF5 /* WARequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WARequestHandler.h; path = Source/WARequestHandler.h; sourceTree = "<group>"; };
+		E2D88B5B12B2FE2400219BF5 /* WARequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WARequestHandler.m; path = Source/WARequestHandler.m; sourceTree = "<group>"; };
+		E2D88B5C12B2FE2400219BF5 /* WAResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAResponse.h; path = Source/WAResponse.h; sourceTree = "<group>"; };
+		E2D88B5D12B2FE2400219BF5 /* WAResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAResponse.m; path = Source/WAResponse.m; sourceTree = "<group>"; };
+		E2D88B5E12B2FE2400219BF5 /* WARoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WARoute.h; path = Source/WARoute.h; sourceTree = "<group>"; };
+		E2D88B5F12B2FE2400219BF5 /* WARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WARoute.m; path = Source/WARoute.m; sourceTree = "<group>"; };
+		E2D88B6012B2FE2400219BF5 /* WAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAServer.h; path = Source/WAServer.h; sourceTree = "<group>"; };
+		E2D88B6112B2FE2400219BF5 /* WAServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAServer.m; path = Source/WAServer.m; sourceTree = "<group>"; };
+		E2D88B7D12B2FE5E00219BF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E2D88B8112B2FE6500219BF5 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		E2D88B8712B2FE7300219BF5 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		E2D88B9012B2FE8100219BF5 /* WebAppKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebAppKit.h; path = Source/WebAppKit.h; sourceTree = "<group>"; };
+		E2E876C512B3167400558845 /* WADirectoryHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WADirectoryHandler.h; path = Source/WADirectoryHandler.h; sourceTree = "<group>"; };
+		E2E876C612B3167400558845 /* WADirectoryHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WADirectoryHandler.m; path = Source/WADirectoryHandler.m; sourceTree = "<group>"; };
+		E2E877AD12B3CC3900558845 /* WAStaticFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAStaticFileHandler.h; path = Source/WAStaticFileHandler.h; sourceTree = "<group>"; };
+		E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAStaticFileHandler.m; path = Source/WAStaticFileHandler.m; sourceTree = "<group>"; };
+		E2EAEED012B986A500097E0B /* WATemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WATemplate.h; path = Source/WATemplate.h; sourceTree = "<group>"; };
+		E2EAEED112B986A500097E0B /* WATemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WATemplate.m; path = Source/WATemplate.m; sourceTree = "<group>"; };
+		E2EAEEDC12B98D5100097E0B /* FScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FScript.framework; path = Frameworks/FScript.framework; sourceTree = "<group>"; };
+		E2EAEFED12B999FF00097E0B /* WAModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAModule.h; path = Source/WAModule.h; sourceTree = "<group>"; };
+		E2EAEFEE12B999FF00097E0B /* WAModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAModule.m; path = Source/WAModule.m; sourceTree = "<group>"; };
+		E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACoreDataExtras.h; path = Source/WACoreDataExtras.h; sourceTree = "<group>"; };
+		E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACoreDataExtras.m; path = Source/WACoreDataExtras.m; sourceTree = "<group>"; };
+		E2EAF09812B9AB4800097E0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E2EAF1C112BADEE600097E0B /* WASession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASession.h; path = Source/WASession.h; sourceTree = "<group>"; };
+		E2EAF1C212BADEE600097E0B /* WASession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASession.m; path = Source/WASession.m; sourceTree = "<group>"; };
+		E2EAF1C512BAE00B00097E0B /* WACookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACookie.h; path = Source/WACookie.h; sourceTree = "<group>"; };
+		E2EAF1C612BAE00B00097E0B /* WACookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookie.m; path = Source/WACookie.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DC2EF560486A6940098B216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2D88B7E12B2FE5E00219BF5 /* Foundation.framework in Frameworks */,
+				E2D88B8212B2FE6500219BF5 /* CoreFoundation.framework in Frameworks */,
+				E2D88B8812B2FE7300219BF5 /* CoreServices.framework in Frameworks */,
+				E2EAEEDD12B98D5100097E0B /* FScript.framework in Frameworks */,
+				E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */,
+				E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */,
+				E2B7A17212C3AC71006BA324 /* ParseKit.framework in Frameworks */,
+				E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */,
+				E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5B0486A6940098B216 /* WebAppKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* WebApp */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = WebApp;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
+				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5A0486A6940098B216 /* Info.plist */,
+				E26154D612B3CCED0040B002 /* 404.html */,
+				E2B7A20A12C3B1A2006BA324 /* CometPrefix.html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E2E8778D12B3C61800558845 /* Server */,
+				E2DA8B2D12D2634700B1EDE8 /* Transaction */,
+				E2E877AC12B3CC1D00558845 /* Request Handlers */,
+				E2DA8B2B12D2633100B1EDE8 /* Categories */,
+				E2DA8B2E12D2635F00B1EDE8 /* Application */,
+				E2DA8B2F12D2638E00B1EDE8 /* Templates */,
+				E21D234212BC606300277F2E /* Cookies */,
+				E2B7A15912C3AC0D006BA324 /* WAJSON.h */,
+				E2B7A15A12C3AC0D006BA324 /* WAJSON.m */,
+				E21D22AF12BC53CE00277F2E /* WAUtilities.h */,
+				E21D22B012BC53CE00277F2E /* WAUtilities.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E260B0F912CCB99F0084FC05 /* libcrypto.dylib */,
+				E21702C212C9286800DCE8FD /* libicucore.dylib */,
+				E2B7A17112C3AC71006BA324 /* ParseKit.framework */,
+				E21D233112BC5E6A00277F2E /* libsqlite3.dylib */,
+				E2EAF09812B9AB4800097E0B /* CoreData.framework */,
+				E2EAEEDC12B98D5100097E0B /* FScript.framework */,
+				E2D88B7D12B2FE5E00219BF5 /* Foundation.framework */,
+				E2D88B8112B2FE6500219BF5 /* CoreFoundation.framework */,
+				E2D88B8712B2FE7300219BF5 /* CoreServices.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
+				D2F7E79907B2D74100F64583 /* CoreData.framework */,
+				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B9012B2FE8100219BF5 /* WebAppKit.h */,
+				32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */,
+				E21D231612BC5D4500277F2E /* FMDatabase */,
+				E21702C812C92C5800DCE8FD /* TFRegex */,
+				E2D88B4F12B2FE2400219BF5 /* AsyncSocket */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		E21702C812C92C5800DCE8FD /* TFRegex */ = {
+			isa = PBXGroup;
+			children = (
+				E21702C912C92C5800DCE8FD /* TFRegex.h */,
+				E21702CA12C92C5800DCE8FD /* TFRegex.m */,
+			);
+			path = TFRegex;
+			sourceTree = "<group>";
+		};
+		E21D231612BC5D4500277F2E /* FMDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				E21D231712BC5D4500277F2E /* FMDatabase.h */,
+				E21D231812BC5D4500277F2E /* FMDatabase.m */,
+				E21D231912BC5D4500277F2E /* FMDatabaseAdditions.h */,
+				E21D231A12BC5D4500277F2E /* FMDatabaseAdditions.m */,
+				E21D231B12BC5D4500277F2E /* FMResultSet.h */,
+				E21D231C12BC5D4500277F2E /* FMResultSet.m */,
+			);
+			path = FMDatabase;
+			sourceTree = "<group>";
+		};
+		E21D234212BC606300277F2E /* Cookies */ = {
+			isa = PBXGroup;
+			children = (
+				E2EAF1C512BAE00B00097E0B /* WACookie.h */,
+				E2EAF1C612BAE00B00097E0B /* WACookie.m */,
+				E21D234312BC607200277F2E /* WASessionStore.h */,
+				E21D234412BC607200277F2E /* WASessionStore.m */,
+				E2EAF1C112BADEE600097E0B /* WASession.h */,
+				E2EAF1C212BADEE600097E0B /* WASession.m */,
+			);
+			name = Cookies;
+			sourceTree = "<group>";
+		};
+		E2B7A0F012C3A6B3006BA324 /* Comet */ = {
+			isa = PBXGroup;
+			children = (
+				E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */,
+				E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */,
+				E2B7A0FA12C3A80C006BA324 /* WACometStream.h */,
+				E2B7A0FB12C3A80C006BA324 /* WACometStream.m */,
+			);
+			name = Comet;
+			sourceTree = "<group>";
+		};
+		E2D88B4F12B2FE2400219BF5 /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */,
+				E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */,
+			);
+			name = AsyncSocket;
+			path = Source/AsyncSocket;
+			sourceTree = "<group>";
+		};
+		E2DA8B2B12D2633100B1EDE8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */,
+				E2D88B5312B2FE2400219BF5 /* WAFoundationExtras.m */,
+				E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */,
+				E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		E2DA8B2D12D2634700B1EDE8 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B5812B2FE2400219BF5 /* WARequest.h */,
+				E2D88B5912B2FE2400219BF5 /* WARequest.m */,
+				E2D88B5C12B2FE2400219BF5 /* WAResponse.h */,
+				E2D88B5D12B2FE2400219BF5 /* WAResponse.m */,
+			);
+			name = Transaction;
+			sourceTree = "<group>";
+		};
+		E2DA8B2E12D2635F00B1EDE8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B5412B2FE2400219BF5 /* WAApplication.h */,
+				E2D88B5512B2FE2400219BF5 /* WAApplication.m */,
+				E2D88B5E12B2FE2400219BF5 /* WARoute.h */,
+				E2D88B5F12B2FE2400219BF5 /* WARoute.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		E2DA8B2F12D2638E00B1EDE8 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				E2EAEED012B986A500097E0B /* WATemplate.h */,
+				E2EAEED112B986A500097E0B /* WATemplate.m */,
+				E2EAEFED12B999FF00097E0B /* WAModule.h */,
+				E2EAEFEE12B999FF00097E0B /* WAModule.m */,
+				E21E76A812C03DC80082E402 /* WALocalization.h */,
+				E21E76A912C03DC80082E402 /* WALocalization.m */,
+			);
+			name = Templates;
+			sourceTree = "<group>";
+		};
+		E2E8778D12B3C61800558845 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B6012B2FE2400219BF5 /* WAServer.h */,
+				E2D88B6112B2FE2400219BF5 /* WAServer.m */,
+				E2D88B5612B2FE2400219BF5 /* WAServerConnection.h */,
+				E2D88B5712B2FE2400219BF5 /* WAServerConnection.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		E2E877AC12B3CC1D00558845 /* Request Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				E2D88B5A12B2FE2400219BF5 /* WARequestHandler.h */,
+				E2D88B5B12B2FE2400219BF5 /* WARequestHandler.m */,
+				E2E876C512B3167400558845 /* WADirectoryHandler.h */,
+				E2E876C612B3167400558845 /* WADirectoryHandler.m */,
+				E2E877AD12B3CC3900558845 /* WAStaticFileHandler.h */,
+				E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */,
+				E2B7A0F012C3A6B3006BA324 /* Comet */,
+			);
+			name = "Request Handlers";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8DC2EF500486A6940098B216 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */,
+				E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */,
+				E2D88B6612B2FE2400219BF5 /* WAApplication.h in Headers */,
+				E2D88B6812B2FE2400219BF5 /* WAServerConnection.h in Headers */,
+				E2D88B6A12B2FE2400219BF5 /* WARequest.h in Headers */,
+				E2D88B6C12B2FE2400219BF5 /* WARequestHandler.h in Headers */,
+				E2D88B6E12B2FE2400219BF5 /* WAResponse.h in Headers */,
+				E2D88B7012B2FE2400219BF5 /* WARoute.h in Headers */,
+				E2D88B7212B2FE2400219BF5 /* WAServer.h in Headers */,
+				E2D88B9112B2FE8100219BF5 /* WebAppKit.h in Headers */,
+				E2E876C712B3167400558845 /* WADirectoryHandler.h in Headers */,
+				E2E877AF12B3CC3900558845 /* WAStaticFileHandler.h in Headers */,
+				E2EAEED212B986A500097E0B /* WATemplate.h in Headers */,
+				E2EAEFEF12B999FF00097E0B /* WAModule.h in Headers */,
+				E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */,
+				E2EAF1C312BADEE600097E0B /* WASession.h in Headers */,
+				E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */,
+				E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */,
+				E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */,
+				E21D231F12BC5D4500277F2E /* FMDatabaseAdditions.h in Headers */,
+				E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */,
+				E21D234512BC607200277F2E /* WASessionStore.h in Headers */,
+				E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */,
+				E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */,
+				E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */,
+				E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */,
+				E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DC2EF4F0486A6940098B216 /* WebAppKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "WebAppKit" */;
+			buildPhases = (
+				8DC2EF500486A6940098B216 /* Headers */,
+				8DC2EF520486A6940098B216 /* Resources */,
+				8DC2EF540486A6940098B216 /* Sources */,
+				8DC2EF560486A6940098B216 /* Frameworks */,
+				E2EAEF0F12B98D9300097E0B /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebAppKit;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = WebApp;
+			productReference = 8DC2EF5B0486A6940098B216 /* WebAppKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "WebAppKit" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* WebApp */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DC2EF4F0486A6940098B216 /* WebAppKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DC2EF520486A6940098B216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2B7A20B12C3B1A2006BA324 /* CometPrefix.html in Resources */,
+				E26154D712B3CCED0040B002 /* 404.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DC2EF540486A6940098B216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */,
+				E2D88B6512B2FE2400219BF5 /* WAFoundationExtras.m in Sources */,
+				E2D88B6712B2FE2400219BF5 /* WAApplication.m in Sources */,
+				E2D88B6912B2FE2400219BF5 /* WAServerConnection.m in Sources */,
+				E2D88B6B12B2FE2400219BF5 /* WARequest.m in Sources */,
+				E2D88B6D12B2FE2400219BF5 /* WARequestHandler.m in Sources */,
+				E2D88B6F12B2FE2400219BF5 /* WAResponse.m in Sources */,
+				E2D88B7112B2FE2400219BF5 /* WARoute.m in Sources */,
+				E2D88B7312B2FE2400219BF5 /* WAServer.m in Sources */,
+				E2E876C812B3167400558845 /* WADirectoryHandler.m in Sources */,
+				E2E877B012B3CC3900558845 /* WAStaticFileHandler.m in Sources */,
+				E2EAEED312B986A500097E0B /* WATemplate.m in Sources */,
+				E2EAEFF012B999FF00097E0B /* WAModule.m in Sources */,
+				E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */,
+				E2EAF1C412BADEE600097E0B /* WASession.m in Sources */,
+				E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */,
+				E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */,
+				E21D231E12BC5D4500277F2E /* FMDatabase.m in Sources */,
+				E21D232012BC5D4500277F2E /* FMDatabaseAdditions.m in Sources */,
+				E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */,
+				E21D234612BC607200277F2E /* WASessionStore.m in Sources */,
+				E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */,
+				E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */,
+				E2B7A0FD12C3A80C006BA324 /* WACometStream.m in Sources */,
+				E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */,
+				E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91AE08733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = /Library/Frameworks;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = WebAppKit;
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		1DEB91AF08733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				PRODUCT_NAME = WebAppKit;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		1DEB91B208733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB91B308733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEPLOYMENT_LOCATION = NO;
+				DSTROOT = /;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "";
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "WebAppKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91AE08733DA50010E9CD /* Debug */,
+				1DEB91AF08733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "WebAppKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91B208733DA50010E9CD /* Debug */,
+				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
