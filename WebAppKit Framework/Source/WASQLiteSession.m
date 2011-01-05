@@ -67,4 +67,9 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 }
 
 
+- (void)removeValueForKey:(NSString*)key {
+	[database executeUpdate:@"DELETE FROM `values` WHERE token = ? AND `key` = ?", token, key];
+}
+
+
 @end

@@ -11,4 +11,5 @@
 @implementation WASession
 - (void)setValue:(id)value forKey:(NSString*)key {}
 - (id)valueForKey:(NSString*)key {return nil;}
+- (void)removeValueForKey:(NSString*)key {}
 @end

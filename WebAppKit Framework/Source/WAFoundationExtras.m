@@ -158,8 +158,7 @@
 	size_t outSize = 0;
 	CCCrypt(kCCEncrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], NULL, 0, &outSize);
 	
-	NSMutableData *ciphertext = [NSMutableData data];
-	[ciphertext setLength:outSize];
+	NSMutableData *ciphertext = [NSMutableData dataWithLength:outSize];
 	if(CCCrypt(kCCEncrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], [ciphertext mutableBytes], outSize, &outSize) != kCCSuccess)
 		return nil;
 	return ciphertext;
@@ -170,11 +169,10 @@
 	size_t outSize = 0;
 	CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], NULL, 0, &outSize);
 	
-	NSMutableData *cleartext = [NSMutableData data];
-	[cleartext setLength:outSize];
+	NSMutableData *cleartext = [NSMutableData dataWithLength:outSize];
 	if(CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], [cleartext mutableBytes], outSize, &outSize) != kCCSuccess)
 		return nil;
-	[cleartext setLength:outSize];
+	[cleartext setLength:outSize]; // Can be smaller due to padding
 	return cleartext;
 }
 

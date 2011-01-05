@@ -16,4 +16,5 @@
 
 - (void)setValue:(id)value forKey:(NSString*)key;
 - (id)valueForKey:(NSString*)key;
+- (void)removeValueForKey:(NSString*)key;
 @end

@@ -49,6 +49,7 @@
 - (void)redirectToURL:(NSURL*)URL withStatusCode:(NSUInteger)code;
 
 - (void)addCookie:(WACookie*)cookie;
+- (void)removeCookieNamed:(NSString*)name;
 - (void)requestAuthenticationForRealm:(NSString*)realm scheme:(WAAuthenticationScheme)scheme;
 
 @end
