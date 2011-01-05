@@ -19,10 +19,18 @@
 		E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231B12BC5D4500277F2E /* FMResultSet.h */; };
 		E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231C12BC5D4500277F2E /* FMResultSet.m */; };
 		E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21D233112BC5E6A00277F2E /* libsqlite3.dylib */; };
-		E21D234512BC607200277F2E /* WASessionStore.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D234312BC607200277F2E /* WASessionStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E21D234612BC607200277F2E /* WASessionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D234412BC607200277F2E /* WASessionStore.m */; };
 		E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = E21E76A812C03DC80082E402 /* WALocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = E21E76A912C03DC80082E402 /* WALocalization.m */; };
+		E227EC3512D3B67600C9B669 /* WASessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC3312D3B67600C9B669 /* WASessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E227EC3612D3B67600C9B669 /* WASessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC3412D3B67600C9B669 /* WASessionManager.m */; };
+		E227EC4512D3B82F00C9B669 /* WASQLiteSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC4312D3B82F00C9B669 /* WASQLiteSession.h */; };
+		E227EC4612D3B82F00C9B669 /* WASQLiteSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC4412D3B82F00C9B669 /* WASQLiteSession.m */; };
+		E227EC6812D3BA1B00C9B669 /* WASQLiteSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC6612D3BA1B00C9B669 /* WASQLiteSessionManager.h */; };
+		E227EC6912D3BA1B00C9B669 /* WASQLiteSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC6712D3BA1B00C9B669 /* WASQLiteSessionManager.m */; };
+		E227ED3412D3C1C800C9B669 /* WACookieSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E227ED3212D3C1C800C9B669 /* WACookieSessionManager.h */; };
+		E227ED3512D3C1C800C9B669 /* WACookieSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E227ED3312D3C1C800C9B669 /* WACookieSessionManager.m */; };
+		E227ED3812D3C1D000C9B669 /* WACookieSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E227ED3612D3C1D000C9B669 /* WACookieSession.h */; };
+		E227ED3912D3C1D000C9B669 /* WACookieSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E227ED3712D3C1D000C9B669 /* WACookieSession.m */; };
 		E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E260B0F912CCB99F0084FC05 /* libcrypto.dylib */; };
 		E26154D712B3CCED0040B002 /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E26154D612B3CCED0040B002 /* 404.html */; };
 		E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -109,10 +117,18 @@
 		E21D231B12BC5D4500277F2E /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		E21D231C12BC5D4500277F2E /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		E21D233112BC5E6A00277F2E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/local/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		E21D234312BC607200277F2E /* WASessionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASessionStore.h; path = Source/WASessionStore.h; sourceTree = "<group>"; };
-		E21D234412BC607200277F2E /* WASessionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASessionStore.m; path = Source/WASessionStore.m; sourceTree = "<group>"; };
 		E21E76A812C03DC80082E402 /* WALocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WALocalization.h; path = Source/WALocalization.h; sourceTree = "<group>"; };
 		E21E76A912C03DC80082E402 /* WALocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WALocalization.m; path = Source/WALocalization.m; sourceTree = "<group>"; };
+		E227EC3312D3B67600C9B669 /* WASessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASessionManager.h; path = Source/WASessionManager.h; sourceTree = "<group>"; };
+		E227EC3412D3B67600C9B669 /* WASessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASessionManager.m; path = Source/WASessionManager.m; sourceTree = "<group>"; };
+		E227EC4312D3B82F00C9B669 /* WASQLiteSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASQLiteSession.h; path = Source/WASQLiteSession.h; sourceTree = "<group>"; };
+		E227EC4412D3B82F00C9B669 /* WASQLiteSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASQLiteSession.m; path = Source/WASQLiteSession.m; sourceTree = "<group>"; };
+		E227EC6612D3BA1B00C9B669 /* WASQLiteSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASQLiteSessionManager.h; path = Source/WASQLiteSessionManager.h; sourceTree = "<group>"; };
+		E227EC6712D3BA1B00C9B669 /* WASQLiteSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASQLiteSessionManager.m; path = Source/WASQLiteSessionManager.m; sourceTree = "<group>"; };
+		E227ED3212D3C1C800C9B669 /* WACookieSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACookieSessionManager.h; path = Source/WACookieSessionManager.h; sourceTree = "<group>"; };
+		E227ED3312D3C1C800C9B669 /* WACookieSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookieSessionManager.m; path = Source/WACookieSessionManager.m; sourceTree = "<group>"; };
+		E227ED3612D3C1D000C9B669 /* WACookieSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACookieSession.h; path = Source/WACookieSession.h; sourceTree = "<group>"; };
+		E227ED3712D3C1D000C9B669 /* WACookieSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookieSession.m; path = Source/WACookieSession.m; sourceTree = "<group>"; };
 		E260B0F912CCB99F0084FC05 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		E26154D612B3CCED0040B002 /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
 		E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometHandler.h; path = Source/WACometHandler.h; sourceTree = "<group>"; };
@@ -305,12 +321,36 @@
 			children = (
 				E2EAF1C512BAE00B00097E0B /* WACookie.h */,
 				E2EAF1C612BAE00B00097E0B /* WACookie.m */,
-				E21D234312BC607200277F2E /* WASessionStore.h */,
-				E21D234412BC607200277F2E /* WASessionStore.m */,
+				E227EC3312D3B67600C9B669 /* WASessionManager.h */,
+				E227EC3412D3B67600C9B669 /* WASessionManager.m */,
 				E2EAF1C112BADEE600097E0B /* WASession.h */,
 				E2EAF1C212BADEE600097E0B /* WASession.m */,
+				E227EC3712D3B7EF00C9B669 /* SQLite Sessions */,
+				E227ED3112D3C1A700C9B669 /* Cookie Sessions */,
 			);
 			name = Cookies;
+			sourceTree = "<group>";
+		};
+		E227EC3712D3B7EF00C9B669 /* SQLite Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				E227EC6612D3BA1B00C9B669 /* WASQLiteSessionManager.h */,
+				E227EC6712D3BA1B00C9B669 /* WASQLiteSessionManager.m */,
+				E227EC4312D3B82F00C9B669 /* WASQLiteSession.h */,
+				E227EC4412D3B82F00C9B669 /* WASQLiteSession.m */,
+			);
+			name = "SQLite Sessions";
+			sourceTree = "<group>";
+		};
+		E227ED3112D3C1A700C9B669 /* Cookie Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				E227ED3212D3C1C800C9B669 /* WACookieSessionManager.h */,
+				E227ED3312D3C1C800C9B669 /* WACookieSessionManager.m */,
+				E227ED3612D3C1D000C9B669 /* WACookieSession.h */,
+				E227ED3712D3C1D000C9B669 /* WACookieSession.m */,
+			);
+			name = "Cookie Sessions";
 			sourceTree = "<group>";
 		};
 		E2B7A0F012C3A6B3006BA324 /* Comet */ = {
@@ -433,12 +473,16 @@
 				E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */,
 				E21D231F12BC5D4500277F2E /* FMDatabaseAdditions.h in Headers */,
 				E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */,
-				E21D234512BC607200277F2E /* WASessionStore.h in Headers */,
 				E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */,
 				E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */,
 				E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */,
 				E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */,
 				E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */,
+				E227EC3512D3B67600C9B669 /* WASessionManager.h in Headers */,
+				E227EC4512D3B82F00C9B669 /* WASQLiteSession.h in Headers */,
+				E227EC6812D3BA1B00C9B669 /* WASQLiteSessionManager.h in Headers */,
+				E227ED3412D3C1C800C9B669 /* WACookieSessionManager.h in Headers */,
+				E227ED3812D3C1D000C9B669 /* WACookieSession.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,12 +571,16 @@
 				E21D231E12BC5D4500277F2E /* FMDatabase.m in Sources */,
 				E21D232012BC5D4500277F2E /* FMDatabaseAdditions.m in Sources */,
 				E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */,
-				E21D234612BC607200277F2E /* WASessionStore.m in Sources */,
 				E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */,
 				E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */,
 				E2B7A0FD12C3A80C006BA324 /* WACometStream.m in Sources */,
 				E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */,
 				E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */,
+				E227EC3612D3B67600C9B669 /* WASessionManager.m in Sources */,
+				E227EC4612D3B82F00C9B669 /* WASQLiteSession.m in Sources */,
+				E227EC6912D3BA1B00C9B669 /* WASQLiteSessionManager.m in Sources */,
+				E227ED3512D3C1C800C9B669 /* WACookieSessionManager.m in Sources */,
+				E227ED3912D3C1D000C9B669 /* WACookieSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

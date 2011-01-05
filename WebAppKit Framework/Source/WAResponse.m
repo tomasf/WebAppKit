@@ -223,6 +223,11 @@
 	[cookies setObject:cookie forKey:cookie.name];
 }
 
+- (void)removeCookieNamed:(NSString*)name {
+	[self requireProgressiveHeaderNotSent];
+	[cookies removeObjectForKey:name];
+}
+
 - (void)setEntityTag:(NSString*)ETag {
 	[self setValue:ETag forHeaderField:@"ETag"];
 }

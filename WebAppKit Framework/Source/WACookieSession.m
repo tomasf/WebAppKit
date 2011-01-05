@@ -10,6 +10,7 @@
 #import "WACookie.h"
 #import "WARequest.h"
 #import "WAResponse.h"
+#import <openssl/md5.h>3
 
 static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 
@@ -40,7 +41,22 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 		NSLog(@"Cookie value decryption failed. Discarding data.");
 		return empty;
 	}
-	NSDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithData:plaintext];
+	
+	if([plaintext length] < MD5_DIGEST_LENGTH) {
+		NSLog(@"Decoded cookie value too short.");
+		return empty;
+	}
+	
+	NSData *hash = [plaintext subdataWithRange:NSMakeRange(0, MD5_DIGEST_LENGTH)];
+	NSData *payload = [plaintext subdataWithRange:NSMakeRange(MD5_DIGEST_LENGTH, [plaintext length]-MD5_DIGEST_LENGTH)];
+	NSData *correctHash = [payload MD5Digest];
+	
+	if(![hash isEqualToData:correctHash]) {
+		NSLog(@"Session cookie had invalid hash. Discarding data.");
+		return empty;
+	}
+	
+	NSDictionary *dictionary = [NSKeyedUnarchiver unarchiveObjectWithData:payload];
 	if(!dictionary) {
 		NSLog(@"Failed to unarchive plaintext cookie payload. Discarding data.");
 		return empty;
@@ -50,11 +66,17 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 
 
 + (NSString*)cookieValueFromDictionary:(NSDictionary*)dictionary key:(NSData*)key {
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-	if(!data) [NSException raise:NSInternalInconsistencyException format:@"Session data archiving failed"];
-	data = [data dataByEncryptingAES128UsingKey:key];
-	if(!data) [NSException raise:NSInternalInconsistencyException format:@"Session data encryption failed"];	
-	NSString *base64 = [data base64String];
+	NSData *payload = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+	if(!payload) [NSException raise:NSInternalInconsistencyException format:@"Session data archiving failed"];
+	
+	NSMutableData *data = [NSMutableData data];
+	[data appendData:[payload MD5Digest]];
+	[data appendData:payload];
+	
+	NSData *ciphertext = [data dataByEncryptingAES128UsingKey:key];
+	if(!ciphertext) [NSException raise:NSInternalInconsistencyException format:@"Session data encryption failed"];	
+						   
+	NSString *base64 = [ciphertext base64String];
 	if(!base64) [NSException raise:NSInternalInconsistencyException format:@"Session data base64 encoding failed"];	
 	return [self tokenValueFromBase64:base64];
 }
@@ -80,7 +102,7 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 
 
 - (void)updateResponse {
-	NSString *value = [[self class] cookieValueFromDictionary:values key:encryptionKey];
+	NSString *value = [values count] ? [[self class] cookieValueFromDictionary:values key:encryptionKey] : @"";
 	WACookie *cookie = [[WACookie alloc] initWithName:name value:value lifespan:WSSessionDefaultLifespan path:nil domain:nil];
 	[response addCookie:cookie];
 }
@@ -94,6 +116,11 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 
 - (id)valueForKey:(NSString*)key {
 	return [values objectForKey:key];
+}
+
+- (void)removeValueForKey:(NSString*)key {
+	[values removeObjectForKey:key];
+	[self updateResponse];
 }
 
 @end
