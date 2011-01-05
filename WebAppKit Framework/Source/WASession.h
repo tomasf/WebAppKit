@@ -10,12 +10,8 @@
 
 
 @interface WASession : NSObject {
-	NSString *name;
 	__weak WARequest *request;
 	__weak WAResponse *response;
-
-	NSString *token;
-	FMDatabase *database;
 }
 
 - (void)setValue:(id)value forKey:(NSString*)key;

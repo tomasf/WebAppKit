@@ -20,6 +20,7 @@ typedef enum {
 	NSString *HTTPVersion;
 	NSString *method;
 	NSString *path;
+	NSString *clientAddress;
 	NSDictionary *headerFields;
 	NSDictionary *queryParameters;
 	NSDictionary *POSTParameters;
@@ -32,14 +33,18 @@ typedef enum {
 @property(readonly) NSString *HTTPVersion;
 @property(readonly) NSString *method;
 @property(readonly) NSString *path;
+
 @property(readonly) NSDictionary *headerFields;
 @property(readonly) NSDictionary *queryParameters;
 @property(readonly) NSString *host;
 @property(readonly) NSURL *URL;
+
 @property(readonly) NSDictionary *cookies;
 @property(readonly) NSDate *conditionalModificationDate;
 @property(readonly) NSArray *acceptedMediaTypes;
 @property(readonly) WAAuthenticationScheme authenticationScheme;
+
+@property(readonly) NSString *clientAddress;
 
 @property(readonly) BOOL wantsPersistentConnection;
 

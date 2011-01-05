@@ -10,7 +10,7 @@
 #import <openssl/md5.h>
 #import <openssl/bio.h>
 #import <openssl/evp.h>
-
+#import <CommonCrypto/CommonCryptor.h>
 
 @implementation NSDictionary (WAExtras)
 
@@ -116,6 +116,7 @@
     NSData *encodedData = [[string stringByAppendingString:@"\n"] dataUsingEncoding:NSASCIIStringEncoding];
     
     BIO *command = BIO_new(BIO_f_base64());
+	BIO_set_flags(command, BIO_FLAGS_BASE64_NO_NL);
     BIO *context = BIO_new_mem_buf((void *)[encodedData bytes], [encodedData length]);
     context = BIO_push(command, context);
 	
@@ -137,6 +138,7 @@
 	// Tell a context to encode base64
 	BIO *context = BIO_new(BIO_s_mem());
 	BIO *command = BIO_new(BIO_f_base64());
+	BIO_set_flags(command, BIO_FLAGS_BASE64_NO_NL);
 	context = BIO_push(command, context);
 	
 	// Encode data
@@ -148,7 +150,33 @@
 	long outputLength = BIO_get_mem_data(context, &outputBuffer);	
 	NSString *encodedString = [[[NSString alloc] initWithBytes:outputBuffer length:outputLength encoding:NSASCIIStringEncoding] autorelease];
 	BIO_free_all(context);
-	return [encodedString stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+	return encodedString;
 }
+
+
+- (NSData*)dataByEncryptingAES128UsingKey:(NSData*)key {
+	size_t outSize = 0;
+	CCCrypt(kCCEncrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], NULL, 0, &outSize);
+	
+	NSMutableData *ciphertext = [NSMutableData data];
+	[ciphertext setLength:outSize];
+	if(CCCrypt(kCCEncrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], [ciphertext mutableBytes], outSize, &outSize) != kCCSuccess)
+		return nil;
+	return ciphertext;
+}
+
+
+- (NSData*)dataByDecryptingAES128UsingKey:(NSData*)key {
+	size_t outSize = 0;
+	CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], NULL, 0, &outSize);
+	
+	NSMutableData *cleartext = [NSMutableData data];
+	[cleartext setLength:outSize];
+	if(CCCrypt(kCCDecrypt, kCCAlgorithmAES128, kCCOptionPKCS7Padding, [key bytes], [key length], NULL, [self bytes], [self length], [cleartext mutableBytes], outSize, &outSize) != kCCSuccess)
+		return nil;
+	[cleartext setLength:outSize];
+	return cleartext;
+}
+
 
 @end

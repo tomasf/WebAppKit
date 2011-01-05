@@ -13,7 +13,7 @@
 #import "WAModule.h"
 #import "WALocalization.h"
 
-#import "WASessionStore.h"
+#import "WASessionManager.h"
 #import "WASession.h"
 #import "WAUtilities.h"
 

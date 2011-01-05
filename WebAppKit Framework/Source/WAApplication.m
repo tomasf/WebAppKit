@@ -23,7 +23,7 @@ static const NSString *WAHTTPServerExternalAccessKey = @"WAHTTPServerExternalAcc
 int WAApplicationMain() {
 	Class appClass = NSClassFromString([[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSPrincipalClass"]);
 	if(!appClass) {
-		NSLog(@"WAApplicationMain() requires NSPrincipalClass to be set in Info.plist. Set it to your WSApplication subclass or call +start yourself.");
+		NSLog(@"WAApplicationMain() requires NSPrincipalClass to be set in Info.plist. Set it to your WAApplication subclass or call +start yourself.");
 		return 1;
 	}
 	return [appClass run];
@@ -47,7 +47,6 @@ int WAApplicationMain() {
 
 
 + (int)run {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	NSUInteger port = [self port];
 	if(!port) return 1;
 	NSString *interface = [self enableExternalAccess] ? nil : @"localhost";
@@ -59,8 +58,6 @@ int WAApplicationMain() {
 	
 	for(;;)
 		[[NSRunLoop currentRunLoop] run];
-	
-	[pool drain];
 }
 
 

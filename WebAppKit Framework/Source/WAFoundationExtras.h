@@ -29,6 +29,8 @@
 - (NSString*)hexMD5Digest;
 + (NSData*)dataByDecodingBase64:(NSString*)string;
 - (NSString*)base64String;
+- (NSData*)dataByEncryptingAES128UsingKey:(NSData*)key;
+- (NSData*)dataByDecryptingAES128UsingKey:(NSData*)key;
 @end
 
 #define $array(...) [NSArray arrayWithObjects:__VA_ARGS__, nil]

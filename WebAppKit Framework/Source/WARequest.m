@@ -15,7 +15,7 @@
 
 
 @implementation WARequest
-@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion;
+@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion, clientAddress;
 
 
 + (NSDictionary*)dictionaryFromQueryParameters:(NSString*)query encoding:(NSStringEncoding)enc {
@@ -120,6 +120,7 @@
 
 
 - (void)readBodyFromSocket:(AsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler {
+	clientAddress = [[socket connectedHost] copy];
 	BOOL hasBody = [self valueForHeaderField:@"Content-Length"] || [self valueForHeaderField:@"Transfer-Encoding"];
 	
 	if(!hasBody) {
