@@ -10,7 +10,6 @@
 #import "WACookie.h"
 
 #import "WATemplate.h"
-#import "WAModule.h"
 #import "WALocalization.h"
 
 #import "WASessionManager.h"

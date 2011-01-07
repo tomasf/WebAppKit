@@ -10,7 +10,7 @@
 #import <FScript/FScript.h>
 #import "WAModule.h"
 #import "WALocalization.h"
-
+#import "WAModuleManager.h"
 
 
 @interface NSScanner (WSExtras)
@@ -88,7 +88,7 @@
 
 
 @implementation WATemplate
-@synthesize localization;
+@synthesize localization, layout;
 
 
 static WALocalization *defaultLocalization;
@@ -117,7 +117,7 @@ static WALocalization *defaultLocalization;
 	self = [super init];
 	source = [templateString copy];
 	values = [NSMutableDictionary dictionary];
-	modules = [NSMutableSet set];
+	moduleIdentifiers = [NSMutableSet set];
 	return self;
 }
 
@@ -204,37 +204,56 @@ static WALocalization *defaultLocalization;
 }
 
 
-- (NSString*)evaluatedString {
+- (NSString*)evaluatedStringWithAdditionalModules:(NSSet*)addedModules values:(NSDictionary*)addedValues {
+	NSSet *effectiveModules = [moduleIdentifiers setByAddingObjectsFromSet:addedModules];
+	NSString *headCode = [[WAModuleManager sharedManager] headerStringFromModuleIdentifiers:effectiveModules];
+	
 	NSString *code = [[self class] codeForTemplate:source];
 	NSMutableString *output = [NSMutableString string];
 	
+	NSMutableDictionary *effectiveValues = [NSMutableDictionary dictionary];
+	[effectiveValues addEntriesFromDictionary:values];
+	[effectiveValues addEntriesFromDictionary:addedValues];
+	
 	FSInterpreter *interpreter = [[FSInterpreter alloc] init];
-	for(NSString *key in values)
-		[interpreter setObject:[values objectForKey:key] forIdentifier:key];
+	[interpreter setObject:headCode forIdentifier:@"HEAD"];
+	for(NSString *key in effectiveValues)
+		[interpreter setObject:[effectiveValues objectForKey:key] forIdentifier:key];
 	[interpreter setObject:output forIdentifier:@"__output"];
 	[interpreter setObject:values forIdentifier:@"__values"];
 	[interpreter setObject:localization ?: defaultLocalization forIdentifier:@"__localization"];
 	
 	FSInterpreterResult *result = [interpreter execute:code];
-	if(![result isOK]) NSLog(@"%@", [result errorMessage]);
 	
-	return [result isOK] ? output : nil;
+	if([result isOK]) {
+		if(layout) {
+			[effectiveValues setObject:output forKey:@"CONTENT"];
+			[output setString:[layout evaluatedStringWithAdditionalModules:effectiveModules values:effectiveValues]];
+		}
+		return output;
+	}else{
+		NSLog(@"%@", [result errorMessage]);
+		return nil;
+	}
 }
 
 
 
-- (NSString*)result {
-	NSMutableSet *loadedModules = [NSMutableSet set];
-	for(WAModule *module in modules)
-		if(![loadedModules containsObject:module])
-			[module invokeWithTemplate:self loadedModules:loadedModules];
-	
-	return [self evaluatedString];
+- (NSString*)result {	
+	return [self evaluatedStringWithAdditionalModules:[NSSet set] values:[NSDictionary dictionary]];
 }
 
-- (void)addModule:(WAModule*)module {
-	[modules addObject:module];
+
+#pragma mark Modules
+
+- (void)addModule:(NSString*)identifier {
+	[moduleIdentifiers addObject:identifier];
 }
+
+- (void)removeModule:(NSString*)identifier {
+	[moduleIdentifiers removeObject:identifier];
+}
+
 
 
 @end

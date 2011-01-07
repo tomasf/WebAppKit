@@ -14,6 +14,7 @@
 #import "WAServer.h"
 #import "WADirectoryHandler.h"
 #import "WAStaticFileHandler.h"
+#import "WAModuleManager.h"
 #import "TFRegex.h"
 
 static const NSString *WAHTTPServerPortKey = @"WAHTTPServerPort";
@@ -55,6 +56,9 @@ int WAApplicationMain() {
 	NSString *publicDir = [[NSBundle bundleForClass:self] pathForResource:@"public" ofType:nil]; 
 	WADirectoryHandler *publicHandler = [[WADirectoryHandler alloc] initWithDirectory:publicDir requestPath:@"/"];
 	[app addRequestHandler:publicHandler];
+	
+	for(WARequestHandler *handler in [[WAModuleManager sharedManager] allRequestHandlers])
+		[app addRequestHandler:handler];
 	
 	for(;;)
 		[[NSRunLoop currentRunLoop] run];

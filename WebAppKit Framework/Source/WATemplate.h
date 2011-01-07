@@ -13,15 +13,16 @@
 @interface WATemplate : NSObject {
 	NSString *source;
 	NSMutableDictionary *values;
-	NSMutableSet *modules;
+	NSMutableSet *moduleIdentifiers;
 	WALocalization *localization;
+	WATemplate *layout;
 }
 
 @property(readonly) NSString *result;
 @property(retain) WALocalization *localization;
+@property(retain) WATemplate *layout;
 
 + (id)templateNamed:(NSString*)name;
-//+ (id)templateNamed:(NSString*)name;
 - (id)initWithContentsOfURL:(NSURL*)URL;
 - (id)initWithSource:(NSString*)templateString;
 
@@ -30,7 +31,8 @@
 
 - (void)appendString:(NSString*)string toValueForKey:(NSString*)key;
 
-- (void)addModule:(WAModule*)module;
+- (void)addModule:(NSString*)identifier;
+- (void)removeModule:(NSString*)identifier;
 
 + (void)setDefaultLocalization:(WALocalization*)loc;
 + (WALocalization*)defaultLocalization;

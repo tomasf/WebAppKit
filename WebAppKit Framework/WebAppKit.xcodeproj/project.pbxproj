@@ -33,6 +33,10 @@
 		E227ED3912D3C1D000C9B669 /* WACookieSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E227ED3712D3C1D000C9B669 /* WACookieSession.m */; };
 		E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E260B0F912CCB99F0084FC05 /* libcrypto.dylib */; };
 		E26154D712B3CCED0040B002 /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E26154D612B3CCED0040B002 /* 404.html */; };
+		E262BE4912D7958D00A8A4B4 /* WAModuleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E262BE4712D7958D00A8A4B4 /* WAModuleManager.h */; };
+		E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */; };
+		E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E262BE4E12D797D100A8A4B4 /* WAModule.h */; };
+		E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4F12D797D100A8A4B4 /* WAModule.m */; };
 		E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */; };
 		E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0FA12C3A80C006BA324 /* WACometStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,8 +76,6 @@
 		E2EAEED312B986A500097E0B /* WATemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAEED112B986A500097E0B /* WATemplate.m */; };
 		E2EAEEDD12B98D5100097E0B /* FScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAEEDC12B98D5100097E0B /* FScript.framework */; };
 		E2EAEF0A12B98D7500097E0B /* FScript.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAEEDC12B98D5100097E0B /* FScript.framework */; };
-		E2EAEFEF12B999FF00097E0B /* WAModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAEFED12B999FF00097E0B /* WAModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2EAEFF012B999FF00097E0B /* WAModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAEFEE12B999FF00097E0B /* WAModule.m */; };
 		E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */; };
 		E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAF09812B9AB4800097E0B /* CoreData.framework */; };
@@ -131,6 +133,10 @@
 		E227ED3712D3C1D000C9B669 /* WACookieSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookieSession.m; path = Source/WACookieSession.m; sourceTree = "<group>"; };
 		E260B0F912CCB99F0084FC05 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		E26154D612B3CCED0040B002 /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
+		E262BE4712D7958D00A8A4B4 /* WAModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAModuleManager.h; sourceTree = "<group>"; };
+		E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModuleManager.m; sourceTree = "<group>"; };
+		E262BE4E12D797D100A8A4B4 /* WAModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAModule.h; sourceTree = "<group>"; };
+		E262BE4F12D797D100A8A4B4 /* WAModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModule.m; sourceTree = "<group>"; };
 		E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometHandler.h; path = Source/WACometHandler.h; sourceTree = "<group>"; };
 		E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACometHandler.m; path = Source/WACometHandler.m; sourceTree = "<group>"; };
 		E2B7A0FA12C3A80C006BA324 /* WACometStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometStream.h; path = Source/WACometStream.h; sourceTree = "<group>"; };
@@ -168,8 +174,6 @@
 		E2EAEED012B986A500097E0B /* WATemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WATemplate.h; path = Source/WATemplate.h; sourceTree = "<group>"; };
 		E2EAEED112B986A500097E0B /* WATemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WATemplate.m; path = Source/WATemplate.m; sourceTree = "<group>"; };
 		E2EAEEDC12B98D5100097E0B /* FScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FScript.framework; path = Frameworks/FScript.framework; sourceTree = "<group>"; };
-		E2EAEFED12B999FF00097E0B /* WAModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAModule.h; path = Source/WAModule.h; sourceTree = "<group>"; };
-		E2EAEFEE12B999FF00097E0B /* WAModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAModule.m; path = Source/WAModule.m; sourceTree = "<group>"; };
 		E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACoreDataExtras.h; path = Source/WACoreDataExtras.h; sourceTree = "<group>"; };
 		E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACoreDataExtras.m; path = Source/WACoreDataExtras.m; sourceTree = "<group>"; };
 		E2EAF09812B9AB4800097E0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -248,6 +252,7 @@
 				E2DA8B2E12D2635F00B1EDE8 /* Application */,
 				E2DA8B2F12D2638E00B1EDE8 /* Templates */,
 				E21D234212BC606300277F2E /* Cookies */,
+				E262BE4212D7941100A8A4B4 /* Modules */,
 				E2B7A15912C3AC0D006BA324 /* WAJSON.h */,
 				E2B7A15A12C3AC0D006BA324 /* WAJSON.m */,
 				E21D22AF12BC53CE00277F2E /* WAUtilities.h */,
@@ -353,6 +358,17 @@
 			name = "Cookie Sessions";
 			sourceTree = "<group>";
 		};
+		E262BE4212D7941100A8A4B4 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				E262BE4712D7958D00A8A4B4 /* WAModuleManager.h */,
+				E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */,
+				E262BE4E12D797D100A8A4B4 /* WAModule.h */,
+				E262BE4F12D797D100A8A4B4 /* WAModule.m */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
 		E2B7A0F012C3A6B3006BA324 /* Comet */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,8 +428,6 @@
 			children = (
 				E2EAEED012B986A500097E0B /* WATemplate.h */,
 				E2EAEED112B986A500097E0B /* WATemplate.m */,
-				E2EAEFED12B999FF00097E0B /* WAModule.h */,
-				E2EAEFEE12B999FF00097E0B /* WAModule.m */,
 				E21E76A812C03DC80082E402 /* WALocalization.h */,
 				E21E76A912C03DC80082E402 /* WALocalization.m */,
 			);
@@ -465,7 +479,6 @@
 				E2E876C712B3167400558845 /* WADirectoryHandler.h in Headers */,
 				E2E877AF12B3CC3900558845 /* WAStaticFileHandler.h in Headers */,
 				E2EAEED212B986A500097E0B /* WATemplate.h in Headers */,
-				E2EAEFEF12B999FF00097E0B /* WAModule.h in Headers */,
 				E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */,
 				E2EAF1C312BADEE600097E0B /* WASession.h in Headers */,
 				E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */,
@@ -483,6 +496,8 @@
 				E227EC6812D3BA1B00C9B669 /* WASQLiteSessionManager.h in Headers */,
 				E227ED3412D3C1C800C9B669 /* WACookieSessionManager.h in Headers */,
 				E227ED3812D3C1D000C9B669 /* WACookieSession.h in Headers */,
+				E262BE4912D7958D00A8A4B4 /* WAModuleManager.h in Headers */,
+				E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +578,6 @@
 				E2E876C812B3167400558845 /* WADirectoryHandler.m in Sources */,
 				E2E877B012B3CC3900558845 /* WAStaticFileHandler.m in Sources */,
 				E2EAEED312B986A500097E0B /* WATemplate.m in Sources */,
-				E2EAEFF012B999FF00097E0B /* WAModule.m in Sources */,
 				E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */,
 				E2EAF1C412BADEE600097E0B /* WASession.m in Sources */,
 				E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */,
@@ -581,6 +595,8 @@
 				E227EC6912D3BA1B00C9B669 /* WASQLiteSessionManager.m in Sources */,
 				E227ED3512D3C1C800C9B669 /* WACookieSessionManager.m in Sources */,
 				E227ED3912D3C1D000C9B669 /* WACookieSession.m in Sources */,
+				E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */,
+				E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
