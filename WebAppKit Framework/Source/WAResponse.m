@@ -195,7 +195,7 @@
 
 
 - (void)redirectToURL:(NSURL*)URL withStatusCode:(NSUInteger)code {
-	URL = [NSURL URLWithString:[URL relativePath] relativeToURL:request.URL];
+	URL = [NSURL URLWithString:[URL relativeString] relativeToURL:request.URL];
 	self.statusCode = code;
 	[self setValue:[URL absoluteString] forHeaderField:@"Location"];
 }
