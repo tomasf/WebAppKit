@@ -12,12 +12,12 @@
 
 @implementation WASessionGenerator
 
-+ (id)databaseStorageManagerWithName:(NSString*)name {
++ (id)databaseStorageGeneratorWithName:(NSString*)name {
 	return [[WASQLiteSessionGenerator alloc] initWithName:name];
 }
 
 
-+ (id)clientStorageManagerWithName:(NSString*)name encryptionKey:(NSData*)key {
++ (id)clientStorageGeneratorWithName:(NSString*)name encryptionKey:(NSData*)key {
 	return [[WACookieSessionGenerator alloc] initWithName:name encryptionKey:key];
 }
 

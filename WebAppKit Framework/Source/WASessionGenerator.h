@@ -11,8 +11,8 @@
 @interface WASessionGenerator : NSObject {
 }
 
-+ (id)databaseStorageManagerWithName:(NSString*)n;
-+ (id)clientStorageManagerWithName:(NSString*)n encryptionKey:(NSData*)key;
++ (id)databaseStorageGeneratorWithName:(NSString*)n;
++ (id)clientStorageGeneratorWithName:(NSString*)n encryptionKey:(NSData*)key;
 
 - (WASession*)sessionForRequest:(WARequest*)request response:(WAResponse*)response;
 - (void)invalidate;
