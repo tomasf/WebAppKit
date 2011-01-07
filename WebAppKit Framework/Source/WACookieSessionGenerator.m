@@ -6,10 +6,10 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-#import "WACookieSessionManager.h"
+#import "WACookieSessionGenerator.h"
 #import "WACookieSession.h"
 
-@implementation WACookieSessionManager
+@implementation WACookieSessionGenerator
 
 - (id)initWithName:(NSString*)n encryptionKey:(NSData*)key {
 	NSParameterAssert(n != nil);

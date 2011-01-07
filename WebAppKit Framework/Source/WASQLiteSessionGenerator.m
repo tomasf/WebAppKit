@@ -6,11 +6,11 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-#import "WASQLiteSessionManager.h"
+#import "WASQLiteSessionGenerator.h"
 #import "FMDatabase.h"
 #import "WASQLiteSession.h"
 
-@implementation WASQLiteSessionManager
+@implementation WASQLiteSessionGenerator
 
 
 - (id)initWithName:(NSString*)n {

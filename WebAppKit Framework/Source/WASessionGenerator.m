@@ -6,19 +6,19 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-#import "WASessionManager.h"
-#import "WASQLiteSessionManager.h"
-#import "WACookieSessionManager.h"
+#import "WASessionGenerator.h"
+#import "WASQLiteSessionGenerator.h"
+#import "WACookieSessionGenerator.h"
 
-@implementation WASessionManager
+@implementation WASessionGenerator
 
 + (id)databaseStorageManagerWithName:(NSString*)name {
-	return [[WASQLiteSessionManager alloc] initWithName:name];
+	return [[WASQLiteSessionGenerator alloc] initWithName:name];
 }
 
 
 + (id)clientStorageManagerWithName:(NSString*)name encryptionKey:(NSData*)key {
-	return [[WACookieSessionManager alloc] initWithName:name encryptionKey:key];
+	return [[WACookieSessionGenerator alloc] initWithName:name encryptionKey:key];
 }
 
 

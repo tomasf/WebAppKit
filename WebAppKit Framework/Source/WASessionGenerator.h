@@ -8,7 +8,7 @@
 
 @class WASession, WARequest, WAResponse;
 
-@interface WASessionManager : NSObject {
+@interface WASessionGenerator : NSObject {
 }
 
 + (id)databaseStorageManagerWithName:(NSString*)n;

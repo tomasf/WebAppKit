@@ -12,7 +12,7 @@
 #import "WATemplate.h"
 #import "WALocalization.h"
 
-#import "WASessionManager.h"
+#import "WASessionGenerator.h"
 #import "WASession.h"
 #import "WAUtilities.h"
 

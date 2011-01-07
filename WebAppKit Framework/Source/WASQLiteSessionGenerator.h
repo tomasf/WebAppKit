@@ -6,11 +6,11 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-#import "WASessionManager.h"
+#import "WASessionGenerator.h"
 
 @class FMDatabase;
 
-@interface WASQLiteSessionManager : WASessionManager {
+@interface WASQLiteSessionGenerator : WASessionGenerator {
 	NSString *name;
 	FMDatabase *database;
 }

@@ -6,9 +6,9 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-#import "WASessionManager.h"
+#import "WASessionGenerator.h"
 
-@interface WACookieSessionManager : WASessionManager {
+@interface WACookieSessionGenerator : WASessionGenerator {
 	NSString *name;
 	NSData *encryptionKey;
 }
