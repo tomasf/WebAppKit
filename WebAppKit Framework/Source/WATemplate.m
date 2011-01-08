@@ -204,12 +204,14 @@ static WALocalization *defaultLocalization;
 }
 
 
-- (NSString*)evaluatedStringWithAdditionalModules:(NSSet*)addedModules values:(NSDictionary*)addedValues {
+- (NSString*)evaluatedStringWithAdditionalModules:(NSSet*)addedModules values:(NSDictionary*)addedValues localization:(WALocalization*)addedLocalization {
 	NSSet *effectiveModules = [moduleIdentifiers setByAddingObjectsFromSet:addedModules];
 	NSString *headCode = [[WAModuleManager sharedManager] headerStringFromModuleIdentifiers:effectiveModules];
 	
 	NSString *code = [[self class] codeForTemplate:source];
 	NSMutableString *output = [NSMutableString string];
+	
+	WALocalization *effectiveLocalization = addedLocalization ?: localization;
 	
 	NSMutableDictionary *effectiveValues = [NSMutableDictionary dictionary];
 	[effectiveValues addEntriesFromDictionary:values];
@@ -221,14 +223,14 @@ static WALocalization *defaultLocalization;
 		[interpreter setObject:[effectiveValues objectForKey:key] forIdentifier:key];
 	[interpreter setObject:output forIdentifier:@"__output"];
 	[interpreter setObject:values forIdentifier:@"__values"];
-	[interpreter setObject:localization ?: defaultLocalization forIdentifier:@"__localization"];
+	[interpreter setObject:effectiveLocalization ?: defaultLocalization forIdentifier:@"__localization"];
 	
 	FSInterpreterResult *result = [interpreter execute:code];
 	
 	if([result isOK]) {
 		if(layout) {
 			[effectiveValues setObject:output forKey:@"CONTENT"];
-			[output setString:[layout evaluatedStringWithAdditionalModules:effectiveModules values:effectiveValues]];
+			[output setString:[layout evaluatedStringWithAdditionalModules:effectiveModules values:effectiveValues localization:effectiveLocalization]];
 		}
 		return output;
 	}else{
@@ -240,7 +242,7 @@ static WALocalization *defaultLocalization;
 
 
 - (NSString*)result {	
-	return [self evaluatedStringWithAdditionalModules:[NSSet set] values:[NSDictionary dictionary]];
+	return [self evaluatedStringWithAdditionalModules:[NSSet set] values:[NSDictionary dictionary] localization:nil];
 }
 
 
