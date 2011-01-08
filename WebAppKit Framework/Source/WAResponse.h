@@ -47,6 +47,7 @@
 
 - (void)redirectToURL:(NSURL*)URL;
 - (void)redirectToURL:(NSURL*)URL withStatusCode:(NSUInteger)code;
+- (void)redirectToURLFormat:(NSString*)format, ...;
 
 - (void)addCookie:(WACookie*)cookie;
 - (void)removeCookieNamed:(NSString*)name;

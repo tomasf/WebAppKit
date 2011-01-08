@@ -204,6 +204,17 @@
 	[self redirectToURL:URL withStatusCode:302];	
 }
 
+- (void)redirectToURLFormat:(NSString*)format, ... {
+	va_list list;
+	va_start(list, format);
+	NSString *string = [[NSString alloc] initWithFormat:format arguments:list];
+	va_end(list);
+	NSURL *URL = [NSURL URLWithString:string];
+	if(!URL)
+		[NSException raise:NSInvalidArgumentException format:@"String was not a valid URL: %@", string];
+	[self redirectToURL:URL];	
+}
+
 
 - (NSString*)valueForHeaderField:(NSString*)fieldName {
 	return [headerFields objectForKey:fieldName];

@@ -104,7 +104,7 @@ static WALocalization *defaultLocalization;
 
 + (id)templateNamed:(NSString*)name {
 	NSURL *URL = [[NSBundle mainBundle] URLForResource:name withExtension:@"wat"];
-	if(!URL) return nil;
+	if(!URL) [NSException raise:NSInvalidArgumentException format:@"Template named '%@' wasn't found.", name];
 	return [[self alloc] initWithContentsOfURL:URL];
 }
 
@@ -234,7 +234,7 @@ static WALocalization *defaultLocalization;
 		}
 		return output;
 	}else{
-		NSLog(@"%@", [result errorMessage]);
+		[NSException raise:NSInternalInconsistencyException format:@"An F-Script error occured while evaluating template: %@", [result errorMessage]];
 		return nil;
 	}
 }
