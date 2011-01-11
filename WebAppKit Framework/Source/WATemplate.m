@@ -88,7 +88,7 @@
 
 
 @implementation WATemplate
-@synthesize localization, layout;
+@synthesize localization, parent;
 
 
 static WALocalization *defaultLocalization;
@@ -233,9 +233,9 @@ static WALocalization *defaultLocalization;
 	FSInterpreterResult *result = [interpreter execute:code];
 	
 	if([result isOK]) {
-		if(layout) {
+		if(parent) {
 			[effectiveValues setObject:output forKey:@"CONTENT"];
-			[output setString:[layout evaluatedStringWithAdditionalModules:effectiveModules values:effectiveValues localization:effectiveLocalization]];
+			[output setString:[parent evaluatedStringWithAdditionalModules:effectiveModules values:effectiveValues localization:effectiveLocalization]];
 		}
 		return output;
 	}else{

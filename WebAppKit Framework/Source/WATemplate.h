@@ -15,12 +15,12 @@
 	NSMutableDictionary *values;
 	NSMutableSet *moduleIdentifiers;
 	WALocalization *localization;
-	WATemplate *layout;
+	WATemplate *parent;
 }
 
 @property(readonly) NSString *result;
 @property(retain) WALocalization *localization;
-@property(retain) WATemplate *layout;
+@property(retain) WATemplate *parent;
 
 + (id)templateNamed:(NSString*)name;
 - (id)initWithContentsOfURL:(NSURL*)URL;
