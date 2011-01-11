@@ -25,9 +25,9 @@
 		[NSException raise:NSInvalidArgumentException format:@"Request path must begin with '/'."];
 	
 	directoryRoot = [root copy];
+	requestPathRoot = [path copy];
 	if(![requestPathRoot hasSuffix:@"/"])
 		requestPathRoot = [requestPathRoot stringByAppendingString:@"/"];
-	requestPathRoot = [path copy];
 	return self;
 }
 

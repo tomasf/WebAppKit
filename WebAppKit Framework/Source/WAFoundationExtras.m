@@ -48,7 +48,7 @@
 	return self;
 }
 
-- (NSString*)html {
+- (NSString*)HTML {
 	return [self HTMLEscapedString];
 }
 
@@ -67,6 +67,15 @@
 - (NSString*)stringByDecodingBase64UsingEncoding:(NSStringEncoding)encoding {
 	NSData *data = [NSData dataByDecodingBase64:self];
 	return [[NSString alloc] initWithData:data encoding:encoding];
+}
+
+- (NSString*)stringByEnforcingCharacterSet:(NSCharacterSet*)set {
+	NSMutableString *string = [NSMutableString string];
+	for(int i=0; i<[self length]; i++) {
+		unichar c = [self characterAtIndex:i];
+		if([set characterIsMember:c]) [string appendFormat:@"%C", c];
+	}
+	return string;
 }
 
 @end

@@ -33,11 +33,8 @@
 	NSError *error = nil;
 	
 	if(![coordinator addPersistentStoreWithType:storeType configuration:nil URL:storeURL options:nil error:&error]) {
-		NSLog(@"%@ failed to load persistent store: %@", self, error);
-		for (NSError *suberror in [[error userInfo] valueForKey:NSDetailedErrorsKey])
-			NSLog(@"\t%@", [suberror localizedDescription]);
-		
-		return nil;
+		NSLog(@"Store path: %@", [storeURL path]);
+		[NSException raise:NSInvalidArgumentException format:@"%@ failed to load persistent store: %@", self, error];		
 	}
 	
 	NSManagedObjectContext *moc = [[[NSManagedObjectContext alloc] init] autorelease];

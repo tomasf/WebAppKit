@@ -13,10 +13,11 @@
 
 @interface NSString (WAExtras)
 - (NSString*)HTMLEscapedString;
-- (NSString*)html;
+- (NSString*)HTML;
 - (NSString*)hexMD5DigestUsingEncoding:(NSStringEncoding)encoding;
 - (NSString*)stringByEncodingBase64UsingEncoding:(NSStringEncoding)encoding;
 - (NSString*)stringByDecodingBase64UsingEncoding:(NSStringEncoding)encoding;
+- (NSString*)stringByEnforcingCharacterSet:(NSCharacterSet*)set;
 @end
 
 @interface NSArray (WAExtras)

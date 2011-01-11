@@ -122,10 +122,11 @@ static WALocalization *defaultLocalization;
 }
 
 - (void)setValue:(id)value forKey:(NSString*)key {
-	if(value)
-		[values setObject:value forKey:key];
-	else
-		[values removeObjectForKey:key];
+	[values setObject:value ?: [NSNull null] forKey:key];
+}
+
+- (void)removeValueForKey:(NSString*)key {
+	[values removeObjectForKey:key];
 }
 
 - (id)valueForKey:(NSString*)key {
@@ -219,8 +220,12 @@ static WALocalization *defaultLocalization;
 	
 	FSInterpreter *interpreter = [[FSInterpreter alloc] init];
 	[interpreter setObject:headCode forIdentifier:@"HEAD"];
-	for(NSString *key in effectiveValues)
-		[interpreter setObject:[effectiveValues objectForKey:key] forIdentifier:key];
+	for(NSString *key in effectiveValues) {
+		id obj = [effectiveValues objectForKey:key];
+		if(obj == [NSNull null]) obj = nil;
+		[interpreter setObject:obj forIdentifier:key];
+	}
+		
 	[interpreter setObject:output forIdentifier:@"__output"];
 	[interpreter setObject:values forIdentifier:@"__values"];
 	[interpreter setObject:effectiveLocalization ?: defaultLocalization forIdentifier:@"__localization"];
