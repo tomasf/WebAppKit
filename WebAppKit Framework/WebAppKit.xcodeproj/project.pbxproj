@@ -83,6 +83,8 @@
 		E2EAF1C412BADEE600097E0B /* WASession.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF1C212BADEE600097E0B /* WASession.m */; };
 		E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF1C512BAE00B00097E0B /* WACookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF1C612BAE00B00097E0B /* WACookie.m */; };
+		E2F4F39212DB669F0058342E /* WAHTTPSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F4F39012DB669F0058342E /* WAHTTPSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2F4F39312DB669F0058342E /* WAHTTPSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F4F39112DB669F0058342E /* WAHTTPSupport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,6 +183,8 @@
 		E2EAF1C212BADEE600097E0B /* WASession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASession.m; path = Source/WASession.m; sourceTree = "<group>"; };
 		E2EAF1C512BAE00B00097E0B /* WACookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACookie.h; path = Source/WACookie.h; sourceTree = "<group>"; };
 		E2EAF1C612BAE00B00097E0B /* WACookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookie.m; path = Source/WACookie.m; sourceTree = "<group>"; };
+		E2F4F39012DB669F0058342E /* WAHTTPSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHTTPSupport.h; sourceTree = "<group>"; };
+		E2F4F39112DB669F0058342E /* WAHTTPSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHTTPSupport.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +412,8 @@
 				E2D88B5912B2FE2400219BF5 /* WARequest.m */,
 				E2D88B5C12B2FE2400219BF5 /* WAResponse.h */,
 				E2D88B5D12B2FE2400219BF5 /* WAResponse.m */,
+				E2F4F39012DB669F0058342E /* WAHTTPSupport.h */,
+				E2F4F39112DB669F0058342E /* WAHTTPSupport.m */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -498,6 +504,7 @@
 				E227ED3812D3C1D000C9B669 /* WACookieSession.h in Headers */,
 				E262BE4912D7958D00A8A4B4 /* WAModuleManager.h in Headers */,
 				E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */,
+				E2F4F39212DB669F0058342E /* WAHTTPSupport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +604,7 @@
 				E227ED3912D3C1D000C9B669 /* WACookieSession.m in Sources */,
 				E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */,
 				E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */,
+				E2F4F39312DB669F0058342E /* WAHTTPSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

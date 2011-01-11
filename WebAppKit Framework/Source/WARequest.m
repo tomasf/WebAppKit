@@ -15,7 +15,7 @@
 
 
 @implementation WARequest
-@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion, clientAddress;
+@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion, clientAddress, byteRanges;
 
 
 + (NSDictionary*)dictionaryFromQueryParameters:(NSString*)query encoding:(NSStringEncoding)enc {
@@ -47,6 +47,20 @@
 }
 
 
++ (NSArray*)byteRangesFromHeaderFieldValue:(NSString*)value {
+	if(![value hasPrefix:@"bytes="]) return nil;
+	NSString *string = [value substringFromIndex:6];
+	NSArray *rangeStrings = [string componentsSeparatedByString:@","];
+	NSMutableArray *ranges = [NSMutableArray array];
+	for(NSString *spec in rangeStrings) {
+		WAByteRange range = WAByteRangeFromRangeSpec(spec);
+		if(WAByteRangeIsInvalid(range)) return nil;
+		NSValue *value = [NSValue valueWithBytes:&range objCType:@encode(WAByteRange)];
+		[ranges addObject:value];
+	}
+	return ranges;
+}
+
 
 
 - (id)initWithHTTPMessage:(CFHTTPMessageRef)message {
@@ -67,6 +81,9 @@
 			[cookieDict setObject:cookie forKey:cookie.name];
 		cookies = [cookieDict copy];
 	}
+	
+	NSString *rangeString = [headerFields objectForKey:@"Range"];
+	if(rangeString) byteRanges = [[[self class] byteRangesFromHeaderFieldValue:rangeString] copy];
 	
 	return self;
 }
@@ -300,9 +317,7 @@
 			return [self hasValidAuthenticationForCredentialHash:hash];
 		}
 			
-			
-		default:
-			return NO;
+		default: return NO;
 	}
 }
 
@@ -317,6 +332,89 @@
 	return WANoneAuthenticationScheme;
 }
 
+
+#pragma mark Byte Ranges
+
++ (WAByteRange)rangeFromValue:(NSValue*)value {
+	WAByteRange range;
+	[value getValue:&range];
+	return range;
+}
+
+
++ (NSValue*)valueFromRange:(WAByteRange)range {
+	return [NSValue valueWithBytes:&range objCType:@encode(WAByteRange)];
+}
+
+
++ (NSValue*)valueByCombiningRange:(NSValue*)value1 range:(NSValue*)value2 {
+	WAByteRange combo = WAByteRangeCombine([self rangeFromValue:value1], [self rangeFromValue:value2]);
+	if(WAByteRangeIsInvalid(combo)) return nil;
+	return [self valueFromRange:combo];
+}
+
+
++ (NSArray*)sortedRanges:(NSArray*)ranges {
+	return [ranges sortedArrayUsingComparator:^NSInteger(id obj1, id obj2){
+		WAByteRange range1 = [self rangeFromValue:obj1];
+		WAByteRange range2 = [self rangeFromValue:obj2];
+		if(range1.firstByte < range2.firstByte)
+			return NSOrderedAscending;
+		else if(range1.firstByte > range2.firstByte)
+			return NSOrderedDescending;
+		else
+			return NSOrderedSame;
+	}];
+}
+
++ (NSArray*)canonicalRanges:(NSArray*)ranges {
+	ranges = [self sortedRanges:ranges];
+	NSMutableArray *selection = [NSMutableArray arrayWithObject:[ranges objectAtIndex:0]];
+	for(NSValue *range in ranges) {
+		NSValue *combo = [self valueByCombiningRange:range range:[selection lastObject]];
+		if(combo) [selection replaceObjectAtIndex:[selection count]-1 withObject:combo];
+		else [selection addObject:range];
+	}
+	return selection;
+}
+
+
++ (NSArray*)absoluteArrayOfRanges:(NSArray*)array availableLength:(uint64_t)length {
+	NSMutableArray *ranges = [array mutableCopy];
+	for(int i=0; i<[ranges count]; i++) {
+		WAByteRange range;
+		[[ranges objectAtIndex:i] getValue:&range];
+		range = WAByteRangeMakeAbsolute(range, length);
+		if(WAByteRangeIsInvalid(range)) {
+			[ranges removeObjectAtIndex:i];
+			i--;
+		}else{
+			[ranges replaceObjectAtIndex:i withObject:[NSValue valueWithBytes:&range objCType:@encode(WAByteRange)]];
+		}
+	}
+	return ranges;
+}
+
+
+- (NSArray*)canonicalByteRangesForDataLength:(uint64_t)length {
+	NSArray *ranges = self.byteRanges;
+	if(!ranges) return nil;
+	
+	ranges = [[self class] absoluteArrayOfRanges:ranges availableLength:length];
+	if(![ranges count]) return nil;
+	
+	ranges = [[self class] canonicalRanges:ranges];
+	return ranges;
+}
+
+
+- (void)enumerateCanonicalByteRangesForDataLength:(uint64_t)length usingBlock:(void(^)(WAByteRange range, BOOL *stop))block {
+	BOOL stop = NO;
+	for(NSValue *value in [self canonicalByteRangesForDataLength:length]) {
+		block([[self class] rangeFromValue:value], &stop);
+		if(stop) break;
+	}
+}
 
 
 @end

@@ -6,15 +6,9 @@
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
 
+#import "WAHTTPSupport.h"
+
 @class AsyncSocket, WACookie;
-
-typedef enum {
-	WANoneAuthenticationScheme,
-	WABasicAuthenticationScheme,
-	WADigestAuthenticationScheme,
-} WAAuthenticationScheme;
-
-
 
 @interface WARequest : NSObject {
 	NSString *HTTPVersion;
@@ -25,6 +19,7 @@ typedef enum {
 	NSDictionary *queryParameters;
 	NSDictionary *POSTParameters;
 	NSDictionary *cookies;
+	NSArray *byteRanges;
 	
 	void(^completionHandler)(BOOL validity);
 }
@@ -44,6 +39,8 @@ typedef enum {
 @property(readonly) NSArray *acceptedMediaTypes;
 @property(readonly) WAAuthenticationScheme authenticationScheme;
 
+@property(readonly) NSArray *byteRanges; // NSValue-wrapped WAByteRanges
+
 @property(readonly) NSString *clientAddress;
 
 @property(readonly) BOOL wantsPersistentConnection;
@@ -60,4 +57,8 @@ typedef enum {
 - (BOOL)hasValidAuthenticationForUsername:(NSString*)name password:(NSString*)password;
 - (BOOL)hasValidAuthenticationForCredentialHash:(NSString*)hash;
 + (NSString*)credentialHashForUsername:(NSString*)user password:(NSString*)password realm:(NSString*)realm;
+
+// Nice sorted array of absolute combined ranges
+- (NSArray*)canonicalByteRangesForDataLength:(uint64_t)length;
+- (void)enumerateCanonicalByteRangesForDataLength:(uint64_t)length usingBlock:(void(^)(WAByteRange range, BOOL *stop))block;
 @end

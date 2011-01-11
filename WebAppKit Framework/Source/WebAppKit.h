@@ -20,3 +20,4 @@
 #import "WACometStream.h"
 
 #import "WAJSON.h"
+#import "WAHTTPSupport.h"
