@@ -324,7 +324,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E2DA8CB912D26B0C00B1EDE8</string>
+										<string>E2B8E89D12DFA8E1001FFB48</string>
 										<key>history</key>
 										<array>
 											<string>E2F75AAA12CBD0B3005FD98B</string>
@@ -332,7 +332,7 @@
 											<string>E2DA87B312D11E3D00B1EDE8</string>
 											<string>E2DA87B512D11E3D00B1EDE8</string>
 											<string>E2DA8CB712D26B0C00B1EDE8</string>
-											<string>E2DA8CB812D26B0C00B1EDE8</string>
+											<string>E2DA8CB912D26B0C00B1EDE8</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -371,10 +371,10 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>E2DA8CBA12D26B0C00B1EDE8</string>
+										<string>E2B8E89E12DFA8E1001FFB48</string>
 										<key>history</key>
 										<array>
-											<string>E2DA87BD12D11E4600B1EDE8</string>
+											<string>E2DA8CBA12D26B0C00B1EDE8</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -433,9 +433,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>E2DA8C9812D26AD000B1EDE8</string>
+				<string>E2B8E89F12DFA8E1001FFB48</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>E2DA8C9912D26AD000B1EDE8</string>
+				<string>E2B8E8A012DFA8E1001FFB48</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
@@ -574,12 +574,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>E2DA8CA312D26AD000B1EDE8</string>
-		<string>E2DA8CA412D26AD000B1EDE8</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>E2EAED5C12B932F700097E0B</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>/Users/tom/Desktop/Skräp/Skräp 2011-01-03/untitled folder/Web Application/___PROJECTNAME___.xcodeproj</string>
+		<string>/Users/tom/Documents/WebAppKit/Source/Project Templates/WebAppKit/Web Application/___PROJECTNAME___.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>633 479 1123 723 0 0 2560 1418 </string>
@@ -659,7 +655,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>E2EAED5C12B932F700097E0B</string>
-				<string>E2DA8C9A12D26AD000B1EDE8</string>
+				<string>E2B8E8A112DFA8E1001FFB48</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
