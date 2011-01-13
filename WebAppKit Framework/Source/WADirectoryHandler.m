@@ -44,7 +44,10 @@
 	
 	NSString *filePath = [self filePathForRequestPath:path];
 	BOOL isDir;
-	return [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] && !isDir;
+	if(![[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] || isDir) return false;
+	for(NSString *component in [filePath pathComponents])
+		if([component hasPrefix:@"."]) return NO; // Disallow invisible files
+	return YES;
 }
 
 
