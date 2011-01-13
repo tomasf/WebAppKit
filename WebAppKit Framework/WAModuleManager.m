@@ -74,6 +74,8 @@
 			stylesheet = [resourceRoot stringByAppendingPathComponent:stylesheet];
 			[header appendFormat:@"<link rel=\"stylesheet\" href=\"%@\" />", stylesheet];
 		}
+		NSString *additional = module.additionalCode;
+		if(additional) [header appendString:additional];
 	}
 	return header;
 }

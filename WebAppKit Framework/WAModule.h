@@ -12,6 +12,7 @@
 @interface WAModule : NSObject {
 	NSBundle *bundle;
 	NSDictionary *info;
+	Class bundleClass;
 }
 
 - (id)initWithBundleURL:(NSURL*)URL;
@@ -23,4 +24,5 @@
 @property(readonly) NSArray *scripts;
 @property(readonly) NSArray *stylesheets;
 @property(readonly) WARequestHandler *resourcesRequestHandler;
+@property(readonly) NSString *additionalCode;
 @end

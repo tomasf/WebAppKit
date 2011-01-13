@@ -14,6 +14,12 @@ static const NSString *WAModuleScriptsKey = @"WAModuleScripts";
 static const NSString *WAModuleStylesheetsKey = @"WAModuleStylesheets";
 static const NSString *WAModuleDependenciesKey = @"WAModuleDependencies";
 
+@protocol WAModuleClass
+@optional
++ (NSString*)headerCode;
+@end
+
+
 
 @implementation WAModule
 
@@ -21,7 +27,7 @@ static const NSString *WAModuleDependenciesKey = @"WAModuleDependencies";
 	self = [super init];
 	bundle = [NSBundle bundleWithURL:URL];
 	info = [[bundle infoDictionary] copy];
-	[bundle load];
+	bundleClass = [bundle principalClass];
 	return self;
 }
 
@@ -52,6 +58,13 @@ static const NSString *WAModuleDependenciesKey = @"WAModuleDependencies";
 - (WARequestHandler*)resourcesRequestHandler {
 	if(!self.publicResourceDirectory) return nil;
 	return [[WADirectoryHandler alloc] initWithDirectory:self.publicResourceDirectory requestPath:self.baseRequestPath];
+}
+
+- (NSString*)additionalCode {
+	if([bundleClass respondsToSelector:@selector(headerCode)])
+		return [bundleClass headerCode];
+	else
+		return nil;
 }
 
 @end
