@@ -7,6 +7,7 @@
 
 #import "WARequest.h"
 #import "WAResponse.h"
+#import "WAUploadedFile.h"
 #import "WACookie.h"
 
 #import "WATemplate.h"

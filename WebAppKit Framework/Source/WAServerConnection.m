@@ -25,6 +25,7 @@
 - (id)initWithHTTPMessage:(CFHTTPMessageRef)message;
 - (id)initWithHeaderData:(NSData*)data;
 - (void)readBodyFromSocket:(AsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler;
+- (void)invalidate;
 @end
 
 @interface WAServer (Private)
@@ -81,12 +82,11 @@ enum {
 	
 	currentRequestHandler = [server.delegate server:server handlerForRequest:request];
 	
-	
-	
 	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:socket completionHandler:^(BOOL keepAlive) {
 		uint64_t duration = [self nanosecondTime]-start;
 		NSLog(@"%.02f ms %@", duration/1000000.0, request.path);
 		currentRequestHandler = nil;
+		[request invalidate];
 		
 		if(keepAlive)
 			[self readNewRequest];
@@ -96,7 +96,7 @@ enum {
 	
 
 	@try {
-		[currentRequestHandler handleRequest:request response:response];
+		[currentRequestHandler handleRequest:request response:response socket:socket];
 	}@catch(NSException *e) {
 		[response finishWithErrorString:[NSString stringWithFormat:@"<h1>Exception</h1>Break on objc_exception_throw to debug.<br/><pre>%@</pre>", e]];
 	}

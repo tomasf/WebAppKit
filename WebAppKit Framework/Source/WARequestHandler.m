@@ -28,6 +28,10 @@
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp {
 }
 
+- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(AsyncSocket*)sock {
+	[self handleRequest:req response:resp];
+}
+
 - (void)connectionDidClose {
 	
 }

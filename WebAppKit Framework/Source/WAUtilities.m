@@ -31,3 +31,35 @@ NSDateFormatter *WAHTTPDateFormatter(void) {
 	}
 	return formatter;
 }
+
+NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams) {
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	if(outParams) *outParams = params;
+	
+	NSInteger split = [fullValue rangeOfString:@";"].location;
+	if(split == NSNotFound) return fullValue;
+	NSString *basePart = [fullValue substringToIndex:split];
+	NSString *parameterPart = [fullValue substringFromIndex:split];
+	
+	NSScanner *scanner = [NSScanner scannerWithString:parameterPart];
+	for(;;) {
+		if(![scanner scanString:@";" intoString:NULL]) break;		
+		NSString *attribute = nil;
+		if(![scanner scanUpToString:@"=" intoString:&attribute]) break;
+		if(!attribute) break;
+		[scanner scanString:@"=" intoString:NULL];
+		if([scanner isAtEnd]) break;
+		unichar c = [parameterPart characterAtIndex:[scanner scanLocation]];
+		NSString *value = nil;
+		if(c == '"') {
+			[scanner scanString:@"\"" intoString:NULL];
+			if(![scanner scanUpToString:@"\"" intoString:&value]) break;
+			[scanner scanString:@"\"" intoString:NULL];
+		}else{
+			if(![scanner scanUpToString:@";" intoString:&value]) break;
+		}
+		
+		[params setObject:value forKey:attribute];
+	}
+	return basePart;	
+}

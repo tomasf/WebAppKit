@@ -13,6 +13,8 @@
 
 - (BOOL)canHandleRequest:(WARequest*)req;
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp;
+- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(AsyncSocket*)sock;
+
 - (WARequestHandler*)handlerForRequest:(WARequest*)req;
 - (void)connectionDidClose;
 @end

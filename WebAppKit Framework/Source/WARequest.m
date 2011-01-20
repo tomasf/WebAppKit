@@ -9,9 +9,22 @@
 #import "WARequest.h"
 #import "AsyncSocket.h"
 #import "WACookie.h"
+#import "WAMultipartReader.h"
+#import "WAUploadedFile.h"
+#import "WAMultipartPart.h"
 
-@interface WARequest () <AsyncSocketDelegate>
+static const uint64_t WARequestMaxStaticBodyLength = 1000000;
+
+
+
+@interface WARequest () <AsyncSocketDelegate, WAMultipartReaderDelegate>
 @end
+
+@interface WAUploadedFile (Private)
+- (id)initWithPart:(WAMultipartPart*)part;
+- (void)invalidate;
+@end
+
 
 
 @implementation WARequest
@@ -112,6 +125,13 @@
 }
 
 
+- (NSString*)valueForHeaderField:(NSString*)fieldName parameters:(NSDictionary**)outParams {
+	NSString *value = [self valueForHeaderField:fieldName];
+	if(!value) return nil;
+	return WAExtractHeaderValueParameters(value, outParams);
+}
+
+
 - (NSString*)valueForPOSTParameter:(NSString*)name {
 	return [POSTParameters objectForKey:name];
 }
@@ -146,11 +166,68 @@
 	}
 	
 	uint64_t contentLength = [[self valueForHeaderField:@"Content-Length"] longLongValue];
+	NSDictionary *params = nil;
+	NSString *contentType = [self valueForHeaderField:@"Content-Type" parameters:&params];
 	
-	[socket setDelegate:self];
-	[socket readDataToLength:contentLength withTimeout:-1 tag:0];
+	if([contentType isEqual:@"multipart/form-data"]) {
+		NSString *boundary = [params objectForKey:@"boundary"];
+		if(!boundary) {
+			handler(NO);
+			return;
+		}
+		multipartReader = [[WAMultipartReader alloc] initWithSocket:socket boundary:boundary delegate:self];
+	}else if([contentType isEqual:@"application/x-www-form-urlencoded"]) {
 	
+		if(contentLength > WARequestMaxStaticBodyLength) {
+			handler(NO);
+			return;
+		}
+		[socket setDelegate:self];
+		[socket readDataToLength:contentLength withTimeout:-1 tag:0];
+	}else{
+		handler(NO);
+		return;
+	}
 	completionHandler = [handler copy];
+}
+
+
+- (void)invalidate {
+	for(WAUploadedFile *file in self.uploadedFiles)
+		[file invalidate];
+}
+
+
+- (void)multipartReader:(WAMultipartReader *)reader finishedWithParts:(NSArray *)parts {
+	NSMutableDictionary *files = [NSMutableDictionary dictionary];
+	NSMutableDictionary *POSTValues = [NSMutableDictionary dictionary];
+	
+	for(WAMultipartPart *part in parts) {
+		NSDictionary *params = nil;
+		WAExtractHeaderValueParameters([part.headerFields objectForKey:@"Content-Disposition"]?:@"", &params);
+		BOOL isFile = ([params objectForKey:@"filename"] != nil);
+		NSString *paramName = [params objectForKey:@"name"];
+		if(!paramName) continue;
+		
+		if(isFile) {
+			WAUploadedFile *file = [[WAUploadedFile alloc] initWithPart:part];
+			if(!file.parameterName) continue;
+			[files setObject:file forKey:file.parameterName];
+		}else if(part.data){
+			NSString *string = [[NSString alloc] initWithData:part.data encoding:NSUTF8StringEncoding];
+			if(!string) continue;
+			[POSTValues setObject:string forKey:paramName];
+		}
+	}
+	
+	uploadedFiles = files;
+	POSTParameters = POSTValues;
+	
+	completionHandler(YES);
+}
+
+- (void)multipartReaderFailed:(WAMultipartReader *)reader {
+	completionHandler(NO);
 }
 
 
@@ -225,6 +302,14 @@
 	for(NSString *acceptedType in self.acceptedMediaTypes)
 		if([[self class] mediaType:type matchesType:acceptedType]) return YES;
 	return NO;
+}
+
+- (NSSet*)uploadedFiles {
+	return [NSSet setWithArray:[uploadedFiles allValues]];
+}
+
+- (WAUploadedFile*)uploadedFileForName:(NSString*)name {
+	return [uploadedFiles objectForKey:name];
 }
 
 

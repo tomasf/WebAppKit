@@ -3625,6 +3625,8 @@ Failed:
 	
 	if(maxoutError)
 	{
+		[self completeCurrentRead]; // tomasf 2011-01-20
+		return;
 		[self closeWithError:[self getReadMaxedOutError]];
 		return;
 	}
@@ -3691,7 +3693,7 @@ Failed:
 }
 
 - (void)doReadTimeout:(NSTimer *)timer
-{
+{	
 	NSTimeInterval timeoutExtension = 0.0;
 	
 	if([theDelegate respondsToSelector:@selector(onSocket:shouldTimeoutReadWithTag:elapsed:bytesDone:)])

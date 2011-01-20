@@ -7,8 +7,7 @@
 //
 
 #import "WAHTTPSupport.h"
-
-@class AsyncSocket, WACookie;
+@class AsyncSocket, WACookie, WAUploadedFile, WAMultipartReader;
 
 @interface WARequest : NSObject {
 	NSString *HTTPVersion;
@@ -18,8 +17,11 @@
 	NSDictionary *headerFields;
 	NSDictionary *queryParameters;
 	NSDictionary *POSTParameters;
+	NSDictionary *uploadedFiles;
 	NSDictionary *cookies;
 	NSArray *byteRanges;
+	
+	WAMultipartReader *multipartReader;
 	
 	void(^completionHandler)(BOOL validity);
 }
@@ -31,6 +33,7 @@
 
 @property(readonly) NSDictionary *headerFields;
 @property(readonly) NSDictionary *queryParameters;
+@property(readonly) NSSet *uploadedFiles;
 @property(readonly) NSString *host;
 @property(readonly) NSURL *URL;
 
@@ -50,6 +53,7 @@
 - (NSString*)valueForHeaderField:(NSString*)fieldName;
 - (NSString*)valueForPOSTParameter:(NSString*)name;
 - (WACookie*)cookieForName:(NSString*)name;
+- (WAUploadedFile*)uploadedFileForName:(NSString*)name;
 
 - (BOOL)acceptsMediaType:(NSString*)type;
 

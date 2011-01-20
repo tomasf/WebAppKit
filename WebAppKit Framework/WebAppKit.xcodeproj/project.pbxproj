@@ -37,6 +37,12 @@
 		E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */; };
 		E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E262BE4E12D797D100A8A4B4 /* WAModule.h */; };
 		E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4F12D797D100A8A4B4 /* WAModule.m */; };
+		E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C2CE12E7B43000462191 /* WAMultipartReader.h */; };
+		E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C2CF12E7B43000462191 /* WAMultipartReader.m */; };
+		E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C2D212E7BEA900462191 /* WAMultipartPart.h */; };
+		E275C2D512E7BEA900462191 /* WAMultipartPart.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C2D312E7BEA900462191 /* WAMultipartPart.m */; };
+		E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C41112E84FF100462191 /* WAUploadedFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
 		E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */; };
 		E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0FA12C3A80C006BA324 /* WACometStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,6 +145,12 @@
 		E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModuleManager.m; sourceTree = "<group>"; };
 		E262BE4E12D797D100A8A4B4 /* WAModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAModule.h; sourceTree = "<group>"; };
 		E262BE4F12D797D100A8A4B4 /* WAModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModule.m; sourceTree = "<group>"; };
+		E275C2CE12E7B43000462191 /* WAMultipartReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMultipartReader.h; sourceTree = "<group>"; };
+		E275C2CF12E7B43000462191 /* WAMultipartReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMultipartReader.m; sourceTree = "<group>"; };
+		E275C2D212E7BEA900462191 /* WAMultipartPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMultipartPart.h; sourceTree = "<group>"; };
+		E275C2D312E7BEA900462191 /* WAMultipartPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMultipartPart.m; sourceTree = "<group>"; };
+		E275C41112E84FF100462191 /* WAUploadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUploadedFile.h; sourceTree = "<group>"; };
+		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUploadedFile.m; sourceTree = "<group>"; };
 		E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometHandler.h; path = Source/WACometHandler.h; sourceTree = "<group>"; };
 		E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACometHandler.m; path = Source/WACometHandler.m; sourceTree = "<group>"; };
 		E2B7A0FA12C3A80C006BA324 /* WACometStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometStream.h; path = Source/WACometStream.h; sourceTree = "<group>"; };
@@ -251,6 +263,7 @@
 			children = (
 				E2E8778D12B3C61800558845 /* Server */,
 				E2DA8B2D12D2634700B1EDE8 /* Transaction */,
+				E275C40F12E84FDF00462191 /* Multipart */,
 				E2E877AC12B3CC1D00558845 /* Request Handlers */,
 				E2DA8B2B12D2633100B1EDE8 /* Categories */,
 				E2DA8B2E12D2635F00B1EDE8 /* Application */,
@@ -373,6 +386,17 @@
 			name = Modules;
 			sourceTree = "<group>";
 		};
+		E275C40F12E84FDF00462191 /* Multipart */ = {
+			isa = PBXGroup;
+			children = (
+				E275C2CE12E7B43000462191 /* WAMultipartReader.h */,
+				E275C2CF12E7B43000462191 /* WAMultipartReader.m */,
+				E275C2D212E7BEA900462191 /* WAMultipartPart.h */,
+				E275C2D312E7BEA900462191 /* WAMultipartPart.m */,
+			);
+			name = Multipart;
+			sourceTree = "<group>";
+		};
 		E2B7A0F012C3A6B3006BA324 /* Comet */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +438,8 @@
 				E2D88B5D12B2FE2400219BF5 /* WAResponse.m */,
 				E2F4F39012DB669F0058342E /* WAHTTPSupport.h */,
 				E2F4F39112DB669F0058342E /* WAHTTPSupport.m */,
+				E275C41112E84FF100462191 /* WAUploadedFile.h */,
+				E275C41212E84FF100462191 /* WAUploadedFile.m */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -505,6 +531,9 @@
 				E262BE4912D7958D00A8A4B4 /* WAModuleManager.h in Headers */,
 				E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */,
 				E2F4F39212DB669F0058342E /* WAHTTPSupport.h in Headers */,
+				E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */,
+				E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */,
+				E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +634,9 @@
 				E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */,
 				E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */,
 				E2F4F39312DB669F0058342E /* WAHTTPSupport.m in Sources */,
+				E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */,
+				E275C2D512E7BEA900462191 /* WAMultipartPart.m in Sources */,
+				E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

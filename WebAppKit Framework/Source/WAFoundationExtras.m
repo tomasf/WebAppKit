@@ -41,8 +41,8 @@
 @implementation NSString (WAExtras)
 
 - (NSString*)HTMLEscapedString {
-	self = [self stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
 	self = [self stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
+	self = [self stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
 	self = [self stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
 	self = [self stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
 	return self;
