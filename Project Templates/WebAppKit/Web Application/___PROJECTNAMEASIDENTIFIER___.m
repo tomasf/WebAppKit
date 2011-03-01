@@ -4,11 +4,11 @@
 
 
 - (void)setup {
-	[self addRouteSelector:@selector(index:response:) HTTPMethod:@"GET" path:@"/"];
+	[self addRouteSelector:@selector(index) HTTPMethod:@"GET" path:@"/"];
 }
 
 
-- (id)index:(WARequest*)req response:(WAResponse*)resp {
+- (id)index {
 	WATemplate *t = [WATemplate templateNamed:@"index"];
 	[t setValue:@"Hello world" forKey:@"foo"];
 	return t;
