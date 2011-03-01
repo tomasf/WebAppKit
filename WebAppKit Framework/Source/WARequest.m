@@ -28,7 +28,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 @implementation WARequest
-@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion, clientAddress, byteRanges;
+@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion, clientAddress, byteRanges, query;
 
 
 + (NSDictionary*)dictionaryFromQueryParameters:(NSString*)query encoding:(NSStringEncoding)enc {
@@ -84,6 +84,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	NSURL *requestURL = NSMakeCollectable(CFHTTPMessageCopyRequestURL(message));
 	path = [[requestURL path] copy];
 	queryParameters = [[[self class] dictionaryFromQueryParameters:[requestURL query] encoding:NSUTF8StringEncoding] copy];
+	query = [[requestURL query] copy];
 	
 	headerFields = NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message));
 	NSString *cookieString = [headerFields objectForKey:@"Cookie"];

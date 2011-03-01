@@ -15,6 +15,7 @@
 	NSString *path;
 	NSString *clientAddress;
 	NSDictionary *headerFields;
+	NSString *query;
 	NSDictionary *queryParameters;
 	NSDictionary *POSTParameters;
 	NSDictionary *uploadedFiles;
@@ -31,6 +32,7 @@
 @property(readonly) NSString *method;
 @property(readonly) NSString *path;
 
+@property(readonly) NSString *query;
 @property(readonly) NSDictionary *headerFields;
 @property(readonly) NSDictionary *queryParameters;
 @property(readonly) NSSet *uploadedFiles;
