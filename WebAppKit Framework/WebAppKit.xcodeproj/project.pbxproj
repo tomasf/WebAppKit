@@ -37,21 +37,25 @@
 		E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */; };
 		E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E262BE4E12D797D100A8A4B4 /* WAModule.h */; };
 		E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4F12D797D100A8A4B4 /* WAModule.m */; };
+		E264E06712FA3020007AD73A /* WAHTMLMarkdownFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */; };
+		E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */; };
+		E264E06912FA3020007AD73A /* WAMarkdown.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06312FA3020007AD73A /* WAMarkdown.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06412FA3020007AD73A /* WAMarkdown.m */; };
+		E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06512FA3020007AD73A /* WAMarkdownParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06612FA3020007AD73A /* WAMarkdownParser.m */; };
+		E264E06E12FA302D007AD73A /* libupskirt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E264E06D12FA302D007AD73A /* libupskirt.a */; };
+		E264E07512FA303A007AD73A /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E07312FA303A007AD73A /* buffer.h */; };
+		E264E07612FA303A007AD73A /* markdown.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E07412FA303A007AD73A /* markdown.h */; };
 		E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C2CE12E7B43000462191 /* WAMultipartReader.h */; };
 		E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C2CF12E7B43000462191 /* WAMultipartReader.m */; };
 		E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C2D212E7BEA900462191 /* WAMultipartPart.h */; };
 		E275C2D512E7BEA900462191 /* WAMultipartPart.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C2D312E7BEA900462191 /* WAMultipartPart.m */; };
 		E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C41112E84FF100462191 /* WAUploadedFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
-		E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */; };
-		E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A0FA12C3A80C006BA324 /* WACometStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2B7A0FD12C3A80C006BA324 /* WACometStream.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A0FB12C3A80C006BA324 /* WACometStream.m */; };
 		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
 		E2B7A17212C3AC71006BA324 /* ParseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B7A17112C3AC71006BA324 /* ParseKit.framework */; };
 		E2B7A1AB12C3AC7C006BA324 /* ParseKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2B7A17112C3AC71006BA324 /* ParseKit.framework */; };
-		E2B7A20B12C3B1A2006BA324 /* CometPrefix.html in Resources */ = {isa = PBXBuildFile; fileRef = E2B7A20A12C3B1A2006BA324 /* CometPrefix.html */; };
 		E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */; };
 		E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -145,20 +149,24 @@
 		E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModuleManager.m; sourceTree = "<group>"; };
 		E262BE4E12D797D100A8A4B4 /* WAModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAModule.h; sourceTree = "<group>"; };
 		E262BE4F12D797D100A8A4B4 /* WAModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModule.m; sourceTree = "<group>"; };
+		E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAHTMLMarkdownFormatter.h; path = Source/Markdown/WAHTMLMarkdownFormatter.h; sourceTree = "<group>"; };
+		E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAHTMLMarkdownFormatter.m; path = Source/Markdown/WAHTMLMarkdownFormatter.m; sourceTree = "<group>"; };
+		E264E06312FA3020007AD73A /* WAMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMarkdown.h; path = Source/Markdown/WAMarkdown.h; sourceTree = "<group>"; };
+		E264E06412FA3020007AD73A /* WAMarkdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAMarkdown.m; path = Source/Markdown/WAMarkdown.m; sourceTree = "<group>"; };
+		E264E06512FA3020007AD73A /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMarkdownParser.h; path = Source/Markdown/WAMarkdownParser.h; sourceTree = "<group>"; };
+		E264E06612FA3020007AD73A /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAMarkdownParser.m; path = Source/Markdown/WAMarkdownParser.m; sourceTree = "<group>"; };
+		E264E06D12FA302D007AD73A /* libupskirt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupskirt.a; path = Source/Markdown/libupskirt.a; sourceTree = "<group>"; };
+		E264E07312FA303A007AD73A /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = buffer.h; path = Source/Markdown/buffer.h; sourceTree = "<group>"; };
+		E264E07412FA303A007AD73A /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = markdown.h; path = Source/Markdown/markdown.h; sourceTree = "<group>"; };
 		E275C2CE12E7B43000462191 /* WAMultipartReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMultipartReader.h; sourceTree = "<group>"; };
 		E275C2CF12E7B43000462191 /* WAMultipartReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMultipartReader.m; sourceTree = "<group>"; };
 		E275C2D212E7BEA900462191 /* WAMultipartPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMultipartPart.h; sourceTree = "<group>"; };
 		E275C2D312E7BEA900462191 /* WAMultipartPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMultipartPart.m; sourceTree = "<group>"; };
 		E275C41112E84FF100462191 /* WAUploadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUploadedFile.h; sourceTree = "<group>"; };
 		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUploadedFile.m; sourceTree = "<group>"; };
-		E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometHandler.h; path = Source/WACometHandler.h; sourceTree = "<group>"; };
-		E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACometHandler.m; path = Source/WACometHandler.m; sourceTree = "<group>"; };
-		E2B7A0FA12C3A80C006BA324 /* WACometStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACometStream.h; path = Source/WACometStream.h; sourceTree = "<group>"; };
-		E2B7A0FB12C3A80C006BA324 /* WACometStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACometStream.m; path = Source/WACometStream.m; sourceTree = "<group>"; };
 		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
 		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
 		E2B7A17112C3AC71006BA324 /* ParseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseKit.framework; path = Frameworks/ParseKit.framework; sourceTree = "<group>"; };
-		E2B7A20A12C3B1A2006BA324 /* CometPrefix.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CometPrefix.html; sourceTree = "<group>"; };
 		E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAFoundationExtras.h; path = Source/WAFoundationExtras.h; sourceTree = "<group>"; };
@@ -213,6 +221,7 @@
 				E2B7A17212C3AC71006BA324 /* ParseKit.framework in Frameworks */,
 				E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */,
 				E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */,
+				E264E06E12FA302D007AD73A /* libupskirt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +262,6 @@
 			children = (
 				8DC2EF5A0486A6940098B216 /* Info.plist */,
 				E26154D612B3CCED0040B002 /* 404.html */,
-				E2B7A20A12C3B1A2006BA324 /* CometPrefix.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -270,6 +278,7 @@
 				E2DA8B2F12D2638E00B1EDE8 /* Templates */,
 				E21D234212BC606300277F2E /* Cookies */,
 				E262BE4212D7941100A8A4B4 /* Modules */,
+				E264E05E12FA300B007AD73A /* Markdown */,
 				E2B7A15912C3AC0D006BA324 /* WAJSON.h */,
 				E2B7A15A12C3AC0D006BA324 /* WAJSON.m */,
 				E21D22AF12BC53CE00277F2E /* WAUtilities.h */,
@@ -386,6 +395,30 @@
 			name = Modules;
 			sourceTree = "<group>";
 		};
+		E264E05E12FA300B007AD73A /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				E264E07012FA3030007AD73A /* libupskirt */,
+				E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */,
+				E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */,
+				E264E06312FA3020007AD73A /* WAMarkdown.h */,
+				E264E06412FA3020007AD73A /* WAMarkdown.m */,
+				E264E06512FA3020007AD73A /* WAMarkdownParser.h */,
+				E264E06612FA3020007AD73A /* WAMarkdownParser.m */,
+			);
+			name = Markdown;
+			sourceTree = "<group>";
+		};
+		E264E07012FA3030007AD73A /* libupskirt */ = {
+			isa = PBXGroup;
+			children = (
+				E264E07312FA303A007AD73A /* buffer.h */,
+				E264E07412FA303A007AD73A /* markdown.h */,
+				E264E06D12FA302D007AD73A /* libupskirt.a */,
+			);
+			name = libupskirt;
+			sourceTree = "<group>";
+		};
 		E275C40F12E84FDF00462191 /* Multipart */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,17 +428,6 @@
 				E275C2D312E7BEA900462191 /* WAMultipartPart.m */,
 			);
 			name = Multipart;
-			sourceTree = "<group>";
-		};
-		E2B7A0F012C3A6B3006BA324 /* Comet */ = {
-			isa = PBXGroup;
-			children = (
-				E2B7A0F612C3A6E0006BA324 /* WACometHandler.h */,
-				E2B7A0F712C3A6E0006BA324 /* WACometHandler.m */,
-				E2B7A0FA12C3A80C006BA324 /* WACometStream.h */,
-				E2B7A0FB12C3A80C006BA324 /* WACometStream.m */,
-			);
-			name = Comet;
 			sourceTree = "<group>";
 		};
 		E2D88B4F12B2FE2400219BF5 /* AsyncSocket */ = {
@@ -486,7 +508,6 @@
 				E2E876C612B3167400558845 /* WADirectoryHandler.m */,
 				E2E877AD12B3CC3900558845 /* WAStaticFileHandler.h */,
 				E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */,
-				E2B7A0F012C3A6B3006BA324 /* Comet */,
 			);
 			name = "Request Handlers";
 			sourceTree = "<group>";
@@ -519,8 +540,6 @@
 				E21D231F12BC5D4500277F2E /* FMDatabaseAdditions.h in Headers */,
 				E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */,
 				E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */,
-				E2B7A0F812C3A6E0006BA324 /* WACometHandler.h in Headers */,
-				E2B7A0FC12C3A80C006BA324 /* WACometStream.h in Headers */,
 				E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */,
 				E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */,
 				E227EC3512D3B67600C9B669 /* WASessionGenerator.h in Headers */,
@@ -534,6 +553,11 @@
 				E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */,
 				E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */,
 				E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */,
+				E264E06712FA3020007AD73A /* WAHTMLMarkdownFormatter.h in Headers */,
+				E264E06912FA3020007AD73A /* WAMarkdown.h in Headers */,
+				E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */,
+				E264E07512FA303A007AD73A /* buffer.h in Headers */,
+				E264E07612FA303A007AD73A /* markdown.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,7 +614,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2B7A20B12C3B1A2006BA324 /* CometPrefix.html in Resources */,
 				E26154D712B3CCED0040B002 /* 404.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,8 +645,6 @@
 				E21D232012BC5D4500277F2E /* FMDatabaseAdditions.m in Sources */,
 				E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */,
 				E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */,
-				E2B7A0F912C3A6E0006BA324 /* WACometHandler.m in Sources */,
-				E2B7A0FD12C3A80C006BA324 /* WACometStream.m in Sources */,
 				E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */,
 				E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */,
 				E227EC3612D3B67600C9B669 /* WASessionGenerator.m in Sources */,
@@ -637,6 +658,9 @@
 				E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */,
 				E275C2D512E7BEA900462191 /* WAMultipartPart.m in Sources */,
 				E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */,
+				E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */,
+				E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */,
+				E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +688,10 @@
 				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Source/Markdown\"",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = WebAppKit;
 				VALID_ARCHS = "i386 x86_64";
@@ -690,6 +718,10 @@
 				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Source/Markdown\"",
+				);
 				PRODUCT_NAME = WebAppKit;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -726,6 +758,7 @@
 				INSTALL_PATH = "";
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};

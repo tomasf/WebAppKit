@@ -19,7 +19,13 @@ extern int WAApplicationMain();
 	
 	NSMutableArray *requestHandlers;
 	NSMutableSet *currentHandlers;
+	
+	WARequest *request;
+	WAResponse *response;
 }
+
+@property(readonly) WARequest *request;
+@property(readonly) WAResponse *response;
 
 + (int)run;
 - (id)initWithPort:(NSUInteger)port;
@@ -31,6 +37,6 @@ extern int WAApplicationMain();
 - (void)addRequestHandler:(WARequestHandler*)handler;
 - (void)removeRequestHandler:(WARequestHandler*)handler;
 
-- (void)preprocessRequest:(WARequest*)req response:(WAResponse*)resp;
-- (void)postprocessRequest:(WARequest*)req response:(WAResponse*)resp;
+- (void)preprocess;
+- (void)postprocess;
 @end

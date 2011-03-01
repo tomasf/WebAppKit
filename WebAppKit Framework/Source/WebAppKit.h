@@ -17,8 +17,8 @@
 #import "WASession.h"
 #import "WAUtilities.h"
 
-#import "WACometHandler.h"
-#import "WACometStream.h"
-
 #import "WAJSON.h"
 #import "WAHTTPSupport.h"
+
+#import "WAMarkdown.h"
+#import "WAMarkdownParser.h"

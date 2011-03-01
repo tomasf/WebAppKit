@@ -15,6 +15,7 @@
 	TFRegex *pathExpression;
 	id target;
 	SEL action;
+	BOOL hasTransactionParameters;
 }
 
 @property(readonly) NSString *method;

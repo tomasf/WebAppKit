@@ -33,6 +33,8 @@ int WAApplicationMain() {
 
 
 @implementation WAApplication
+@synthesize request, response;
+
 
 + (NSUInteger)port {
 	NSUInteger port = [[[[NSBundle mainBundle] infoDictionary] objectForKey:WAHTTPServerPortKey] integerValue];
@@ -59,6 +61,8 @@ int WAApplicationMain() {
 	
 	for(WARequestHandler *handler in [[WAModuleManager sharedManager] allRequestHandlers])
 		[app addRequestHandler:handler];
+	
+	NSLog(@"WebAppKit started on port %d", (int)port);
 	
 	for(;;)
 		[[NSRunLoop currentRunLoop] run];
@@ -113,16 +117,16 @@ int WAApplicationMain() {
 }
 
 
-- (WARequestHandler*)handlerForRequest:(WARequest*)request {
+- (WARequestHandler*)handlerForRequest:(WARequest*)req {
 	for(WARequestHandler *handler in requestHandlers)
-		if([handler canHandleRequest:request])
-			return [handler handlerForRequest:request];
+		if([handler canHandleRequest:req])
+			return [handler handlerForRequest:req];
 	return [self fallbackHandler];
 }
 
 
-- (WARequestHandler*)server:(WAServer*)server handlerForRequest:(WARequest*)request {
-	return [self handlerForRequest:request];
+- (WARequestHandler*)server:(WAServer*)server handlerForRequest:(WARequest*)req {
+	return [self handlerForRequest:req];
 }
 
 
@@ -153,7 +157,14 @@ int WAApplicationMain() {
 	[requestHandlers addObject:[[WARoute alloc] initWithPathExpression:regex method:method target:self action:sel]];
 }
 
-- (void)preprocessRequest:(WARequest*)req response:(WAResponse*)resp {}
-- (void)postprocessRequest:(WARequest*)req response:(WAResponse*)resp {}
+- (void)setRequest:(WARequest*)req response:(WAResponse*)resp {
+	request = req;
+	response = resp;
+}
+
+- (void)preprocess {}
+- (void)postprocess {}
+
+
 
 @end
