@@ -1,312 +1,150 @@
 //
-//  FTJSON.m
-//  JSON
+//  WAJSON.m
+//  JSCTest
 //
-//  Created by Tomas Franzén on 2009-10-25.
-//  Copyright 2009 Lighthead Software. All rights reserved.
+//  Created by Tomas Franzén on 2011-02-21.
+//  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
 #import "WAJSON.h"
-#import <ParseKit/ParseKit.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
-#pragma mark Generation
+/*
+JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
+*/
 
-@implementation NSString (JSONEncoding)
-- (NSString*)JSONValue {
-	self = [self stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-	self = [self stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
-	self = [self stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
-	return [NSString stringWithFormat:@"\"%@\"", self];
-}
+@interface NSObject (WAJSONEncodingPrivate)
+- (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx;
 @end
 
-@implementation NSArray (JSONEncoding)
-- (NSString*)JSONValue {
-	NSMutableArray *entries = [NSMutableArray array];
-	for(id obj in self) {
-		id value = [obj JSONValue];
-		if(!value) return nil;
-		[entries addObject:value];
-	}
-	return [NSString stringWithFormat:@"[%@]", [entries componentsJoinedByString:@","]];
-}
-@end
 
-@implementation NSDictionary (JSONEncoding)
-- (NSString*)JSONValue {
-	NSMutableString *JSON = [NSMutableString stringWithString:@"{"];
-	NSMutableArray *entries = [NSMutableArray array];
-	for(id key in self) 
-		[entries addObject:[NSString stringWithFormat:@"%@:%@", [key JSONValue], [[self objectForKey:key] JSONValue]]];
+@implementation NSObject (WAJSON)
+
+- (NSString*)JSONRepresentationWithIndentation:(NSUInteger)indentation {
+	JSGlobalContextRef ctx = JSGlobalContextCreate(NULL);
+	JSValueRef value = [self JavaScriptRepresentationWithContext:ctx];
+	JSStringRef JSON = JSValueCreateJSONString(ctx, value, indentation, NULL);
+	JSGlobalContextRelease(ctx);
 	
-	[JSON appendString:[entries componentsJoinedByString:@","]];
-	[JSON appendString:@"}"];
-	return JSON;
+	if(!JSON) return nil;
+	return NSMakeCollectable(JSStringCopyCFString(NULL, JSON));
+}
+
+- (NSString*)JSONRepresentation {
+	return [self JSONRepresentationWithIndentation:0];
+}
+
+@end
+
+
+@implementation NSString (WAJSON)
+- (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
+	return JSValueMakeString(ctx, (JSStringRef)CFMakeCollectable(JSStringCreateWithCFString((CFStringRef)self)));
 }
 @end
 
-@implementation NSNumber (JSONEncoding)
-- (NSString*)JSONValue {
+
+@implementation NSNumber (WAJSON)
+- (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
 	if(strcmp([self objCType], @encode(BOOL)) == 0)
-		return [self boolValue] ? @"true" : @"false";
-	return [self description];
-}
-@end
-
-@implementation NSNull (JSONEncoding)
-- (NSString*)JSONValue {
-	return @"null";
+		return JSValueMakeBoolean(ctx, [self boolValue]);
+	else
+		return JSValueMakeNumber(ctx, [self doubleValue]);
 }
 @end
 
 
-
-#pragma mark Parsing
-
-#define FTJSONParserErrorDomain @"FTJSONParserErrorDomain"
-
-
-@interface FTJSONStringState : PKTokenizerState {}
-@end
-
-// Private interfaces. PKQuoteState uses this, so it should be okay.
-@interface PKToken ()
-@property (nonatomic, readwrite) NSUInteger offset;
-@end
-
-@interface PKTokenizerState ()
-- (void)resetWithReader:(PKReader *)r;
-- (void)append:(PKUniChar)c;
-- (NSString *)bufferedString;
-@end
-
-
-@implementation FTJSONStringState
-
-- (PKToken *)nextTokenFromReader:(PKReader *)r startingWith:(PKUniChar)cin tokenizer:(PKTokenizer *)t {
-    NSParameterAssert(r);
-    [self resetWithReader:r];
-    
-	BOOL isEscaping = NO;
-    PKUniChar c;
-	
-	[self append:cin];
-	
-    for(;;) {
-        c = [r read];
-        if(c == PKEOF) break;
-		[self append:c];
-		
-		if(isEscaping)
-			isEscaping = NO;
-		else{
-			if(c == cin) break;
-			if(c == '\\') isEscaping = YES;
-		}
-    }
-	
-    PKToken *tok = [PKToken tokenWithTokenType:PKTokenTypeQuotedString stringValue:[self bufferedString] floatValue:0.0];
-    tok.offset = offset;
-    return tok;
+@implementation NSDictionary (WAJSON)
+- (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
+	JSObjectRef object = JSObjectMake(ctx, NULL, NULL);
+	for(NSString *key in self) {
+		JSStringRef keyString = (JSStringRef)CFMakeCollectable(JSStringCreateWithCFString((CFStringRef)key));
+		JSValueRef value = [[self objectForKey:key] JavaScriptRepresentationWithContext:ctx];
+		JSObjectSetProperty(ctx, object, keyString, value, kJSPropertyAttributeNone, NULL);
+	}
+	return object;
 }
-
 @end
 
 
-
-
-@interface WAJSONParser ()
-@property(retain) NSError *error;
-- (id)parseToken:(PKToken*)token;
+@implementation NSArray (WAJSON)
+- (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
+	JSValueRef values[[self count]];
+	
+	NSUInteger index = 0;
+	for(id object in self)
+		values[index++] = [object JavaScriptRepresentationWithContext:ctx];
+	
+	return JSObjectMakeArray(ctx, [self count], values, NULL);
+}
 @end
+
+
+@implementation NSNull (WAJSON)
+- (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
+	return JSValueMakeNull(ctx);
+}
+@end
+
+
+#define JSSTR(x) ((JSStringRef)CFMakeCollectable(JSStringCreateWithCFString(CFSTR(x))))
 
 
 @implementation WAJSONParser
-@synthesize error;
 
-
-- (id)initWithJSONString:(NSString*)s {
-	[super init];
-	tokenizer = [[PKTokenizer tokenizerWithString:s] retain];
-	
-	tokenizer.numberState.allowsTrailingDot = NO;
-	tokenizer.numberState.allowsOctalNotation = NO;
-	tokenizer.numberState.allowsScientificNotation = YES;
-	tokenizer.numberState.allowsHexadecimalNotation = NO;
-	
-	FTJSONStringState *qs = [[FTJSONStringState alloc] init];
-	[tokenizer setTokenizerState:qs from:'"' to:'"'];
-	[qs release];
-	
-	// Disallow:
-	[tokenizer setTokenizerState:tokenizer.symbolState from:'\'' to:'\'']; // Single quotes
-	[tokenizer setTokenizerState:tokenizer.symbolState from:'/' to:'/']; // Comments
-	return self;
-}
-
-
-- (void)dealloc {
-	[tokenizer release];
-	[error release];
-	[super dealloc];
-}
-
-
-- (id)setErrorDescription:(NSString*)format, ... {
-	va_list vars;
-	va_start(vars,format);
-	NSString *description = [[[NSString alloc] initWithFormat:format arguments:vars] autorelease];
-	va_end(vars);
-	self.error = [NSError errorWithDomain:FTJSONParserErrorDomain code:-1 userInfo:[NSDictionary dictionaryWithObject:description forKey:NSLocalizedFailureReasonErrorKey]];
-	return nil;
-}
-
-
-- (NSArray*)parseArray {
-	NSMutableArray *array = [NSMutableArray array];
-
-	for(;;) {
-		PKToken *token = [tokenizer nextToken];
-		if([[token stringValue] isEqual:@"]"]) break;
-		
-		id object = [self parseToken:token];
-		if(!object) return nil;
-		
-		[array addObject:object];
-		
-		token = [tokenizer nextToken];
-		if([[token stringValue] isEqual:@"]"])
-			break;
-		if(![[token stringValue] isEqual:@","])
-			return [self setErrorDescription:@"Parse error: Expected comma or ] at character %d, but found: %@", [token offset], [token stringValue] ?: @"EOF"];
++ (id)objectFromJSValue:(JSValueRef)value context:(JSGlobalContextRef)ctx {
+	switch(JSValueGetType(ctx, value)) {
+		case kJSTypeNull:
+			return [NSNull null];
+		case kJSTypeBoolean:
+			return [NSNumber numberWithBool:JSValueToBoolean(ctx, value)];
+		case kJSTypeNumber:
+			return [NSNumber numberWithDouble:JSValueToNumber(ctx, value, NULL)];
+		case kJSTypeString:
+			return (id)CFMakeCollectable(JSStringCopyCFString(NULL, (JSStringRef)CFMakeCollectable(JSValueToStringCopy(ctx, value, NULL))));
+		case kJSTypeObject: {
+			JSObjectRef object = (JSObjectRef)value;
+			JSValueRef constructor = JSEvaluateScript(ctx, JSSTR("Array"), NULL, NULL, 0, NULL);
+			
+			if(JSValueIsInstanceOfConstructor(ctx, value, (JSObjectRef)constructor, NULL)) {
+				NSMutableArray *array = [NSMutableArray array];
+				JSValueRef lengthValue = JSObjectGetProperty(ctx, object, JSSTR("length"), NULL);
+				unsigned length = JSValueToNumber(ctx, lengthValue, NULL);
+				
+				for(unsigned i=0; i<length; i++) {					
+					JSValueRef indexValue = JSObjectGetPropertyAtIndex(ctx, object, i, NULL);
+					[array addObject:[self objectFromJSValue:indexValue context:ctx]];
+				}
+				return array;
+			}else{
+				NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+				JSPropertyNameArrayRef names = JSObjectCopyPropertyNames(ctx, object);
+				size_t count = JSPropertyNameArrayGetCount(names);
+				for(size_t i=0; i<count; i++) {
+					JSStringRef name = JSPropertyNameArrayGetNameAtIndex(names, i);
+					JSValueRef indexValue = JSObjectGetProperty(ctx, object, name, NULL);
+					NSString *key = (NSString*)NSMakeCollectable(JSStringCopyCFString(NULL, name));
+					id value = [self objectFromJSValue:indexValue context:ctx];
+					[dict setObject:value forKey:key];
+				}
+				return dict;
+			}
+			
+		}
 	}
+	return NULL;
+}
+
++ (id)objectFromJSON:(NSString*)JSON {
+	JSGlobalContextRef ctx = JSGlobalContextCreate(NULL);
+	JSStringRef source = (JSStringRef)JSStringCreateWithCFString((CFStringRef)JSON);
 	
-	return array;
-}
-
-
-- (NSDictionary*)parseObject {
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
-	for(;;) {
-		PKToken *token = [tokenizer nextToken];
-		if([[token stringValue] isEqual:@"}"]) break;
-		
-		id key = [self parseToken:token];
-		if(!key) return nil;
-		
-		token = [tokenizer nextToken];
-		if(![[token stringValue] isEqual:@":"])
-			return [self setErrorDescription:@"Parse error: Expected colon in object at character %d, but found: %@", [token offset], [token stringValue] ?: @"EOF"];
-		
-		token = [tokenizer nextToken];
-		id value = [self parseToken:token];
-		if(!value) return nil;
-		
-		[dict setObject:value forKey:key];
-		
-		token = [tokenizer nextToken];
-		if([[token stringValue] isEqual:@"}"])
-			break;
-		if(![[token stringValue] isEqual:@","])
-			return [self setErrorDescription:@"Parse error: Expected comma or } at character %d, but found: %@", [token offset], [token stringValue] ?: @"EOF"];
-	}
-
-	return dict;
-}
-
-
-- (NSString*)parseStringToken:(PKToken*)token {
-	NSMutableString *newString = [NSMutableString string];
-	NSString *string = [NSString stringWithString:[[token stringValue] substringWithRange:NSMakeRange(1, [[token stringValue] length]-2)]];
-	NSScanner *scanner = [NSScanner scannerWithString:string];
+	JSValueRef value = JSValueMakeFromJSONString(ctx, source);
+	id object = [self objectFromJSValue:value context:ctx];
 	
-	while(![scanner isAtEnd]) {
-		NSString *chunk = nil;
-		[scanner scanUpToString:@"\\" intoString:&chunk];
-		if(chunk) [newString appendString:chunk];
-		if([scanner isAtEnd]) break;
-		
-		unichar c = [string characterAtIndex:[scanner scanLocation]+1];
-		[scanner setScanLocation:[scanner scanLocation]+2];
-		
-		NSString *replacement = nil;
-		if(c == '"' || c == '\\' || c == '/')
-			replacement = [NSString stringWithCharacters:&c length:1];
-		else if(c == 'b') replacement = @"\b";
-		else if(c == 'f') replacement = @"\f";
-		else if(c == 'n') replacement = @"\n";
-		else if(c == 'r') replacement = @"\r";
-		else if(c == 't') replacement = @"\t";
-		
-		else if(c == 'u') {
-			unsigned int value;
-			unichar replacementChar;
-			NSString *hexValue = [string substringWithRange:NSMakeRange([scanner scanLocation], 4)];
-			NSScanner *hexScanner = [NSScanner scannerWithString:hexValue];
-			if(![hexScanner scanHexInt:&value]) 
-				return [self setErrorDescription:@"Parse error: Invalid Unicode character '%@'.", hexValue];
-			replacementChar = value;
-			replacement = [NSString stringWithCharacters:&replacementChar length:1];
-			[scanner setScanLocation:[scanner scanLocation]+4];
-		
-		}else
-			return [self setErrorDescription:@"Parse error: Invalid escape character '%C'.", c];
-		
-		[newString appendString:replacement];
-	}
+	JSGlobalContextRelease(ctx);
 	
-	return newString;
-}
-
-
-- (NSNumber*)parseNumberToken:(PKToken*)token {
-	return [NSNumber numberWithFloat:[token floatValue]];
-}
-
-
-- (id)parseToken:(PKToken*)token {
-	if(token == [PKToken EOFToken])
-		return [self setErrorDescription:@"Parse error: Unexpected end of data."];
-		
-	if([token isQuotedString]) return [self parseStringToken:token];
-	if([token isNumber]) return [self parseNumberToken:token];
-	
-	NSString *string = [token stringValue];
-	
-	if([string isEqual:@"["]) return [self parseArray];
-	if([string isEqual:@"{"]) return [self parseObject];
-	
-	if([string isEqual:@"null"]) return [NSNull null];
-	if([string isEqual:@"true"]) return [NSNumber numberWithBool:YES];
-	if([string isEqual:@"false"]) return [NSNumber numberWithBool:NO];
-
-	return [self setErrorDescription:@"Parse error: Undefined symbol '%@' at character %d.", [token stringValue], [token offset]];
-}
-
-
-- (id)parse {
-	id object = [self parseToken:[tokenizer nextToken]];
-	if(!object) return nil;
-	PKToken *suffix = [tokenizer nextToken];
-	if(suffix != [PKToken EOFToken])
-		return [self setErrorDescription:@"Parse error: Expected EOF at character %d, but found crud: %@", [suffix offset], [suffix stringValue]];
-	return object;
-}
-
-- (NSError*)error {
-	return error;
-}
-
-+ (id)objectFromJSON:(NSString*)JSONString error:(NSError**)outError {
-	WAJSONParser *parser = [[[WAJSONParser alloc] initWithJSONString:JSONString] autorelease];
-	id value = [parser parse];
-	if(!value && outError) *outError = [parser error];
-	return value;
-}
-
-+ (NSString*)JSONFromObject:(id)object {
-	return [object JSONValue];
+	return object;	
 }
 
 @end

@@ -23,6 +23,7 @@
 @interface NSArray (WAExtras)
 - (NSArray*)filteredArrayUsingPredicateFormat:(NSString*)format, ...;
 - (id)firstObjectMatchingPredicateFormat:(NSString*)format, ...;
+- (id)sortedArrayUsingKeyPath:(NSString*)keyPath selector:(SEL)selector ascending:(BOOL)ascending;
 @end
 
 @interface NSData (WAExtras)
@@ -34,7 +35,7 @@
 - (NSData*)dataByDecryptingAES128UsingKey:(NSData*)key;
 @end
 
-#define $array(...) [NSArray arrayWithObjects:__VA_ARGS__, nil]
-#define $dict(...) [NSDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil]
-#define $marray(...) [NSMutableArray arrayWithObjects:__VA_ARGS__, nil]
-#define $mdict(...) [NSMutableDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil]
+#define $array(...) ((NSArray*)[NSArray arrayWithObjects:__VA_ARGS__, nil])
+#define $dict(...) ((NSDictionary*)[NSDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil])
+#define $marray(...) ((NSMutableArray*)[NSMutableArray arrayWithObjects:__VA_ARGS__, nil])
+#define $mdict(...) ((NSMutableDictionary*)[NSMutableDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil])

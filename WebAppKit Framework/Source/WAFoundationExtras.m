@@ -100,6 +100,11 @@
 	return [array count] ? [array objectAtIndex:0] : nil;
 }
 
+- (id)sortedArrayUsingKeyPath:(NSString*)keyPath selector:(SEL)selector ascending:(BOOL)ascending {
+	NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:keyPath ascending:ascending selector:selector];
+	return [self sortedArrayUsingDescriptors:[NSArray arrayWithObject:desc]];
+}
+
 @end
 
 

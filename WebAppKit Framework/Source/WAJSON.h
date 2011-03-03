@@ -1,35 +1,22 @@
 //
-//  FTJSON.h
-//  JSON
+//  WAJSON.h
+//  JSCTest
 //
-//  Created by Tomas Franzén on 2009-10-25.
-//  Copyright 2009 Lighthead Software. All rights reserved.
+//  Created by Tomas Franzén on 2011-02-21.
+//  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-@class PKTokenizer;
+#import <JavaScriptCore/JavaScriptCore.h>
+
+@interface NSObject (WAJSONEncoding)
+- (NSString*)JSONRepresentation;
+- (NSString*)JSONRepresentationWithIndentation:(NSUInteger)indentation;
+@end
+
+
 
 @interface WAJSONParser : NSObject {
-	PKTokenizer *tokenizer;
-	NSError *error;
+
 }
-
-+ (id)objectFromJSON:(NSString*)JSONString error:(NSError**)outError;
-+ (NSString*)JSONFromObject:(id)object;
-@end
-
-@interface NSString (JSONEncoding)
-- (NSString*)JSONValue;
-@end
-@interface NSArray (JSONEncoding)
-- (NSString*)JSONValue;
-@end
-@interface NSDictionary (JSONEncoding)
-- (NSString*)JSONValue;
-@end
-@interface NSNumber (JSONEncoding)
-- (NSString*)JSONValue;
-@end
-@interface NSNull (JSONEncoding)
-- (NSString*)JSONValue;
++ (id)objectFromJSON:(NSString*)JSON;
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
 		E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = E21702C912C92C5800DCE8FD /* TFRegex.h */; };
 		E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = E21702CA12C92C5800DCE8FD /* TFRegex.m */; };
@@ -54,8 +55,6 @@
 		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
 		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
-		E2B7A17212C3AC71006BA324 /* ParseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B7A17112C3AC71006BA324 /* ParseKit.framework */; };
-		E2B7A1AB12C3AC7C006BA324 /* ParseKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2B7A17112C3AC71006BA324 /* ParseKit.framework */; };
 		E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */; };
 		E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -104,7 +103,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E2B7A1AB12C3AC7C006BA324 /* ParseKit.framework in Copy Frameworks */,
 				E2EAEF0A12B98D7500097E0B /* FScript.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -113,12 +111,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebAppKit_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* WebAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		E20B1A26131F252600948E4B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		E21702C212C9286800DCE8FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E21702C912C92C5800DCE8FD /* TFRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFRegex.h; sourceTree = "<group>"; };
 		E21702CA12C92C5800DCE8FD /* TFRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFRegex.m; sourceTree = "<group>"; };
@@ -166,7 +162,6 @@
 		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUploadedFile.m; sourceTree = "<group>"; };
 		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
 		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
-		E2B7A17112C3AC71006BA324 /* ParseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseKit.framework; path = Frameworks/ParseKit.framework; sourceTree = "<group>"; };
 		E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAFoundationExtras.h; path = Source/WAFoundationExtras.h; sourceTree = "<group>"; };
@@ -218,10 +213,10 @@
 				E2EAEEDD12B98D5100097E0B /* FScript.framework in Frameworks */,
 				E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */,
 				E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */,
-				E2B7A17212C3AC71006BA324 /* ParseKit.framework in Frameworks */,
 				E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */,
 				E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */,
 				E264E06E12FA302D007AD73A /* libupskirt.a in Frameworks */,
+				E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +246,9 @@
 		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
-				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
+				E20B188A131F242500948E4B /* Libraries */,
+				1058C7B0FEA5585E11CA2CBB /* Apple Frameworks */,
+				E20B1A23131F245000948E4B /* Third-party Frameworks */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -287,30 +283,16 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
+		1058C7B0FEA5585E11CA2CBB /* Apple Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E260B0F912CCB99F0084FC05 /* libcrypto.dylib */,
-				E21702C212C9286800DCE8FD /* libicucore.dylib */,
-				E2B7A17112C3AC71006BA324 /* ParseKit.framework */,
-				E21D233112BC5E6A00277F2E /* libsqlite3.dylib */,
 				E2EAF09812B9AB4800097E0B /* CoreData.framework */,
-				E2EAEEDC12B98D5100097E0B /* FScript.framework */,
 				E2D88B7D12B2FE5E00219BF5 /* Foundation.framework */,
 				E2D88B8112B2FE6500219BF5 /* CoreFoundation.framework */,
 				E2D88B8712B2FE7300219BF5 /* CoreServices.framework */,
+				E20B1A26131F252600948E4B /* JavaScriptCore.framework */,
 			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
-				D2F7E79907B2D74100F64583 /* CoreData.framework */,
-				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
+			name = "Apple Frameworks";
 			sourceTree = "<group>";
 		};
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
@@ -323,6 +305,24 @@
 				E2D88B4F12B2FE2400219BF5 /* AsyncSocket */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		E20B188A131F242500948E4B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				E260B0F912CCB99F0084FC05 /* libcrypto.dylib */,
+				E21702C212C9286800DCE8FD /* libicucore.dylib */,
+				E21D233112BC5E6A00277F2E /* libsqlite3.dylib */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		E20B1A23131F245000948E4B /* Third-party Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2EAEEDC12B98D5100097E0B /* FScript.framework */,
+			);
+			name = "Third-party Frameworks";
 			sourceTree = "<group>";
 		};
 		E21702C812C92C5800DCE8FD /* TFRegex */ = {
