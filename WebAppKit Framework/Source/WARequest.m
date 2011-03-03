@@ -184,6 +184,10 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 			return;
 		}
 		[socket setDelegate:self];
+		if(contentLength == 0) {
+			handler(YES);
+			return;
+		}
 		[socket readDataToLength:contentLength withTimeout:-1 tag:0];
 	}else{
 		handler(NO);
