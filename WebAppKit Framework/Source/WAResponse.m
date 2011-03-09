@@ -23,6 +23,7 @@
 @implementation WAResponse
 @synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive;
 
+
 - (id)initWithRequest:(WARequest*)req socket:(AsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
 	self = [super init];
 	
@@ -141,9 +142,15 @@
 - (NSString*)defaultUserAgent {
 	static NSString *cachedValue;
 	if(cachedValue) return cachedValue;
-	NSDictionary *appInfo = [[NSBundle mainBundle] infoDictionary];
+	
 	NSDictionary *frameworkInfo = [[NSBundle bundleForClass:[self class]] infoDictionary];
-	return cachedValue = [NSString stringWithFormat:@"%@ (with %@ %@)", [appInfo objectForKey:@"CFBundleName"], [frameworkInfo objectForKey:@"CFBundleName"], [frameworkInfo objectForKey:@"CFBundleShortVersionString"]];
+	NSString *versionString = [frameworkInfo objectForKey:@"CFBundleShortVersionString"];
+	NSString *frameworkName = [frameworkInfo objectForKey:@"CFBundleName"];
+	
+	cachedValue = frameworkName;
+	if([versionString length]) cachedValue = [cachedValue stringByAppendingFormat:@"/%@", versionString];
+		
+	return cachedValue;
 }
 
 

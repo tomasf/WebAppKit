@@ -573,6 +573,7 @@
 				8DC2EF540486A6940098B216 /* Sources */,
 				8DC2EF560486A6940098B216 /* Frameworks */,
 				E2EAEF0F12B98D9300097E0B /* Copy Frameworks */,
+				E2A2D17313271B5E00B17E55 /* Set version to git commit date */,
 			);
 			buildRules = (
 			);
@@ -619,6 +620,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E2A2D17313271B5E00B17E55 /* Set version to git commit date */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set version to git commit date";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=$PATH:/usr/local/git/bin\ncd \"$PROJECT_DIR\"\n\nTIMESTAMP=`git show --summary --format=\"format:%ct\"`\nDATE=`date -j -f \"%s\" $TIMESTAMP +\"%Y%m%d\"`\ndefaults write \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Resources/Info\" CFBundleShortVersionString \"$DATE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DC2EF540486A6940098B216 /* Sources */ = {
