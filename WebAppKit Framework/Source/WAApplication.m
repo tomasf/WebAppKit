@@ -75,6 +75,7 @@ int WAApplicationMain() {
 	requestHandlers = [NSMutableArray array];
 	server = [[WAServer alloc] initWithPort:port interface:interface delegate:self];
 	currentHandlers = [NSMutableSet set];
+	routes = [NSMutableSet set];
 	
 	NSError *error;
 	if(![server start:&error]) {
@@ -104,6 +105,7 @@ int WAApplicationMain() {
 
 - (void)removeRequestHandler:(WARequestHandler*)handler {
 	[requestHandlers removeObject:handler];
+	[routes removeObject:handler];
 }
 
 
@@ -149,12 +151,23 @@ int WAApplicationMain() {
 }
 
 
-- (void)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path {
+- (WARoute*)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path {
 	if(![self respondsToSelector:sel])
 		NSLog(@"Warning: %@ doesn't respond to route handler message '%@'.", self, NSStringFromSelector(sel));
 
 	TFRegex *regex = [self regexForPathExpression:path];
-	[requestHandlers addObject:[[WARoute alloc] initWithPathExpression:regex method:method target:self action:sel]];
+	WARoute *route = [[WARoute alloc] initWithPathExpression:regex method:method target:self action:sel];
+	
+	[self addRequestHandler:route];
+	[routes addObject:route];
+	return route;
+}
+
+- (WARoute*)routeForSelector:(SEL)selector {
+	for(WARoute *route in routes)
+		if(route.action == selector)
+			return route;
+	return nil;
 }
 
 - (void)setRequest:(WARequest*)req response:(WAResponse*)resp {

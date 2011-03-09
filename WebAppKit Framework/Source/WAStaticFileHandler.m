@@ -20,13 +20,24 @@
 }
 
 
+// We use this instead of -[NSWorkspace typeOfFile:error:] because NSWorkspace is in AppKit.
 + (NSString*)UTIForFile:(NSString*)file {
 	FSRef ref;
 	if(FSPathMakeRef((const uint8_t*)[file fileSystemRepresentation], &ref, false) != noErr) return nil;
-	NSDictionary *values;
+	NSDictionary *values = nil;
 	if(LSCopyItemAttributes(&ref, kLSRolesViewer, (CFArrayRef)[NSArray arrayWithObject:(id)kLSItemContentType], (CFDictionaryRef*)&values) != noErr) return nil;
 	NSMakeCollectable(values);
 	return [values objectForKey:(id)kLSItemContentType];
+}
+
+
++ (NSString*)mediaTypeForFile:(NSString*)file {
+	NSString *defaultType = @"application/octet-stream";
+	NSString *UTI = [self UTIForFile:file];
+	if(!UTI) return defaultType;
+	NSString *mediaType = (NSString*)UTTypeCopyPreferredTagWithClass((CFStringRef)UTI, kUTTagClassMIMEType);
+	if(!mediaType) return defaultType;
+	return NSMakeCollectable(mediaType);
 }
 
 
@@ -42,11 +53,9 @@
 		return;
 	}
 	
-	NSString *UTI = [[self class] UTIForFile:file];
-	NSString *mediaType = NSMakeCollectable(UTTypeCopyPreferredTagWithClass((CFStringRef)UTI, kUTTagClassMIMEType));
-	
+	resp.mediaType = [[self class] mediaTypeForFile:file];
 	if(enableCaching) resp.modificationDate = modificationDate;
-	resp.mediaType = mediaType;
+	
 	[resp appendBodyData:[NSData dataWithContentsOfFile:file]];
 	[resp finish];
 }

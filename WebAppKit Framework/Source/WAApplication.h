@@ -11,14 +11,18 @@
 #import "WARequest.h"
 #import "WAResponse.h"
 #import "WAServer.h"
+@class WARoute;
 
 extern int WAApplicationMain();
+
 
 @interface WAApplication : NSObject <WSServerDelegate> {
 	WAServer *server;
 	
 	NSMutableArray *requestHandlers;
 	NSMutableSet *currentHandlers;
+	
+	NSMutableSet *routes;
 	
 	WARequest *request;
 	WAResponse *response;
@@ -32,7 +36,9 @@ extern int WAApplicationMain();
 - (id)initWithPort:(NSUInteger)port interface:(NSString*)interface;
 
 - (void)setup;
-- (void)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path;
+
+- (WARoute*)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path;
+- (WARoute*)routeForSelector:(SEL)selector;
 
 - (void)addRequestHandler:(WARequestHandler*)handler;
 - (void)removeRequestHandler:(WARequestHandler*)handler;

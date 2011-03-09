@@ -24,5 +24,4 @@
 @property(readonly) id target;
 
 - (id)initWithPathExpression:(TFRegex*)regex method:(NSString*)m target:(id)object action:(SEL)selector;
-- (BOOL)canHandleRequest:(WARequest*)request;
 @end
