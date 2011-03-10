@@ -11,9 +11,7 @@
 #import "WAResponse.h"
 #import "WARequestHandler.h"
 #import "WAServer.h"
-
-#include <mach/mach.h>
-#include <mach/mach_time.h>
+#import "WATemplate.h"
 
 
 @interface WAResponse (Private)
@@ -70,20 +68,13 @@ enum {
 }
 
 
-- (uint64_t)nanosecondTime {
-	uint64_t time = mach_absolute_time();
-	Nanoseconds nanosecs = AbsoluteToNanoseconds(*(AbsoluteTime *) &time);
-	return *(uint64_t*)&nanosecs;
-}
-
-
 - (void)handleRequest:(WARequest*)request {
-	uint64_t start = [self nanosecondTime];
+	uint64_t start = WANanosecondTime();
 	
 	currentRequestHandler = [server.delegate server:server handlerForRequest:request];
 	
 	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:socket completionHandler:^(BOOL keepAlive) {
-		uint64_t duration = [self nanosecondTime]-start;
+		uint64_t duration = WANanosecondTime()-start;
 		NSLog(@"%.02f ms %@", duration/1000000.0, request.path);
 		currentRequestHandler = nil;
 		[request invalidate];
@@ -98,7 +89,9 @@ enum {
 	@try {
 		[currentRequestHandler handleRequest:request response:response socket:socket];
 	}@catch(NSException *e) {
-		[response finishWithErrorString:[NSString stringWithFormat:@"<h1>Exception</h1>Break on objc_exception_throw to debug.<br/><pre>%@</pre>", e]];
+		WATemplate *template = [WATemplate templateNamed:@"Exception" inBundle:[NSBundle bundleForClass:[self class]]];
+		[template setValue:e forKey:@"exception"];
+		[response finishWithErrorString:[template result]];
 	}
 }
 

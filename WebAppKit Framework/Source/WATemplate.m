@@ -101,11 +101,14 @@ static WALocalization *defaultLocalization;
 	return defaultLocalization;
 }
 
-
-+ (id)templateNamed:(NSString*)name {
-	NSURL *URL = [[NSBundle mainBundle] URLForResource:name withExtension:@"wat"];
++ (id)templateNamed:(NSString*)name inBundle:(NSBundle*)bundle {
+	NSURL *URL = [bundle URLForResource:name withExtension:@"wat"];
 	if(!URL) [NSException raise:NSInvalidArgumentException format:@"Template named '%@' wasn't found.", name];
 	return [[self alloc] initWithContentsOfURL:URL];
+}
+
++ (id)templateNamed:(NSString*)name {
+	return [self templateNamed:name inBundle:[NSBundle mainBundle]];
 }
 
 - (id)initWithContentsOfURL:(NSURL*)URL {

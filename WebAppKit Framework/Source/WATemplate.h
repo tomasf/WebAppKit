@@ -23,6 +23,8 @@
 @property(retain) WATemplate *parent;
 
 + (id)templateNamed:(NSString*)name;
++ (id)templateNamed:(NSString*)name inBundle:(NSBundle*)bundle;
+
 - (id)initWithContentsOfURL:(NSURL*)URL;
 - (id)initWithSource:(NSString*)templateString;
 
