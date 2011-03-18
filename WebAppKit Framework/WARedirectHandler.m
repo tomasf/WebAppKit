@@ -3,7 +3,7 @@
 //  WebAppKit
 //
 //  Created by Tim Andersson on 3/18/11.
-//  Copyright 2011 Scratchapp. All rights reserved.
+//  Copyright 2011 Cocoabeans Software. All rights reserved.
 //
 
 #import "WARedirectHandler.h"
@@ -24,7 +24,6 @@
 }
 
 - (BOOL)canHandleRequest:(WARequest *)request {
-	NSLog(@"%@ matches %@: %i", [pathExpression source], request.path, [pathExpression matchesString:request.path]);
 	return [pathExpression matchesString:request.path];
 }
 
@@ -33,6 +32,28 @@
 	[resp redirectToURL:URL];
 	
 	[resp finish];
+}
+
+@end
+
+@interface WAApplication (Private)
+- (TFRegex *)regexForPathExpression:(NSString *)path;
+@end
+
+@implementation WAApplication (WARedirect)
+
+- (WARedirectHandler *)addRedirectRuleWithPattern:(NSString *)regex replacement:(NSString *)replacement {
+	TFRegex *r = [TFRegex regexWithPattern:regex options:0];
+	WARedirectHandler *handler = [[WARedirectHandler alloc] initWithPathExpression:r replacementString:replacement];
+	[self addRequestHandler:handler];
+	return handler;
+}
+
+- (WARedirectHandler *)addRedirectRuleWithPath:(NSString *)path replacement:(NSString *)replacement {
+	TFRegex *r = [self regexForPathExpression:path];
+	WARedirectHandler *handler = [[WARedirectHandler alloc] initWithPathExpression:r replacementString:replacement];
+	[self addRequestHandler:handler];
+	return handler;
 }
 
 @end

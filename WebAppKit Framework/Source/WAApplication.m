@@ -180,21 +180,3 @@ int WAApplicationMain() {
 - (void)postprocess {}
 
 @end
-
-@implementation WAApplication (WARedirect)
-
-- (WARedirectHandler *)addRedirectRuleWithPattern:(NSString *)regex replacement:(NSString *)replacement {
-	TFRegex *r = [TFRegex regexWithPattern:regex options:0];
-	WARedirectHandler *handler = [[WARedirectHandler alloc] initWithPathExpression:r replacementString:replacement];
-	[self addRequestHandler:handler];
-	return handler;
-}
-
-- (WARedirectHandler *)addRedirectRuleWithPath:(NSString *)path replacement:(NSString *)replacement {
-	TFRegex *r = [self regexForPathExpression:path];
-	WARedirectHandler *handler = [[WARedirectHandler alloc] initWithPathExpression:r replacementString:replacement];
-	[self addRequestHandler:handler];
-	return handler;
-}
-
-@end
