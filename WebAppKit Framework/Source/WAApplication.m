@@ -16,6 +16,7 @@
 #import "WAStaticFileHandler.h"
 #import "WAModuleManager.h"
 #import "TFRegex.h"
+#import "WARedirectHandler.h"
 
 static const NSString *WAHTTPServerPortKey = @"WAHTTPServerPort";
 static const NSString *WAHTTPServerExternalAccessKey = @"WAHTTPServerExternalAccess";
@@ -177,7 +178,5 @@ int WAApplicationMain() {
 
 - (void)preprocess {}
 - (void)postprocess {}
-
-
 
 @end

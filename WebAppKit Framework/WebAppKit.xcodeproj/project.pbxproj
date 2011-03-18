@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 93961C8313340DD90067A07A /* WARedirectHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 93961C8413340DD90067A07A /* WARedirectHandler.m */; };
 		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
 		E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = E21702C912C92C5800DCE8FD /* TFRegex.h */; };
@@ -115,6 +117,8 @@
 		32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebAppKit_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* WebAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93961C8313340DD90067A07A /* WARedirectHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WARedirectHandler.h; sourceTree = SOURCE_ROOT; };
+		93961C8413340DD90067A07A /* WARedirectHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARedirectHandler.m; sourceTree = SOURCE_ROOT; };
 		E20B1A26131F252600948E4B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		E21702C212C9286800DCE8FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E21702C912C92C5800DCE8FD /* TFRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFRegex.h; sourceTree = "<group>"; };
@@ -511,6 +515,8 @@
 				E2E876C612B3167400558845 /* WADirectoryHandler.m */,
 				E2E877AD12B3CC3900558845 /* WAStaticFileHandler.h */,
 				E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */,
+				93961C8313340DD90067A07A /* WARedirectHandler.h */,
+				93961C8413340DD90067A07A /* WARedirectHandler.m */,
 			);
 			name = "Request Handlers";
 			sourceTree = "<group>";
@@ -561,6 +567,7 @@
 				E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */,
 				E264E07512FA303A007AD73A /* buffer.h in Headers */,
 				E264E07612FA303A007AD73A /* markdown.h in Headers */,
+				93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +690,7 @@
 				E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */,
 				E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */,
 				E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */,
+				93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 #import "WARequest.h"
 #import "WAResponse.h"
 #import "WAServer.h"
-@class WARoute;
+@class WARoute, WARedirectHandler;
 
 extern int WAApplicationMain();
 

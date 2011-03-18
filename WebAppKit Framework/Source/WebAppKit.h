@@ -22,3 +22,5 @@
 
 #import "WAMarkdown.h"
 #import "WAMarkdownParser.h"
+
+#import "WARedirectHandler.h"
