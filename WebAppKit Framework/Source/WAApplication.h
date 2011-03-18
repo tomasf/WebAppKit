@@ -11,7 +11,7 @@
 #import "WARequest.h"
 #import "WAResponse.h"
 #import "WAServer.h"
-@class WARoute;
+@class WARoute, WARedirectHandler;
 
 extern int WAApplicationMain();
 
@@ -45,4 +45,11 @@ extern int WAApplicationMain();
 
 - (void)preprocess;
 - (void)postprocess;
+@end
+
+@interface WAApplication (WARedirect)
+
+- (WARedirectHandler *)addRedirectRuleWithPattern:(NSString *)regex replacement:(NSString *)replacement;
+- (WARedirectHandler *)addRedirectRuleWithPath:(NSString *)path replacement:(NSString *)replacement;
+
 @end

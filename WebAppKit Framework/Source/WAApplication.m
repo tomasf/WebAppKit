@@ -16,6 +16,7 @@
 #import "WAStaticFileHandler.h"
 #import "WAModuleManager.h"
 #import "TFRegex.h"
+#import "WARedirectHandler.h"
 
 static const NSString *WAHTTPServerPortKey = @"WAHTTPServerPort";
 static const NSString *WAHTTPServerExternalAccessKey = @"WAHTTPServerExternalAccess";
@@ -178,6 +179,22 @@ int WAApplicationMain() {
 - (void)preprocess {}
 - (void)postprocess {}
 
+@end
 
+@implementation WAApplication (WARedirect)
+
+- (WARedirectHandler *)addRedirectRuleWithPattern:(NSString *)regex replacement:(NSString *)replacement {
+	TFRegex *r = [TFRegex regexWithPattern:regex options:0];
+	WARedirectHandler *handler = [[WARedirectHandler alloc] initWithPathExpression:r replacementString:replacement];
+	[self addRequestHandler:handler];
+	return handler;
+}
+
+- (WARedirectHandler *)addRedirectRuleWithPath:(NSString *)path replacement:(NSString *)replacement {
+	TFRegex *r = [self regexForPathExpression:path];
+	WARedirectHandler *handler = [[WARedirectHandler alloc] initWithPathExpression:r replacementString:replacement];
+	[self addRequestHandler:handler];
+	return handler;
+}
 
 @end
