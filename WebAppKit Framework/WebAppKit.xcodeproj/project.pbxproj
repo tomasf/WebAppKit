@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 93961C8313340DD90067A07A /* WARedirectHandler.h */; };
+		93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 93961C8313340DD90067A07A /* WARedirectHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 93961C8413340DD90067A07A /* WARedirectHandler.m */; };
 		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
