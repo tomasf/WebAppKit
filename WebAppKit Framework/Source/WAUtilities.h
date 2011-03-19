@@ -7,6 +7,9 @@
 //
 
 extern NSString *WAGenerateUUIDString(void);
+extern uint64_t WANanosecondTime();
+
 extern NSString *WAApplicationSupportDirectory(void);
+
 extern NSDateFormatter *WAHTTPDateFormatter(void);
 extern NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams);

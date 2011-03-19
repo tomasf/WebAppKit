@@ -7,10 +7,22 @@
 //
 
 #import "WAUtilities.h"
+#include <mach/mach.h>
+#include <mach/mach_time.h>
+
 
 NSString *WAGenerateUUIDString(void) {
 	return NSMakeCollectable(CFUUIDCreateString(NULL, CFMakeCollectable(CFUUIDCreate(NULL))));
 }
+
+
+// Recommended by Apple Technical Q&A 1398
+uint64_t WANanosecondTime() {
+	uint64_t time = mach_absolute_time();
+	Nanoseconds nanosecs = AbsoluteToNanoseconds(*(AbsoluteTime *) &time);
+	return *(uint64_t*)&nanosecs;	
+}
+
 
 NSString *WAApplicationSupportDirectory(void) {
 	NSString *name = [[NSBundle mainBundle] bundleIdentifier];
@@ -20,6 +32,7 @@ NSString *WAApplicationSupportDirectory(void) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:NO attributes:nil error:NULL];
 	return directory;
 }
+
 
 NSDateFormatter *WAHTTPDateFormatter(void) {
 	static NSDateFormatter *formatter;
@@ -31,6 +44,7 @@ NSDateFormatter *WAHTTPDateFormatter(void) {
 	}
 	return formatter;
 }
+
 
 NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams) {
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
