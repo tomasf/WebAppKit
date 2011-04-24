@@ -77,3 +77,14 @@ NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **out
 	}
 	return basePart;	
 }
+
+
+static BOOL WADevelopmentMode;
+
+void WASetDevelopmentMode(BOOL enable) {
+	WADevelopmentMode = enable;
+}
+
+BOOL WAGetDevelopmentMode() {
+	return WADevelopmentMode;
+}

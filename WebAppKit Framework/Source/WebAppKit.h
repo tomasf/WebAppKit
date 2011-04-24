@@ -11,6 +11,7 @@
 #import "WACookie.h"
 
 #import "WATemplate.h"
+#import "TLExpression.h"
 #import "WALocalization.h"
 
 #import "WASessionGenerator.h"

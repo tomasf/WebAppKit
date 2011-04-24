@@ -8,13 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
-		E2527AFD12CB75FC00C245E8 /* WebAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2527AFC12CB75FC00C245E8 /* WebAppKit.framework */; };
 		E27AA79312CB78350023E7CE /* index.wat in Resources */ = {isa = PBXBuildFile; fileRef = E27AA75E12CB777C0023E7CE /* index.wat */; };
+		E2CF96A5135B9F90009BA912 /* WebAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CF96A4135B9F90009BA912 /* WebAppKit.framework */; };
+		E2CF96C3135B9FFB009BA912 /* WebAppKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2CF96A4135B9F90009BA912 /* WebAppKit.framework */; };
 		E2EAED4012B9307200097E0B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAED3F12B9307200097E0B /* CoreData.framework */; };
 		E2EAED4212B9307200097E0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAED4112B9307200097E0B /* Foundation.framework */; };
 		E2EAED4912B930A200097E0B /* ___PROJECTNAMEASIDENTIFIER___.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAED4812B930A200097E0B /* ___PROJECTNAMEASIDENTIFIER___.m */; };
 		E2EAEFAD12B9949300097E0B /* public in Resources */ = {isa = PBXBuildFile; fileRef = E2EAEFAA12B9949300097E0B /* public */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2CF96CC135BA000009BA912 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2CF96C3135B9FFB009BA912 /* WebAppKit.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -24,8 +39,8 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* ___PROJECTNAMEASIDENTIFIER___-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "___PROJECTNAMEASIDENTIFIER___-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ___PROJECTNAME___.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "___PROJECTNAME___.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2527AFC12CB75FC00C245E8 /* WebAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebAppKit.framework; path = /Library/Frameworks/WebAppKit.framework; sourceTree = "<absolute>"; };
 		E27AA75E12CB777C0023E7CE /* index.wat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.wat; sourceTree = "<group>"; };
+		E2CF96A4135B9F90009BA912 /* WebAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebAppKit.framework; path = "../../../WebAppKit Framework/build/Debug/WebAppKit.framework"; sourceTree = SOURCE_ROOT; };
 		E2EAED3F12B9307200097E0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E2EAED4112B9307200097E0B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E2EAED4712B930A200097E0B /* ___PROJECTNAMEASIDENTIFIER___.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "___PROJECTNAMEASIDENTIFIER___.h"; sourceTree = "<group>"; };
@@ -40,7 +55,7 @@
 			files = (
 				E2EAED4012B9307200097E0B /* CoreData.framework in Frameworks */,
 				E2EAED4212B9307200097E0B /* Foundation.framework in Frameworks */,
-				E2527AFD12CB75FC00C245E8 /* WebAppKit.framework in Frameworks */,
+				E2CF96A5135B9F90009BA912 /* WebAppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,9 +74,9 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2CF96A4135B9F90009BA912 /* WebAppKit.framework */,
 				E2EAED3F12B9307200097E0B /* CoreData.framework */,
 				E2EAED4112B9307200097E0B /* Foundation.framework */,
-				E2527AFC12CB75FC00C245E8 /* WebAppKit.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -134,7 +149,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				E260B04A12CC03270084FC05 /* Compile LESS stylesheets */,
+				E2CF96CC135BA000009BA912 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,23 +197,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		E260B04A12CC03270084FC05 /* Compile LESS stylesheets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Compile LESS stylesheets";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "SOURCE=$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\nTARGET=public/css\n\ncd \"$SOURCE\"\nfor file in *.less; do\n\tif [ $file != \"*.less\" ]; then\n\t\techo Compiling $file\n\t\tlessc $file $TARGET/${file%.less}.css\n\tfi\ndone";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -217,13 +215,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../WebAppKit Framework/build/Debug\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "___PROJECTNAMEASIDENTIFIER___Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = "Resources/___PROJECTNAMEASIDENTIFIER___-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				ONLY_ACTIVE_ARCH = NO;
@@ -241,6 +243,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Library/Frameworks\"",
 					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+					"\"$(SRCROOT)/../../../WebAppKit Framework/build/Debug\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

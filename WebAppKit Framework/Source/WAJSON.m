@@ -131,8 +131,8 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 			}
 			
 		}
+		default: return NULL;
 	}
-	return NULL;
 }
 
 + (id)objectFromJSON:(NSString*)JSON {
@@ -143,7 +143,6 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 	id object = [self objectFromJSValue:value context:ctx];
 	
 	JSGlobalContextRelease(ctx);
-	
 	return object;	
 }
 

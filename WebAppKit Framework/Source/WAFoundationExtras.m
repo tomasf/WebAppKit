@@ -143,8 +143,8 @@
     while(len = BIO_read(context, inbuf, bufferSize))
 		[outputData appendBytes:inbuf length:len];
 	
-    BIO_free_all(context);	
-	return outputData;	
+    BIO_free_all(context);
+	return outputData;
 }
 
 

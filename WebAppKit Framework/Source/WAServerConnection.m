@@ -75,7 +75,8 @@ enum {
 	
 	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:socket completionHandler:^(BOOL keepAlive) {
 		uint64_t duration = WANanosecondTime()-start;
-		NSLog(@"%.02f ms %@", duration/1000000.0, request.path);
+		if(WAGetDevelopmentMode())
+			NSLog(@"%.02f ms %@", duration/1000000.0, request.path);
 		currentRequestHandler = nil;
 		[request invalidate];
 		
@@ -89,7 +90,7 @@ enum {
 	@try {
 		[currentRequestHandler handleRequest:request response:response socket:socket];
 	}@catch(NSException *e) {
-		WATemplate *template = [WATemplate templateNamed:@"Exception" inBundle:[NSBundle bundleForClass:[self class]]];
+		WATemplate *template = [[WATemplate alloc] initWithContentsOfURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"Exception" withExtension:@"wat"]];
 		[template setValue:e forKey:@"exception"];
 		[response finishWithErrorString:[template result]];
 	}

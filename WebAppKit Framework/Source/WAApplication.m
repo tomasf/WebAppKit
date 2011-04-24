@@ -25,7 +25,7 @@ static const NSString *WAHTTPServerExternalAccessKey = @"WAHTTPServerExternalAcc
 int WAApplicationMain() {
 	Class appClass = NSClassFromString([[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSPrincipalClass"]);
 	if(!appClass) {
-		NSLog(@"WAApplicationMain() requires NSPrincipalClass to be set in Info.plist. Set it to your WAApplication subclass or call +start yourself.");
+		NSLog(@"WAApplicationMain() requires NSPrincipalClass to be set in Info.plist. Set it to your WAApplication subclass or call +run yourself.");
 		return 1;
 	}
 	return [appClass run];
@@ -37,8 +37,8 @@ int WAApplicationMain() {
 @synthesize request, response;
 
 
-+ (NSUInteger)port {
-	NSUInteger port = [[[[NSBundle mainBundle] infoDictionary] objectForKey:WAHTTPServerPortKey] integerValue];
++ (uint16_t)port {
+	NSUInteger port = [[[[NSBundle mainBundle] infoDictionary] objectForKey:WAHTTPServerPortKey] unsignedShortValue];
 	if(!port) port = [[NSUserDefaults standardUserDefaults] integerForKey:@"port"];	
 	if(!port) NSLog(@"No port number specified. Set WAHTTPServerPort in Info.plist or use the -port argument.");
 	return port;
@@ -51,7 +51,7 @@ int WAApplicationMain() {
 
 
 + (int)run {
-	NSUInteger port = [self port];
+	uint16_t port = [self port];
 	if(!port) return 1;
 	NSString *interface = [self enableExternalAccess] ? nil : @"localhost";
 	WAApplication *app = [[self alloc] initWithPort:port interface:interface];
@@ -63,7 +63,8 @@ int WAApplicationMain() {
 	for(WARequestHandler *handler in [[WAModuleManager sharedManager] allRequestHandlers])
 		[app addRequestHandler:handler];
 	
-	NSLog(@"WebAppKit started on port %d", (int)port);
+	NSLog(@"WebAppKit started on port %hu", port);
+	NSLog(@"http://localhost:%hu/", port);
 	
 	for(;;)
 		[[NSRunLoop currentRunLoop] run];

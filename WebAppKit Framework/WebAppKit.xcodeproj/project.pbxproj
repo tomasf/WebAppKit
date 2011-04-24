@@ -58,6 +58,34 @@
 		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
 		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
+		E2CF9604135B93F8009BA912 /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9602135B93F8009BA912 /* TFStringScanner.h */; };
+		E2CF9605135B93F8009BA912 /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9603135B93F8009BA912 /* TFStringScanner.m */; };
+		E2CF9638135B99F9009BA912 /* TL.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF961E135B99F9009BA912 /* TL.h */; };
+		E2CF9639135B99F9009BA912 /* TL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF961F135B99F9009BA912 /* TL.m */; };
+		E2CF963A135B99F9009BA912 /* TLAssignment.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9620135B99F9009BA912 /* TLAssignment.h */; };
+		E2CF963B135B99F9009BA912 /* TLAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9621135B99F9009BA912 /* TLAssignment.m */; };
+		E2CF963C135B99F9009BA912 /* TLCompoundStatement.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9622135B99F9009BA912 /* TLCompoundStatement.h */; };
+		E2CF963D135B99F9009BA912 /* TLCompoundStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9623135B99F9009BA912 /* TLCompoundStatement.m */; };
+		E2CF963E135B99F9009BA912 /* TLConditional.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9624135B99F9009BA912 /* TLConditional.h */; };
+		E2CF963F135B99F9009BA912 /* TLConditional.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9625135B99F9009BA912 /* TLConditional.m */; };
+		E2CF9640135B99F9009BA912 /* TLExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9626135B99F9009BA912 /* TLExpression.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2CF9641135B99F9009BA912 /* TLExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9627135B99F9009BA912 /* TLExpression.m */; };
+		E2CF9642135B99F9009BA912 /* TLForeachLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9628135B99F9009BA912 /* TLForeachLoop.h */; };
+		E2CF9643135B99F9009BA912 /* TLForeachLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9629135B99F9009BA912 /* TLForeachLoop.m */; };
+		E2CF9644135B99F9009BA912 /* TLIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF962A135B99F9009BA912 /* TLIdentifier.h */; };
+		E2CF9645135B99F9009BA912 /* TLIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF962B135B99F9009BA912 /* TLIdentifier.m */; };
+		E2CF9646135B99F9009BA912 /* TLMethodInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF962C135B99F9009BA912 /* TLMethodInvocation.h */; };
+		E2CF9647135B99F9009BA912 /* TLMethodInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF962D135B99F9009BA912 /* TLMethodInvocation.m */; };
+		E2CF9648135B99F9009BA912 /* TLObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF962E135B99F9009BA912 /* TLObject.h */; };
+		E2CF9649135B99F9009BA912 /* TLObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF962F135B99F9009BA912 /* TLObject.m */; };
+		E2CF964A135B99F9009BA912 /* TLOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9630135B99F9009BA912 /* TLOperation.h */; };
+		E2CF964B135B99F9009BA912 /* TLOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9631135B99F9009BA912 /* TLOperation.m */; };
+		E2CF964C135B99F9009BA912 /* TLScope.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9632135B99F9009BA912 /* TLScope.h */; };
+		E2CF964D135B99F9009BA912 /* TLScope.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9633135B99F9009BA912 /* TLScope.m */; };
+		E2CF964E135B99F9009BA912 /* TLStatement.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9634135B99F9009BA912 /* TLStatement.h */; };
+		E2CF964F135B99F9009BA912 /* TLStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9635135B99F9009BA912 /* TLStatement.m */; };
+		E2CF9650135B99F9009BA912 /* TLWhileLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9636135B99F9009BA912 /* TLWhileLoop.h */; };
+		E2CF9651135B99F9009BA912 /* TLWhileLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9637135B99F9009BA912 /* TLWhileLoop.m */; };
 		E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */; };
 		E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -86,8 +114,6 @@
 		E2E877B012B3CC3900558845 /* WAStaticFileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */; };
 		E2EAEED212B986A500097E0B /* WATemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAEED012B986A500097E0B /* WATemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2EAEED312B986A500097E0B /* WATemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAEED112B986A500097E0B /* WATemplate.m */; };
-		E2EAEEDD12B98D5100097E0B /* FScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAEEDC12B98D5100097E0B /* FScript.framework */; };
-		E2EAEF0A12B98D7500097E0B /* FScript.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAEEDC12B98D5100097E0B /* FScript.framework */; };
 		E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */; };
 		E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAF09812B9AB4800097E0B /* CoreData.framework */; };
@@ -106,7 +132,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E2EAEF0A12B98D7500097E0B /* FScript.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +193,34 @@
 		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUploadedFile.m; sourceTree = "<group>"; };
 		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
 		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
+		E2CF9602135B93F8009BA912 /* TFStringScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFStringScanner.h; sourceTree = "<group>"; };
+		E2CF9603135B93F8009BA912 /* TFStringScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFStringScanner.m; sourceTree = "<group>"; };
+		E2CF961E135B99F9009BA912 /* TL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TL.h; path = Source/TL/TL.h; sourceTree = "<group>"; };
+		E2CF961F135B99F9009BA912 /* TL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TL.m; path = Source/TL/TL.m; sourceTree = "<group>"; };
+		E2CF9620135B99F9009BA912 /* TLAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLAssignment.h; path = Source/TL/TLAssignment.h; sourceTree = "<group>"; };
+		E2CF9621135B99F9009BA912 /* TLAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLAssignment.m; path = Source/TL/TLAssignment.m; sourceTree = "<group>"; };
+		E2CF9622135B99F9009BA912 /* TLCompoundStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLCompoundStatement.h; path = Source/TL/TLCompoundStatement.h; sourceTree = "<group>"; };
+		E2CF9623135B99F9009BA912 /* TLCompoundStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLCompoundStatement.m; path = Source/TL/TLCompoundStatement.m; sourceTree = "<group>"; };
+		E2CF9624135B99F9009BA912 /* TLConditional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLConditional.h; path = Source/TL/TLConditional.h; sourceTree = "<group>"; };
+		E2CF9625135B99F9009BA912 /* TLConditional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLConditional.m; path = Source/TL/TLConditional.m; sourceTree = "<group>"; };
+		E2CF9626135B99F9009BA912 /* TLExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLExpression.h; path = Source/TL/TLExpression.h; sourceTree = "<group>"; };
+		E2CF9627135B99F9009BA912 /* TLExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLExpression.m; path = Source/TL/TLExpression.m; sourceTree = "<group>"; };
+		E2CF9628135B99F9009BA912 /* TLForeachLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLForeachLoop.h; path = Source/TL/TLForeachLoop.h; sourceTree = "<group>"; };
+		E2CF9629135B99F9009BA912 /* TLForeachLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLForeachLoop.m; path = Source/TL/TLForeachLoop.m; sourceTree = "<group>"; };
+		E2CF962A135B99F9009BA912 /* TLIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLIdentifier.h; path = Source/TL/TLIdentifier.h; sourceTree = "<group>"; };
+		E2CF962B135B99F9009BA912 /* TLIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLIdentifier.m; path = Source/TL/TLIdentifier.m; sourceTree = "<group>"; };
+		E2CF962C135B99F9009BA912 /* TLMethodInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLMethodInvocation.h; path = Source/TL/TLMethodInvocation.h; sourceTree = "<group>"; };
+		E2CF962D135B99F9009BA912 /* TLMethodInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLMethodInvocation.m; path = Source/TL/TLMethodInvocation.m; sourceTree = "<group>"; };
+		E2CF962E135B99F9009BA912 /* TLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLObject.h; path = Source/TL/TLObject.h; sourceTree = "<group>"; };
+		E2CF962F135B99F9009BA912 /* TLObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLObject.m; path = Source/TL/TLObject.m; sourceTree = "<group>"; };
+		E2CF9630135B99F9009BA912 /* TLOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLOperation.h; path = Source/TL/TLOperation.h; sourceTree = "<group>"; };
+		E2CF9631135B99F9009BA912 /* TLOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLOperation.m; path = Source/TL/TLOperation.m; sourceTree = "<group>"; };
+		E2CF9632135B99F9009BA912 /* TLScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLScope.h; path = Source/TL/TLScope.h; sourceTree = "<group>"; };
+		E2CF9633135B99F9009BA912 /* TLScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLScope.m; path = Source/TL/TLScope.m; sourceTree = "<group>"; };
+		E2CF9634135B99F9009BA912 /* TLStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLStatement.h; path = Source/TL/TLStatement.h; sourceTree = "<group>"; };
+		E2CF9635135B99F9009BA912 /* TLStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLStatement.m; path = Source/TL/TLStatement.m; sourceTree = "<group>"; };
+		E2CF9636135B99F9009BA912 /* TLWhileLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLWhileLoop.h; path = Source/TL/TLWhileLoop.h; sourceTree = "<group>"; };
+		E2CF9637135B99F9009BA912 /* TLWhileLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLWhileLoop.m; path = Source/TL/TLWhileLoop.m; sourceTree = "<group>"; };
 		E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAFoundationExtras.h; path = Source/WAFoundationExtras.h; sourceTree = "<group>"; };
@@ -196,7 +249,6 @@
 		E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAStaticFileHandler.m; path = Source/WAStaticFileHandler.m; sourceTree = "<group>"; };
 		E2EAEED012B986A500097E0B /* WATemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WATemplate.h; path = Source/WATemplate.h; sourceTree = "<group>"; };
 		E2EAEED112B986A500097E0B /* WATemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WATemplate.m; path = Source/WATemplate.m; sourceTree = "<group>"; };
-		E2EAEEDC12B98D5100097E0B /* FScript.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FScript.framework; path = Frameworks/FScript.framework; sourceTree = "<group>"; };
 		E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACoreDataExtras.h; path = Source/WACoreDataExtras.h; sourceTree = "<group>"; };
 		E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACoreDataExtras.m; path = Source/WACoreDataExtras.m; sourceTree = "<group>"; };
 		E2EAF09812B9AB4800097E0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -216,7 +268,6 @@
 				E2D88B7E12B2FE5E00219BF5 /* Foundation.framework in Frameworks */,
 				E2D88B8212B2FE6500219BF5 /* CoreFoundation.framework in Frameworks */,
 				E2D88B8812B2FE7300219BF5 /* CoreServices.framework in Frameworks */,
-				E2EAEEDD12B98D5100097E0B /* FScript.framework in Frameworks */,
 				E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */,
 				E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */,
 				E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */,
@@ -307,6 +358,7 @@
 			children = (
 				E2D88B9012B2FE8100219BF5 /* WebAppKit.h */,
 				32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */,
+				E2CF9601135B93F8009BA912 /* TFStringScanner */,
 				E21D231612BC5D4500277F2E /* FMDatabase */,
 				E21702C812C92C5800DCE8FD /* TFRegex */,
 				E2D88B4F12B2FE2400219BF5 /* AsyncSocket */,
@@ -327,7 +379,6 @@
 		E20B1A23131F245000948E4B /* Third-party Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2EAEEDC12B98D5100097E0B /* FScript.framework */,
 			);
 			name = "Third-party Frameworks";
 			sourceTree = "<group>";
@@ -437,6 +488,65 @@
 			name = Multipart;
 			sourceTree = "<group>";
 		};
+		E2CF95EB135B9108009BA912 /* TL */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF961E135B99F9009BA912 /* TL.h */,
+				E2CF961F135B99F9009BA912 /* TL.m */,
+				E2CF9632135B99F9009BA912 /* TLScope.h */,
+				E2CF9633135B99F9009BA912 /* TLScope.m */,
+				E2CF9607135B9430009BA912 /* Statements */,
+				E2CF9608135B943B009BA912 /* Expressions */,
+			);
+			name = TL;
+			sourceTree = "<group>";
+		};
+		E2CF9601135B93F8009BA912 /* TFStringScanner */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF9602135B93F8009BA912 /* TFStringScanner.h */,
+				E2CF9603135B93F8009BA912 /* TFStringScanner.m */,
+			);
+			name = TFStringScanner;
+			path = Source/TFStringScanner;
+			sourceTree = "<group>";
+		};
+		E2CF9607135B9430009BA912 /* Statements */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF9634135B99F9009BA912 /* TLStatement.h */,
+				E2CF9635135B99F9009BA912 /* TLStatement.m */,
+				E2CF9622135B99F9009BA912 /* TLCompoundStatement.h */,
+				E2CF9623135B99F9009BA912 /* TLCompoundStatement.m */,
+				E2CF9628135B99F9009BA912 /* TLForeachLoop.h */,
+				E2CF9629135B99F9009BA912 /* TLForeachLoop.m */,
+				E2CF9624135B99F9009BA912 /* TLConditional.h */,
+				E2CF9625135B99F9009BA912 /* TLConditional.m */,
+				E2CF9620135B99F9009BA912 /* TLAssignment.h */,
+				E2CF9621135B99F9009BA912 /* TLAssignment.m */,
+				E2CF9636135B99F9009BA912 /* TLWhileLoop.h */,
+				E2CF9637135B99F9009BA912 /* TLWhileLoop.m */,
+			);
+			name = Statements;
+			sourceTree = "<group>";
+		};
+		E2CF9608135B943B009BA912 /* Expressions */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF9626135B99F9009BA912 /* TLExpression.h */,
+				E2CF9627135B99F9009BA912 /* TLExpression.m */,
+				E2CF962E135B99F9009BA912 /* TLObject.h */,
+				E2CF962F135B99F9009BA912 /* TLObject.m */,
+				E2CF962A135B99F9009BA912 /* TLIdentifier.h */,
+				E2CF962B135B99F9009BA912 /* TLIdentifier.m */,
+				E2CF9630135B99F9009BA912 /* TLOperation.h */,
+				E2CF9631135B99F9009BA912 /* TLOperation.m */,
+				E2CF962C135B99F9009BA912 /* TLMethodInvocation.h */,
+				E2CF962D135B99F9009BA912 /* TLMethodInvocation.m */,
+			);
+			name = Expressions;
+			sourceTree = "<group>";
+		};
 		E2D88B4F12B2FE2400219BF5 /* AsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +597,7 @@
 		E2DA8B2F12D2638E00B1EDE8 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				E2CF95EB135B9108009BA912 /* TL */,
 				E2EAEED012B986A500097E0B /* WATemplate.h */,
 				E2EAEED112B986A500097E0B /* WATemplate.m */,
 				E21E76A812C03DC80082E402 /* WALocalization.h */,
@@ -568,6 +679,20 @@
 				E264E07512FA303A007AD73A /* buffer.h in Headers */,
 				E264E07612FA303A007AD73A /* markdown.h in Headers */,
 				93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */,
+				E2CF9604135B93F8009BA912 /* TFStringScanner.h in Headers */,
+				E2CF9638135B99F9009BA912 /* TL.h in Headers */,
+				E2CF963A135B99F9009BA912 /* TLAssignment.h in Headers */,
+				E2CF963C135B99F9009BA912 /* TLCompoundStatement.h in Headers */,
+				E2CF963E135B99F9009BA912 /* TLConditional.h in Headers */,
+				E2CF9640135B99F9009BA912 /* TLExpression.h in Headers */,
+				E2CF9642135B99F9009BA912 /* TLForeachLoop.h in Headers */,
+				E2CF9644135B99F9009BA912 /* TLIdentifier.h in Headers */,
+				E2CF9646135B99F9009BA912 /* TLMethodInvocation.h in Headers */,
+				E2CF9648135B99F9009BA912 /* TLObject.h in Headers */,
+				E2CF964A135B99F9009BA912 /* TLOperation.h in Headers */,
+				E2CF964C135B99F9009BA912 /* TLScope.h in Headers */,
+				E2CF964E135B99F9009BA912 /* TLStatement.h in Headers */,
+				E2CF9650135B99F9009BA912 /* TLWhileLoop.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +816,20 @@
 				E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */,
 				E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */,
 				93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */,
+				E2CF9605135B93F8009BA912 /* TFStringScanner.m in Sources */,
+				E2CF9639135B99F9009BA912 /* TL.m in Sources */,
+				E2CF963B135B99F9009BA912 /* TLAssignment.m in Sources */,
+				E2CF963D135B99F9009BA912 /* TLCompoundStatement.m in Sources */,
+				E2CF963F135B99F9009BA912 /* TLConditional.m in Sources */,
+				E2CF9641135B99F9009BA912 /* TLExpression.m in Sources */,
+				E2CF9643135B99F9009BA912 /* TLForeachLoop.m in Sources */,
+				E2CF9645135B99F9009BA912 /* TLIdentifier.m in Sources */,
+				E2CF9647135B99F9009BA912 /* TLMethodInvocation.m in Sources */,
+				E2CF9649135B99F9009BA912 /* TLObject.m in Sources */,
+				E2CF964B135B99F9009BA912 /* TLOperation.m in Sources */,
+				E2CF964D135B99F9009BA912 /* TLScope.m in Sources */,
+				E2CF964F135B99F9009BA912 /* TLStatement.m in Sources */,
+				E2CF9651135B99F9009BA912 /* TLWhileLoop.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +841,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -717,7 +857,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
+				INSTALL_PATH = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Source/Markdown\"",
@@ -725,6 +865,10 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = WebAppKit;
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wno-parentheses",
+					"-Wno-unused",
+				);
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -734,7 +878,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -747,12 +891,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Frameworks";
+				INSTALL_PATH = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Source/Markdown\"",
 				);
 				PRODUCT_NAME = WebAppKit;
+				WARNING_CFLAGS = (
+					"-Wno-parentheses",
+					"-Wno-unused",
+				);
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -766,7 +914,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -783,6 +931,7 @@
 				DSTROOT = /;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "";

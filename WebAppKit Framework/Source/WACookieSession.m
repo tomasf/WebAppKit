@@ -10,7 +10,7 @@
 #import "WACookie.h"
 #import "WARequest.h"
 #import "WAResponse.h"
-#import <openssl/md5.h>3
+#import <openssl/md5.h>
 
 static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 

@@ -6,10 +6,13 @@
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
 
-extern NSString *WAGenerateUUIDString(void);
-extern uint64_t WANanosecondTime();
+NSString *WAGenerateUUIDString(void);
+uint64_t WANanosecondTime();
 
-extern NSString *WAApplicationSupportDirectory(void);
+NSString *WAApplicationSupportDirectory(void);
 
-extern NSDateFormatter *WAHTTPDateFormatter(void);
-extern NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams);
+NSDateFormatter *WAHTTPDateFormatter(void);
+NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams);
+
+void WASetDevelopmentMode(BOOL enable);
+BOOL WAGetDevelopmentMode();
