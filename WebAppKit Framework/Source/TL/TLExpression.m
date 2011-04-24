@@ -32,6 +32,9 @@
 
 + (TLExpression*)parseNumber:(TFStringScanner*)scanner {
 	NSString *numberString = [scanner scanToken];
+	if([numberString isEqual:@"-"])
+		numberString = [numberString stringByAppendingString:[scanner scanToken]];
+	
 	if([[scanner peekToken] isEqual:@"."]) {
 		[scanner scanToken];
 		NSString *fraction = [scanner scanToken];
@@ -149,7 +152,7 @@
 			[scanner scanToken];
 			part = [self parseExpression:scanner];
 			[scanner scanToken]; // )
-		}else if(type == TFTokenTypeNumeric) {
+		}else if(type == TFTokenTypeNumeric || c == '-') {
 			part = [self parseNumber:scanner];
 		}else if(c == '[') {
 			part = [self parseInvocation:scanner];
