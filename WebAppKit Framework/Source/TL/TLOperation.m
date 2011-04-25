@@ -117,6 +117,10 @@ static NSUInteger operatorCount = sizeof(operatorInfo)/sizeof(operatorInfo[0]);
 	operator = op;
 	leftOperand = left;
 	rightOperand = right;
+	
+	if(leftOperand.constant && rightOperand.constant)
+		return [[TLObject alloc] initWithObject:[self evaluateWithScope:nil]];
+	
 	return self;
 }
 

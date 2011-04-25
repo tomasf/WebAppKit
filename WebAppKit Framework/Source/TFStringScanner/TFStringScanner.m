@@ -142,6 +142,12 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	}
 }
 
+- (BOOL)scanToken:(NSString*)matchToken {
+	if([[self peekToken] isEqual:matchToken]) {
+		[self scanToken];
+		return YES;
+	}else return NO;
+}
 
 - (BOOL)atEnd {
 	return location >= [content length];

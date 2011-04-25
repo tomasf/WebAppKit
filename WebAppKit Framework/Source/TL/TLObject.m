@@ -21,6 +21,10 @@
 	return object;
 }
 
+- (BOOL)constant {
+	return [object isKindOfClass:[NSNumber class]];
+}
+
 - (NSString*)description {
 	return [NSString stringWithFormat:@"<Object: %@>", object];
 }

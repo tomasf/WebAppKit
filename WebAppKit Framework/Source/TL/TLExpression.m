@@ -29,21 +29,38 @@
 	return [self evaluateWithScope:[[TLScope alloc] init]];
 }
 
+- (BOOL)constant {
+	return NO;
+}
+
 
 + (TLExpression*)parseNumber:(TFStringScanner*)scanner {
-	NSString *numberString = [scanner scanToken];
-	if([numberString isEqual:@"-"])
-		numberString = [numberString stringByAppendingString:[scanner scanToken]];
+	NSMutableString *numberString = [NSMutableString string];
 	
-	if([[scanner peekToken] isEqual:@"."]) {
-		[scanner scanToken];
-		NSString *fraction = [scanner scanToken];
-		unichar c = [fraction characterAtIndex:0];
-		if(c >= '0' && c <= '9') {
-			numberString = [numberString stringByAppendingFormat:@".%@", fraction];
-		}else [NSException raise:TLParseException format:@"Expected number fraction after period, but found some other bullshit: %@", fraction];
+	if([scanner scanToken:@"-"]) {
+		[numberString appendString:@"-"];		
 	}
-	return [[TLObject alloc] initWithObject:[NSNumber numberWithDouble:[numberString doubleValue]]];
+	
+	if([scanner peekToken] && scanner.lastTokenType == TFTokenTypeNumeric) {
+		[numberString appendString:[scanner scanToken]];
+	}
+	
+	NSUInteger beforePeriod = scanner.location;
+	if([scanner scanToken:@"."]) {
+		NSString *fraction = [scanner scanToken];
+		if(scanner.lastTokenType == TFTokenTypeNumeric)
+			[numberString appendFormat:@".%@", fraction];
+		else {
+			// If the number is followed by period and something else, assume it's meant to be a key path.
+			// Rewind and bail
+			scanner.location = beforePeriod;
+		}
+	
+	}else if([numberString isEqual:@"-"])
+		[NSException raise:TLParseException format:@"Expected valid number after -, but got: %@", [scanner scanToken]];
+
+	double number = [numberString doubleValue];
+	return [[TLObject alloc] initWithObject:[NSNumber numberWithDouble:number]];
 }
 
 
@@ -152,7 +169,7 @@
 			[scanner scanToken];
 			part = [self parseExpression:scanner];
 			[scanner scanToken]; // )
-		}else if(type == TFTokenTypeNumeric || c == '-') {
+		}else if(type == TFTokenTypeNumeric || c == '-' || c == '.') {
 			part = [self parseNumber:scanner];
 		}else if(c == '[') {
 			part = [self parseInvocation:scanner];

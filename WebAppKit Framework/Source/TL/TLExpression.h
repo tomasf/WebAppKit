@@ -11,6 +11,8 @@
 @interface TLExpression : NSObject {
 }
 
+@property(readonly) BOOL constant;
+
 + (TLExpression*)expressionByParsingString:(NSString*)string;
 
 - (id)evaluateWithScope:(TLScope*)scope;

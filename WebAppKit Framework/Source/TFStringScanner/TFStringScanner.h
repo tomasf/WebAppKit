@@ -40,6 +40,7 @@ typedef enum {
 - (BOOL)scanWhitespace;
 
 - (NSString*)scanToken;
+- (BOOL)scanToken:(NSString*)matchToken;
 - (NSString*)peekToken;
 
 @end
