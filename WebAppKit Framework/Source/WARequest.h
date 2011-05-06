@@ -35,6 +35,7 @@
 @property(readonly) NSString *query;
 @property(readonly) NSDictionary *headerFields;
 @property(readonly) NSDictionary *queryParameters;
+@property(readonly) NSDictionary *POSTParameters;
 @property(readonly) NSSet *uploadedFiles;
 @property(readonly) NSString *host;
 @property(readonly) NSURL *URL;

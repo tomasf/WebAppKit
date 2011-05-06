@@ -28,7 +28,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 @implementation WARequest
-@synthesize method, path, headerFields, queryParameters, cookies, HTTPVersion, clientAddress, byteRanges, query;
+@synthesize method, path, headerFields, queryParameters, POSTParameters, cookies, HTTPVersion, clientAddress, byteRanges, query;
 
 
 + (NSDictionary*)dictionaryFromQueryParameters:(NSString*)query encoding:(NSStringEncoding)enc {
