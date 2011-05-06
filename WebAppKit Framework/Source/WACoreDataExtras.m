@@ -11,30 +11,16 @@
 
 @implementation NSManagedObjectContext (WAExtras)
 
-+ (id)managedObjectContextWithModels:(NSArray*)momURLs store:(NSURL*)storeURL type:(NSString*)storeType {
-	NSMutableArray *models = [NSMutableArray array];
-	for(NSURL *momURL in momURLs) {
-		if(![[NSFileManager defaultManager] fileExistsAtPath:[momURL path]]) {
-			NSLog(@"MOM file does not exist: %@", momURL);
-			return nil;
-		}
-		
-		NSManagedObjectModel *model = [[[NSManagedObjectModel alloc] initWithContentsOfURL:momURL] autorelease];
-		if(!model) {
-			NSLog(@"Failed to create MOM from file: %@", momURL);
-			return nil;
-		}
-
-		[models addObject:model];
-	}
-	
-	NSManagedObjectModel *model = [NSManagedObjectModel modelByMergingModels:models];
++ (id)managedObjectContextWithModel:(NSManagedObjectModel*)model store:(NSURL*)storeURL type:(NSString*)storeType {
 	NSPersistentStoreCoordinator *coordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model] autorelease];
 	NSError *error = nil;
 	
-	if(![coordinator addPersistentStoreWithType:storeType configuration:nil URL:storeURL options:nil error:&error]) {
-		NSLog(@"Store path: %@", [storeURL path]);
-		[NSException raise:NSInvalidArgumentException format:@"%@ failed to load persistent store: %@", self, error];		
+	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+	
+	if(![coordinator addPersistentStoreWithType:storeType configuration:nil URL:storeURL options:options error:&error]) {
+		NSLog(@"Store: %@", [storeURL path]);
+		NSLog(@"Model: %@", model);
+		[NSException raise:NSInvalidArgumentException format:@"Failed to load persistent store: %@", error];		
 	}
 	
 	NSManagedObjectContext *moc = [[[NSManagedObjectContext alloc] init] autorelease];
@@ -44,12 +30,36 @@
 
 
 + (id)managedObjectContextFromModelNamed:(NSString*)modelName storeName:(NSString*)storeName type:(NSString*)storeType {
-	NSURL *modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"mom"];
-	NSString *appSupportDirectory = WAApplicationSupportDirectory();
+	NSURL *modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"momd"];
 	
+	if(!modelURL) {
+		modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"mom"];
+		if(!modelURL)
+			[NSException raise:NSInvalidArgumentException format:@"Model file '%@' (.mom/.momd) not found!", modelName];
+	}
+	
+	NSManagedObjectModel *model = [[[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL] autorelease];
+	if(!model) {
+		[NSException raise:NSInvalidArgumentException format:@"Failed to create MOM from file: %@", modelURL];
+		return nil;
+	}
+		
+	NSString *appSupportDirectory = WAApplicationSupportDirectory();
 	NSURL *storeURL = [NSURL fileURLWithPath:[appSupportDirectory stringByAppendingPathComponent:storeName]];
-	return [self managedObjectContextWithModels:[NSArray arrayWithObject:modelURL] store:storeURL type:storeType];
+	return [self managedObjectContextWithModel:model store:storeURL type:storeType];
 }
+
+
++ (id)managedObjectContextWithStoreName:(NSString*)storeName type:(NSString*)storeType {
+	NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+	if(!model)
+		[NSException raise:NSInvalidArgumentException format:@"mergedModelFromBundles: returned nil"];
+	
+	NSString *appSupportDirectory = WAApplicationSupportDirectory();
+	NSURL *storeURL = [NSURL fileURLWithPath:[appSupportDirectory stringByAppendingPathComponent:storeName]];
+	return [self managedObjectContextWithModel:model store:storeURL type:storeType];	
+}
+
 
 
 - (void)deleteObjectsUsingFetchRequest:(NSFetchRequest*)request {
@@ -64,6 +74,13 @@
 	NSError *error;
 	NSArray *matches = [self executeFetchRequest:request error:&error];
 	return [matches lastObject];
+}
+
+
+- (void)saveOrRaise {
+	NSError *error = nil;
+	if(![self save:&error])
+		[NSException raise:NSInternalInconsistencyException format:@"Failed to save MOC: %@", error];
 }
 
 
@@ -103,6 +120,23 @@
 }
 
 
++ (NSArray*)objectsInManagedObjectContext:(NSManagedObjectContext*)moc sorting:(NSArray*)sortDescriptors matchingPredicateFormat:(NSString*)format, ... {
+	NSPredicate *predicate = nil;
+	if(format) {
+		va_list list;
+		va_start(list, format);
+		predicate = [NSPredicate predicateWithFormat:format arguments:list];
+		va_end(list);
+	}
+	
+	NSFetchRequest *req = [[[NSFetchRequest alloc] init] autorelease];
+	if(predicate) [req setPredicate:predicate];
+	if(sortDescriptors) [req setSortDescriptors:sortDescriptors];
+	
+	return [self objectsMatchingFetchRequest:req managedObjectContext:moc];		
+}
+
+
 + (NSArray*)objectsInManagedObjectContext:(NSManagedObjectContext*)moc sortedBy:(NSString*)keyPath ascending:(BOOL)asc matchingPredicateFormat:(NSString*)format, ... {
 	NSPredicate *predicate = nil;
 	if(format) {
@@ -136,6 +170,20 @@
 + (NSArray*)allObjectsInManagedObjectContext:(NSManagedObjectContext*)moc {
 	NSFetchRequest *req = [[[NSFetchRequest alloc] init] autorelease];	
 	return [self objectsMatchingFetchRequest:req managedObjectContext:moc];		
+}
+
+
+// These require your entity to have a string attribute named 'UUID'
+// Remember to make it indexed!
+
+- (id)initWithRandomUUIDInsertingIntoManagedObjectContext:(NSManagedObjectContext*)moc {
+	self = [self initInsertingIntoManagedObjectContext:moc];
+	[self setValue:WAGenerateUUIDString() forKey:@"UUID"];
+	return self;
+}
+
++ (id)objectWithUUID:(NSString*)UUID inManagedObjectContext:(NSManagedObjectContext*)moc {
+	return [[self objectsInManagedObjectContext:moc matchingPredicateFormat:@"UUID == %@", UUID] lastObject];
 }
 
 @end
