@@ -93,6 +93,7 @@ NSUInteger TLArgumentCountForSelector(SEL selector) {
 
 - (id)evaluateWithScope:(TLScope *)scope {
 	id object = [target evaluateWithScope:scope];
+	if(!object) return nil;
 	
 	NSMethodSignature *signature = [object methodSignatureForSelector:selector];
 	

@@ -11,6 +11,7 @@
 #import "TL.h"
 
 static NSMutableDictionary *TLConstants;
+static NSString *const TLNilPlaceholder = @"TLNilPlaceholder";
 
 
 @implementation TLScope
@@ -48,14 +49,14 @@ static NSMutableDictionary *TLConstants;
 	return [self initWithParentScope:nil];
 }
 
-- (id)valueForKey:(NSString*)key {
+- (id)rawValueForKey:(NSString*)key {
 	id value = [mapping objectForKey:key];
 	if(value) return value;	
 	
 	value = [constants valueForKey:key];
 	if(value) return value;
 	
-	value = [parent valueForKey:key];
+	value = [parent rawValueForKey:key];
 	if(value) return value;
 	
 	if([key isEqual:@"nil"] || [key isEqual:@"NULL"]) return nil;
@@ -64,7 +65,14 @@ static NSMutableDictionary *TLConstants;
 	if(value) return value;
 	
 	[NSException raise:TLRuntimeException format:@"'%@' is undefined", key];
-	return nil;
+	return value;
+}
+
+
+- (id)valueForKey:(NSString*)key {
+	id value = [self rawValueForKey:key];
+	if(value == TLNilPlaceholder) return nil;
+	return value;
 }
 
 - (BOOL)setValue:(id)value ifKeyExists:(NSString*)key {
@@ -75,6 +83,8 @@ static NSMutableDictionary *TLConstants;
 }
 
 - (void)setValue:(id)value forKey:(NSString*)key {
+	if(!value) value = TLNilPlaceholder;
+	
 	if(![self setValue:value ifKeyExists:key]) {
 		if(!mapping) mapping = [NSMutableDictionary dictionary];
 		[mapping setObject:value forKey:key];
@@ -82,6 +92,7 @@ static NSMutableDictionary *TLConstants;
 }
 
 - (void)declareValue:(id)value forKey:(NSString*)key {
+	if(!value) value = TLNilPlaceholder;
 	if(!mapping) mapping = [NSMutableDictionary dictionary];
 	[mapping setObject:value forKey:key];
 }

@@ -17,6 +17,7 @@
 
 
 NSString *const WATemplateOutputKey = @"_WATemplateOutput";
+NSString *const WATemplateNilValuePlaceholder = @"_WATemplateNil";
 
 
 
@@ -38,6 +39,7 @@ NSString *const WATemplateOutputKey = @"_WATemplateOutput";
 
 - (void)invokeInScope:(TLScope *)scope {
 	id object = [content evaluateWithScope:scope];
+	if(!object) return;
 	NSString *chunk = [object isKindOfClass:[NSString class]] ? object : [object description];
 	NSMutableString *output = [scope valueForKey:WATemplateOutputKey];
 	[output appendString:chunk];
@@ -117,7 +119,7 @@ static NSMutableDictionary *WANamedTemplates;
 
 
 - (void)setValue:(id)value forKey:(NSString*)key {
-	[mapping setObject:value forKey:key];
+	[mapping setObject:value ?: WATemplateNilValuePlaceholder forKey:key];
 }
 
 
@@ -132,7 +134,9 @@ static NSMutableDictionary *WANamedTemplates;
 
 
 - (id)valueForKey:(NSString*)key {
-	return [mapping objectForKey:key];
+	id value = [mapping objectForKey:key];
+	if(value == WATemplateNilValuePlaceholder) return nil;
+	return value;
 }
 
 
@@ -144,7 +148,7 @@ static NSMutableDictionary *WANamedTemplates;
 	TLScope *scope = [[TLScope alloc] initWithParentScope:nil];
 	[scope setValue:output forKey:WATemplateOutputKey];
 	for(NSString *key in mapping)
-		[scope setValue:[mapping objectForKey:key] forKey:key];
+		[scope setValue:[self valueForKey:key] forKey:key];
 	[body invokeInScope:scope];
 	return output;
 }
