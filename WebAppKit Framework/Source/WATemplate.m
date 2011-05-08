@@ -10,6 +10,14 @@
 #import "TFStringScanner.h"
 #import "TL.h"
 
+
+@interface WATemplate()
+- (TLStatement*)scanKeyword:(TFStringScanner*)scanner endToken:(NSString**)outEndToken;
+- (TLStatement*)scanText:(TFStringScanner*)scanner endToken:(NSString**)outEndToken;
+- (NSString*)resultWithScope:(TLScope*)scope;
+@end
+
+
 @interface TLExpression ()
 + (TLExpression*)parseExpression:(TFStringScanner*)scanner endToken:(NSString*)string;
 + (TFStringScanner*)newScannerForString:(NSString*)string;
@@ -17,6 +25,7 @@
 
 
 NSString *const WATemplateOutputKey = @"_WATemplateOutput";
+NSString *const WATemplateChildContentKey = @"_WATemplateChildContent";
 NSString *const WATemplateNilValuePlaceholder = @"_WATemplateNil";
 
 
@@ -54,31 +63,61 @@ NSString *const WATemplateNilValuePlaceholder = @"_WATemplateNil";
 
 
 
+@interface WASubTemplateStatement : TLStatement {
+	NSString *templateName;
+}
+- (id)initWithTemplateName:(NSString*)name;
+@end
 
-static NSString *const WATemplateParseException = @"WATemplateParseException";
-static NSMutableDictionary *WANamedTemplates;
 
 
-@interface WATemplate()
-- (TLStatement*)scanKeyword:(TFStringScanner*)scanner endToken:(NSString**)outEndToken;
-- (TLStatement*)scanText:(TFStringScanner*)scanner endToken:(NSString**)outEndToken;
+@implementation WASubTemplateStatement
+
+- (id)initWithTemplateName:(NSString*)name {
+	self = [super init];
+	templateName = [name copy];
+	return self;
+}
+
+- (void)invokeInScope:(TLScope *)scope {
+	WATemplate *template = [WATemplate templateNamed:templateName];
+	NSString *result = [template resultWithScope:scope];
+	
+	NSMutableString *output = [scope valueForKey:WATemplateOutputKey];
+	[output appendString:result];
+}
+
+- (NSString*)description {
+	return [NSString stringWithFormat:@"<Sub-template %@>", templateName];
+}
+
 @end
 
 
 
 
+
+static NSString *const WATemplateParseException = @"WATemplateParseException";
+static NSMutableDictionary *WANamedTemplates;
+
+
+
 @implementation WATemplate
+@synthesize parent;
+
 
 + (void)initialize {
 	if(self != [WATemplate class]) return;
 	WANamedTemplates = [NSMutableDictionary dictionary];
 }
 
+
 + (id)templateNamed:(NSString*)name inBundle:(NSBundle*)bundle {
 	NSURL *URL = [bundle URLForResource:name withExtension:@"wat"];
 	if(!URL) [NSException raise:NSInvalidArgumentException format:@"Template named '%@' wasn't found.", name];
 	return [[self alloc] initWithContentsOfURL:URL];
 }
+
 
 + (id)templateNamed:(NSString*)name {
 	WATemplate *template = [WANamedTemplates objectForKey:name];
@@ -94,6 +133,13 @@ static NSMutableDictionary *WANamedTemplates;
 }
 
 
++ (id)templateNamed:(NSString*)name parent:(NSString*)parentName {
+	WATemplate *template = [self templateNamed:name];
+	template.parent = [self templateNamed:parentName];
+	return template;
+}
+
+
 - (id)initWithStatement:(TLStatement*)statement {
 	self = [super init];
 	body = statement;
@@ -101,11 +147,13 @@ static NSMutableDictionary *WANamedTemplates;
 	return self;
 }
 
+
 - (id)initWithSource:(NSString*)templateString {	
 	TFStringScanner *scanner = [TLExpression newScannerForString:templateString];
 	TLStatement *statement = [self scanText:scanner endToken:nil];
 	return [self initWithStatement:statement];
 }
+
 
 - (id)initWithContentsOfURL:(NSURL*)URL {
 	return [self initWithSource:[NSString stringWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:NULL]];
@@ -139,18 +187,40 @@ static NSMutableDictionary *WANamedTemplates;
 	return value;
 }
 
+- (id)realValueForValue:(id)value {
+	if(value == WATemplateNilValuePlaceholder) return nil;
+	else return value;
+}
 
+- (NSString*)resultWithScope:(TLScope*)scope {
+	TLScope *innerScope = [[TLScope alloc] initWithParentScope:scope];
+	NSMutableString *output = [NSMutableString string];
+	[innerScope declareValue:output forKey:WATemplateOutputKey];
+	
+	for(NSString *key in mapping)
+		[innerScope setValue:[self realValueForValue:[mapping objectForKey:key]] forKey:key];
+	
+	[body invokeInScope:innerScope];
+	return output;
+}
 
+- (NSString*)resultWithChildContent:(NSString*)content additionalMapping:(NSDictionary*)childMapping {
+	TLScope *scope = [[TLScope alloc] initWithParentScope:nil];
+	[scope setValue:content forKey:WATemplateChildContentKey];
+	
+	for(NSString *key in childMapping)
+		[scope setValue:[self realValueForValue:[childMapping objectForKey:key]] forKey:key];
+
+	NSString *output = [self resultWithScope:scope];
+	if(self.parent)
+		return [self.parent resultWithChildContent:output additionalMapping:mapping];
+	else
+		return output;
+}
 
 
 - (NSString*)result {
-	NSMutableString *output = [NSMutableString string];
-	TLScope *scope = [[TLScope alloc] initWithParentScope:nil];
-	[scope setValue:output forKey:WATemplateOutputKey];
-	for(NSString *key in mapping)
-		[scope setValue:[self valueForKey:key] forKey:key];
-	[body invokeInScope:scope];
-	return output;
+	return [self resultWithChildContent:nil additionalMapping:nil];
 }
 
 
@@ -265,6 +335,7 @@ static NSMutableDictionary *WANamedTemplates;
 
 		return [[TLConditional alloc] initWithConditions:conditions consequents:consequents];
 		
+		
 	}else if([token isEqual:@"set"]) {
 		NSString *varName = [scanner scanToken];
 		if(scanner.lastTokenType != TFTokenTypeIdentifier)
@@ -275,6 +346,19 @@ static NSMutableDictionary *WANamedTemplates;
 		[scanner scanToken];
 		
 		return [[TLAssignment alloc] initWithIdentifier:varName value:value];
+		
+		
+	}else if([token isEqual:@"content"]) {
+		if(![[scanner scanToken] isEqual:@">"])
+			[NSException raise:WATemplateParseException format:@"Expected > after <%content, but found something else."];
+		return [[WAPrintStatement alloc] initWithContent:[[TLIdentifier alloc] initWithName:WATemplateChildContentKey]];
+		
+	}else if([token isEqual:@"template"]) {
+		NSString *name = [[scanner scanToString:@">"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		if(![[scanner scanToken] isEqual:@">"])
+			[NSException raise:WATemplateParseException format:@"Expected > after <%template %@, but found something else.", name];
+		return [[WASubTemplateStatement alloc] initWithTemplateName:name];
+		
 		
 	}else{
 		[NSException raise:WATemplateParseException format:@"Found unknown template keyword: <%%%@", [scanner peekToken]];
