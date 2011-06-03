@@ -12,7 +12,7 @@
 #import "WAResponse.h"
 #import <openssl/md5.h>
 
-static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
+static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 
 
 @implementation WACookieSession
@@ -103,7 +103,7 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 
 - (void)updateResponse {
 	NSString *value = [values count] ? [[self class] cookieValueFromDictionary:values key:encryptionKey] : @"";
-	WACookie *cookie = [[WACookie alloc] initWithName:name value:value lifespan:WSSessionDefaultLifespan path:nil domain:nil];
+	WACookie *cookie = [[WACookie alloc] initWithName:name value:value lifespan:WASessionDefaultLifespan path:nil domain:nil];
 	[response addCookie:cookie];
 }
 

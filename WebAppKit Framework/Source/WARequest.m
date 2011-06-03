@@ -260,7 +260,10 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 - (BOOL)wantsPersistentConnection {
-	return [self.HTTPVersion isEqual:(id)kCFHTTPVersion1_1] && ![[self valueForHeaderField:@"Connection"] isEqual:@"close"];
+	if([self.HTTPVersion isEqual:(id)kCFHTTPVersion1_0])
+		return [[self valueForHeaderField:@"Connection"] isCaseInsensitiveLike:@"Keep-Alive"];
+	else
+		return ![[self valueForHeaderField:@"Connection"] isCaseInsensitiveLike:@"close"];
 }
 
 

@@ -15,7 +15,7 @@
 @synthesize delegate;
 
 
-- (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName delegate:(id<WSServerDelegate>)del {
+- (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName delegate:(id<WAServerDelegate>)del {
 	self = [super init];
 	delegate = del;
 	port = p;

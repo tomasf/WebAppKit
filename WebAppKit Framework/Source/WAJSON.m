@@ -124,8 +124,8 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 					JSStringRef name = JSPropertyNameArrayGetNameAtIndex(names, i);
 					JSValueRef indexValue = JSObjectGetProperty(ctx, object, name, NULL);
 					NSString *key = (NSString*)NSMakeCollectable(JSStringCopyCFString(NULL, name));
-					id value = [self objectFromJSValue:indexValue context:ctx];
-					[dict setObject:value forKey:key];
+					id dictValue = [self objectFromJSValue:indexValue context:ctx];
+					[dict setObject:dictValue forKey:key];
 				}
 				return dict;
 			}
@@ -140,6 +140,11 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 	JSStringRef source = (JSStringRef)JSStringCreateWithCFString((CFStringRef)JSON);
 	
 	JSValueRef value = JSValueMakeFromJSONString(ctx, source);
+	CFRelease(source);
+	if(!value) {
+		JSGlobalContextRelease(ctx);
+		return nil;
+	}
 	id object = [self objectFromJSValue:value context:ctx];
 	
 	JSGlobalContextRelease(ctx);

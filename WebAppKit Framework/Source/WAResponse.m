@@ -58,7 +58,7 @@
 
 - (void)requireProgressiveHeaderNotSent {
 	if(progressive && hasSentHeader)
-		[NSException raise:@"WSResponseHeaderAlreadySentException" format:@"You can't modify the header after it has been sent."];
+		[NSException raise:@"WAResponseHeaderAlreadySentException" format:@"You can't modify the header after it has been sent."];
 }
 
 
@@ -162,6 +162,10 @@
 	return mediaType ? [NSString stringWithFormat:@"%@; charset=%@", mediaType, [self charsetName]] : nil;
 }
 
+- (BOOL)needsKeepAliveHeader {
+	return [request.HTTPVersion isEqual:(id)kCFHTTPVersion1_0] && request.wantsPersistentConnection; 
+}
+
 
 - (NSDictionary*)defaultHeaderFields {
 	NSMutableDictionary *fields = $mdict(@"Server", [self defaultUserAgent],
@@ -173,6 +177,9 @@
 		[fields setObject:@"chunked" forKey:@"Transfer-Encoding"];
 	else
 		[fields setObject:[NSString stringWithFormat:@"%qu", (uint64_t)[body length]] forKey:@"Content-Length"];
+	
+	if([self needsKeepAliveHeader])
+		[fields setObject:@"Keep-Alive" forKey:@"Connection"];
 	
 	return fields;
 }

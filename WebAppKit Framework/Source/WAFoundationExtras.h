@@ -35,6 +35,11 @@
 - (NSData*)dataByDecryptingAES128UsingKey:(NSData*)key;
 @end
 
+@interface NSCharacterSet (WAExtras)
++ (id)characterSetWithRanges:(NSRange)firstRange, ...;
++ (NSCharacterSet*)ASCIIAlphanumericCharacterSet;
+@end
+
 #define $array(...) ((NSArray*)[NSArray arrayWithObjects:__VA_ARGS__, nil])
 #define $dict(...) ((NSDictionary*)[NSDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil])
 #define $marray(...) ((NSMutableArray*)[NSMutableArray arrayWithObjects:__VA_ARGS__, nil])

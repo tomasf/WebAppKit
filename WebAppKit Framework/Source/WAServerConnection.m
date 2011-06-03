@@ -37,8 +37,8 @@
 @end
 
 enum {
-	WSConnectionSocketTagHeader,
-	WSConnectionSocketBodyHeader,
+	WAConnectionSocketTagHeader,
+	WAConnectionSocketBodyHeader,
 };
 
 
@@ -57,7 +57,7 @@ enum {
 
 - (void)readNewRequest {
 	NSData *crlfcrlf = [NSData dataWithBytes:"\r\n\r\n" length:4];
-	[socket readDataToData:crlfcrlf withTimeout:60 maxLength:100000 tag:WSConnectionSocketTagHeader];
+	[socket readDataToData:crlfcrlf withTimeout:60 maxLength:100000 tag:WAConnectionSocketTagHeader];
 }
 
 
@@ -116,7 +116,7 @@ enum {
 
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
-	if(tag == WSConnectionSocketTagHeader) {
+	if(tag == WAConnectionSocketTagHeader) {
 		[self handleRequestData:data];
 	}
 }

@@ -11,7 +11,7 @@
 
 @class WARequest, WARequestHandler, WAServer;
 
-@protocol WSServerDelegate
+@protocol WAServerDelegate
 - (WARequestHandler*)server:(WAServer*)server handlerForRequest:(WARequest*)request;
 @end
 
@@ -20,13 +20,13 @@
 	AsyncSocket *serverSocket;
 	NSMutableSet *connections;
 	
-	id<WSServerDelegate> delegate;
+	id<WAServerDelegate> delegate;
 	NSString *interface;
 	NSUInteger port;
 }
 
-@property(assign) id<WSServerDelegate> delegate;
+@property(assign) id<WAServerDelegate> delegate;
 
-- (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName delegate:(id<WSServerDelegate>)del;
+- (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName delegate:(id<WAServerDelegate>)del;
 - (BOOL)start:(NSError**)error;
 @end

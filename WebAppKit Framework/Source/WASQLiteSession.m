@@ -15,7 +15,7 @@
 #import "FMDatabaseAdditions.h"
 
 
-static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
+static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 
 
 @implementation WASQLiteSession
@@ -44,7 +44,7 @@ static const NSTimeInterval WSSessionDefaultLifespan = 31556926;
 
 - (void)refreshCookie {
 	token = WAGenerateUUIDString();
-	WACookie *cookie = [[WACookie alloc] initWithName:name value:token lifespan:WSSessionDefaultLifespan path:nil domain:nil];
+	WACookie *cookie = [[WACookie alloc] initWithName:name value:token lifespan:WASessionDefaultLifespan path:nil domain:nil];
 	[response addCookie:cookie];
 	[database executeUpdate:@"INSERT INTO tokens (token) VALUES (?)", token];
 }

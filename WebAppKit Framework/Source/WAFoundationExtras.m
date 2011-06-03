@@ -192,3 +192,26 @@
 
 
 @end
+
+
+
+@implementation NSCharacterSet (WAExtras)
+
++ (id)characterSetWithRanges:(NSRange)firstRange, ... {
+	NSMutableCharacterSet *set = [NSMutableCharacterSet characterSetWithRange:firstRange];
+	va_list list;
+	va_start(list, firstRange);
+	NSRange range;
+	while((range = va_arg(list, NSRange)).length)
+		[set addCharactersInRange:range];
+	va_end(list);
+	return set;
+}
+
++ (NSCharacterSet*)ASCIIAlphanumericCharacterSet {
+	static NSCharacterSet *set;
+	if(!set) set = [NSCharacterSet characterSetWithRanges:NSMakeRange('a',26), NSMakeRange('A',26), NSMakeRange('0',10), NSMakeRange(0,0)];
+	return set;
+}
+
+@end
