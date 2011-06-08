@@ -21,7 +21,7 @@
 
 
 @implementation WAResponse
-@synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive;
+@synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive, hasBody;
 
 
 - (id)initWithRequest:(WARequest*)req socket:(AsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
@@ -31,6 +31,7 @@
 	socket = sock;
 	completionHandler = [handler copy];
 	
+	hasBody = YES;
 	body = [NSMutableData data];
 	bodyEncoding = NSUTF8StringEncoding;
 	headerFields = [NSMutableDictionary dictionary];
@@ -169,17 +170,19 @@
 
 - (NSDictionary*)defaultHeaderFields {
 	NSMutableDictionary *fields = $mdict(@"Server", [self defaultUserAgent],
-										 @"Date", [WAHTTPDateFormatter() stringFromDate:[NSDate date]],
-										 @"Content-Type", [self contentType]
+										 @"Date", [WAHTTPDateFormatter() stringFromDate:[NSDate date]]
 	);
 	
 	if(progressive)
 		[fields setObject:@"chunked" forKey:@"Transfer-Encoding"];
-	else
+	else if(hasBody)
 		[fields setObject:[NSString stringWithFormat:@"%qu", (uint64_t)[body length]] forKey:@"Content-Length"];
 	
 	if([self needsKeepAliveHeader])
 		[fields setObject:@"Keep-Alive" forKey:@"Connection"];
+	
+	if([self contentType] && hasBody)
+		[fields setObject:[self contentType] forKey:@"Content-Type"];
 	
 	return fields;
 }

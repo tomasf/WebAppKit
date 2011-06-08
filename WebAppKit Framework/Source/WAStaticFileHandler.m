@@ -49,6 +49,7 @@
 	
 	if(notModified && enableCaching) {
 		resp.statusCode = 304;
+		resp.hasBody = NO;
 		[resp finish];
 		return;
 	}

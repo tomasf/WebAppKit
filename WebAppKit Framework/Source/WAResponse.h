@@ -25,6 +25,7 @@
 	NSString *mediaType;
 	NSMutableDictionary *cookies;
 	NSDate *modificationDate;
+	BOOL hasBody;
 }
 
 
@@ -35,7 +36,7 @@
 @property(copy) NSString *mediaType;
 @property(copy) NSDate *modificationDate;
 @property(copy) NSString *entityTag;
-
+@property BOOL hasBody;
 
 - (void)appendBodyData:(NSData*)data;
 - (void)appendString:(NSString*)string;
