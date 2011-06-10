@@ -97,4 +97,24 @@ static NSString *const TLNilPlaceholder = @"TLNilPlaceholder";
 	[mapping setObject:value forKey:key];
 }
 
+- (NSString*)stringByIndentingString:(NSString*)string {
+	NSArray *lines = [string componentsSeparatedByString:@"\n"];
+	NSMutableArray *newLines = [NSMutableArray array];
+	for(NSString *line in lines) {
+		[newLines addObject:[@"   " stringByAppendingString:line]];
+	}
+	return [newLines componentsJoinedByString:@"\n"];
+}
+
+- (NSString*)debugDescription {
+	NSMutableString *output = [NSMutableString stringWithFormat:@"(\n"];
+	for(id key in mapping) {
+		if([key hasPrefix:@"_WATemplate"]) continue;
+		[output appendFormat:@"\"%@\" = %@\n", key, [mapping valueForKey:key]];
+	}
+	if(parent) [output appendFormat:@"parent scope:\n%@\n", [self stringByIndentingString:[parent debugDescription]]];
+	[output appendFormat:@")"];
+	return output;
+}
+
 @end

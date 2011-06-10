@@ -95,6 +95,22 @@ NSString *const WATemplateNilValuePlaceholder = @"_WATemplateNil";
 
 
 
+@interface WADebugStatement : TLStatement {}
+@end
+
+@implementation WADebugStatement
+
+- (void)invokeInScope:(TLScope *)scope {
+	NSLog(@"Scope: %@", [scope debugDescription]);
+}
+
+- (NSString*)description {
+	return [NSString stringWithFormat:@"<Debug statement>"];
+}
+
+@end
+
+
 
 
 static NSString *const WATemplateParseException = @"WATemplateParseException";
@@ -252,6 +268,12 @@ static NSMutableDictionary *WANamedTemplates;
 	if([token isEqual:@"end"] || [token isEqual:@"else"] || [token isEqual:@"elseif"]) {
 		if(outEndToken) *outEndToken = token;
 		return nil;
+		
+	}else if([token isEqual:@"debug"]) {
+		if(![[scanner scanToken] isEqual:@">"])
+			[NSException raise:WATemplateParseException format:@"Expected > after <%debug, but found something else."];
+		return [[WADebugStatement alloc] init];
+		
 	
 	}else if([token isEqual:@"print"]) {
 		TLExpression *content = [TLExpression parseExpression:scanner endToken:@">"];
