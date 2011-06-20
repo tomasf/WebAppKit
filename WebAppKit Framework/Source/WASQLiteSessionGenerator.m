@@ -23,8 +23,10 @@
 	database = [FMDatabase databaseWithPath:path];
 	[database setLogsErrors:YES];
 	
-	if(![database open])
+	if(![database open]) {
+		NSLog(@"WASQLiteSessionGenerator: Failed to open session store SQLite database. Error %d (%@), path: %@", [database lastErrorCode], [database lastErrorMessage], path);
 		return nil;
+	}
 	
 	[database executeUpdate:@"CREATE TABLE IF NOT EXISTS tokens (token)"];
 	[database executeUpdate:@"CREATE TABLE IF NOT EXISTS `values` (token, `key`, value)"];
