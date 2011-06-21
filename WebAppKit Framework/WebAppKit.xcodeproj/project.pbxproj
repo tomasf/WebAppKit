@@ -31,10 +31,6 @@
 		E241AF3713285591009ED0B2 /* Exception.wat in Resources */ = {isa = PBXBuildFile; fileRef = E241AF3613285591009ED0B2 /* Exception.wat */; };
 		E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E260B0F912CCB99F0084FC05 /* libcrypto.dylib */; };
 		E26154D712B3CCED0040B002 /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E26154D612B3CCED0040B002 /* 404.html */; };
-		E262BE4912D7958D00A8A4B4 /* WAModuleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E262BE4712D7958D00A8A4B4 /* WAModuleManager.h */; };
-		E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */; };
-		E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */ = {isa = PBXBuildFile; fileRef = E262BE4E12D797D100A8A4B4 /* WAModule.h */; };
-		E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */ = {isa = PBXBuildFile; fileRef = E262BE4F12D797D100A8A4B4 /* WAModule.m */; };
 		E264E06712FA3020007AD73A /* WAHTMLMarkdownFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */; };
 		E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */; };
 		E264E06912FA3020007AD73A /* WAMarkdown.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06312FA3020007AD73A /* WAMarkdown.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -158,10 +154,6 @@
 		E241AF3613285591009ED0B2 /* Exception.wat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Exception.wat; sourceTree = "<group>"; };
 		E260B0F912CCB99F0084FC05 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		E26154D612B3CCED0040B002 /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
-		E262BE4712D7958D00A8A4B4 /* WAModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAModuleManager.h; sourceTree = "<group>"; };
-		E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModuleManager.m; sourceTree = "<group>"; };
-		E262BE4E12D797D100A8A4B4 /* WAModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAModule.h; sourceTree = "<group>"; };
-		E262BE4F12D797D100A8A4B4 /* WAModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAModule.m; sourceTree = "<group>"; };
 		E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAHTMLMarkdownFormatter.h; path = Source/Markdown/WAHTMLMarkdownFormatter.h; sourceTree = "<group>"; };
 		E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAHTMLMarkdownFormatter.m; path = Source/Markdown/WAHTMLMarkdownFormatter.m; sourceTree = "<group>"; };
 		E264E06312FA3020007AD73A /* WAMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMarkdown.h; path = Source/Markdown/WAMarkdown.h; sourceTree = "<group>"; };
@@ -315,7 +307,6 @@
 				E2DA8B2E12D2635F00B1EDE8 /* Application */,
 				E2DA8B2F12D2638E00B1EDE8 /* Templates */,
 				E21D234212BC606300277F2E /* Cookies */,
-				E262BE4212D7941100A8A4B4 /* Modules */,
 				E264E05E12FA300B007AD73A /* Markdown */,
 				E2B7A15912C3AC0D006BA324 /* WAJSON.h */,
 				E2B7A15A12C3AC0D006BA324 /* WAJSON.m */,
@@ -408,17 +399,6 @@
 				E227EC4412D3B82F00C9B669 /* WASession.m */,
 			);
 			name = Sessions;
-			sourceTree = "<group>";
-		};
-		E262BE4212D7941100A8A4B4 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				E262BE4712D7958D00A8A4B4 /* WAModuleManager.h */,
-				E262BE4812D7958D00A8A4B4 /* WAModuleManager.m */,
-				E262BE4E12D797D100A8A4B4 /* WAModule.h */,
-				E262BE4F12D797D100A8A4B4 /* WAModule.m */,
-			);
-			name = Modules;
 			sourceTree = "<group>";
 		};
 		E264E05E12FA300B007AD73A /* Markdown */ = {
@@ -631,8 +611,6 @@
 				E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */,
 				E227EC4512D3B82F00C9B669 /* WASession.h in Headers */,
 				E227EC6812D3BA1B00C9B669 /* WASessionGenerator.h in Headers */,
-				E262BE4912D7958D00A8A4B4 /* WAModuleManager.h in Headers */,
-				E262BE5012D797D100A8A4B4 /* WAModule.h in Headers */,
 				E2F4F39212DB669F0058342E /* WAHTTPSupport.h in Headers */,
 				E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */,
 				E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */,
@@ -766,8 +744,6 @@
 				E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */,
 				E227EC4612D3B82F00C9B669 /* WASession.m in Sources */,
 				E227EC6912D3BA1B00C9B669 /* WASessionGenerator.m in Sources */,
-				E262BE4A12D7958D00A8A4B4 /* WAModuleManager.m in Sources */,
-				E262BE5112D797D100A8A4B4 /* WAModule.m in Sources */,
 				E2F4F39312DB669F0058342E /* WAHTTPSupport.m in Sources */,
 				E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */,
 				E275C2D512E7BEA900462191 /* WAMultipartPart.m in Sources */,

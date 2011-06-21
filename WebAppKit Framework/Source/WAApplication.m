@@ -14,7 +14,6 @@
 #import "WAServer.h"
 #import "WADirectoryHandler.h"
 #import "WAStaticFileHandler.h"
-#import "WAModuleManager.h"
 #import "TFRegex.h"
 #import "WARedirectHandler.h"
 #import "WASession.h"
@@ -61,9 +60,6 @@ int WAApplicationMain() {
 	NSString *publicDir = [[NSBundle bundleForClass:self] pathForResource:@"public" ofType:nil]; 
 	WADirectoryHandler *publicHandler = [[WADirectoryHandler alloc] initWithDirectory:publicDir requestPath:@"/"];
 	[app addRequestHandler:publicHandler];
-	
-	for(WARequestHandler *handler in [[WAModuleManager sharedManager] allRequestHandlers])
-		[app addRequestHandler:handler];
 	
 	NSLog(@"WebAppKit started on port %hu", port);
 	NSLog(@"http://localhost:%hu/", port);
