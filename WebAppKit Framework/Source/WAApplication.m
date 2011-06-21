@@ -17,6 +17,8 @@
 #import "WAModuleManager.h"
 #import "TFRegex.h"
 #import "WARedirectHandler.h"
+#import "WASession.h"
+#import "WASessionGenerator.h"
 
 static const NSString *WAHTTPServerPortKey = @"WAHTTPServerPort";
 static const NSString *WAHTTPServerExternalAccessKey = @"WAHTTPServerExternalAccess";
@@ -34,7 +36,7 @@ int WAApplicationMain() {
 
 
 @implementation WAApplication
-@synthesize request, response;
+@synthesize request, response, sessionGenerator=standardSessionGenerator;
 
 
 + (uint16_t)port {
@@ -179,5 +181,9 @@ int WAApplicationMain() {
 
 - (void)preprocess {}
 - (void)postprocess {}
+
+- (WASession*)session {
+	return [self.sessionGenerator sessionForRequest:self.request response:self.response];
+}
 
 @end

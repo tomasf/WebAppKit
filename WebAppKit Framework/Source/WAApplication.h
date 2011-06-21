@@ -11,7 +11,8 @@
 #import "WARequest.h"
 #import "WAResponse.h"
 #import "WAServer.h"
-@class WARoute, WARedirectHandler;
+
+@class WARoute, WARedirectHandler, WASessionGenerator, WASession;
 
 extern int WAApplicationMain();
 
@@ -26,10 +27,15 @@ extern int WAApplicationMain();
 	
 	WARequest *request;
 	WAResponse *response;
+	
+	WASessionGenerator *standardSessionGenerator;
 }
 
 @property(readonly) WARequest *request;
 @property(readonly) WAResponse *response;
+
+@property(retain) WASessionGenerator *sessionGenerator;
+@property(readonly) WASession *session;
 
 + (int)run;
 - (id)initWithPort:(NSUInteger)port;
