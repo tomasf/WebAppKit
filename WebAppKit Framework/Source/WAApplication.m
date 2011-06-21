@@ -95,6 +95,13 @@ int WAApplicationMain() {
 	return [self initWithPort:port interface:@"localhost"];
 }
 
+- (void)invalidate {
+	[server invalidate];
+	server = nil;
+	[self.sessionGenerator invalidate];
+	self.sessionGenerator = nil;
+}
+
 
 - (void)setup {}
 

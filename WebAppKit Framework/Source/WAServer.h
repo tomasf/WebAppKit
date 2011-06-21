@@ -29,4 +29,5 @@
 
 - (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName delegate:(id<WAServerDelegate>)del;
 - (BOOL)start:(NSError**)error;
+- (void)invalidate;
 @end

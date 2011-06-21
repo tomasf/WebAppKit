@@ -30,6 +30,11 @@
 	return [serverSocket acceptOnInterface:interface port:port error:error];
 }
 
+- (void)invalidate {
+	[serverSocket disconnect];
+	serverSocket = nil;
+}
+
 
 - (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket {
 	WAServerConnection *connection = [[WAServerConnection alloc] initWithSocket:newSocket server:self];

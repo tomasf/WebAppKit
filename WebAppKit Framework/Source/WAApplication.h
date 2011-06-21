@@ -41,6 +41,8 @@ extern int WAApplicationMain();
 - (id)initWithPort:(NSUInteger)port;
 - (id)initWithPort:(NSUInteger)port interface:(NSString*)interface;
 
+- (void)invalidate;
+
 - (void)setup;
 
 - (WARoute*)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path;
