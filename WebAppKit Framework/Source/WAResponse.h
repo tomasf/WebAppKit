@@ -7,12 +7,12 @@
 //
 
 #import "WARequest.h"
-@class WARequest, WACookie, AsyncSocket;
+@class WARequest, WACookie, GCDAsyncSocket;
 
 
 @interface WAResponse : NSObject {
 	WARequest *request;
-	AsyncSocket *socket;
+	GCDAsyncSocket *socket;
 	void(^completionHandler)(BOOL keepAlive);
 	
 	NSMutableData *body;

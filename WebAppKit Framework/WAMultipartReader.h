@@ -6,8 +6,8 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-@class WAMultipartReader, WAMultipartPart, AsyncSocket;
-#import "AsyncSocket.h"
+@class WAMultipartReader, WAMultipartPart, GCDAsyncSocket;
+#import "GCDAsyncSocket.h"
 
 @protocol WAMultipartReaderDelegate
 - (void)multipartReader:(WAMultipartReader*)reader finishedWithParts:(NSArray*)parts;
@@ -16,16 +16,16 @@
 
 
 
-@interface WAMultipartReader : NSObject <AsyncSocketDelegate> {
+@interface WAMultipartReader : NSObject <GCDAsyncSocketDelegate> {
 	id<WAMultipartReaderDelegate> delegate;
 	id oldSocketDelegate;
-	AsyncSocket *socket;
+	GCDAsyncSocket *socket;
 	NSString *boundary;
 	
 	NSMutableArray *parts;
 	WAMultipartPart *currentPart;
 }
 
-- (id)initWithSocket:(AsyncSocket*)sock boundary:(NSString*)boundaryString delegate:(id<WAMultipartReaderDelegate>)del;
+- (id)initWithSocket:(GCDAsyncSocket*)sock boundary:(NSString*)boundaryString delegate:(id<WAMultipartReaderDelegate>)del;
 
 @end

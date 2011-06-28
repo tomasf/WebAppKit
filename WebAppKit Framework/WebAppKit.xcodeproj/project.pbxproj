@@ -28,6 +28,9 @@
 		E227EC4612D3B82F00C9B669 /* WASession.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC4412D3B82F00C9B669 /* WASession.m */; };
 		E227EC6812D3BA1B00C9B669 /* WASessionGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC6612D3BA1B00C9B669 /* WASessionGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E227EC6912D3BA1B00C9B669 /* WASessionGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC6712D3BA1B00C9B669 /* WASessionGenerator.m */; };
+		E231558313B9209F002F33FC /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E231558113B9209F002F33FC /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E231558213B9209F002F33FC /* GCDAsyncSocket.m */; };
+		E23155B313B9224B002F33FC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23155B213B9224B002F33FC /* Security.framework */; };
 		E241AF3713285591009ED0B2 /* Exception.wat in Resources */ = {isa = PBXBuildFile; fileRef = E241AF3613285591009ED0B2 /* Exception.wat */; };
 		E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E260B0F912CCB99F0084FC05 /* libcrypto.dylib */; };
 		E26154D712B3CCED0040B002 /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E26154D612B3CCED0040B002 /* 404.html */; };
@@ -76,8 +79,6 @@
 		E2CF964F135B99F9009BA912 /* TLStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9635135B99F9009BA912 /* TLStatement.m */; };
 		E2CF9650135B99F9009BA912 /* TLWhileLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9636135B99F9009BA912 /* TLWhileLoop.h */; };
 		E2CF9651135B99F9009BA912 /* TLWhileLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9637135B99F9009BA912 /* TLWhileLoop.m */; };
-		E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */; };
 		E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2D88B6512B2FE2400219BF5 /* WAFoundationExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E2D88B5312B2FE2400219BF5 /* WAFoundationExtras.m */; };
 		E2D88B6612B2FE2400219BF5 /* WAApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = E2D88B5412B2FE2400219BF5 /* WAApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,6 +152,9 @@
 		E227EC4412D3B82F00C9B669 /* WASession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASession.m; path = Source/WASession.m; sourceTree = "<group>"; };
 		E227EC6612D3BA1B00C9B669 /* WASessionGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASessionGenerator.h; path = Source/WASessionGenerator.h; sourceTree = "<group>"; };
 		E227EC6712D3BA1B00C9B669 /* WASessionGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASessionGenerator.m; path = Source/WASessionGenerator.m; sourceTree = "<group>"; };
+		E231558113B9209F002F33FC /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		E231558213B9209F002F33FC /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		E23155B213B9224B002F33FC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E241AF3613285591009ED0B2 /* Exception.wat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Exception.wat; sourceTree = "<group>"; };
 		E260B0F912CCB99F0084FC05 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		E26154D612B3CCED0040B002 /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
@@ -199,8 +203,6 @@
 		E2CF9635135B99F9009BA912 /* TLStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLStatement.m; path = Source/TL/TLStatement.m; sourceTree = "<group>"; };
 		E2CF9636135B99F9009BA912 /* TLWhileLoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLWhileLoop.h; path = Source/TL/TLWhileLoop.h; sourceTree = "<group>"; };
 		E2CF9637135B99F9009BA912 /* TLWhileLoop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLWhileLoop.m; path = Source/TL/TLWhileLoop.m; sourceTree = "<group>"; };
-		E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
-		E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAFoundationExtras.h; path = Source/WAFoundationExtras.h; sourceTree = "<group>"; };
 		E2D88B5312B2FE2400219BF5 /* WAFoundationExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAFoundationExtras.m; path = Source/WAFoundationExtras.m; sourceTree = "<group>"; };
 		E2D88B5412B2FE2400219BF5 /* WAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAApplication.h; path = Source/WAApplication.h; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */,
 				E264E06E12FA302D007AD73A /* libupskirt.a in Frameworks */,
 				E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */,
+				E23155B313B9224B002F33FC /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +322,7 @@
 		1058C7B0FEA5585E11CA2CBB /* Apple Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E23155B213B9224B002F33FC /* Security.framework */,
 				E2EAF09812B9AB4800097E0B /* CoreData.framework */,
 				E2D88B7D12B2FE5E00219BF5 /* Foundation.framework */,
 				E2D88B8112B2FE6500219BF5 /* CoreFoundation.framework */,
@@ -498,8 +502,8 @@
 		E2D88B4F12B2FE2400219BF5 /* AsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				E2D88B5012B2FE2400219BF5 /* AsyncSocket.h */,
-				E2D88B5112B2FE2400219BF5 /* AsyncSocket.m */,
+				E231558113B9209F002F33FC /* GCDAsyncSocket.h */,
+				E231558213B9209F002F33FC /* GCDAsyncSocket.m */,
 			);
 			name = AsyncSocket;
 			path = Source/AsyncSocket;
@@ -587,7 +591,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2D88B6212B2FE2400219BF5 /* AsyncSocket.h in Headers */,
 				E2D88B6412B2FE2400219BF5 /* WAFoundationExtras.h in Headers */,
 				E2D88B6612B2FE2400219BF5 /* WAApplication.h in Headers */,
 				E2D88B6812B2FE2400219BF5 /* WAServerConnection.h in Headers */,
@@ -635,6 +638,7 @@
 				E2CF964C135B99F9009BA912 /* TLScope.h in Headers */,
 				E2CF964E135B99F9009BA912 /* TLStatement.h in Headers */,
 				E2CF9650135B99F9009BA912 /* TLWhileLoop.h in Headers */,
+				E231558313B9209F002F33FC /* GCDAsyncSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,7 +725,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2D88B6312B2FE2400219BF5 /* AsyncSocket.m in Sources */,
 				E2D88B6512B2FE2400219BF5 /* WAFoundationExtras.m in Sources */,
 				E2D88B6712B2FE2400219BF5 /* WAApplication.m in Sources */,
 				E2D88B6912B2FE2400219BF5 /* WAServerConnection.m in Sources */,
@@ -766,6 +769,7 @@
 				E2CF964D135B99F9009BA912 /* TLScope.m in Sources */,
 				E2CF964F135B99F9009BA912 /* TLStatement.m in Sources */,
 				E2CF9651135B99F9009BA912 /* TLWhileLoop.m in Sources */,
+				E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

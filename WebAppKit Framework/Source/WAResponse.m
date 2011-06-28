@@ -9,7 +9,7 @@
 #import "WAResponse.h"
 #import "WARequest.h"
 #import "WACookie.h"
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 
 
 @interface WAResponse ()
@@ -24,7 +24,7 @@
 @synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive, hasBody;
 
 
-- (id)initWithRequest:(WARequest*)req socket:(AsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
+- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
 	self = [super init];
 	
 	request = req;
@@ -100,7 +100,7 @@
 	if([data length] == 0) return;
 	[socket writeData:[[NSString stringWithFormat:@"%qX\r\n", (uint64_t)[data length]] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
 	[socket writeData:data withTimeout:-1 tag:0];
-	[socket writeData:[AsyncSocket CRLFData] withTimeout:-1 tag:0];
+	[socket writeData:[GCDAsyncSocket CRLFData] withTimeout:-1 tag:0];
 }
 
 - (void)sendTerminationChunk {

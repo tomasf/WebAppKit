@@ -15,14 +15,14 @@
 
 
 @interface WAResponse (Private)
-- (id)initWithRequest:(WARequest*)req socket:(AsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler;
+- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler;
 - (void)finishWithErrorString:(NSString*)error;
 @end
 
 @interface WARequest (Private)
 - (id)initWithHTTPMessage:(CFHTTPMessageRef)message;
 - (id)initWithHeaderData:(NSData*)data;
-- (void)readBodyFromSocket:(AsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler;
+- (void)readBodyFromSocket:(GCDAsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler;
 - (void)invalidate;
 @end
 
@@ -44,7 +44,7 @@ enum {
 
 @implementation WAServerConnection
 
-- (id)initWithSocket:(AsyncSocket*)s server:(WAServer*)serv {
+- (id)initWithSocket:(GCDAsyncSocket*)s server:(WAServer*)serv {
 	self = [super init];
 	server = serv;
 	socket = s;
@@ -61,7 +61,7 @@ enum {
 }
 
 
-- (void)onSocketDidDisconnect:(AsyncSocket *)sock {
+- (void)onSocketDidDisconnect:(GCDAsyncSocket *)sock {
 	[currentRequestHandler connectionDidClose];
 	[server connectionDidClose:self];
 	socket = nil;
@@ -115,7 +115,7 @@ enum {
 }
 
 
-- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
 	if(tag == WAConnectionSocketTagHeader) {
 		[self handleRequestData:data];
 	}

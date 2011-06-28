@@ -7,7 +7,7 @@
 //
 
 #import "WAHTTPSupport.h"
-@class AsyncSocket, WACookie, WAUploadedFile, WAMultipartReader;
+@class GCDAsyncSocket, WACookie, WAUploadedFile, WAMultipartReader;
 
 @interface WARequest : NSObject {
 	NSString *HTTPVersion;

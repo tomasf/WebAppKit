@@ -6,7 +6,7 @@
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
 
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 #import "WAServerConnection.h"
 
 @class WARequest, WARequestHandler, WAServer;
@@ -16,8 +16,8 @@
 @end
 
 
-@interface WAServer : NSObject <AsyncSocketDelegate> {
-	AsyncSocket *serverSocket;
+@interface WAServer : NSObject <GCDAsyncSocketDelegate> {
+	GCDAsyncSocket *serverSocket;
 	NSMutableSet *connections;
 	
 	id<WAServerDelegate> delegate;

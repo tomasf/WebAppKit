@@ -7,7 +7,7 @@
 //
 
 #import "WARequest.h"
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 #import "WACookie.h"
 #import "WAMultipartReader.h"
 #import "WAUploadedFile.h"
@@ -17,7 +17,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 
-@interface WARequest () <AsyncSocketDelegate, WAMultipartReaderDelegate>
+@interface WARequest () <GCDAsyncSocketDelegate, WAMultipartReaderDelegate>
 @end
 
 @interface WAUploadedFile (Private)
@@ -157,7 +157,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
-- (void)readBodyFromSocket:(AsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler {
+- (void)readBodyFromSocket:(GCDAsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler {
 	clientAddress = [[socket connectedHost] copy];
 	BOOL hasBody = [self valueForHeaderField:@"Content-Length"] || [self valueForHeaderField:@"Transfer-Encoding"];
 	
@@ -245,7 +245,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
-- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
 	[self handleBodyData:data];
 	completionHandler(YES);
 	completionHandler = nil;

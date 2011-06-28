@@ -7,7 +7,7 @@
 //
 
 #import "WAServer.h"
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 #import "WAServerConnection.h"
 #import "WARequestHandler.h"
 
@@ -21,7 +21,7 @@
 	port = p;
 	interface = [interfaceName copy];
 	connections = [NSMutableSet set];
-	serverSocket = [[AsyncSocket alloc] initWithDelegate:self];
+	serverSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 	return self;
 }
 
@@ -36,7 +36,7 @@
 }
 
 
-- (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket {
+- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket {
 	WAServerConnection *connection = [[WAServerConnection alloc] initWithSocket:newSocket server:self];
 	[connections addObject:connection];
 }

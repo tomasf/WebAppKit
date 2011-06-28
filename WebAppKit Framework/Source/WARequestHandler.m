@@ -11,7 +11,7 @@
 
 #import "WARequest.h"
 #import "WAResponse.h"
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 
 
 @implementation WARequestHandler
@@ -28,7 +28,7 @@
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp {
 }
 
-- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(AsyncSocket*)sock {
+- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(GCDAsyncSocket*)sock {
 	[self handleRequest:req response:resp];
 }
 

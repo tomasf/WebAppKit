@@ -6,14 +6,14 @@
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
 
-@class WARequest, WAResponse, AsyncSocket;
+@class WARequest, WAResponse, GCDAsyncSocket;
 
 @interface WARequestHandler : NSObject {
 }
 
 - (BOOL)canHandleRequest:(WARequest*)req;
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp;
-- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(AsyncSocket*)sock;
+- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(GCDAsyncSocket*)sock;
 
 - (WARequestHandler*)handlerForRequest:(WARequest*)req;
 - (void)connectionDidClose;

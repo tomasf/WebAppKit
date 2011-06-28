@@ -7,7 +7,7 @@
 //
 #import "WAMultipartReader.h"
 #import "WAMultipartPart.h"
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 
 enum {
 	WAMPRInitialBoundary,
@@ -26,7 +26,7 @@ static const uint64_t WAMPRMaxPartBodyChunkLength = 10000;
 
 @implementation WAMultipartReader
 
-- (id)initWithSocket:(AsyncSocket*)sock boundary:(NSString*)boundaryString delegate:(id<WAMultipartReaderDelegate>)del {
+- (id)initWithSocket:(GCDAsyncSocket*)sock boundary:(NSString*)boundaryString delegate:(id<WAMultipartReaderDelegate>)del {
 	self = [super init];
 	delegate = del;
 	socket = sock;
@@ -46,7 +46,7 @@ static const uint64_t WAMPRMaxPartBodyChunkLength = 10000;
 
 
 - (void)readInitialBoundary {
-	[socket readDataToData:[AsyncSocket CRLFData] withTimeout:10 maxLength:[boundary length]+4 tag:WAMPRInitialBoundary];
+	[socket readDataToData:[GCDAsyncSocket CRLFData] withTimeout:10 maxLength:[boundary length]+4 tag:WAMPRInitialBoundary];
 }
 
 
@@ -57,7 +57,7 @@ static const uint64_t WAMPRMaxPartBodyChunkLength = 10000;
 
 
 - (void)readPartBody {
-	[socket readDataToData:[AsyncSocket CRLFData] withTimeout:60 maxLength:WAMPRMaxPartBodyChunkLength tag:WAMPRPartBodyChunk];
+	[socket readDataToData:[GCDAsyncSocket CRLFData] withTimeout:60 maxLength:WAMPRMaxPartBodyChunkLength tag:WAMPRPartBodyChunk];
 }
 
 - (void)finishPart {
@@ -71,7 +71,7 @@ static const uint64_t WAMPRMaxPartBodyChunkLength = 10000;
 }
 
 
-- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
 	if(tag == WAMPRInitialBoundary) {
 		NSString *correctString = [NSString stringWithFormat:@"--%@\r\n", boundary];
 		NSString *givenString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

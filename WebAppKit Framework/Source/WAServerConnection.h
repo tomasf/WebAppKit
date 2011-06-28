@@ -7,17 +7,17 @@
 //
 
 
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 
 @class WAServer, WARequestHandler, WARequest, WAResponse;
 
 
-@interface WAServerConnection : NSObject <AsyncSocketDelegate> {
-	AsyncSocket *socket;
+@interface WAServerConnection : NSObject <GCDAsyncSocketDelegate> {
+	GCDAsyncSocket *socket;
 	WAServer *server;
 	
 	WARequestHandler *currentRequestHandler;
 }
 
-- (id)initWithSocket:(AsyncSocket*)s server:(WAServer*)serv;
+- (id)initWithSocket:(GCDAsyncSocket*)s server:(WAServer*)serv;
 @end
