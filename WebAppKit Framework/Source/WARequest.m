@@ -75,6 +75,13 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
+- (void)setHeaderFields:(NSDictionary*)fields {
+	NSMutableDictionary *newFields = [NSMutableDictionary dictionary];
+	for(NSString *name in fields)
+		[newFields setObject:[fields objectForKey:name] forKey:[name lowercaseString]];
+	headerFields = newFields;
+}
+
 
 - (id)initWithHTTPMessage:(CFHTTPMessageRef)message {
 	self = [super init];
@@ -86,7 +93,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	queryParameters = [[[self class] dictionaryFromQueryParameters:[requestURL query] encoding:NSUTF8StringEncoding] copy];
 	query = [[requestURL query] copy];
 	
-	headerFields = NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message));
+	[self setHeaderFields:NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message))];
 	NSString *cookieString = [headerFields objectForKey:@"Cookie"];
 	if(cookieString) {
 		NSSet *cookieSet = [WACookie cookiesFromHeaderValue:cookieString];
@@ -122,7 +129,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 - (NSString*)valueForHeaderField:(NSString*)fieldName {
-	return [headerFields objectForKey:fieldName];
+	return [headerFields objectForKey:[fieldName lowercaseString]];
 }
 
 
