@@ -381,9 +381,13 @@ static NSMutableDictionary *WANamedTemplates;
 			[NSException raise:WATemplateParseException format:@"Expected > after <%template %@, but found something else.", name];
 		return [[WASubTemplateStatement alloc] initWithTemplateName:name];
 		
+	}else if([token isEqual:@"comment"]) {
+		[scanner scanToString:@"%>"];
+		[scanner scanForLength:2];
+		return [[TLNoop alloc] init];
 		
 	}else{
-		[NSException raise:WATemplateParseException format:@"Found unknown template keyword: <%%%@", [scanner peekToken]];
+		[NSException raise:WATemplateParseException format:@"Found unknown template keyword: <%%%@", token];
 		return nil;
 	}
 }

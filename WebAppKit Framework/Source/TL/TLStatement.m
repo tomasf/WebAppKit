@@ -15,3 +15,9 @@
 }
 
 @end
+
+
+@implementation TLNoop
+- (void)invokeInScope:(TLScope*)scope {}
+@end
+

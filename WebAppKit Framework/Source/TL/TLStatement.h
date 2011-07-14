@@ -11,3 +11,6 @@
 @interface TLStatement : NSObject {}
 - (void)invokeInScope:(TLScope*)scope;
 @end
+
+@interface TLNoop : TLStatement {}
+@end
