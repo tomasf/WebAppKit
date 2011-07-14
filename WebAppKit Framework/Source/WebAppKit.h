@@ -25,3 +25,6 @@
 #import "WAMarkdownParser.h"
 
 #import "WARedirectHandler.h"
+
+#import "FMDatabase.h"
+#import "FMDatabaseAdditions.h"
