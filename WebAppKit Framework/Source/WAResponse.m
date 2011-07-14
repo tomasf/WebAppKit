@@ -22,6 +22,7 @@
 
 @implementation WAResponse
 @synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive, hasBody;
+@synthesize headerFields, cookies;
 
 
 - (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
@@ -191,9 +192,9 @@
 - (NSDictionary*)preparedHeaderFields {
 	NSMutableDictionary *fields = [headerFields mutableCopy];
 	
-	NSString *cookieString = [[[cookies allValues] valueForKey:@"headerFieldValue"] componentsJoinedByString:@","];
+	NSString *cookieString = [[[cookies allValues] valueForKey:@"headerFieldValue"] componentsJoinedByString:@", "];
 	if([cookieString length])
-		[fields setObject:cookieString forKey:@"Set-Cookie"];	
+		[fields setObject:cookieString forKey:@"Set-Cookie"];
 	
 	if(modificationDate)
 		[fields setObject:[WAHTTPDateFormatter() stringFromDate:modificationDate] forKey:@"Last-Modified"];

@@ -27,8 +27,11 @@
 
 @property(readonly) NSString *headerFieldValue;
 
+- (id)initWithName:(NSString*)n value:(NSString*)val;
 - (id)initWithName:(NSString*)n value:(NSString*)val expirationDate:(NSDate*)date path:(NSString*)p domain:(NSString*)d;
 - (id)initWithName:(NSString*)n value:(NSString*)val lifespan:(NSTimeInterval)time path:(NSString*)p domain:(NSString*)d;
+
++ (id)expiredCookieWithName:(NSString*)name;
 
 + (NSSet*)cookiesFromHeaderValue:(NSString*)headerValue;
 @end

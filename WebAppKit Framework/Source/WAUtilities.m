@@ -79,6 +79,35 @@ NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **out
 }
 
 
+NSString *WAConstructHTTPStringValue(NSString *string) {
+	static NSMutableCharacterSet *invalidTokenSet;
+	if(!invalidTokenSet) {
+		invalidTokenSet = [[NSCharacterSet ASCIIAlphanumericCharacterSet] mutableCopy];
+		[invalidTokenSet addCharactersInString:@"-_."];
+		[invalidTokenSet invert];
+	}
+	
+	if([string rangeOfCharacterFromSet:invalidTokenSet].length) {
+		return [NSString stringWithFormat:@"\"%@\"", [string stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]];
+	}else{
+		return string;
+	}	
+}
+
+
+NSString *WAConstructHTTPParameterString(NSDictionary *params) {
+	NSMutableString *string = [NSMutableString string];
+	for(NSString *name in params) {
+		id value = [params objectForKey:name];
+		if(value == [NSNull null])
+			[string appendFormat:@"; %@", WAConstructHTTPStringValue(name)];
+		else
+			[string appendFormat:@"; %@=%@", WAConstructHTTPStringValue(name), WAConstructHTTPStringValue([params objectForKey:name])];
+	}
+	return string;
+}
+
+
 static BOOL WADevelopmentMode;
 
 void WASetDevelopmentMode(BOOL enable) {

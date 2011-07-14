@@ -51,7 +51,7 @@
 		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
 		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
-		E2CF9604135B93F8009BA912 /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9602135B93F8009BA912 /* TFStringScanner.h */; };
+		E2CF9604135B93F8009BA912 /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9602135B93F8009BA912 /* TFStringScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2CF9605135B93F8009BA912 /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9603135B93F8009BA912 /* TFStringScanner.m */; };
 		E2CF9638135B99F9009BA912 /* TL.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF961E135B99F9009BA912 /* TL.h */; };
 		E2CF9639135B99F9009BA912 /* TL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF961F135B99F9009BA912 /* TL.m */; };

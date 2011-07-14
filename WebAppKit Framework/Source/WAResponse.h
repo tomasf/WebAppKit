@@ -38,6 +38,9 @@
 @property(copy) NSString *entityTag;
 @property BOOL hasBody;
 
+@property(readonly) NSDictionary *headerFields;
+@property(readonly) NSDictionary *cookies;
+
 - (void)appendBodyData:(NSData*)data;
 - (void)appendString:(NSString*)string;
 - (void)appendFormat:(NSString*)format, ...;

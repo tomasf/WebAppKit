@@ -13,6 +13,8 @@ NSString *WAApplicationSupportDirectory(void);
 
 NSDateFormatter *WAHTTPDateFormatter(void);
 NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams);
+NSString *WAConstructHTTPStringValue(NSString *string);
+NSString *WAConstructHTTPParameterString(NSDictionary *params);
 
 void WASetDevelopmentMode(BOOL enable);
 BOOL WAGetDevelopmentMode();

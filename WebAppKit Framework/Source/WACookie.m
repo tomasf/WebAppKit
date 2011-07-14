@@ -35,6 +35,11 @@
 }
 
 
+- (id)initWithName:(NSString*)n value:(NSString*)val {
+	return [self initWithName:n value:val expirationDate:nil path:nil domain:nil];
+}
+
+
 - (NSString*)description {
 	return [NSString stringWithFormat:@"<%@ %p: %@=%@>", [self class], self, name, value];
 }
@@ -48,27 +53,24 @@
 
 
 - (NSString*)headerFieldValue {
-	NSMutableString *string = [NSMutableString stringWithFormat:@"%@=%@; Version=1", name, value];
+	NSMutableString *baseValue = [NSMutableString stringWithFormat:@"%@=%@", WAConstructHTTPStringValue(name), WAConstructHTTPStringValue(value)];
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"1" forKey:@"Version"];
 	
 	if(expirationDate) {
-		[string appendFormat:@"; Max-Age=%qu", (uint64_t)[expirationDate timeIntervalSinceNow]];
+		[params setObject:[NSString stringWithFormat:@"%qu", (uint64_t)[expirationDate timeIntervalSinceNow]] forKey:@"Max-Age"];
 		// Compatibility with the old Netscape spec
-		[string appendFormat:@"; Expires=%@", [[[self class] expiryDateFormatter] stringFromDate:expirationDate]];
+		[params setObject:[[[self class] expiryDateFormatter] stringFromDate:expirationDate] forKey:@"Expires"];
 	}
 	
-	if(path)
-		[string appendFormat:@"; Path=%@", path];
+	if(path) [params setObject:path forKey:@"Path"];	
+	if(domain) [params setObject:domain forKey:@"Domain"];
+	if(secure) [params setObject:[NSNull null] forKey:@"Secure"];
 	
-	if(domain)
-		[string appendFormat:@"; Domain=%@",domain];
-	
-	if(secure)
-		[string appendFormat:@"; Secure"];
-	
-	return string;
+	return [baseValue stringByAppendingString:WAConstructHTTPParameterString(params)];
 }
 
 
+// Old Netscape date format
 + (NSDateFormatter*)expiryDateFormatter {
 	static NSDateFormatter *formatter;
 	if(!formatter) {
@@ -96,6 +98,11 @@
 		[cookies addObject:c];
 	}
 	return cookies;
+}
+
+
++ (id)expiredCookieWithName:(NSString*)name {
+	return [[self alloc] initWithName:name value:@"" lifespan:-10000 path:nil domain:nil];
 }
 
 
