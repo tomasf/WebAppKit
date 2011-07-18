@@ -22,4 +22,6 @@
 - (id)initWithDatabase:(FMDatabase*)db name:(NSString*)n request:(WARequest*)req response:(WAResponse*)resp;
 - (void)refreshCookie;
 - (BOOL)tokenIsValid:(NSString*)string;
+
+- (NSSet*)allKeys;
 @end

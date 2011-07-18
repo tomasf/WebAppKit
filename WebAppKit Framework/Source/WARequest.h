@@ -39,6 +39,7 @@
 @property(readonly) NSSet *uploadedFiles;
 @property(readonly) NSString *host;
 @property(readonly) NSURL *URL;
+@property(readonly) NSURL *referrer;
 
 @property(readonly) NSDictionary *cookies;
 @property(readonly) NSDate *conditionalModificationDate;

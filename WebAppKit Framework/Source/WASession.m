@@ -51,7 +51,8 @@ static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 
 - (void)setValue:(id)value forKey:(NSString*)key {
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:value];
-	[database executeUpdate:@"REPLACE INTO `values` (token, `key`, value) VALUES (?, ?, ?)", token, key, data];
+	if(![database executeUpdate:@"REPLACE INTO `values` (token, `key`, value) VALUES (?, ?, ?)", token, key, data])
+		[NSException raise:@"WASessionException" format:@"Failed to update database: %@", [database lastErrorMessage]];
 }
 
 
@@ -63,6 +64,15 @@ static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 
 - (void)removeValueForKey:(NSString*)key {
 	[database executeUpdate:@"DELETE FROM `values` WHERE token = ? AND `key` = ?", token, key];
+}
+
+
+- (NSSet*)allKeys {
+	FMResultSet *results = [database executeQuery:@"SELECT `key` FROM `values` WHERE token = ?", token];
+	NSMutableSet *keys = [NSMutableSet set];
+	while([results next])
+		[keys addObject:[results stringForColumn:@"key"]];
+	return keys;
 }
 
 

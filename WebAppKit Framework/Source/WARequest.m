@@ -94,7 +94,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	query = [[requestURL query] copy];
 	
 	[self setHeaderFields:NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message))];
-	NSString *cookieString = [headerFields objectForKey:@"Cookie"];
+	NSString *cookieString = [self valueForHeaderField:@"Cookie"];
 	if(cookieString) {
 		NSSet *cookieSet = [WACookie cookiesFromHeaderValue:cookieString];
 		NSMutableDictionary *cookieDict = [NSMutableDictionary dictionary];
@@ -161,6 +161,13 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 - (NSURL*)URL {
 	NSString *scheme = NO ? @"https" : @"http";
 	return [[[NSURL alloc] initWithScheme:scheme host:self.host path:self.path] autorelease];
+}
+
+
+- (NSURL*)referrer {
+	NSString *URLString = [self valueForHeaderField:@"Referer"];
+	if(!URLString) return nil;
+	return [NSURL URLWithString:URLString relativeToURL:self.URL];
 }
 
 

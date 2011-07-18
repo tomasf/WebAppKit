@@ -18,6 +18,7 @@ extern int WAApplicationMain();
 
 
 @interface WAApplication : NSObject <WAServerDelegate> {
+	@private
 	WAServer *server;
 	
 	NSMutableArray *requestHandlers;

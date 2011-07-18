@@ -136,6 +136,7 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 }
 
 + (id)objectFromJSON:(NSString*)JSON {
+	NSParameterAssert(JSON);
 	JSGlobalContextRef ctx = JSGlobalContextCreate(NULL);
 	JSStringRef source = (JSStringRef)JSStringCreateWithCFString((CFStringRef)JSON);
 	
