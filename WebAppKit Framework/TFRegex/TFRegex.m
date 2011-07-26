@@ -25,8 +25,8 @@
 	
 	if(compileError) {
 		char errorBuffer[256];
-		regerror(compileError,&expression,errorBuffer,sizeof(errorBuffer));
-		[NSException raise:@"TFRegexCompileException" format:@"Could not compile regular expression \"%@\": %s",pattern,errorBuffer];
+		regerror(compileError, &expression, errorBuffer, sizeof(errorBuffer));
+		[NSException raise:@"TFRegexCompileException" format:@"Could not compile regular expression \"%@\": %s", pattern, errorBuffer];
 	}
 	return self;
 }
@@ -53,10 +53,12 @@
 #pragma mark -
 
 - (BOOL)matchesString:(NSString*)string {
+	NSParameterAssert(string != nil);
 	return (regexec(&expression,[string UTF8String],0,NULL,0)==0);
 }
 
 - (NSString*)firstMatchInString:(NSString*)string {
+	NSParameterAssert(string != nil);
 	const char *cString = [string UTF8String];
 	regmatch_t match;
 	
@@ -68,6 +70,7 @@
 
 
 - (NSArray*)matchesInString:(NSString*)string {
+	NSParameterAssert(string != nil);
 	const char *cString = [string UTF8String];
 	regmatch_t match;
 	NSMutableArray *matches = [NSMutableArray array];
@@ -86,6 +89,7 @@
 
 
 - (NSRange)rangeOfFirstMatchInString:(NSString*)string {
+	NSParameterAssert(string != nil);
 	const char *cString = [string UTF8String];
 	regmatch_t match;
 	
@@ -96,6 +100,7 @@
 }
 
 - (BOOL)getRangesOfSubexpressionsOfFirstMatchInString:(NSString*)string, ... {
+	NSParameterAssert(string != nil);
 	const char *cString = [string UTF8String];
 	int numSubExpressions = expression.re_nsub + 1;
 	regmatch_t matches[numSubExpressions];
@@ -124,6 +129,7 @@
 
 
 - (NSArray*)subExpressionsInMatchesOfString:(NSString*)string {
+	NSParameterAssert(string != nil);
 	const char *cString = [string UTF8String];
 	NSMutableArray *matchArray = [NSMutableArray array];
 	int numSubExpressions = expression.re_nsub + 1;
@@ -158,6 +164,7 @@
 
 
 - (BOOL)replaceMatchesInString:(NSMutableString*)string withStringPattern:(NSString*)replacement {
+	NSParameterAssert(string != nil);
 	const char *cString = [string UTF8String];
 	int numSubExpressions = expression.re_nsub + 1;
 	regmatch_t matches[numSubExpressions];
