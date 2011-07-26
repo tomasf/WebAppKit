@@ -14,7 +14,6 @@
 #import "WAServer.h"
 #import "WADirectoryHandler.h"
 #import "WAStaticFileHandler.h"
-#import "TFRegex.h"
 #import "WARedirectHandler.h"
 #import "WASession.h"
 #import "WASessionGenerator.h"
@@ -69,13 +68,11 @@ int WAApplicationMain() {
 }
 
 
-
 - (id)initWithPort:(NSUInteger)port interface:(NSString*)interface {
 	self = [super init];
 	requestHandlers = [NSMutableArray array];
 	server = [[WAServer alloc] initWithPort:port interface:interface delegate:self];
 	currentHandlers = [NSMutableSet set];
-	routes = [NSMutableSet set];
 	
 	NSError *error;
 	if(![server start:&error]) {
@@ -87,9 +84,11 @@ int WAApplicationMain() {
 	return self;
 }
 
+
 - (id)initWithPort:(NSUInteger)port {
 	return [self initWithPort:port interface:@"localhost"];
 }
+
 
 - (void)invalidate {
 	[server invalidate];
@@ -112,7 +111,6 @@ int WAApplicationMain() {
 
 - (void)removeRequestHandler:(WARequestHandler*)handler {
 	[requestHandlers removeObject:handler];
-	[routes removeObject:handler];
 }
 
 
@@ -142,50 +140,29 @@ int WAApplicationMain() {
 
 #pragma mark Routes
 
-
-- (TFRegex*)regexForPathExpression:(NSString*)path {
-	NSMutableArray *newComponents = [NSMutableArray array];
-	for(NSString *component in [path pathComponents]) {
-		if([component isEqual:@"*"]){
-			[newComponents addObject:@"([[:alnum:]_-]+)"];
-		}else{
-			[newComponents addObject:[TFRegex escapeString:component]];
-		}
-	}
-	
-	NSString *re = [NSString stringWithFormat:@"^%@$", [NSString pathWithComponents:newComponents]];
-	return [[TFRegex alloc] initWithPattern:re options:0];
-}
-
-
 - (WARoute*)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path {
 	if(![self respondsToSelector:sel])
 		NSLog(@"Warning: %@ doesn't respond to route handler message '%@'.", self, NSStringFromSelector(sel));
 
-	TFRegex *regex = [self regexForPathExpression:path];
-	WARoute *route = [[WARoute alloc] initWithPathExpression:regex method:method target:self action:sel];
+	WARoute *route = [WARoute routeWithPathExpression:path method:method target:self action:sel];
 	
 	[self addRequestHandler:route];
-	[routes addObject:route];
 	return route;
 }
 
-- (WARoute*)routeForSelector:(SEL)selector {
-	for(WARoute *route in routes)
-		if(route.action == selector)
-			return route;
-	return nil;
-}
 
 - (void)setRequest:(WARequest*)req response:(WAResponse*)resp {
 	request = req;
 	response = resp;
 }
 
+
 - (void)preprocess {}
 - (void)postprocess {}
 
 - (WASession*)session {
+	if(!self.sessionGenerator)
+		[NSException raise:NSGenericException format:@"The session property cannot be used without first setting a sessionGenerator."];
 	return [self.sessionGenerator sessionForRequest:self.request response:self.response];
 }
 

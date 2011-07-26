@@ -23,5 +23,7 @@
 @property(readonly) SEL action;
 @property(readonly) id target;
 
-- (id)initWithPathExpression:(TFRegex*)regex method:(NSString*)m target:(id)object action:(SEL)selector;
++ (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector;
+
+- (id)initWithPathRegex:(TFRegex*)regex method:(NSString*)m target:(id)object action:(SEL)selector;
 @end

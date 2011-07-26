@@ -23,8 +23,34 @@
 @synthesize method, pathExpression, target, action;
 
 
-- (id)initWithPathExpression:(TFRegex*)regex method:(NSString*)m target:(id)object action:(SEL)selector {
-	self = [super init];
++ (TFRegex*)regexForPathExpression:(NSString*)path {
+	NSMutableArray *newComponents = [NSMutableArray array];
+	for(NSString *component in [path pathComponents]) {
+		if([component isEqual:@"*"]){
+			[newComponents addObject:@"([[:alnum:]_-]+)"];
+		}else{
+			[newComponents addObject:[TFRegex escapeString:component]];
+		}
+	}
+	
+	NSString *re = [NSString stringWithFormat:@"^%@$", [NSString pathWithComponents:newComponents]];
+	return [[TFRegex alloc] initWithPattern:re options:0];
+}
+
+
++ (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector {
+	NSParameterAssert(expr != nil);
+	TFRegex *regex = [self regexForPathExpression:expr];
+	return [[self alloc] initWithPathRegex:regex method:m target:object action:selector];
+}
+
+
+- (id)initWithPathRegex:(TFRegex*)regex method:(NSString*)m target:(id)object action:(SEL)selector {
+	if(!(self = [super init])) return nil;
+	NSParameterAssert(regex != nil);
+	NSParameterAssert(method != nil);
+	NSParameterAssert(object != nil);
+	NSParameterAssert(selector != nil);
 	pathExpression = regex;
 	
 	NSUInteger numSubs = pathExpression.subexpressionCount;
@@ -42,9 +68,11 @@
 	return self;
 }
 
+
 - (BOOL)canHandleRequest:(WARequest*)request {
 	return [request.method isEqual:method] && [pathExpression matchesString:request.path];
 }
+
 
 - (void)handleRequest:(WARequest*)request response:(WAResponse*)response {
 	NSUInteger subs = pathExpression.subexpressionCount;
