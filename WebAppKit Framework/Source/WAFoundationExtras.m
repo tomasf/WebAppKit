@@ -11,6 +11,8 @@
 #import <openssl/bio.h>
 #import <openssl/evp.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonDigest.h>
+
 
 @implementation NSDictionary (WAExtras)
 
@@ -28,6 +30,7 @@
 	va_end(list);
 	return dict;
 }
+
 
 - (NSDictionary*)dictionaryBySettingValue:(id)value forKey:(id)key {
 	NSMutableDictionary *dict = [self mutableCopy];
@@ -48,26 +51,32 @@
 	return self;
 }
 
+
 - (NSString*)HTML {
 	return [self HTMLEscapedString];
 }
+
 
 - (NSString*)URIEscape {
 	return NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8));
 }
 
+
 - (NSString*)hexMD5DigestUsingEncoding:(NSStringEncoding)encoding {
 	return [[self dataUsingEncoding:encoding] hexMD5Digest];
 }
+
 
 - (NSString*)stringByEncodingBase64UsingEncoding:(NSStringEncoding)encoding {
 	return [[self dataUsingEncoding:encoding] base64String];
 }
 
+
 - (NSString*)stringByDecodingBase64UsingEncoding:(NSStringEncoding)encoding {
 	NSData *data = [NSData dataByDecodingBase64:self];
 	return [[NSString alloc] initWithData:data encoding:encoding];
 }
+
 
 - (NSString*)stringByEnforcingCharacterSet:(NSCharacterSet*)set {
 	NSMutableString *string = [NSMutableString string];
@@ -81,6 +90,7 @@
 @end
 
 
+
 @implementation NSArray (WAExtras)
 
 - (NSArray*)filteredArrayUsingPredicateFormat:(NSString*)format, ... {
@@ -91,6 +101,7 @@
 	return [self filteredArrayUsingPredicate:p];
 }
 
+
 - (id)firstObjectMatchingPredicateFormat:(NSString*)format, ... {
 	va_list list;
 	va_start(list, format);
@@ -99,6 +110,7 @@
 	NSArray *array = [self filteredArrayUsingPredicate:p];
 	return [array count] ? [array objectAtIndex:0] : nil;
 }
+
 
 - (id)sortedArrayUsingKeyPath:(NSString*)keyPath selector:(SEL)selector ascending:(BOOL)ascending {
 	NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:keyPath ascending:ascending selector:selector];
@@ -119,14 +131,24 @@
 	return hexDigest;	
 }
 
+
 - (NSData*)MD5Digest {
 	NSMutableData *digest = [NSMutableData dataWithLength:MD5_DIGEST_LENGTH];
-	MD5([self bytes], [self length], [digest mutableBytes]);
+	CC_MD5([self bytes], [self length], [digest mutableBytes]);
 	return digest;
 }
 
 
 + (NSData*)dataByDecodingBase64:(NSString*)string {
+#if LION
+	NSData *encodedData = [string dataUsingEncoding:NSASCIIStringEncoding];
+	SecTransformRef transform = SecDecodeTransformCreate(kSecBase64Encoding, NULL);
+	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (CFTypeRef)encodedData, NULL);
+	NSData *output = NSMakeCollectable(SecTransformExecute(transform, NULL));
+	CFRelease(transform);
+	return output;
+	
+#else
     NSData *encodedData = [[string stringByAppendingString:@"\n"] dataUsingEncoding:NSASCIIStringEncoding];
     
     BIO *command = BIO_new(BIO_f_base64());
@@ -145,10 +167,19 @@
 	
     BIO_free_all(context);
 	return outputData;
+#endif
 }
 
 
 - (NSString*)base64String {
+#if LION
+	SecTransformRef transform = SecEncodeTransformCreate(kSecBase64Encoding, NULL);
+	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (CFTypeRef)self, NULL);
+	NSData *output = NSMakeCollectable(SecTransformExecute(transform, NULL));
+	CFRelease(transform);
+	return [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
+
+#else
 	// Tell a context to encode base64
 	BIO *context = BIO_new(BIO_s_mem());
 	BIO *command = BIO_new(BIO_f_base64());
@@ -165,6 +196,7 @@
 	NSString *encodedString = [[[NSString alloc] initWithBytes:outputBuffer length:outputLength encoding:NSASCIIStringEncoding] autorelease];
 	BIO_free_all(context);
 	return encodedString;
+#endif
 }
 
 
@@ -207,6 +239,7 @@
 	va_end(list);
 	return set;
 }
+
 
 + (NSCharacterSet*)ASCIIAlphanumericCharacterSet {
 	static NSCharacterSet *set;

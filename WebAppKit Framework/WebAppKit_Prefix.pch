@@ -8,3 +8,10 @@
 #import "WAUtilities.h"
 #import "WAJSON.h"
 #endif
+
+#if (MAC_OS_X_VERSION_MIN_REQUIRED >= 1070)
+#define LION 1
+#else
+#define LION 0
+#endif
+
