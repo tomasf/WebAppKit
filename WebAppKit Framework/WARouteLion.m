@@ -1,16 +1,13 @@
 //
-//  WSRoute.m
-//  WebServer
+//  WARouteLion.m
+//  WebAppKit
 //
-//  Created by Tomas Franzén on 2010-12-09.
-//  Copyright 2010 Lighthead Software. All rights reserved.
+//  Created by Tomas Franzén on 2011-07-26.
+//  Copyright 2011 Lighthead Software. All rights reserved.
 //
-#if !LION
-
+#if LION
 #import "WARoute.h"
 #import "WARequest.h"
-#import "WAResponse.h"
-#import "TFRegex.h"
 #import "WAApplication.h"
 #import "WATemplate.h"
 #import <objc/runtime.h>
@@ -20,28 +17,33 @@
 @end
 
 
+
 @implementation WARoute
 @synthesize method, target, action;
 
 
-+ (TFRegex*)regexForPathExpression:(NSString*)path {
++ (NSRegularExpression*)regexForPathExpression:(NSString*)path {
 	NSMutableArray *newComponents = [NSMutableArray array];
 	for(NSString *component in [path pathComponents]) {
-		if([component isEqual:@"*"]){
+		if([component isEqual:@"*"])
 			[newComponents addObject:@"([[:alnum:]_-]+)"];
-		}else{
-			[newComponents addObject:[TFRegex escapeString:component]];
-		}
+		else
+			[newComponents addObject:[NSRegularExpression escapedTemplateForString:component]];
 	}
 	
-	NSString *re = [NSString stringWithFormat:@"^%@$", [NSString pathWithComponents:newComponents]];
-	return [[TFRegex alloc] initWithPattern:re options:0];
+	NSString *regexString = [NSString stringWithFormat:@"^%@$", [NSString pathWithComponents:newComponents]];
+	NSError *error = nil;
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:0 error:&error];
+	if(!regex)
+		[NSException raise:NSGenericException format:@"WARoute failed to compile regular expression for path expression.\nPath: %@\nRegex: %@\nError: %@", path, regexString, error];	
+	
+	return regex;
 }
 
 
 + (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector {
 	NSParameterAssert(expr != nil);
-	TFRegex *regex = [self regexForPathExpression:expr];
+	NSRegularExpression *regex = [self regexForPathExpression:expr];
 	return [[self alloc] initWithPathRegex:regex method:m target:object action:selector];
 }
 
@@ -54,11 +56,13 @@
 	NSParameterAssert(selector != nil);
 	pathExpression = regex;
 	
-	NSUInteger numSubs = [pathExpression subexpressionCount];
-	NSUInteger numArgs = [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count]-1;
+	NSUInteger numSubs = [pathExpression numberOfCaptureGroups];
+	NSUInteger numArgs = WAGetParameterCountForSelector(selector);
 	
 	if(numArgs != numSubs)
 		[NSException raise:NSInvalidArgumentException format:@"The number of arguments in the action selector (%@) must be equal to the number of sub-expressions in the regular expression (%d).", NSStringFromSelector(selector), (int)numSubs];
+	if(numArgs > 6)
+		[NSException raise:NSInvalidArgumentException format:@"Routes support a maximum of 6 parameters."];
 	
 	method = [m copy];
 	action = selector;
@@ -69,15 +73,18 @@
 
 
 - (BOOL)canHandleRequest:(WARequest*)request {
-	return [request.method isEqual:method] && [pathExpression matchesString:request.path];
+	NSString *path = request.path;
+	return [request.method isEqual:method] && [pathExpression firstMatchInString:request.path options:0 range:NSMakeRange(0, [path length])];
 }
 
 
 - (void)handleRequest:(WARequest*)request response:(WAResponse*)response {
-	NSUInteger subs = [pathExpression subexpressionCount];
+	NSUInteger subs = [pathExpression numberOfCaptureGroups];
 	NSString *strings[subs];
-	NSArray *matches = [[pathExpression subExpressionsInMatchesOfString:request.path] objectAtIndex:0];
-	[matches getObjects:strings range:NSMakeRange(1, subs)];
+	NSString *path = request.path;
+	NSTextCheckingResult *result = [pathExpression firstMatchInString:path options:0 range:NSMakeRange(0, [path length])];
+	for(int i=0; i<subs; i++)
+		strings[i] = [path substringWithRange:[result rangeAtIndex:i+1]];
 	
 	[target setRequest:request response:response];
 	[target preprocess];
@@ -102,16 +109,16 @@
 			break;
 		case 6: value = m(target, action, strings[0], strings[1], strings[2], strings[3], strings[4], strings[5]);
 			break;
-		default:
-			[NSException raise:NSInternalInconsistencyException format:@"Too many arguments."];
-			break;
 	}
+	
 	
 	if(hasReturnValue) {
 		if([value isKindOfClass:[WATemplate class]])
 			[response appendString:[value result]];
 		else if([value isKindOfClass:[NSData class]])
 			[response appendBodyData:value];
+		else if([value isKindOfClass:[NSString class]])
+			[response appendString:value];
 		else
 			[response appendString:[value description]];
 	}
@@ -125,4 +132,4 @@
 @end
 
 
-#endif //!LION
+#endif // LION

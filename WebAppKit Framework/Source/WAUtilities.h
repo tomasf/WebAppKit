@@ -8,8 +8,8 @@
 
 NSString *WAGenerateUUIDString(void);
 uint64_t WANanosecondTime();
-
 NSString *WAApplicationSupportDirectory(void);
+NSUInteger WAGetParameterCountForSelector(SEL selector);
 
 NSDateFormatter *WAHTTPDateFormatter(void);
 NSString *WAExtractHeaderValueParameters(NSString *fullValue, NSDictionary **outParams);

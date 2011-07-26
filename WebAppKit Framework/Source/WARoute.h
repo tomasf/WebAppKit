@@ -12,18 +12,15 @@
 
 @interface WARoute : WARequestHandler {
 	NSString *method;
-	TFRegex *pathExpression;
+	id pathExpression;
 	id target;
 	SEL action;
-	BOOL hasTransactionParameters;
 }
 
 @property(readonly) NSString *method;
-@property(readonly) TFRegex *pathExpression;
 @property(readonly) SEL action;
 @property(readonly) id target;
 
 + (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector;
-
-- (id)initWithPathRegex:(TFRegex*)regex method:(NSString*)m target:(id)object action:(SEL)selector;
+- (id)initWithPathRegex:(id)regex method:(NSString*)m target:(id)object action:(SEL)selector;
 @end

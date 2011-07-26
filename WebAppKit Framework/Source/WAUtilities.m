@@ -34,6 +34,11 @@ NSString *WAApplicationSupportDirectory(void) {
 }
 
 
+NSUInteger WAGetParameterCountForSelector(SEL selector) {
+	return [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count]-1;
+}
+
+
 NSDateFormatter *WAHTTPDateFormatter(void) {
 	static NSDateFormatter *formatter;
 	if(!formatter) {
