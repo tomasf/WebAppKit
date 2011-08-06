@@ -51,4 +51,7 @@ extern int WAApplicationMain();
 
 - (void)preprocess;
 - (void)postprocess;
+
+- (BOOL)validateRequestToken:(NSString*)parameterName forSession:(WASession*)session;
+- (BOOL)validateRequestToken;
 @end

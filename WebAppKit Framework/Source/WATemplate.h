@@ -6,15 +6,17 @@
 //  Copyright 2011 Lighthead Software. All rights reserved.
 //
 
-@class TLStatement;
+@class TLStatement, WASession;
 
 @interface WATemplate : NSObject <NSCopying> {
 	TLStatement *body;
 	NSMutableDictionary *mapping;
 	WATemplate *parent;
+	WASession *session;
 }
 
 @property(retain) WATemplate *parent;
+@property(retain) WASession *session;
 
 + (id)templateNamed:(NSString*)name;
 + (id)templateNamed:(NSString*)name parent:(NSString*)parentName;

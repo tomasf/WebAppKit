@@ -13,6 +13,13 @@
 
 @implementation WASessionGenerator
 
++ (id)sessionGenerator {
+	return [[self alloc] init];	
+}
+
++ (id)sessionGeneratorWithName:(NSString*)name {
+	return [[self alloc] initWithName:name];	
+}
 
 - (id)initWithName:(NSString*)n {
 	NSAssert(n != nil, @"name is nil");
@@ -37,6 +44,11 @@
 	
 	return self;
 }
+
+- (id)init {
+	return [self initWithName:@"Session"];	
+}
+
 
 - (void)invalidate {
 	[database close];

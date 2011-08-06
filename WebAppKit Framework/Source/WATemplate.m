@@ -9,7 +9,7 @@
 #import "WATemplate.h"
 #import "TFStringScanner.h"
 #import "TL.h"
-
+#import "WASession.h"
 
 @interface WATemplate()
 - (TLStatement*)scanKeyword:(TFStringScanner*)scanner endToken:(NSString**)outEndToken;
@@ -27,7 +27,7 @@
 NSString *const WATemplateOutputKey = @"_WATemplateOutput";
 NSString *const WATemplateChildContentKey = @"_WATemplateChildContent";
 NSString *const WATemplateNilValuePlaceholder = @"_WATemplateNil";
-
+NSString *const WATemplateSessionTokenKey = @"_WATemplateSessionToken";
 
 
 @interface WAPrintStatement : TLStatement {
@@ -119,7 +119,7 @@ static NSMutableDictionary *WANamedTemplates;
 
 
 @implementation WATemplate
-@synthesize parent;
+@synthesize parent, session;
 
 
 + (void)initialize {
@@ -215,6 +215,9 @@ static NSMutableDictionary *WANamedTemplates;
 	
 	for(NSString *key in mapping)
 		[innerScope setValue:[self realValueForValue:[mapping objectForKey:key]] forKey:key];
+	
+	if(self.session)
+		[innerScope setValue:self.session.token forKey:WATemplateSessionTokenKey];
 	
 	[body invokeInScope:innerScope];
 	return output;
@@ -380,6 +383,12 @@ static NSMutableDictionary *WANamedTemplates;
 		if(![[scanner scanToken] isEqual:@">"])
 			[NSException raise:WATemplateParseException format:@"Expected > after <%template %@, but found something else.", name];
 		return [[WASubTemplateStatement alloc] initWithTemplateName:name];
+		
+	}else if([token isEqual:@"token"]) {
+		if(![[scanner scanToken] isEqual:@">"])
+			[NSException raise:WATemplateParseException format:@"Expected > after <%token, but found something else."];
+		return [[WAPrintStatement alloc] initWithContent:[[TLIdentifier alloc] initWithName:WATemplateSessionTokenKey]];
+
 		
 	}else if([token isEqual:@"comment"]) {
 		[scanner scanToString:@"%>"];

@@ -16,6 +16,9 @@
 	FMDatabase *database;
 }
 
++ (id)sessionGenerator;
++ (id)sessionGeneratorWithName:(NSString*)name;
+
 - (id)initWithName:(NSString*)n;
 - (void)invalidate;
 
