@@ -21,9 +21,11 @@
 
 @property(readonly) NSString *token;
 
-- (id)initWithDatabase:(FMDatabase*)db name:(NSString*)n request:(WARequest*)req response:(WAResponse*)resp;
-- (void)refreshCookie;
-- (BOOL)tokenIsValid:(NSString*)string;
-
+- (id)valueForKey:(NSString*)key;
+- (void)setValue:(id)value forKey:(NSString*)key;
+- (void)removeValueForKey:(NSString*)key;
 - (NSSet*)allKeys;
+
+- (BOOL)validateRequestTokenForParameter:(NSString*)parameterName;
+- (BOOL)validateRequestToken;
 @end

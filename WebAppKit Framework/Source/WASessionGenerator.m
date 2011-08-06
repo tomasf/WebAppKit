@@ -11,6 +11,11 @@
 #import "WASession.h"
 #import "WARequest.h"
 
+@interface WASession (Private)
+- (id)initWithDatabase:(FMDatabase*)db name:(NSString*)n request:(WARequest*)req response:(WAResponse*)resp;
+@end
+
+
 @implementation WASessionGenerator
 
 + (id)sessionGenerator {

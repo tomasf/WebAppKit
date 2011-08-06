@@ -14,6 +14,11 @@
 #import "FMResultSet.h"
 #import "FMDatabaseAdditions.h"
 
+@interface WASession ()
+- (void)refreshCookie;
+- (BOOL)tokenIsValid:(NSString*)string;
+@end
+
 
 static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 
@@ -75,6 +80,26 @@ static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 		[keys addObject:[results stringForColumn:@"key"]];
 	return keys;
 }
+
+
+
+#pragma mark CSRF token validation
+
+
+- (BOOL)validateRequestTokenForParameter:(NSString*)parameterName {
+	BOOL valid = [[request valueForPOSTParameter:parameterName] isEqual:self.token];
+	if(!valid) {
+		response.statusCode = 403;
+		[response appendFormat:@"<h1>403 Forbidden: CSRF fault</h1>POST parameter '%@' did not match session token.", parameterName];
+		[response finish];
+	}
+	return valid;
+}
+
+- (BOOL)validateRequestToken {
+	return [self validateRequestTokenForParameter:@"WAKSessionToken"];
+}
+
 
 
 @end

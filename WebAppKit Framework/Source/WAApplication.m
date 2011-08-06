@@ -138,26 +138,8 @@ int WAApplicationMain() {
 
 
 
-#pragma mark CSRF token validation
-
-
-- (BOOL)validateRequestToken:(NSString*)parameterName forSession:(WASession*)session {
-	BOOL valid = [[self.request valueForPOSTParameter:parameterName] isEqual:session.token];
-	if(!valid) {
-		self.response.statusCode = 403;
-		[self.response appendFormat:@"<h1>403 Forbidden: CSRF fault</h1>POST parameter '%@' did not match session token.", parameterName];
-		[self.response finish];
-	}
-	return valid;
-}
-
-- (BOOL)validateRequestToken {
-	return [self validateRequestToken:@"WAKSessionToken" forSession:self.session];
-}
-
-
-
 #pragma mark Routes
+
 
 - (WARoute*)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path {
 	if(![self respondsToSelector:sel])
