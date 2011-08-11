@@ -29,7 +29,7 @@ NSString *WAApplicationSupportDirectory(void) {
 	NSString *root = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
 	NSString *directory = [root stringByAppendingPathComponent:name];
 	if(![[NSFileManager defaultManager] fileExistsAtPath:directory])
-		[[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:NO attributes:nil error:NULL];
+		[[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:NULL];
 	return directory;
 }
 

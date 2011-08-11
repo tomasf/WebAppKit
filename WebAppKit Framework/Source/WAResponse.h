@@ -25,6 +25,7 @@
 	NSString *mediaType;
 	NSMutableDictionary *cookies;
 	NSDate *modificationDate;
+	NSSet *allowedOrigins;
 	BOOL hasBody;
 }
 
@@ -40,6 +41,7 @@
 
 @property(readonly) NSDictionary *headerFields;
 @property(readonly) NSDictionary *cookies;
+@property(copy) NSSet *allowedOrigins; // CORS Access-Control-Allow-Origin field
 
 - (void)appendBodyData:(NSData*)data;
 - (void)appendString:(NSString*)string;

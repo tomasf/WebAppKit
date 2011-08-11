@@ -22,7 +22,7 @@
 
 @implementation WAResponse
 @synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive, hasBody;
-@synthesize headerFields, cookies;
+@synthesize headerFields, cookies, allowedOrigins;
 
 
 - (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
@@ -190,7 +190,7 @@
 
 
 - (NSDictionary*)preparedHeaderFields {
-	NSMutableDictionary *fields = [headerFields mutableCopy];
+	NSMutableDictionary *fields = [NSMutableDictionary dictionary];
 	
 	NSString *cookieString = [[[cookies allValues] valueForKey:@"headerFieldValue"] componentsJoinedByString:@", "];
 	if([cookieString length])
@@ -208,6 +208,10 @@
 		if([[fields objectForKey:key] length] == 0)
 			[fields removeObjectForKey:key];
 	
+	if(self.allowedOrigins)
+		[fields setObject:[[self.allowedOrigins allObjects] componentsJoinedByString:@" "] forKey:@"Access-Control-Allow-Origin"];
+	
+	[fields addEntriesFromDictionary:headerFields];
 	return fields;
 }
 

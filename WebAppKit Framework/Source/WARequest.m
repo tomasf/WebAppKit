@@ -171,16 +171,23 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
+- (NSSet*)origins {
+	NSArray *components = [[self valueForHeaderField:@"Origin"] componentsSeparatedByString:@" "];
+	if(!components) return nil;
+	return [NSSet setWithArray:components];
+}
+
+
 - (void)readBodyFromSocket:(GCDAsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler {
 	clientAddress = [[socket connectedHost] copy];
-	BOOL hasBody = [self valueForHeaderField:@"Content-Length"] || [self valueForHeaderField:@"Transfer-Encoding"];
+	uint64_t contentLength = [[self valueForHeaderField:@"Content-Length"] longLongValue];
+	BOOL hasBody = contentLength || [self valueForHeaderField:@"Transfer-Encoding"];
 	
 	if(!hasBody) {
 		handler(YES);
 		return;
 	}
 	
-	uint64_t contentLength = [[self valueForHeaderField:@"Content-Length"] longLongValue];
 	NSDictionary *params = nil;
 	NSString *contentType = [self valueForHeaderField:@"Content-Type" parameters:&params];
 	

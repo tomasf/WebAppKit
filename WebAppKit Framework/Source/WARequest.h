@@ -40,6 +40,7 @@
 @property(readonly) NSString *host;
 @property(readonly) NSURL *URL;
 @property(readonly) NSURL *referrer;
+@property(readonly) NSSet *origins; // CORS Origin header
 
 @property(readonly) NSDictionary *cookies;
 @property(readonly) NSDate *conditionalModificationDate;

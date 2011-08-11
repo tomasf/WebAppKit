@@ -38,7 +38,7 @@
 	[database setLogsErrors:YES];
 	
 	if(![database open]) {
-		NSLog(@"WASQLiteSessionGenerator: Failed to open session store SQLite database. Error %d (%@), path: %@", [database lastErrorCode], [database lastErrorMessage], path);
+		[NSException raise:NSGenericException format:@"WASQLiteSessionGenerator: Failed to open session store SQLite database. Error %d (%@), path: %@", [database lastErrorCode], [database lastErrorMessage], path];
 		return nil;
 	}
 	
@@ -51,7 +51,7 @@
 }
 
 - (id)init {
-	return [self initWithName:@"Session"];	
+	return [self initWithName:@"Session"];
 }
 
 
