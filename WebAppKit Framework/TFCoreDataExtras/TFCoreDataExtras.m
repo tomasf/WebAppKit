@@ -1,21 +1,35 @@
-//
-//  WSCoreDataExtras.m
-//  WebTest
-//
-//  Created by Tomas Franzén on 2010-12-15.
-//  Copyright 2010 Lighthead Software. All rights reserved.
-//
-
-#import "WACoreDataExtras.h"
+#import "TFCoreDataExtras.h"
 
 
-@implementation NSManagedObjectContext (WAExtras)
+static NSString *TFApplicationName() {
+	NSBundle *bundle = [NSBundle mainBundle];
+	NSString *name = [[bundle infoDictionary] objectForKey:@"CFBundleName"];
+	if(!name) name = [[bundle executablePath] lastPathComponent];
+	return name;
+}
+
+static NSString *TFApplicationSupportDirectory() {	
+	NSString *appSupportPath = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject];
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+	appSupportPath = [appSupportPath stringByAppendingPathComponent:TFApplicationName()];
+#endif
+	[[NSFileManager defaultManager] createDirectoryAtPath:appSupportPath withIntermediateDirectories:YES attributes:nil error:nil];
+	return appSupportPath;
+}
+
+
+
+@implementation NSManagedObjectContext (TFCoreDataExtras)
+
 
 + (id)managedObjectContextWithModel:(NSManagedObjectModel*)model store:(NSURL*)storeURL type:(NSString*)storeType {
 	NSPersistentStoreCoordinator *coordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model] autorelease];
 	NSError *error = nil;
 	
-	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+	NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+							 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+							 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+							 nil];
 	
 	if(![coordinator addPersistentStoreWithType:storeType configuration:nil URL:storeURL options:options error:&error]) {
 		NSLog(@"Store: %@", [storeURL path]);
@@ -29,11 +43,11 @@
 }
 
 
-+ (id)managedObjectContextFromModelNamed:(NSString*)modelName storeName:(NSString*)storeName type:(NSString*)storeType {
-	NSURL *modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"momd"];
++ (id)managedObjectContextFromModelNamed:(NSString*)modelName inBundle:(NSBundle*)bundle storeName:(NSString*)storeName type:(NSString*)storeType {
+	NSURL *modelURL = [bundle URLForResource:modelName withExtension:@"momd"];
 	
 	if(!modelURL) {
-		modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"mom"];
+		modelURL = [bundle URLForResource:modelName withExtension:@"mom"];
 		if(!modelURL)
 			[NSException raise:NSInvalidArgumentException format:@"Model file '%@' (.mom/.momd) not found!", modelName];
 	}
@@ -44,9 +58,14 @@
 		return nil;
 	}
 		
-	NSString *appSupportDirectory = WAApplicationSupportDirectory();
+	NSString *appSupportDirectory = TFApplicationSupportDirectory();
 	NSURL *storeURL = [NSURL fileURLWithPath:[appSupportDirectory stringByAppendingPathComponent:storeName]];
 	return [self managedObjectContextWithModel:model store:storeURL type:storeType];
+}
+
+
++ (id)managedObjectContextFromModelNamed:(NSString*)modelName storeName:(NSString*)storeName type:(NSString*)storeType {
+	return [self managedObjectContextFromModelNamed:modelName inBundle:[NSBundle mainBundle] storeName:storeName type:storeType];	
 }
 
 
@@ -55,17 +74,9 @@
 	if(!model)
 		[NSException raise:NSInvalidArgumentException format:@"mergedModelFromBundles: returned nil"];
 	
-	NSString *appSupportDirectory = WAApplicationSupportDirectory();
+	NSString *appSupportDirectory = TFApplicationSupportDirectory();
 	NSURL *storeURL = [NSURL fileURLWithPath:[appSupportDirectory stringByAppendingPathComponent:storeName]];
 	return [self managedObjectContextWithModel:model store:storeURL type:storeType];	
-}
-
-
-
-- (void)deleteObjectsUsingFetchRequest:(NSFetchRequest*)request {
-	NSArray *matches = [self executeFetchRequest:request error:NULL];
-	for(NSManagedObject *match in matches)
-		[self deleteObject:match];
 }
 
 
@@ -80,7 +91,7 @@
 - (void)saveOrRaise {
 	NSError *error = nil;
 	if(![self save:&error])
-		[NSException raise:NSInternalInconsistencyException format:@"Failed to save MOC: %@", error];
+		[NSException raise:NSGenericException format:@"Failed to save MOC: %@", error];
 }
 
 
@@ -89,7 +100,7 @@
 
 
 
-@implementation NSManagedObject (WAExtras)
+@implementation NSManagedObject (TFCoreDataExtras)
 
 
 - (id)initInsertingIntoManagedObjectContext:(NSManagedObjectContext*)moc {
@@ -172,18 +183,5 @@
 	return [self objectsMatchingFetchRequest:req managedObjectContext:moc];		
 }
 
-
-// These require your entity to have a string attribute named 'UUID'
-// Remember to make it indexed!
-
-- (id)initWithRandomUUIDInsertingIntoManagedObjectContext:(NSManagedObjectContext*)moc {
-	self = [self initInsertingIntoManagedObjectContext:moc];
-	[self setValue:WAGenerateUUIDString() forKey:@"UUID"];
-	return self;
-}
-
-+ (id)objectWithUUID:(NSString*)UUID inManagedObjectContext:(NSManagedObjectContext*)moc {
-	return [[self objectsInManagedObjectContext:moc matchingPredicateFormat:@"UUID == %@", UUID] lastObject];
-}
 
 @end

@@ -10,6 +10,8 @@
 		93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 93961C8313340DD90067A07A /* WARedirectHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 93961C8413340DD90067A07A /* WARedirectHandler.m */; };
 		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
+		E20D577E140190130072BD6E /* TFCoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D577C140190130072BD6E /* TFCoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D577D140190130072BD6E /* TFCoreDataExtras.m */; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
 		E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = E21702C912C92C5800DCE8FD /* TFRegex.h */; };
 		E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = E21702CA12C92C5800DCE8FD /* TFRegex.m */; };
@@ -106,8 +108,6 @@
 		E2E877B012B3CC3900558845 /* WAStaticFileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */; };
 		E2EAEED212B986A500097E0B /* WATemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAEED012B986A500097E0B /* WATemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2EAEED312B986A500097E0B /* WATemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAEED112B986A500097E0B /* WATemplate.m */; };
-		E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */; };
 		E2EAF09912B9AB4800097E0B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EAF09812B9AB4800097E0B /* CoreData.framework */; };
 		E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */ = {isa = PBXBuildFile; fileRef = E2EAF1C512BAE00B00097E0B /* WACookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EAF1C612BAE00B00097E0B /* WACookie.m */; };
@@ -135,6 +135,8 @@
 		93961C8313340DD90067A07A /* WARedirectHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WARedirectHandler.h; sourceTree = SOURCE_ROOT; };
 		93961C8413340DD90067A07A /* WARedirectHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARedirectHandler.m; sourceTree = SOURCE_ROOT; };
 		E20B1A26131F252600948E4B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		E20D577C140190130072BD6E /* TFCoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCoreDataExtras.h; sourceTree = "<group>"; };
+		E20D577D140190130072BD6E /* TFCoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCoreDataExtras.m; sourceTree = "<group>"; };
 		E21702C212C9286800DCE8FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E21702C912C92C5800DCE8FD /* TFRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFRegex.h; sourceTree = "<group>"; };
 		E21702CA12C92C5800DCE8FD /* TFRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFRegex.m; sourceTree = "<group>"; };
@@ -231,8 +233,6 @@
 		E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAStaticFileHandler.m; path = Source/WAStaticFileHandler.m; sourceTree = "<group>"; };
 		E2EAEED012B986A500097E0B /* WATemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WATemplate.h; path = Source/WATemplate.h; sourceTree = "<group>"; };
 		E2EAEED112B986A500097E0B /* WATemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WATemplate.m; path = Source/WATemplate.m; sourceTree = "<group>"; };
-		E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACoreDataExtras.h; path = Source/WACoreDataExtras.h; sourceTree = "<group>"; };
-		E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACoreDataExtras.m; path = Source/WACoreDataExtras.m; sourceTree = "<group>"; };
 		E2EAF09812B9AB4800097E0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E2EAF1C512BAE00B00097E0B /* WACookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACookie.h; path = Source/WACookie.h; sourceTree = "<group>"; };
 		E2EAF1C612BAE00B00097E0B /* WACookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookie.m; path = Source/WACookie.m; sourceTree = "<group>"; };
@@ -339,6 +339,7 @@
 			children = (
 				E2D88B9012B2FE8100219BF5 /* WebAppKit.h */,
 				32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */,
+				E20D577B140190130072BD6E /* TFCoreDataExtras */,
 				E2CF9601135B93F8009BA912 /* TFStringScanner */,
 				E21D231612BC5D4500277F2E /* FMDatabase */,
 				E21702C812C92C5800DCE8FD /* TFRegex */,
@@ -362,6 +363,15 @@
 			children = (
 			);
 			name = "Third-party Frameworks";
+			sourceTree = "<group>";
+		};
+		E20D577B140190130072BD6E /* TFCoreDataExtras */ = {
+			isa = PBXGroup;
+			children = (
+				E20D577C140190130072BD6E /* TFCoreDataExtras.h */,
+				E20D577D140190130072BD6E /* TFCoreDataExtras.m */,
+			);
+			path = TFCoreDataExtras;
 			sourceTree = "<group>";
 		};
 		E21702C812C92C5800DCE8FD /* TFRegex */ = {
@@ -516,8 +526,6 @@
 			children = (
 				E2D88B5212B2FE2400219BF5 /* WAFoundationExtras.h */,
 				E2D88B5312B2FE2400219BF5 /* WAFoundationExtras.m */,
-				E2EAF09112B9AB2600097E0B /* WACoreDataExtras.h */,
-				E2EAF09212B9AB2600097E0B /* WACoreDataExtras.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -606,7 +614,6 @@
 				E2E876C712B3167400558845 /* WADirectoryHandler.h in Headers */,
 				E2E877AF12B3CC3900558845 /* WAStaticFileHandler.h in Headers */,
 				E2EAEED212B986A500097E0B /* WATemplate.h in Headers */,
-				E2EAF09312B9AB2600097E0B /* WACoreDataExtras.h in Headers */,
 				E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */,
 				E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */,
 				E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */,
@@ -623,6 +630,7 @@
 				E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */,
 				E264E06712FA3020007AD73A /* WAHTMLMarkdownFormatter.h in Headers */,
 				E264E06912FA3020007AD73A /* WAMarkdown.h in Headers */,
+				E20D577E140190130072BD6E /* TFCoreDataExtras.h in Headers */,
 				E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */,
 				E264E07512FA303A007AD73A /* buffer.h in Headers */,
 				E264E07612FA303A007AD73A /* markdown.h in Headers */,
@@ -742,7 +750,6 @@
 				E2E876C812B3167400558845 /* WADirectoryHandler.m in Sources */,
 				E2E877B012B3CC3900558845 /* WAStaticFileHandler.m in Sources */,
 				E2EAEED312B986A500097E0B /* WATemplate.m in Sources */,
-				E2EAF09412B9AB2600097E0B /* WACoreDataExtras.m in Sources */,
 				E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */,
 				E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */,
 				E21D231E12BC5D4500277F2E /* FMDatabase.m in Sources */,
@@ -777,6 +784,7 @@
 				E2CF9651135B99F9009BA912 /* TLWhileLoop.m in Sources */,
 				E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */,
 				E223236113DF57B8002CC672 /* WARouteLion.m in Sources */,
+				E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
