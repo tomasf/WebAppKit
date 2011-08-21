@@ -26,7 +26,7 @@
 	NSMutableArray *newComponents = [NSMutableArray array];
 	for(NSString *component in [path pathComponents]) {
 		if([component isEqual:@"*"])
-			[newComponents addObject:@"([[:alnum:]_-]+)"];
+			[newComponents addObject:@"([[:alnum:]_.-]+)"];
 		else
 			[newComponents addObject:[NSRegularExpression escapedTemplateForString:component]];
 	}
