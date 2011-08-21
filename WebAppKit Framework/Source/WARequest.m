@@ -103,7 +103,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 		cookies = [cookieDict copy];
 	}
 	
-	NSString *rangeString = [headerFields objectForKey:@"Range"];
+	NSString *rangeString = [self valueForHeaderField:@"Range"];
 	if(rangeString) byteRanges = [[[self class] byteRangesFromHeaderFieldValue:rangeString] copy];
 	
 	return self;
