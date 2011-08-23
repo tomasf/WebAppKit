@@ -11,11 +11,13 @@
 #import "WARequest.h"
 
 @implementation WAStaticFileHandler
+@synthesize statusCode;
 
 - (id)initWithFile:(NSString*)path enableCaching:(BOOL)useHTTPCache {
 	self = [super init];
 	file = [path copy];
 	enableCaching = useHTTPCache;
+	statusCode = 200;
 	return self;
 }
 
@@ -42,6 +44,7 @@
 
 
 - (void)handleRequest:(WARequest *)req response:(WAResponse *)resp {
+	resp.statusCode = self.statusCode;
 	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:file error:NULL];
 	NSDate *modificationDate = [attributes fileModificationDate];
 		

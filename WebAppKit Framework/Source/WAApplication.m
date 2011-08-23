@@ -14,7 +14,6 @@
 #import "WAServer.h"
 #import "WADirectoryHandler.h"
 #import "WAStaticFileHandler.h"
-#import "WARedirectHandler.h"
 #import "WASession.h"
 #import "WASessionGenerator.h"
 
@@ -120,7 +119,9 @@ int WAApplicationMain() {
 
 
 - (WARequestHandler*)fallbackHandler {
-	return [[WAStaticFileHandler alloc] initWithFile:[self fileNotFoundFile] enableCaching:NO];
+	WAStaticFileHandler *handler = [[WAStaticFileHandler alloc] initWithFile:[self fileNotFoundFile] enableCaching:NO];
+	handler.statusCode = 404;
+	return handler;
 }
 
 

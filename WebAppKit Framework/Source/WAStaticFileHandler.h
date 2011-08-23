@@ -11,7 +11,10 @@
 @interface WAStaticFileHandler : WARequestHandler {
 	NSString *file;
 	BOOL enableCaching;
+	NSUInteger statusCode;
 }
 
 - (id)initWithFile:(NSString*)path enableCaching:(BOOL)useHTTPCache;
+
+@property NSUInteger statusCode;
 @end
