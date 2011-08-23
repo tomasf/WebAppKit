@@ -1,12 +1,4 @@
-//
-//  TFStringScanner.h
-//  WebAppKit
-//
-//  Created by Tomas Franzén on 2011-04-12.
-//  Copyright 2011 Lighthead Software. All rights reserved.
-//
-
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 typedef enum {
 	TFTokenTypeIdentifier,
@@ -22,10 +14,13 @@ typedef enum {
 	TFTokenType lastTokenType;
 }
 
+@property(readonly) NSString *string;
 @property NSUInteger location;
-@property(readonly) BOOL atEnd;
+@property(readonly, getter=isAtEnd) BOOL atEnd;
 @property(readonly) TFTokenType lastTokenType;
 
+
++ (id)scannerWithString:(NSString*)string;
 - (id)initWithString:(NSString*)string;
 
 - (void)addMulticharacterSymbol:(NSString*)symbol;

@@ -1,46 +1,83 @@
-//
-//  TFStringScanner.m
-//  WebAppKit
-//
-//  Created by Tomas Franzén on 2011-04-12.
-//  Copyright 2011 Lighthead Software. All rights reserved.
-//
-
 #import "TFStringScanner.h"
 
-static BOOL CharacterIsWhitespace(unichar c) {
-	return c == ' ' || c == '\t' || c == '\n' || c == '\r';
-}
+static NSCharacterSet *digitCharacters, *alphaCharacters, *alphanumericCharacters, *symbolCharacters;
 
 
 @implementation TFStringScanner
-@synthesize location, lastTokenType;
+@synthesize location, lastTokenType, string=content;
+
+
++ (void)initialize {
+	digitCharacters = [[NSCharacterSet characterSetWithRange:NSMakeRange('0', 10)] retain];
+	
+	NSMutableCharacterSet *alpha = [NSMutableCharacterSet characterSetWithRange:NSMakeRange('a', 26)];
+	[alpha addCharactersInRange:NSMakeRange('A', 26)];
+	[alpha addCharactersInString:@"_"];
+	alphaCharacters = [alpha retain];
+	
+	NSMutableCharacterSet *alphanum = [digitCharacters mutableCopy];
+	[alphanum formUnionWithCharacterSet:alphaCharacters];
+	alphanumericCharacters = alphanum;
+	
+	NSMutableCharacterSet *symbols = [[alphanumericCharacters invertedSet] mutableCopy];
+	[symbols removeCharactersInString:@" \t\r\n"];
+	symbolCharacters = symbols;
+}
+
+
++ (id)scannerWithString:(NSString*)string {
+	return [[[self alloc] initWithString:string] autorelease];	
+}
+
 
 - (id)initWithString:(NSString*)string {
 	self = [super init];
 	content = [string copy];
-	multicharSymbols = [NSMutableArray array];
+	multicharSymbols = [[NSMutableArray alloc] init];
 	return self;
 }
+
+
+- (void)dealloc {
+	[content release];
+	[multicharSymbols release];
+	[super dealloc];	
+}
+
+
+- (NSString *)description {
+	NSInteger radius = 15;
+	NSUInteger start = MAX((NSInteger)self.location-radius, 0);
+	NSUInteger end = MIN(self.location+radius, [content length]-1);
+	NSString *sample = [content substringWithRange:NSMakeRange(start, end-start+1)];
+	sample = [sample stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+	sample = [sample stringByReplacingOccurrencesOfString:@"\r" withString:@" "];
+	NSString *pointString = [[@"" stringByPaddingToLength:self.location-start withString:@" " startingAtIndex:0] stringByAppendingString:@"^"];
+	return [NSString stringWithFormat:@"<%@ %p at position %lu>\n%@\n%@", [self class], self, (unsigned long)self.location, sample, pointString];
+}
+
 
 - (void)resortSymbols {
 	[multicharSymbols sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"length" ascending:NO]]];	
 }
+
 
 - (void)addMulticharacterSymbol:(NSString*)symbol {
 	[multicharSymbols addObject:symbol];
 	[self resortSymbols];
 }
 
+
 - (void)addMulticharacterSymbols:(NSString*)symbol, ... {
 	va_list list;
 	va_start(list, symbol);
 	do {
 		[multicharSymbols addObject:symbol];
-	} while(symbol = va_arg(list, NSString*));
+	} while((symbol = va_arg(list, NSString*)));
 	va_end(list);
 	[self resortSymbols];
 }
+
 
 - (void)removeMulticharacterSymbol:(NSString*)symbol {
 	[multicharSymbols removeObject:symbol];
@@ -73,6 +110,7 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	}else return NO;
 }
 
+
 - (NSString*)scanToString:(NSString*)substring {
 	NSRange remainingRange = NSMakeRange(location, [content length]-location);
 	NSUInteger newLocation = [content rangeOfString:substring options:0 range:remainingRange].location;
@@ -85,6 +123,7 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	return string;
 }
 
+
 - (NSString*)scanStringFromCharacterSet:(NSCharacterSet*)set {
 	BOOL found = NO;
 	NSUInteger start = location;
@@ -95,9 +134,11 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	return found ? [content substringWithRange:NSMakeRange(start, location-start)] : nil;
 }
 
+
 - (BOOL)scanWhitespace {
 	return [self scanStringFromCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] != nil;
 }
+
 
 - (NSString*)peekToken {
 	NSUInteger loc = location;
@@ -106,32 +147,20 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	return token;
 }
 
+
 - (NSString*)scanToken {
 	[self scanWhitespace];
 	if(self.atEnd) return nil;
 	
-	static NSCharacterSet *digits;
-	static NSMutableCharacterSet *alpha, *alphaNum, *symbols;
-	
-	if(!digits) {
-		digits = [NSCharacterSet characterSetWithRange:NSMakeRange('0', 10)];
-		alpha = [NSMutableCharacterSet characterSetWithRange:NSMakeRange('A', 26)];
-		[alpha addCharactersInRange:NSMakeRange('a', 26)];
-		[alpha addCharactersInString:@"_"];
-		alphaNum = [alpha mutableCopy];
-		[alphaNum formUnionWithCharacterSet:digits];
-		symbols = [[alphaNum invertedSet] mutableCopy];
-		[symbols removeCharactersInString:@" \t\r\n"];
-	}
-	
 	unichar firstChar = [content characterAtIndex:location];
-	if([alpha characterIsMember:firstChar]) {
+	
+	if([alphaCharacters characterIsMember:firstChar]) {
 		lastTokenType = TFTokenTypeIdentifier;
-		return [self scanStringFromCharacterSet:alphaNum];
+		return [self scanStringFromCharacterSet:alphanumericCharacters];
 		
-	}else if([digits characterIsMember:firstChar]) {
+	}else if([digitCharacters characterIsMember:firstChar]) {
 		lastTokenType = TFTokenTypeNumeric;
-		return [self scanStringFromCharacterSet:digits];
+		return [self scanStringFromCharacterSet:digitCharacters];
 	
 	}else{
 		lastTokenType = TFTokenTypeSymbol;
@@ -142,6 +171,7 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	}
 }
 
+
 - (BOOL)scanToken:(NSString*)matchToken {
 	if([[self peekToken] isEqual:matchToken]) {
 		[self scanToken];
@@ -149,19 +179,9 @@ static BOOL CharacterIsWhitespace(unichar c) {
 	}else return NO;
 }
 
-- (BOOL)atEnd {
-	return location >= [content length];
-}
 
-- (NSString *)description {
-	NSInteger radius = 15;
-	NSUInteger start = MAX((NSInteger)self.location-radius, 0);
-	NSUInteger end = MIN(self.location+radius, [content length]-1);
-	NSString *sample = [content substringWithRange:NSMakeRange(start, end-start+1)];
-	sample = [sample stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-	sample = [sample stringByReplacingOccurrencesOfString:@"\r" withString:@" "];
-	NSString *pointString = [[@"" stringByPaddingToLength:self.location-start withString:@" " startingAtIndex:0] stringByAppendingString:@"^"];
-	return [NSString stringWithFormat:@"<%@ %p at position %lu>\n%@\n%@", [self class], self, (unsigned long)self.location, sample, pointString];
+- (BOOL)isAtEnd {
+	return location >= [content length];
 }
 
 
