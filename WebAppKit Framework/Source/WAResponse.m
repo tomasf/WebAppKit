@@ -17,20 +17,22 @@
 - (BOOL)needsBody;
 - (void)sendBodyChunk:(NSData*)data;
 - (void)sendTerminationChunk;
+
+@property(copy) void(^completionHandler)(BOOL keepAlive);
 @end
 
 
 @implementation WAResponse
 @synthesize bodyEncoding, statusCode, mediaType, modificationDate, progressive, hasBody;
 @synthesize headerFields, cookies, allowedOrigins;
+@synthesize completionHandler;
 
 
-- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler {
+- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock {
 	self = [super init];
 	
 	request = req;
 	socket = sock;
-	completionHandler = [handler copy];
 	
 	hasBody = YES;
 	body = [NSMutableData data];
@@ -101,7 +103,7 @@
 	if([data length] == 0) return;
 	[socket writeData:[[NSString stringWithFormat:@"%qX\r\n", (uint64_t)[data length]] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
 	[socket writeData:data withTimeout:-1 tag:0];
-	[socket writeData:[GCDAsyncSocket CRLFData] withTimeout:-1 tag:0];
+	[socket writeData:[GCDAsyncSocket CRLFData] withTimeout:-1 tag:1];
 }
 
 - (void)sendTerminationChunk {

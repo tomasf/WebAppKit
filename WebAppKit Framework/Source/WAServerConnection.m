@@ -15,8 +15,9 @@
 
 
 @interface WAResponse (Private)
-- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock completionHandler:(void(^)(BOOL keepAlive))handler;
+- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock;
 - (void)finishWithErrorString:(NSString*)error;
+@property(copy) void(^completionHandler)(BOOL keepAlive);
 @end
 
 @interface WARequest (Private)
@@ -73,10 +74,11 @@ enum {
 	
 	currentRequestHandler = [server.delegate server:server handlerForRequest:request];
 	
-	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:socket completionHandler:^(BOOL keepAlive) {
+	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:socket];
+	response.completionHandler = ^(BOOL keepAlive) {
 		uint64_t duration = WANanosecondTime()-start;
 		if(WAGetDevelopmentMode())
-			NSLog(@"%.02f ms %@", duration/1000000.0, request.path);
+			NSLog(@"%d %@ - %.02f ms", (int)response.statusCode, request.path, duration/1000000.0);
 		currentRequestHandler = nil;
 		[request invalidate];
 		
@@ -84,7 +86,7 @@ enum {
 			[self readNewRequest];
 		else
 			[socket disconnectAfterWriting];
-	}];
+	};
 	
 
 	@try {
