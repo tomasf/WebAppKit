@@ -248,3 +248,14 @@
 }
 
 @end
+
+
+
+@implementation NSURL (WAExtras)
+
+// Avoids NSURL's stupid behavior of stripping trailing slashes in -path
+- (NSString*)realPath {
+	return NSMakeCollectable(CFURLCopyPath((CFURLRef)self));	
+}
+
+@end

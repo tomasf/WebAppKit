@@ -89,7 +89,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	
 	HTTPVersion = NSMakeCollectable(CFHTTPMessageCopyVersion(message));
 	NSURL *requestURL = NSMakeCollectable(CFHTTPMessageCopyRequestURL(message));
-	path = [[requestURL path] copy];
+	path = [[requestURL realPath] copy];
 	queryParameters = [[[self class] dictionaryFromQueryParameters:[requestURL query] encoding:NSUTF8StringEncoding] copy];
 	query = [[requestURL query] copy];
 	
@@ -108,6 +108,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	
 	return self;
 }
+
 
 - (id)initWithHeaderData:(NSData*)data {
 	CFHTTPMessageRef message = (CFHTTPMessageRef)CFMakeCollectable(CFHTTPMessageCreateEmpty(NULL, true));
@@ -155,7 +156,6 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	if(host) return host;
 	return @"localhost";
 }
-
 
 
 - (NSURL*)URL {
