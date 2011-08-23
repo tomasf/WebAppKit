@@ -11,8 +11,10 @@
 @class WARequest, WAResponse, TFRegex;
 
 @interface WARoute : WARequestHandler {
+	NSArray *components;
+	NSArray *argumentWildcardMapping;
+	
 	NSString *method;
-	id pathExpression;
 	id target;
 	SEL action;
 }
@@ -22,5 +24,4 @@
 @property(readonly) id target;
 
 + (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector;
-- (id)initWithPathRegex:(id)regex method:(NSString*)m target:(id)object action:(SEL)selector;
 @end

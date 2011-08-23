@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 93961C8313340DD90067A07A /* WARedirectHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 93961C8413340DD90067A07A /* WARedirectHandler.m */; };
 		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
 		E20D577E140190130072BD6E /* TFCoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D577C140190130072BD6E /* TFCoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D577D140190130072BD6E /* TFCoreDataExtras.m */; };
+		E20D57D31403169D0072BD6E /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D57D11403169D0072BD6E /* TFStringScanner.h */; };
+		E20D57D41403169D0072BD6E /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D57D21403169D0072BD6E /* TFStringScanner.m */; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
-		E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = E21702C912C92C5800DCE8FD /* TFRegex.h */; };
-		E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = E21702CA12C92C5800DCE8FD /* TFRegex.m */; };
 		E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D22AF12BC53CE00277F2E /* WAUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D22B012BC53CE00277F2E /* WAUtilities.m */; };
 		E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231712BC5D4500277F2E /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,7 +24,6 @@
 		E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21D233112BC5E6A00277F2E /* libsqlite3.dylib */; };
 		E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = E21E76A812C03DC80082E402 /* WALocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = E21E76A912C03DC80082E402 /* WALocalization.m */; };
-		E223236113DF57B8002CC672 /* WARouteLion.m in Sources */ = {isa = PBXBuildFile; fileRef = E223235F13DF57B8002CC672 /* WARouteLion.m */; };
 		E227EC4512D3B82F00C9B669 /* WASession.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC4312D3B82F00C9B669 /* WASession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E227EC4612D3B82F00C9B669 /* WASession.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC4412D3B82F00C9B669 /* WASession.m */; };
 		E227EC6812D3BA1B00C9B669 /* WASessionGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC6612D3BA1B00C9B669 /* WASessionGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,8 +51,6 @@
 		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
 		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
-		E2CF9604135B93F8009BA912 /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9602135B93F8009BA912 /* TFStringScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2CF9605135B93F8009BA912 /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF9603135B93F8009BA912 /* TFStringScanner.m */; };
 		E2CF9638135B99F9009BA912 /* TL.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF961E135B99F9009BA912 /* TL.h */; };
 		E2CF9639135B99F9009BA912 /* TL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF961F135B99F9009BA912 /* TL.m */; };
 		E2CF963A135B99F9009BA912 /* TLAssignment.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9620135B99F9009BA912 /* TLAssignment.h */; };
@@ -132,14 +127,12 @@
 		32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebAppKit_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* WebAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93961C8313340DD90067A07A /* WARedirectHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WARedirectHandler.h; sourceTree = SOURCE_ROOT; };
-		93961C8413340DD90067A07A /* WARedirectHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARedirectHandler.m; sourceTree = SOURCE_ROOT; };
 		E20B1A26131F252600948E4B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		E20D577C140190130072BD6E /* TFCoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCoreDataExtras.h; sourceTree = "<group>"; };
 		E20D577D140190130072BD6E /* TFCoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCoreDataExtras.m; sourceTree = "<group>"; };
+		E20D57D11403169D0072BD6E /* TFStringScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFStringScanner.h; sourceTree = "<group>"; };
+		E20D57D21403169D0072BD6E /* TFStringScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFStringScanner.m; sourceTree = "<group>"; };
 		E21702C212C9286800DCE8FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		E21702C912C92C5800DCE8FD /* TFRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFRegex.h; sourceTree = "<group>"; };
-		E21702CA12C92C5800DCE8FD /* TFRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFRegex.m; sourceTree = "<group>"; };
 		E21D22AF12BC53CE00277F2E /* WAUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAUtilities.h; path = Source/WAUtilities.h; sourceTree = "<group>"; };
 		E21D22B012BC53CE00277F2E /* WAUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAUtilities.m; path = Source/WAUtilities.m; sourceTree = "<group>"; };
 		E21D231712BC5D4500277F2E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -151,7 +144,6 @@
 		E21D233112BC5E6A00277F2E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/local/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E21E76A812C03DC80082E402 /* WALocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WALocalization.h; path = Source/WALocalization.h; sourceTree = "<group>"; };
 		E21E76A912C03DC80082E402 /* WALocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WALocalization.m; path = Source/WALocalization.m; sourceTree = "<group>"; };
-		E223235F13DF57B8002CC672 /* WARouteLion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARouteLion.m; sourceTree = "<group>"; };
 		E227EC4312D3B82F00C9B669 /* WASession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASession.h; path = Source/WASession.h; sourceTree = "<group>"; };
 		E227EC4412D3B82F00C9B669 /* WASession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASession.m; path = Source/WASession.m; sourceTree = "<group>"; };
 		E227EC6612D3BA1B00C9B669 /* WASessionGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASessionGenerator.h; path = Source/WASessionGenerator.h; sourceTree = "<group>"; };
@@ -179,8 +171,6 @@
 		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUploadedFile.m; sourceTree = "<group>"; };
 		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
 		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
-		E2CF9602135B93F8009BA912 /* TFStringScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFStringScanner.h; sourceTree = "<group>"; };
-		E2CF9603135B93F8009BA912 /* TFStringScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFStringScanner.m; sourceTree = "<group>"; };
 		E2CF961E135B99F9009BA912 /* TL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TL.h; path = Source/TL/TL.h; sourceTree = "<group>"; };
 		E2CF961F135B99F9009BA912 /* TL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TL.m; path = Source/TL/TL.m; sourceTree = "<group>"; };
 		E2CF9620135B99F9009BA912 /* TLAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLAssignment.h; path = Source/TL/TLAssignment.h; sourceTree = "<group>"; };
@@ -339,10 +329,9 @@
 			children = (
 				E2D88B9012B2FE8100219BF5 /* WebAppKit.h */,
 				32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */,
+				E20D57D01403169D0072BD6E /* TFStringScanner */,
 				E20D577B140190130072BD6E /* TFCoreDataExtras */,
-				E2CF9601135B93F8009BA912 /* TFStringScanner */,
 				E21D231612BC5D4500277F2E /* FMDatabase */,
-				E21702C812C92C5800DCE8FD /* TFRegex */,
 				E2D88B4F12B2FE2400219BF5 /* AsyncSocket */,
 			);
 			name = "Other Sources";
@@ -374,13 +363,14 @@
 			path = TFCoreDataExtras;
 			sourceTree = "<group>";
 		};
-		E21702C812C92C5800DCE8FD /* TFRegex */ = {
+		E20D57D01403169D0072BD6E /* TFStringScanner */ = {
 			isa = PBXGroup;
 			children = (
-				E21702C912C92C5800DCE8FD /* TFRegex.h */,
-				E21702CA12C92C5800DCE8FD /* TFRegex.m */,
+				E20D57D11403169D0072BD6E /* TFStringScanner.h */,
+				E20D57D21403169D0072BD6E /* TFStringScanner.m */,
 			);
-			path = TFRegex;
+			name = TFStringScanner;
+			path = Source/TFStringScanner;
 			sourceTree = "<group>";
 		};
 		E21D231612BC5D4500277F2E /* FMDatabase */ = {
@@ -465,16 +455,6 @@
 			name = TL;
 			sourceTree = "<group>";
 		};
-		E2CF9601135B93F8009BA912 /* TFStringScanner */ = {
-			isa = PBXGroup;
-			children = (
-				E2CF9602135B93F8009BA912 /* TFStringScanner.h */,
-				E2CF9603135B93F8009BA912 /* TFStringScanner.m */,
-			);
-			name = TFStringScanner;
-			path = Source/TFStringScanner;
-			sourceTree = "<group>";
-		};
 		E2CF9607135B9430009BA912 /* Statements */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,7 +532,6 @@
 				E2D88B5512B2FE2400219BF5 /* WAApplication.m */,
 				E2D88B5E12B2FE2400219BF5 /* WARoute.h */,
 				E2D88B5F12B2FE2400219BF5 /* WARoute.m */,
-				E223235F13DF57B8002CC672 /* WARouteLion.m */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -589,8 +568,6 @@
 				E2E876C612B3167400558845 /* WADirectoryHandler.m */,
 				E2E877AD12B3CC3900558845 /* WAStaticFileHandler.h */,
 				E2E877AE12B3CC3900558845 /* WAStaticFileHandler.m */,
-				93961C8313340DD90067A07A /* WARedirectHandler.h */,
-				93961C8413340DD90067A07A /* WARedirectHandler.m */,
 			);
 			name = "Request Handlers";
 			sourceTree = "<group>";
@@ -621,7 +598,6 @@
 				E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */,
 				E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */,
 				E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */,
-				E21702CB12C92C5800DCE8FD /* TFRegex.h in Headers */,
 				E227EC4512D3B82F00C9B669 /* WASession.h in Headers */,
 				E227EC6812D3BA1B00C9B669 /* WASessionGenerator.h in Headers */,
 				E2F4F39212DB669F0058342E /* WAHTTPSupport.h in Headers */,
@@ -634,8 +610,6 @@
 				E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */,
 				E264E07512FA303A007AD73A /* buffer.h in Headers */,
 				E264E07612FA303A007AD73A /* markdown.h in Headers */,
-				93961C8513340DD90067A07A /* WARedirectHandler.h in Headers */,
-				E2CF9604135B93F8009BA912 /* TFStringScanner.h in Headers */,
 				E2CF9638135B99F9009BA912 /* TL.h in Headers */,
 				E2CF963A135B99F9009BA912 /* TLAssignment.h in Headers */,
 				E2CF963C135B99F9009BA912 /* TLCompoundStatement.h in Headers */,
@@ -650,6 +624,7 @@
 				E2CF964E135B99F9009BA912 /* TLStatement.h in Headers */,
 				E2CF9650135B99F9009BA912 /* TLWhileLoop.h in Headers */,
 				E231558313B9209F002F33FC /* GCDAsyncSocket.h in Headers */,
+				E20D57D31403169D0072BD6E /* TFStringScanner.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,7 +732,6 @@
 				E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */,
 				E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */,
 				E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */,
-				E21702CC12C92C5800DCE8FD /* TFRegex.m in Sources */,
 				E227EC4612D3B82F00C9B669 /* WASession.m in Sources */,
 				E227EC6912D3BA1B00C9B669 /* WASessionGenerator.m in Sources */,
 				E2F4F39312DB669F0058342E /* WAHTTPSupport.m in Sources */,
@@ -767,8 +741,6 @@
 				E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */,
 				E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */,
 				E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */,
-				93961C8613340DD90067A07A /* WARedirectHandler.m in Sources */,
-				E2CF9605135B93F8009BA912 /* TFStringScanner.m in Sources */,
 				E2CF9639135B99F9009BA912 /* TL.m in Sources */,
 				E2CF963B135B99F9009BA912 /* TLAssignment.m in Sources */,
 				E2CF963D135B99F9009BA912 /* TLCompoundStatement.m in Sources */,
@@ -783,8 +755,8 @@
 				E2CF964F135B99F9009BA912 /* TLStatement.m in Sources */,
 				E2CF9651135B99F9009BA912 /* TLWhileLoop.m in Sources */,
 				E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */,
-				E223236113DF57B8002CC672 /* WARouteLion.m in Sources */,
 				E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */,
+				E20D57D41403169D0072BD6E /* TFStringScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

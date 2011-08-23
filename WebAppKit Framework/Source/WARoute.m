@@ -5,12 +5,10 @@
 //  Created by Tomas Franzén on 2010-12-09.
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
-#if !LION
 
 #import "WARoute.h"
 #import "WARequest.h"
 #import "WAResponse.h"
-#import "TFRegex.h"
 #import "WAApplication.h"
 #import "WATemplate.h"
 #import <objc/runtime.h>
@@ -19,46 +17,65 @@
 - (void)setRequest:(WARequest*)req response:(WAResponse*)resp;
 @end
 
+static NSCharacterSet *wildcardComponentCharacters;
+
 
 @implementation WARoute
 @synthesize method, target, action;
 
 
-+ (TFRegex*)regexForPathExpression:(NSString*)path {
-	NSMutableArray *newComponents = [NSMutableArray array];
-	for(NSString *component in [path pathComponents]) {
-		if([component isEqual:@"*"]){
-			[newComponents addObject:@"([[:alnum:]_.-]+)"];
-		}else{
-			[newComponents addObject:[TFRegex escapeString:component]];
-		}
-	}
-	
-	NSString *re = [NSString stringWithFormat:@"^%@$", [NSString pathWithComponents:newComponents]];
-	return [[TFRegex alloc] initWithPattern:re options:0];
++ (void)initialize {
+	NSMutableCharacterSet *set = [NSMutableCharacterSet characterSetWithRanges:NSMakeRange('a', 26), NSMakeRange('A', 26), NSMakeRange('0', 10), NSMakeRange(0, 0)];
+	[set addCharactersInString:@"-_."];
+	wildcardComponentCharacters = set;
 }
 
 
-+ (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector {
-	NSParameterAssert(expr != nil);
-	TFRegex *regex = [self regexForPathExpression:expr];
-	return [[self alloc] initWithPathRegex:regex method:m target:object action:selector];
++ (NSUInteger)wildcardCountInExpressionComponents:(NSArray*)components {
+	NSUInteger count = 0;
+	for(NSString *component in components)
+		if([component hasPrefix:@"*"])
+			count++;	
+	return count;
 }
 
 
-- (id)initWithPathRegex:(id)regex method:(NSString*)m target:(id)object action:(SEL)selector {
+- (id)initWithPathExpression:(NSString*)expression method:(NSString*)m target:(id)object action:(SEL)selector {
 	if(!(self = [super init])) return nil;
-	NSParameterAssert(regex != nil);
+	NSParameterAssert(expression != nil);
 	NSParameterAssert(m != nil);
 	NSParameterAssert(object != nil);
 	NSParameterAssert(selector != nil);
-	pathExpression = regex;
 	
-	NSUInteger numSubs = [pathExpression subexpressionCount];
+	NSMutableArray *componentStrings = [[expression componentsSeparatedByString:@"/"] mutableCopy];
+	NSUInteger wildcardCount = [[self class] wildcardCountInExpressionComponents:componentStrings];
+	NSMutableArray *wildcardMapping = [NSMutableArray array];
+	for(int i=0; i<wildcardCount; i++) [wildcardMapping addObject:[NSNull null]];
+	
+	NSUInteger wildcardCounter = 0;
+	for(int i=0; i<[componentStrings count]; i++) {
+		NSString *component = [componentStrings objectAtIndex:i];
+		if([component hasPrefix:@"*"]) {
+			NSString *indexString = [component substringFromIndex:1];
+			NSUInteger argumentIndex = [indexString length] ? [indexString integerValue]-1 : wildcardCounter;
+			if(argumentIndex > wildcardCount-1) {
+				[NSException raise:NSInvalidArgumentException format:@"Invalid argument index %d in path expression. Must be in the range {1..%d}", (int)argumentIndex+1, (int)wildcardCount];
+			}
+			if([wildcardMapping objectAtIndex:argumentIndex] != [NSNull null]) {
+				[NSException raise:NSInvalidArgumentException format:@"Argument index %d is used more than once in path expression.", (int)argumentIndex+1];	
+			}
+			[wildcardMapping replaceObjectAtIndex:argumentIndex withObject:[NSNumber numberWithUnsignedInteger:wildcardCounter]];
+			[componentStrings replaceObjectAtIndex:i withObject:@"*"];
+			wildcardCounter++;
+		}
+	}
+	argumentWildcardMapping = wildcardMapping;
+	components = componentStrings;
+	
 	NSUInteger numArgs = [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count]-1;
 	
-	if(numArgs != numSubs)
-		[NSException raise:NSInvalidArgumentException format:@"The number of arguments in the action selector (%@) must be equal to the number of sub-expressions in the regular expression (%d).", NSStringFromSelector(selector), (int)numSubs];
+	if(numArgs != wildcardCount)
+		[NSException raise:NSInvalidArgumentException format:@"The number of arguments in the action selector (%@) must be equal to the number of wildcards in the path expression (%d).", NSStringFromSelector(selector), (int)wildcardCount];
 	
 	method = [m copy];
 	action = selector;
@@ -68,17 +85,53 @@
 }
 
 
++ (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector {
+	return [[self alloc] initWithPathExpression:expr method:m target:object action:selector];
+}
+
+
+- (BOOL)stringIsValidComponentValue:(NSString*)string {
+	return [[string stringByTrimmingCharactersInSet:wildcardComponentCharacters] length] == 0;
+}
+
+
+- (BOOL)matchesPath:(NSString*)path wildcardValues:(NSArray**)outWildcards {
+	NSArray *givenComponents = [path componentsSeparatedByString:@"/"];
+	if([givenComponents count] != [components count]) return NO;
+	NSMutableArray *wildcardValues = [NSMutableArray array];
+	
+	for(NSUInteger i=0; i<[components count]; i++) {
+		NSString *givenComponent = [givenComponents objectAtIndex:i];
+		NSString *component = [components objectAtIndex:i];
+		if([component isEqual:@"*"]) {
+			if(![self stringIsValidComponentValue:givenComponent])
+				return NO;
+			[wildcardValues addObject:givenComponent];
+		}else{
+			if(![givenComponent isEqual:component])
+				return NO;
+		}
+	}
+	if(outWildcards) *outWildcards = wildcardValues;
+	return YES;	
+}
+
+
 - (BOOL)canHandleRequest:(WARequest*)request {
-	return [request.method isEqual:method] && [pathExpression matchesString:request.path];
+	return [request.method isEqual:method] && [self matchesPath:request.path wildcardValues:NULL];
 }
 
 
 - (void)handleRequest:(WARequest*)request response:(WAResponse*)response {
-	NSUInteger subs = [pathExpression subexpressionCount];
-	NSString *strings[subs];
-	NSArray *matches = [[pathExpression subExpressionsInMatchesOfString:request.path] objectAtIndex:0];
-	[matches getObjects:strings range:NSMakeRange(1, subs)];
-	
+	NSArray *wildcardValues = nil;
+	[self matchesPath:request.path wildcardValues:&wildcardValues];
+	NSUInteger numWildcards = [wildcardValues count];
+	NSString *strings[numWildcards];
+	for(int i=0; i<[argumentWildcardMapping count]; i++) {
+		NSUInteger componentIndex = [[argumentWildcardMapping objectAtIndex:i] unsignedIntegerValue];
+		strings[i] = [wildcardValues objectAtIndex:componentIndex];
+	}
+		
 	[target setRequest:request response:response];
 	[target preprocess];
 	
@@ -87,7 +140,7 @@
 	IMP m = method_getImplementation(actionMethod);
 	id value = nil;
 	
-	switch(subs) {
+	switch(numWildcards) {
 		case 0: value = m(target, action);
 			break;
 		case 1: value = m(target, action, strings[0]);
@@ -123,6 +176,3 @@
 
 
 @end
-
-
-#endif //!LION
