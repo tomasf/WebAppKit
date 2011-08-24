@@ -62,7 +62,7 @@ enum {
 }
 
 
-- (void)onSocketDidDisconnect:(GCDAsyncSocket *)sock {
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
 	[currentRequestHandler connectionDidClose];
 	[server connectionDidClose:self];
 	socket = nil;

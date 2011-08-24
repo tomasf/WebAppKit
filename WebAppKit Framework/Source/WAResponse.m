@@ -29,7 +29,7 @@
 
 
 - (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock {
-	self = [super init];
+	if(!(self = [super init])) return nil;
 	
 	request = req;
 	socket = sock;
@@ -41,6 +41,7 @@
 	statusCode = 200;
 	mediaType = @"text/html";
 	cookies = [NSMutableDictionary dictionary];
+	
 	return self;
 }
 

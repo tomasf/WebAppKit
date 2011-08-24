@@ -84,12 +84,15 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 - (id)initWithHTTPMessage:(CFHTTPMessageRef)message {
-	self = [super init];
+	if(!(self = [super init])) return nil;
+	
 	method = NSMakeCollectable(CFHTTPMessageCopyRequestMethod(message));
 	
 	HTTPVersion = NSMakeCollectable(CFHTTPMessageCopyVersion(message));
 	NSURL *requestURL = NSMakeCollectable(CFHTTPMessageCopyRequestURL(message));
 	path = [[requestURL realPath] copy];
+	if(!path) return nil;
+	
 	queryParameters = [[[self class] dictionaryFromQueryParameters:[requestURL query] encoding:NSUTF8StringEncoding] copy];
 	query = [[requestURL query] copy];
 	
