@@ -13,6 +13,7 @@
 
 @interface WASession (Private)
 - (id)initWithDatabase:(FMDatabase*)db name:(NSString*)n request:(WARequest*)req response:(WAResponse*)resp;
+- (id)initWithDatabase:(FMDatabase*)db name:(NSString*)n token:(NSString*)tokenString;
 @end
 
 
@@ -65,6 +66,12 @@
 	NSAssert(database != nil, @"can't create session from invalidated session generator");
 	
 	return [[WASession alloc] initWithDatabase:database name:name request:request response:response];
+}
+
+- (WASession*)sessionForToken:(NSString*)token {
+	NSAssert(database != nil, @"can't create session from invalidated session generator");
+
+	return [[WASession alloc] initWithDatabase:database name:name token:token];	
 }
 
 

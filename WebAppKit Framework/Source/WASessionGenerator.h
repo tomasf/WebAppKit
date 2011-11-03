@@ -23,4 +23,5 @@
 - (void)invalidate;
 
 - (WASession*)sessionForRequest:(WARequest*)request response:(WAResponse*)response;
+- (WASession*)sessionForToken:(NSString*)token;
 @end
