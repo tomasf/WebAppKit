@@ -10,18 +10,10 @@
 
 @class WARequest, WAResponse, TFRegex;
 
-@interface WARoute : WARequestHandler {
-	NSArray *components;
-	NSArray *argumentWildcardMapping;
-	
-	NSString *method;
-	id target;
-	SEL action;
-}
-
-@property(readonly) NSString *method;
-@property(readonly) SEL action;
-@property(readonly) id target;
+@interface WARoute : WARequestHandler
+@property(readonly, copy) NSString *method;
+@property(readonly, assign) SEL action;
+@property(readonly, weak) id target;
 
 + (id)routeWithPathExpression:(NSString*)expr method:(NSString*)m target:(id)object action:(SEL)selector;
 @end

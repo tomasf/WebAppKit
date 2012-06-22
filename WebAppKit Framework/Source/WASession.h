@@ -11,15 +11,10 @@
 @class WARequest, WAResponse, FMDatabase;
 
 @interface WASession : NSObject {
-	__weak WARequest *request;
-	__weak WAResponse *response;
-	
-	NSString *name;
-	NSString *token;
-	FMDatabase *database;
+
 }
 
-@property(readonly) NSString *token;
+@property(readonly, copy) NSString *token;
 
 - (id)valueForKey:(NSString*)key;
 - (void)setValue:(id)value forKey:(NSString*)key;

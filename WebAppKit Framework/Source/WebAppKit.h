@@ -21,8 +21,7 @@
 #import "WAJSON.h"
 #import "WAHTTPSupport.h"
 
-#import "WAMarkdown.h"
-#import "WAMarkdownParser.h"
-
 #import "FMDatabase.h"
 #import "FMDatabaseAdditions.h"
+
+#import "WALegacy.h"

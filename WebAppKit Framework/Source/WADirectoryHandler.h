@@ -8,10 +8,6 @@
 
 #import "WARequestHandler.h"
 
-@interface WADirectoryHandler : WARequestHandler {
-	NSString *directoryRoot;
-	NSString *requestPathRoot;
-}
-
+@interface WADirectoryHandler : WARequestHandler
 - (id)initWithDirectory:(NSString*)root requestPath:(NSString*)path;
 @end

@@ -6,42 +6,23 @@
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
 
-#import "WARequest.h"
-@class WARequest, WACookie, GCDAsyncSocket;
+#import "WAHTTPSupport.h"
+@class WACookie;
 
 
-@interface WAResponse : NSObject {
-	WARequest *request;
-	GCDAsyncSocket *socket;
-	void(^completionHandler)(BOOL keepAlive);
-	
-	NSMutableData *body;
-	NSStringEncoding bodyEncoding;
-	BOOL progressive;
-	BOOL hasSentHeader;
-	
-	NSMutableDictionary *headerFields;
-	NSUInteger statusCode;
-	NSString *mediaType;
-	NSMutableDictionary *cookies;
-	NSDate *modificationDate;
-	NSSet *allowedOrigins;
-	BOOL hasBody;
-}
-
-
+@interface WAResponse : NSObject
 @property NSUInteger statusCode;
 @property NSStringEncoding bodyEncoding;
-@property(getter=isProgressive) BOOL progressive; // Use chunked transfer encoding?
+@property(getter=isProgressive, nonatomic) BOOL progressive; // Use chunked transfer encoding?
 
 @property(copy) NSString *mediaType;
 @property(copy) NSDate *modificationDate;
 @property(copy) NSString *entityTag;
 @property BOOL hasBody;
 
-@property(readonly) NSDictionary *headerFields;
-@property(readonly) NSDictionary *cookies;
-@property(copy) NSSet *allowedOrigins; // CORS Access-Control-Allow-Origin field
+@property(strong, readonly) NSDictionary *headerFields;
+@property(strong, readonly) NSDictionary *cookies;
+@property(copy) NSSet *allowedOrigins; // Access-Control-Allow-Origin
 
 - (void)appendBodyData:(NSData*)data;
 - (void)appendString:(NSString*)string;

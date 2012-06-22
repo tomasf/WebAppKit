@@ -11,7 +11,7 @@
 
 typedef struct {
 	TLOperator operator;
-	NSString *symbol;
+	__unsafe_unretained NSString *symbol;
 	NSUInteger precedence;
 } TLOperatorInfo;
 
@@ -119,7 +119,7 @@ static NSUInteger operatorCount = sizeof(operatorInfo)/sizeof(operatorInfo[0]);
 	rightOperand = right;
 	
 	if(leftOperand.constant && rightOperand.constant)
-		return [[TLObject alloc] initWithObject:[self evaluateWithScope:nil]];
+		return (id)[[TLObject alloc] initWithObject:[self evaluateWithScope:nil]];
 	
 	return self;
 }

@@ -9,15 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface WACookie : NSObject <NSCopying> {
-	NSString *name;
-	NSString *value;
-	NSDate *expirationDate;
-	NSString *path;
-	NSString *domain;
-	BOOL secure;
-}
-
+@interface WACookie : NSObject <NSCopying>
 @property(copy) NSString *name;
 @property(copy) NSString *value;
 @property(copy) NSString *path;

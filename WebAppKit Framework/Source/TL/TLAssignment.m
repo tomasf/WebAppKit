@@ -8,6 +8,7 @@
 
 #import "TLAssignment.h"
 #import "TLExpression.h"
+#import "TLScope.h"
 
 @implementation TLAssignment
 

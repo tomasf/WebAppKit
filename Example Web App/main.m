@@ -1,4 +1,4 @@
-#import "___PROJECTNAMEASIDENTIFIER___.h"
+#import "WebApp.h"
 
 int main(int argc, char *argv[]) {
 #ifdef DEBUG

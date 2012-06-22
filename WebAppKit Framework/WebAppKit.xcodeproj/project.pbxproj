@@ -3,24 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9EC0A8315063764009B01DE /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A7915063764009B01DE /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A8415063764009B01DE /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A7A15063764009B01DE /* FMDatabase.m */; };
+		C9EC0A8515063764009B01DE /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A7B15063764009B01DE /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A8615063764009B01DE /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A7C15063764009B01DE /* FMDatabaseAdditions.m */; };
+		C9EC0A8715063764009B01DE /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A7D15063764009B01DE /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A8815063764009B01DE /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A7E15063764009B01DE /* FMDatabasePool.m */; };
+		C9EC0A8915063764009B01DE /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A7F15063764009B01DE /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A8A15063764009B01DE /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A8015063764009B01DE /* FMDatabaseQueue.m */; };
+		C9EC0A8B15063764009B01DE /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A8115063764009B01DE /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A8C15063764009B01DE /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A8215063764009B01DE /* FMResultSet.m */; };
+		C9EC0A8F15063E03009B01DE /* WAPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A8D15063E03009B01DE /* WAPrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A9715064C34009B01DE /* WALegacy.h in Headers */ = {isa = PBXBuildFile; fileRef = C9EC0A9515064C34009B01DE /* WALegacy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9EC0A9815064C34009B01DE /* WALegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A9615064C34009B01DE /* WALegacy.m */; };
 		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
 		E20D577E140190130072BD6E /* TFCoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D577C140190130072BD6E /* TFCoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D577D140190130072BD6E /* TFCoreDataExtras.m */; };
+		E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D577D140190130072BD6E /* TFCoreDataExtras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E20D57D31403169D0072BD6E /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D57D11403169D0072BD6E /* TFStringScanner.h */; };
-		E20D57D41403169D0072BD6E /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D57D21403169D0072BD6E /* TFStringScanner.m */; };
+		E20D57D41403169D0072BD6E /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D57D21403169D0072BD6E /* TFStringScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
 		E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D22AF12BC53CE00277F2E /* WAUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D22B012BC53CE00277F2E /* WAUtilities.m */; };
-		E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231712BC5D4500277F2E /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E21D231E12BC5D4500277F2E /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231812BC5D4500277F2E /* FMDatabase.m */; };
-		E21D231F12BC5D4500277F2E /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231912BC5D4500277F2E /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E21D232012BC5D4500277F2E /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231A12BC5D4500277F2E /* FMDatabaseAdditions.m */; };
-		E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = E21D231B12BC5D4500277F2E /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = E21D231C12BC5D4500277F2E /* FMResultSet.m */; };
 		E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21D233112BC5E6A00277F2E /* libsqlite3.dylib */; };
 		E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = E21E76A812C03DC80082E402 /* WALocalization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = E21E76A912C03DC80082E402 /* WALocalization.m */; };
@@ -29,20 +36,11 @@
 		E227EC6812D3BA1B00C9B669 /* WASessionGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = E227EC6612D3BA1B00C9B669 /* WASessionGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E227EC6912D3BA1B00C9B669 /* WASessionGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = E227EC6712D3BA1B00C9B669 /* WASessionGenerator.m */; };
 		E231558313B9209F002F33FC /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E231558113B9209F002F33FC /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E231558213B9209F002F33FC /* GCDAsyncSocket.m */; };
+		E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E231558213B9209F002F33FC /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E23155B313B9224B002F33FC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E23155B213B9224B002F33FC /* Security.framework */; };
 		E241AF3713285591009ED0B2 /* Exception.wat in Resources */ = {isa = PBXBuildFile; fileRef = E241AF3613285591009ED0B2 /* Exception.wat */; };
 		E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E260B0F912CCB99F0084FC05 /* libcrypto.dylib */; };
 		E26154D712B3CCED0040B002 /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E26154D612B3CCED0040B002 /* 404.html */; };
-		E264E06712FA3020007AD73A /* WAHTMLMarkdownFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */; };
-		E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */; };
-		E264E06912FA3020007AD73A /* WAMarkdown.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06312FA3020007AD73A /* WAMarkdown.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06412FA3020007AD73A /* WAMarkdown.m */; };
-		E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E06512FA3020007AD73A /* WAMarkdownParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E264E06612FA3020007AD73A /* WAMarkdownParser.m */; };
-		E264E06E12FA302D007AD73A /* libupskirt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E264E06D12FA302D007AD73A /* libupskirt.a */; };
-		E264E07512FA303A007AD73A /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E07312FA303A007AD73A /* buffer.h */; };
-		E264E07612FA303A007AD73A /* markdown.h in Headers */ = {isa = PBXBuildFile; fileRef = E264E07412FA303A007AD73A /* markdown.h */; };
 		E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C2CE12E7B43000462191 /* WAMultipartReader.h */; };
 		E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C2CF12E7B43000462191 /* WAMultipartReader.m */; };
 		E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C2D212E7BEA900462191 /* WAMultipartPart.h */; };
@@ -127,6 +125,19 @@
 		32DBCF5E0370ADEE00C91783 /* WebAppKit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebAppKit_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* WebAppKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WebAppKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9EC0A7915063764009B01DE /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		C9EC0A7A15063764009B01DE /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		C9EC0A7B15063764009B01DE /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		C9EC0A7C15063764009B01DE /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		C9EC0A7D15063764009B01DE /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		C9EC0A7E15063764009B01DE /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		C9EC0A7F15063764009B01DE /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		C9EC0A8015063764009B01DE /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		C9EC0A8115063764009B01DE /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		C9EC0A8215063764009B01DE /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		C9EC0A8D15063E03009B01DE /* WAPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAPrivate.h; sourceTree = "<group>"; };
+		C9EC0A9515064C34009B01DE /* WALegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WALegacy.h; path = Source/WALegacy.h; sourceTree = "<group>"; };
+		C9EC0A9615064C34009B01DE /* WALegacy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WALegacy.m; path = Source/WALegacy.m; sourceTree = "<group>"; };
 		E20B1A26131F252600948E4B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		E20D577C140190130072BD6E /* TFCoreDataExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFCoreDataExtras.h; sourceTree = "<group>"; };
 		E20D577D140190130072BD6E /* TFCoreDataExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFCoreDataExtras.m; sourceTree = "<group>"; };
@@ -135,12 +146,6 @@
 		E21702C212C9286800DCE8FD /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E21D22AF12BC53CE00277F2E /* WAUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAUtilities.h; path = Source/WAUtilities.h; sourceTree = "<group>"; };
 		E21D22B012BC53CE00277F2E /* WAUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAUtilities.m; path = Source/WAUtilities.m; sourceTree = "<group>"; };
-		E21D231712BC5D4500277F2E /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		E21D231812BC5D4500277F2E /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		E21D231912BC5D4500277F2E /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		E21D231A12BC5D4500277F2E /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		E21D231B12BC5D4500277F2E /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		E21D231C12BC5D4500277F2E /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		E21D233112BC5E6A00277F2E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/local/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E21E76A812C03DC80082E402 /* WALocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WALocalization.h; path = Source/WALocalization.h; sourceTree = "<group>"; };
 		E21E76A912C03DC80082E402 /* WALocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WALocalization.m; path = Source/WALocalization.m; sourceTree = "<group>"; };
@@ -154,21 +159,12 @@
 		E241AF3613285591009ED0B2 /* Exception.wat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Exception.wat; sourceTree = "<group>"; };
 		E260B0F912CCB99F0084FC05 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		E26154D612B3CCED0040B002 /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
-		E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAHTMLMarkdownFormatter.h; path = Source/Markdown/WAHTMLMarkdownFormatter.h; sourceTree = "<group>"; };
-		E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAHTMLMarkdownFormatter.m; path = Source/Markdown/WAHTMLMarkdownFormatter.m; sourceTree = "<group>"; };
-		E264E06312FA3020007AD73A /* WAMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMarkdown.h; path = Source/Markdown/WAMarkdown.h; sourceTree = "<group>"; };
-		E264E06412FA3020007AD73A /* WAMarkdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAMarkdown.m; path = Source/Markdown/WAMarkdown.m; sourceTree = "<group>"; };
-		E264E06512FA3020007AD73A /* WAMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMarkdownParser.h; path = Source/Markdown/WAMarkdownParser.h; sourceTree = "<group>"; };
-		E264E06612FA3020007AD73A /* WAMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAMarkdownParser.m; path = Source/Markdown/WAMarkdownParser.m; sourceTree = "<group>"; };
-		E264E06D12FA302D007AD73A /* libupskirt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupskirt.a; path = Source/Markdown/libupskirt.a; sourceTree = "<group>"; };
-		E264E07312FA303A007AD73A /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = buffer.h; path = Source/Markdown/buffer.h; sourceTree = "<group>"; };
-		E264E07412FA303A007AD73A /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = markdown.h; path = Source/Markdown/markdown.h; sourceTree = "<group>"; };
-		E275C2CE12E7B43000462191 /* WAMultipartReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMultipartReader.h; sourceTree = "<group>"; };
-		E275C2CF12E7B43000462191 /* WAMultipartReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMultipartReader.m; sourceTree = "<group>"; };
-		E275C2D212E7BEA900462191 /* WAMultipartPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAMultipartPart.h; sourceTree = "<group>"; };
-		E275C2D312E7BEA900462191 /* WAMultipartPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAMultipartPart.m; sourceTree = "<group>"; };
-		E275C41112E84FF100462191 /* WAUploadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAUploadedFile.h; sourceTree = "<group>"; };
-		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAUploadedFile.m; sourceTree = "<group>"; };
+		E275C2CE12E7B43000462191 /* WAMultipartReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMultipartReader.h; path = Source/WAMultipartReader.h; sourceTree = "<group>"; };
+		E275C2CF12E7B43000462191 /* WAMultipartReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAMultipartReader.m; path = Source/WAMultipartReader.m; sourceTree = "<group>"; };
+		E275C2D212E7BEA900462191 /* WAMultipartPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAMultipartPart.h; path = Source/WAMultipartPart.h; sourceTree = "<group>"; };
+		E275C2D312E7BEA900462191 /* WAMultipartPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAMultipartPart.m; path = Source/WAMultipartPart.m; sourceTree = "<group>"; };
+		E275C41112E84FF100462191 /* WAUploadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAUploadedFile.h; path = Source/WAUploadedFile.h; sourceTree = "<group>"; };
+		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAUploadedFile.m; path = Source/WAUploadedFile.m; sourceTree = "<group>"; };
 		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
 		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
 		E2CF961E135B99F9009BA912 /* TL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TL.h; path = Source/TL/TL.h; sourceTree = "<group>"; };
@@ -226,8 +222,8 @@
 		E2EAF09812B9AB4800097E0B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E2EAF1C512BAE00B00097E0B /* WACookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WACookie.h; path = Source/WACookie.h; sourceTree = "<group>"; };
 		E2EAF1C612BAE00B00097E0B /* WACookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WACookie.m; path = Source/WACookie.m; sourceTree = "<group>"; };
-		E2F4F39012DB669F0058342E /* WAHTTPSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHTTPSupport.h; sourceTree = "<group>"; };
-		E2F4F39112DB669F0058342E /* WAHTTPSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHTTPSupport.m; sourceTree = "<group>"; };
+		E2F4F39012DB669F0058342E /* WAHTTPSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAHTTPSupport.h; path = Source/WAHTTPSupport.h; sourceTree = "<group>"; };
+		E2F4F39112DB669F0058342E /* WAHTTPSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAHTTPSupport.m; path = Source/WAHTTPSupport.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +238,6 @@
 				E21D233212BC5E6A00277F2E /* libsqlite3.dylib in Frameworks */,
 				E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */,
 				E260B0FA12CCB99F0084FC05 /* libcrypto.dylib in Frameworks */,
-				E264E06E12FA302D007AD73A /* libupskirt.a in Frameworks */,
 				E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */,
 				E23155B313B9224B002F33FC /* Security.framework in Frameworks */,
 			);
@@ -302,11 +297,13 @@
 				E2DA8B2E12D2635F00B1EDE8 /* Application */,
 				E2DA8B2F12D2638E00B1EDE8 /* Templates */,
 				E21D234212BC606300277F2E /* Cookies */,
-				E264E05E12FA300B007AD73A /* Markdown */,
 				E2B7A15912C3AC0D006BA324 /* WAJSON.h */,
 				E2B7A15A12C3AC0D006BA324 /* WAJSON.m */,
 				E21D22AF12BC53CE00277F2E /* WAUtilities.h */,
 				E21D22B012BC53CE00277F2E /* WAUtilities.m */,
+				C9EC0A8D15063E03009B01DE /* WAPrivate.h */,
+				C9EC0A9515064C34009B01DE /* WALegacy.h */,
+				C9EC0A9615064C34009B01DE /* WALegacy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -376,12 +373,16 @@
 		E21D231612BC5D4500277F2E /* FMDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				E21D231712BC5D4500277F2E /* FMDatabase.h */,
-				E21D231812BC5D4500277F2E /* FMDatabase.m */,
-				E21D231912BC5D4500277F2E /* FMDatabaseAdditions.h */,
-				E21D231A12BC5D4500277F2E /* FMDatabaseAdditions.m */,
-				E21D231B12BC5D4500277F2E /* FMResultSet.h */,
-				E21D231C12BC5D4500277F2E /* FMResultSet.m */,
+				C9EC0A7915063764009B01DE /* FMDatabase.h */,
+				C9EC0A7A15063764009B01DE /* FMDatabase.m */,
+				C9EC0A7B15063764009B01DE /* FMDatabaseAdditions.h */,
+				C9EC0A7C15063764009B01DE /* FMDatabaseAdditions.m */,
+				C9EC0A7D15063764009B01DE /* FMDatabasePool.h */,
+				C9EC0A7E15063764009B01DE /* FMDatabasePool.m */,
+				C9EC0A7F15063764009B01DE /* FMDatabaseQueue.h */,
+				C9EC0A8015063764009B01DE /* FMDatabaseQueue.m */,
+				C9EC0A8115063764009B01DE /* FMResultSet.h */,
+				C9EC0A8215063764009B01DE /* FMResultSet.m */,
 			);
 			path = FMDatabase;
 			sourceTree = "<group>";
@@ -405,30 +406,6 @@
 				E227EC4412D3B82F00C9B669 /* WASession.m */,
 			);
 			name = Sessions;
-			sourceTree = "<group>";
-		};
-		E264E05E12FA300B007AD73A /* Markdown */ = {
-			isa = PBXGroup;
-			children = (
-				E264E07012FA3030007AD73A /* libupskirt */,
-				E264E06112FA3020007AD73A /* WAHTMLMarkdownFormatter.h */,
-				E264E06212FA3020007AD73A /* WAHTMLMarkdownFormatter.m */,
-				E264E06312FA3020007AD73A /* WAMarkdown.h */,
-				E264E06412FA3020007AD73A /* WAMarkdown.m */,
-				E264E06512FA3020007AD73A /* WAMarkdownParser.h */,
-				E264E06612FA3020007AD73A /* WAMarkdownParser.m */,
-			);
-			name = Markdown;
-			sourceTree = "<group>";
-		};
-		E264E07012FA3030007AD73A /* libupskirt */ = {
-			isa = PBXGroup;
-			children = (
-				E264E07312FA303A007AD73A /* buffer.h */,
-				E264E07412FA303A007AD73A /* markdown.h */,
-				E264E06D12FA302D007AD73A /* libupskirt.a */,
-			);
-			name = libupskirt;
 			sourceTree = "<group>";
 		};
 		E275C40F12E84FDF00462191 /* Multipart */ = {
@@ -513,12 +490,12 @@
 		E2DA8B2D12D2634700B1EDE8 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
+				E2F4F39012DB669F0058342E /* WAHTTPSupport.h */,
+				E2F4F39112DB669F0058342E /* WAHTTPSupport.m */,
 				E2D88B5812B2FE2400219BF5 /* WARequest.h */,
 				E2D88B5912B2FE2400219BF5 /* WARequest.m */,
 				E2D88B5C12B2FE2400219BF5 /* WAResponse.h */,
 				E2D88B5D12B2FE2400219BF5 /* WAResponse.m */,
-				E2F4F39012DB669F0058342E /* WAHTTPSupport.h */,
-				E2F4F39112DB669F0058342E /* WAHTTPSupport.m */,
 				E275C41112E84FF100462191 /* WAUploadedFile.h */,
 				E275C41212E84FF100462191 /* WAUploadedFile.m */,
 			);
@@ -593,9 +570,6 @@
 				E2EAEED212B986A500097E0B /* WATemplate.h in Headers */,
 				E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */,
 				E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */,
-				E21D231D12BC5D4500277F2E /* FMDatabase.h in Headers */,
-				E21D231F12BC5D4500277F2E /* FMDatabaseAdditions.h in Headers */,
-				E21D232112BC5D4500277F2E /* FMResultSet.h in Headers */,
 				E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */,
 				E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */,
 				E227EC4512D3B82F00C9B669 /* WASession.h in Headers */,
@@ -604,12 +578,14 @@
 				E275C2D012E7B43000462191 /* WAMultipartReader.h in Headers */,
 				E275C2D412E7BEA900462191 /* WAMultipartPart.h in Headers */,
 				E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */,
-				E264E06712FA3020007AD73A /* WAHTMLMarkdownFormatter.h in Headers */,
-				E264E06912FA3020007AD73A /* WAMarkdown.h in Headers */,
+				C9EC0A8F15063E03009B01DE /* WAPrivate.h in Headers */,
+				C9EC0A9715064C34009B01DE /* WALegacy.h in Headers */,
+				C9EC0A8315063764009B01DE /* FMDatabase.h in Headers */,
+				C9EC0A8515063764009B01DE /* FMDatabaseAdditions.h in Headers */,
+				C9EC0A8715063764009B01DE /* FMDatabasePool.h in Headers */,
+				C9EC0A8915063764009B01DE /* FMDatabaseQueue.h in Headers */,
+				C9EC0A8B15063764009B01DE /* FMResultSet.h in Headers */,
 				E20D577E140190130072BD6E /* TFCoreDataExtras.h in Headers */,
-				E264E06B12FA3020007AD73A /* WAMarkdownParser.h in Headers */,
-				E264E07512FA303A007AD73A /* buffer.h in Headers */,
-				E264E07612FA303A007AD73A /* markdown.h in Headers */,
 				E2CF9638135B99F9009BA912 /* TL.h in Headers */,
 				E2CF963A135B99F9009BA912 /* TLAssignment.h in Headers */,
 				E2CF963C135B99F9009BA912 /* TLCompoundStatement.h in Headers */,
@@ -640,7 +616,7 @@
 				8DC2EF540486A6940098B216 /* Sources */,
 				8DC2EF560486A6940098B216 /* Frameworks */,
 				E2EAEF0F12B98D9300097E0B /* Copy Frameworks */,
-				E2A2D17313271B5E00B17E55 /* Set version to git commit date */,
+				E2A2D17313271B5E00B17E55 /* Set version to short git commit hash */,
 			);
 			buildRules = (
 			);
@@ -658,10 +634,10 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "WebAppKit" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -693,19 +669,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E2A2D17313271B5E00B17E55 /* Set version to git commit date */ = {
+		E2A2D17313271B5E00B17E55 /* Set version to short git commit hash */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Set version to git commit date";
+			name = "Set version to short git commit hash";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PATH=$PATH:/usr/local/git/bin\ncd \"$PROJECT_DIR\"\n\nTIMESTAMP=`git show --summary --format=\"format:%ct\"`\nDATE=`date -j -f \"%s\" $TIMESTAMP +\"%Y%m%d\"`\ndefaults write \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Resources/Info\" CFBundleShortVersionString \"$DATE\"";
+			shellScript = "PATH=$PATH:/usr/local/git/bin\ncd \"$PROJECT_DIR\"\n\nHASH=`git show --summary --format=\"format:%H\" | cut -b -10`\ndefaults write \"$BUILT_PRODUCTS_DIR/$WRAPPER_NAME/Resources/Info\" CFBundleShortVersionString \"$HASH\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -727,9 +703,6 @@
 				E2EAEED312B986A500097E0B /* WATemplate.m in Sources */,
 				E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */,
 				E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */,
-				E21D231E12BC5D4500277F2E /* FMDatabase.m in Sources */,
-				E21D232012BC5D4500277F2E /* FMDatabaseAdditions.m in Sources */,
-				E21D232212BC5D4500277F2E /* FMResultSet.m in Sources */,
 				E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */,
 				E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */,
 				E227EC4612D3B82F00C9B669 /* WASession.m in Sources */,
@@ -738,9 +711,6 @@
 				E275C2D112E7B43000462191 /* WAMultipartReader.m in Sources */,
 				E275C2D512E7BEA900462191 /* WAMultipartPart.m in Sources */,
 				E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */,
-				E264E06812FA3020007AD73A /* WAHTMLMarkdownFormatter.m in Sources */,
-				E264E06A12FA3020007AD73A /* WAMarkdown.m in Sources */,
-				E264E06C12FA3020007AD73A /* WAMarkdownParser.m in Sources */,
 				E2CF9639135B99F9009BA912 /* TL.m in Sources */,
 				E2CF963B135B99F9009BA912 /* TLAssignment.m in Sources */,
 				E2CF963D135B99F9009BA912 /* TLCompoundStatement.m in Sources */,
@@ -757,6 +727,12 @@
 				E231558413B9209F002F33FC /* GCDAsyncSocket.m in Sources */,
 				E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */,
 				E20D57D41403169D0072BD6E /* TFStringScanner.m in Sources */,
+				C9EC0A8415063764009B01DE /* FMDatabase.m in Sources */,
+				C9EC0A8615063764009B01DE /* FMDatabaseAdditions.m in Sources */,
+				C9EC0A8815063764009B01DE /* FMDatabasePool.m in Sources */,
+				C9EC0A8A15063764009B01DE /* FMDatabaseQueue.m in Sources */,
+				C9EC0A8C15063764009B01DE /* FMResultSet.m in Sources */,
+				C9EC0A9815064C34009B01DE /* WALegacy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,10 +748,6 @@
 				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -784,13 +756,9 @@
 				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Source/Markdown\"",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = WebAppKit;
-				VALID_ARCHS = "i386 x86_64";
 				WARNING_CFLAGS = (
 					"-Wno-parentheses",
 					"-Wno-unused",
@@ -808,20 +776,13 @@
 				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WebAppKit_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Source/Markdown\"",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = WebAppKit;
 				WARNING_CFLAGS = (
 					"-Wno-parentheses",
@@ -834,36 +795,37 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = "";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = /;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = "";
-				VALID_ARCHS = "i386 x86_64";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

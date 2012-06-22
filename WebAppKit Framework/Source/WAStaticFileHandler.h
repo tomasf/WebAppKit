@@ -8,13 +8,8 @@
 
 #import "WARequestHandler.h"
 
-@interface WAStaticFileHandler : WARequestHandler {
-	NSString *file;
-	BOOL enableCaching;
-	NSUInteger statusCode;
-}
+@interface WAStaticFileHandler : WARequestHandler
+@property NSUInteger statusCode;
 
 - (id)initWithFile:(NSString*)path enableCaching:(BOOL)useHTTPCache;
-
-@property NSUInteger statusCode;
 @end

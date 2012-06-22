@@ -9,54 +9,37 @@
 #import "WAHTTPSupport.h"
 @class GCDAsyncSocket, WACookie, WAUploadedFile, WAMultipartReader;
 
-@interface WARequest : NSObject {
-	NSString *HTTPVersion;
-	NSString *method;
-	NSString *path;
-	NSString *clientAddress;
-	NSDictionary *headerFields;
-	NSString *query;
-	NSDictionary *queryParameters;
-	NSDictionary *POSTParameters;
-	NSDictionary *uploadedFiles;
-	NSDictionary *cookies;
-	NSArray *byteRanges;
-	
-	WAMultipartReader *multipartReader;
-	
-	void(^completionHandler)(BOOL validity);
-}
+@interface WARequest : NSObject
+@property(readonly, copy) NSString *HTTPVersion;
+@property(readonly, copy) NSString *method;
+@property(readonly, copy) NSString *path;
+@property(readonly, copy) NSData *body;
 
+@property(readonly, copy) NSString *query;
+@property(readonly, nonatomic, copy) NSDictionary *headerFields;
+@property(readonly, copy) NSDictionary *queryParameters;
+@property(readonly, copy) NSDictionary *bodyParameters;
+@property(readonly, nonatomic) NSSet *uploadedFiles;
+@property(readonly, nonatomic) NSString *host;
+@property(readonly, nonatomic) NSURL *URL;
+@property(readonly, nonatomic) NSURL *referrer;
+@property(readonly, nonatomic) NSSet *origins; // Origin header
+@property(readonly, nonatomic) NSString *mediaType;
 
-@property(readonly) NSString *HTTPVersion;
-@property(readonly) NSString *method;
-@property(readonly) NSString *path;
+@property(readonly, copy) NSDictionary *cookies;
+@property(readonly, nonatomic) NSDate *conditionalModificationDate;
+@property(readonly, nonatomic) NSArray *acceptedMediaTypes;
+@property(readonly, nonatomic) WAAuthenticationScheme authenticationScheme;
 
-@property(readonly) NSString *query;
-@property(readonly) NSDictionary *headerFields;
-@property(readonly) NSDictionary *queryParameters;
-@property(readonly) NSDictionary *POSTParameters;
-@property(readonly) NSSet *uploadedFiles;
-@property(readonly) NSString *host;
-@property(readonly) NSURL *URL;
-@property(readonly) NSURL *referrer;
-@property(readonly) NSSet *origins; // CORS Origin header
+@property(readonly, copy) NSArray *byteRanges; // NSValue-wrapped WAByteRanges
 
-@property(readonly) NSDictionary *cookies;
-@property(readonly) NSDate *conditionalModificationDate;
-@property(readonly) NSArray *acceptedMediaTypes;
-@property(readonly) WAAuthenticationScheme authenticationScheme;
-
-@property(readonly) NSArray *byteRanges; // NSValue-wrapped WAByteRanges
-
-@property(readonly) NSString *clientAddress;
-
-@property(readonly) BOOL wantsPersistentConnection;
+@property(readonly, copy) NSString *clientAddress;
+@property(readonly, nonatomic) BOOL wantsPersistentConnection;
 
 
 - (NSString*)valueForQueryParameter:(NSString*)name;
 - (NSString*)valueForHeaderField:(NSString*)fieldName;
-- (NSString*)valueForPOSTParameter:(NSString*)name;
+- (NSString*)valueForBodyParameter:(NSString*)name;
 - (WACookie*)cookieForName:(NSString*)name;
 - (WAUploadedFile*)uploadedFileForName:(NSString*)name;
 
@@ -67,7 +50,7 @@
 - (BOOL)hasValidAuthenticationForCredentialHash:(NSString*)hash;
 + (NSString*)credentialHashForUsername:(NSString*)user password:(NSString*)password realm:(NSString*)realm;
 
-// Nice sorted array of absolute combined ranges
+// Sorted array of absolute combined ranges
 - (NSArray*)canonicalByteRangesForDataLength:(uint64_t)length;
 - (void)enumerateCanonicalByteRangesForDataLength:(uint64_t)length usingBlock:(void(^)(WAByteRange range, BOOL *stop))block;
 @end

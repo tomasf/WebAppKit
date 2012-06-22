@@ -8,23 +8,26 @@
 
 #import "WACookie.h"
 
-@interface WACookie ()
-+ (NSDateFormatter*)expiryDateFormatter;
-@end
-
 
 @implementation WACookie
-@synthesize name, value, path, domain, expirationDate, secure;
+@synthesize name=_name;
+@synthesize value=_value;
+@synthesize path=_path;
+@synthesize domain=_domain;
+@synthesize expirationDate=_expirationDate;
+@synthesize secure=_secure;
 
 
 - (id)initWithName:(NSString*)cookieName value:(NSString*)cookieValue expirationDate:(NSDate*)date path:(NSString*)p domain:(NSString*)d {
-	[super init];
+	if(!(self = [super init])) return nil;
+	
 	NSParameterAssert(cookieName && cookieValue);
 	self.name = cookieName;
 	self.value = cookieValue;
 	self.expirationDate = date;
 	self.path = p;
 	self.domain = d;
+	
 	return self;
 }
 
@@ -41,30 +44,30 @@
 
 
 - (NSString*)description {
-	return [NSString stringWithFormat:@"<%@ %p: %@=%@>", [self class], self, name, value];
+	return [NSString stringWithFormat:@"<%@ %p: %@=%@>", [self class], self, self.name, self.value];
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-	WACookie *copy = [[WACookie alloc] initWithName:name value:value expirationDate:expirationDate path:path domain:domain];
+	WACookie *copy = [[WACookie alloc] initWithName:self.name value:self.value expirationDate:self.expirationDate path:self.path domain:self.domain];
 	copy.secure = self.secure;
 	return copy;
 }
 
 
 - (NSString*)headerFieldValue {
-	NSMutableString *baseValue = [NSMutableString stringWithFormat:@"%@=%@", WAConstructHTTPStringValue(name), WAConstructHTTPStringValue(value)];
+	NSMutableString *baseValue = [NSMutableString stringWithFormat:@"%@=%@", WAConstructHTTPStringValue(self.name), WAConstructHTTPStringValue(self.value)];
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:@"1" forKey:@"Version"];
 	
-	if(expirationDate) {
-		[params setObject:[NSString stringWithFormat:@"%qu", (uint64_t)[expirationDate timeIntervalSinceNow]] forKey:@"Max-Age"];
+	if(self.expirationDate) {
+		[params setObject:[NSString stringWithFormat:@"%qu", (uint64_t)[self.expirationDate timeIntervalSinceNow]] forKey:@"Max-Age"];
 		// Compatibility with the old Netscape spec
-		[params setObject:[[[self class] expiryDateFormatter] stringFromDate:expirationDate] forKey:@"Expires"];
+		[params setObject:[[[self class] expiryDateFormatter] stringFromDate:self.expirationDate] forKey:@"Expires"];
 	}
 	
-	if(path) [params setObject:path forKey:@"Path"];	
-	if(domain) [params setObject:domain forKey:@"Domain"];
-	if(secure) [params setObject:[NSNull null] forKey:@"Secure"];
+	if(self.path) [params setObject:self.path forKey:@"Path"];	
+	if(self.domain) [params setObject:self.domain forKey:@"Domain"];
+	if(self.secure) [params setObject:[NSNull null] forKey:@"Secure"];
 	
 	return [baseValue stringByAppendingString:WAConstructHTTPParameterString(params)];
 }

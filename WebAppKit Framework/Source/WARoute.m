@@ -11,17 +11,30 @@
 #import "WAResponse.h"
 #import "WAApplication.h"
 #import "WATemplate.h"
+#import "WAPrivate.h"
+
 #import <objc/runtime.h>
 
-@interface WAApplication (TransactionPrivate)
-- (void)setRequest:(WARequest*)req response:(WAResponse*)resp;
-@end
 
 static NSCharacterSet *wildcardComponentCharacters;
 
+@interface WARoute ()
+@property(strong) NSArray *components;
+@property(strong) NSArray *argumentWildcardMapping;
+
+@property(readwrite, copy) NSString *method;
+@property(readwrite, weak) id target;
+@property(readwrite, assign) SEL action;
+@end
+
+
 
 @implementation WARoute
-@synthesize method, target, action;
+@synthesize components=_components;
+@synthesize argumentWildcardMapping=_argumentWildcardMapping;
+@synthesize method=_method;
+@synthesize target=_target;
+@synthesize action=_action;
 
 
 + (void)initialize {
@@ -69,17 +82,17 @@ static NSCharacterSet *wildcardComponentCharacters;
 			wildcardCounter++;
 		}
 	}
-	argumentWildcardMapping = wildcardMapping;
-	components = componentStrings;
+	self.argumentWildcardMapping = wildcardMapping;
+	self.components = componentStrings;
 	
 	NSUInteger numArgs = [[NSStringFromSelector(selector) componentsSeparatedByString:@":"] count]-1;
 	
 	if(numArgs != wildcardCount)
 		[NSException raise:NSInvalidArgumentException format:@"The number of arguments in the action selector (%@) must be equal to the number of wildcards in the path expression (%d).", NSStringFromSelector(selector), (int)wildcardCount];
 	
-	method = [m copy];
-	action = selector;
-	target = object;
+	self.method = m;
+	self.action = selector;
+	self.target = object;
 	
 	return self;
 }
@@ -97,12 +110,12 @@ static NSCharacterSet *wildcardComponentCharacters;
 
 - (BOOL)matchesPath:(NSString*)path wildcardValues:(NSArray**)outWildcards {
 	NSArray *givenComponents = [path componentsSeparatedByString:@"/"];
-	if([givenComponents count] != [components count]) return NO;
+	if([givenComponents count] != [self.components count]) return NO;
 	NSMutableArray *wildcardValues = [NSMutableArray array];
 	
-	for(NSUInteger i=0; i<[components count]; i++) {
+	for(NSUInteger i=0; i<[self.components count]; i++) {
 		NSString *givenComponent = [givenComponents objectAtIndex:i];
-		NSString *component = [components objectAtIndex:i];
+		NSString *component = [self.components objectAtIndex:i];
 		if([component isEqual:@"*"]) {
 			if(![self stringIsValidComponentValue:givenComponent])
 				return NO;
@@ -118,7 +131,7 @@ static NSCharacterSet *wildcardComponentCharacters;
 
 
 - (BOOL)canHandleRequest:(WARequest*)request {
-	return [request.method isEqual:method] && [self matchesPath:request.path wildcardValues:NULL];
+	return [request.method isEqual:self.method] && [self matchesPath:request.path wildcardValues:NULL];
 }
 
 
@@ -127,13 +140,16 @@ static NSCharacterSet *wildcardComponentCharacters;
 	[self matchesPath:request.path wildcardValues:&wildcardValues];
 	NSUInteger numWildcards = [wildcardValues count];
 	NSString *strings[numWildcards];
-	for(int i=0; i<[argumentWildcardMapping count]; i++) {
-		NSUInteger componentIndex = [[argumentWildcardMapping objectAtIndex:i] unsignedIntegerValue];
+	for(int i=0; i<[self.argumentWildcardMapping count]; i++) {
+		NSUInteger componentIndex = [[self.argumentWildcardMapping objectAtIndex:i] unsignedIntegerValue];
 		strings[i] = [wildcardValues objectAtIndex:componentIndex];
 	}
 		
-	[target setRequest:request response:response];
-	[target preprocess];
+	[self.target setRequest:request response:response];
+	[self.target preprocess];
+	
+	id target = self.target;
+	SEL action = self.action;
 	
 	Method actionMethod = class_getInstanceMethod([target class], action);
 	BOOL hasReturnValue = (method_getTypeEncoding(actionMethod)[0] != 'v');

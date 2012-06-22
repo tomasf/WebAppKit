@@ -7,6 +7,7 @@
 //
 #import "WAHTTPSupport.h"
 
+
 WAByteRange WAByteRangeFromRangeSpec(NSString *spec) {
 	NSArray *parts = [spec componentsSeparatedByString:@"-"];
 	if([parts count] != 2) return WAByteRangeInvalid;
@@ -46,6 +47,7 @@ WAByteRange WAByteRangeMakeAbsolute(WAByteRange range, uint64_t availableLength)
 	return range;
 }
 
+
 WAByteRange WAByteRangeMake(uint64_t first, uint64_t last) {
 	return (WAByteRange){first, last};
 }
@@ -54,6 +56,7 @@ WAByteRange WAByteRangeMake(uint64_t first, uint64_t last) {
 BOOL WAByteRangeContainsByte(WAByteRange concreteRange, uint64_t bytePos) {
 	return bytePos >= concreteRange.firstByte && bytePos <= concreteRange.lastByte;
 }
+
 
 BOOL WAByteRangesOverlap(WAByteRange range1, WAByteRange range2) {
 	return WAByteRangeContainsByte(range1, range2.firstByte) || WAByteRangeContainsByte(range1, range2.lastByte) || WAByteRangeContainsByte(range2, range1.firstByte) || WAByteRangeContainsByte(range2, range1.lastByte);

@@ -12,10 +12,20 @@
 #import "WAStaticFileHandler.h"
 
 
+@interface WADirectoryHandler ()
+@property(copy) NSString *directoryRoot;
+@property(copy) NSString *requestPathRoot;
+@end
+
+
+
 @implementation WADirectoryHandler
+@synthesize directoryRoot=_directoryRoot;
+@synthesize requestPathRoot=_requestPathRoot;
+
 
 - (id)initWithDirectory:(NSString*)root requestPath:(NSString*)path {
-	self = [super init];
+	if(!(self = [super init])) return nil;
 	
 	BOOL isDir;	
 	if(![[NSFileManager defaultManager] fileExistsAtPath:root isDirectory:&isDir] || !isDir)
@@ -24,23 +34,24 @@
 	if(![path hasPrefix:@"/"])
 		[NSException raise:NSInvalidArgumentException format:@"Request path must begin with '/'."];
 	
-	directoryRoot = [root copy];
-	requestPathRoot = [path copy];
-	if(![requestPathRoot hasSuffix:@"/"])
-		requestPathRoot = [requestPathRoot stringByAppendingString:@"/"];
+	self.directoryRoot = root;
+	self.requestPathRoot = path;
+	if(![self.requestPathRoot hasSuffix:@"/"])
+		self.requestPathRoot = [self.requestPathRoot stringByAppendingString:@"/"];
+	
 	return self;
 }
 
 
 - (NSString*)filePathForRequestPath:(NSString*)path {
-	path = [path substringFromIndex:[requestPathRoot length]];
-	return [directoryRoot stringByAppendingPathComponent:path];
+	path = [path substringFromIndex:[self.requestPathRoot length]];
+	return [self.directoryRoot stringByAppendingPathComponent:path];
 }
 
 
 - (BOOL)canHandleRequest:(WARequest *)req {
 	NSString *path = req.path;
-	if(![path hasPrefix:requestPathRoot]) return NO;
+	if(![path hasPrefix:self.requestPathRoot]) return NO;
 	
 	NSString *filePath = [self filePathForRequestPath:path];
 	BOOL isDir;

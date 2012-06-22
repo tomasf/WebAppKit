@@ -11,15 +11,11 @@
 @class FMDatabase, WASession, WARequest, WAResponse;
 
 
-@interface WASessionGenerator : NSObject {
-	NSString *name;
-	FMDatabase *database;
-}
-
+@interface WASessionGenerator : NSObject
 + (id)sessionGenerator;
 + (id)sessionGeneratorWithName:(NSString*)name;
 
-- (id)initWithName:(NSString*)n;
+- (id)initWithName:(NSString*)name;
 - (void)invalidate;
 
 - (WASession*)sessionForRequest:(WARequest*)request response:(WAResponse*)response;

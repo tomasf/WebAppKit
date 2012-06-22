@@ -7,34 +7,17 @@
 //
 
 
-#import "WARequestHandler.h"
-#import "WARequest.h"
-#import "WAResponse.h"
-#import "WAServer.h"
-
-@class WARoute, WARedirectHandler, WASessionGenerator, WASession;
+@class WARoute, WASessionGenerator, WASession, WARequest, WAResponse, WARequestHandler;
 
 extern int WAApplicationMain();
 
 
-@interface WAApplication : NSObject <WAServerDelegate> {
-	@private
-	WAServer *server;
-	
-	NSMutableArray *requestHandlers;
-	NSMutableSet *currentHandlers;
-		
-	WARequest *request;
-	WAResponse *response;
-	
-	WASessionGenerator *standardSessionGenerator;
-}
+@interface WAApplication : NSObject
+@property(readonly, strong) WARequest *request;
+@property(readonly, strong) WAResponse *response;
 
-@property(readonly) WARequest *request;
-@property(readonly) WAResponse *response;
-
-@property(retain) WASessionGenerator *sessionGenerator;
-@property(readonly) WASession *session;
+@property(strong) WASessionGenerator *sessionGenerator;
+@property(readonly, nonatomic) WASession *session;
 
 + (int)run;
 - (id)initWithPort:(NSUInteger)port;

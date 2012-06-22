@@ -7,7 +7,7 @@
 //
 
 #import "TLIdentifier.h"
-
+#import "TLScope.h"
 
 @implementation TLIdentifier
 

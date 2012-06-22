@@ -39,7 +39,7 @@ NSUInteger TLArgumentCountForSelector(SEL selector) {
 
 - (void)copyArgument:(id)object toType:(const char*)type buffer:(void*)buffer {
 	if(ARGTYPE(id)) {
-		*(id*)buffer = object;
+		*(void**)buffer = (__bridge void*)object;
 		return;
 	}
 
@@ -70,7 +70,7 @@ NSUInteger TLArgumentCountForSelector(SEL selector) {
 
 
 - (id)objectFromReturnValue:(void*)buffer ofType:(const char*)type {
-	if(ARGTYPE(id)) return *(id*)buffer;
+	if(ARGTYPE(id)) return (__bridge id)*(void**)buffer;
 	
 	if(ARGTYPE(char)) return [NSNumber numberWithChar:*(char*)buffer];
 	else if(ARGTYPE(int)) return [NSNumber numberWithInt:*(int*)buffer];

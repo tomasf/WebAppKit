@@ -12,44 +12,31 @@
 #import "WARequestHandler.h"
 #import "WAServer.h"
 #import "WATemplate.h"
+#import "WAPrivate.h"
+#import "GCDAsyncSocket.h"
 
 
-@interface WAResponse (Private)
-- (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock;
-- (void)finishWithErrorString:(NSString*)error;
-@property(copy) void(^completionHandler)(BOOL keepAlive);
-@end
+@interface WAServerConnection () <GCDAsyncSocketDelegate> 
+@property(strong) GCDAsyncSocket *socket;
+@property(weak) WAServer *server;
+@property(strong) WARequestHandler *currentRequestHandler;
 
-@interface WARequest (Private)
-- (id)initWithHTTPMessage:(CFHTTPMessageRef)message;
-- (id)initWithHeaderData:(NSData*)data;
-- (void)readBodyFromSocket:(GCDAsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler;
-- (void)invalidate;
-@end
-
-@interface WAServer (Private)
-- (void)connectionDidClose:(WAServerConnection*)connection;
-@end
-
-
-
-@interface WAServerConnection ()
 - (void)readNewRequest;
 @end
 
-enum {
-	WAConnectionSocketTagHeader,
-	WAConnectionSocketBodyHeader,
-};
-
 
 @implementation WAServerConnection
+@synthesize socket=_socket;
+@synthesize server=_server;
+@synthesize currentRequestHandler=_currentRequestHandler;
 
-- (id)initWithSocket:(GCDAsyncSocket*)s server:(WAServer*)serv {
-	self = [super init];
-	server = serv;
-	socket = s;
-	[socket setDelegate:self];
+
+- (id)initWithSocket:(GCDAsyncSocket*)socket server:(WAServer*)server {
+	if(!(self = [super init])) return nil;
+	
+	self.server = server;
+	self.socket = socket;
+	self.socket.delegate = self;
 	
 	[self readNewRequest];
 	return self;
@@ -58,39 +45,41 @@ enum {
 
 - (void)readNewRequest {
 	NSData *crlfcrlf = [NSData dataWithBytes:"\r\n\r\n" length:4];
-	[socket readDataToData:crlfcrlf withTimeout:60 maxLength:100000 tag:WAConnectionSocketTagHeader];
+	[self.socket readDataToData:crlfcrlf withTimeout:60 maxLength:100000 tag:0];
 }
 
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-	[currentRequestHandler connectionDidClose];
-	[server connectionDidClose:self];
-	socket = nil;
+	[self.currentRequestHandler connectionDidClose];
+	[self.server connectionDidClose:self];
+	self.socket = nil;
 }
 
 
 - (void)handleRequest:(WARequest*)request {
 	uint64_t start = WANanosecondTime();
 	
-	currentRequestHandler = [server.delegate server:server handlerForRequest:request];
+	self.currentRequestHandler = self.server.requestHandlerFactory(request);
 	
-	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:socket];
+	WAResponse *response = [[WAResponse alloc] initWithRequest:request socket:self.socket];
+	__weak WAResponse *weakResponse = response;
+	
 	response.completionHandler = ^(BOOL keepAlive) {
 		uint64_t duration = WANanosecondTime()-start;
 		if(WAGetDevelopmentMode())
-			NSLog(@"%d %@ - %.02f ms", (int)response.statusCode, request.path, duration/1000000.0);
-		currentRequestHandler = nil;
+			NSLog(@"%d %@ - %.02f ms", (int)weakResponse.statusCode, request.path, duration/1000000.0);
+		self.currentRequestHandler = nil;
 		[request invalidate];
 		
 		if(keepAlive)
 			[self readNewRequest];
 		else
-			[socket disconnectAfterWriting];
+			[self.socket disconnectAfterWriting];
 	};
 	
 
 	@try {
-		[currentRequestHandler handleRequest:request response:response socket:socket];
+		[self.currentRequestHandler handleRequest:request response:response socket:self.socket];
 	}@catch(NSException *e) {
 		WATemplate *template = [[WATemplate alloc] initWithContentsOfURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"Exception" withExtension:@"wat"]];
 		[template setValue:e forKey:@"exception"];
@@ -102,25 +91,23 @@ enum {
 - (void)handleRequestData:(NSData*)data {
 	WARequest *request = [[WARequest alloc] initWithHeaderData:data];
 	if(!request) {
-		[socket disconnectAfterWriting];
+		[self.socket disconnectAfterWriting];
 		return;
 	}
 	
-	[request readBodyFromSocket:socket completionHandler:^(BOOL validity) {
-		[socket setDelegate:self];
+	[request readBodyFromSocket:self.socket completionHandler:^(BOOL validity) {
+		[self.socket setDelegate:self];
 		
 		if(validity)
 			[self handleRequest:request];
 		else
-			[socket disconnectAfterWriting];
+			[self.socket disconnectAfterWriting];
 	}];
 }
 
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
-	if(tag == WAConnectionSocketTagHeader) {
-		[self handleRequestData:data];
-	}
+	[self handleRequestData:data];
 }
 
 

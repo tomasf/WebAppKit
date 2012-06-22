@@ -9,25 +9,13 @@
 #import "GCDAsyncSocket.h"
 #import "WAServerConnection.h"
 
-@class WARequest, WARequestHandler, WAServer;
-
-@protocol WAServerDelegate
-- (WARequestHandler*)server:(WAServer*)server handlerForRequest:(WARequest*)request;
-@end
+@class WARequest, WARequestHandler;
 
 
-@interface WAServer : NSObject <GCDAsyncSocketDelegate> {
-	GCDAsyncSocket *serverSocket;
-	NSMutableSet *connections;
-	
-	id<WAServerDelegate> delegate;
-	NSString *interface;
-	NSUInteger port;
-}
+@interface WAServer : NSObject
+@property(copy) WARequestHandler*(^requestHandlerFactory)(WARequest *request);
 
-@property(assign) id<WAServerDelegate> delegate;
-
-- (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName delegate:(id<WAServerDelegate>)del;
+- (id)initWithPort:(NSUInteger)p interface:(NSString*)interfaceName;
 - (BOOL)start:(NSError**)error;
 - (void)invalidate;
 @end

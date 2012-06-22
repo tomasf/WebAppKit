@@ -27,7 +27,7 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 	JSGlobalContextRelease(ctx);
 	
 	if(!JSON) return nil;
-	return NSMakeCollectable(JSStringCopyCFString(NULL, JSON));
+	return (__bridge_transfer NSString*)JSStringCopyCFString(NULL, JSON);
 }
 
 - (NSString*)JSONRepresentation {
@@ -39,7 +39,8 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 
 @implementation NSString (WAJSON)
 - (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
-	return JSValueMakeString(ctx, (JSStringRef)CFMakeCollectable(JSStringCreateWithCFString((CFStringRef)self)));
+	id string = (__bridge_transfer id)JSStringCreateWithCFString((__bridge CFStringRef)self);
+	return JSValueMakeString(ctx, (__bridge JSStringRef)string);
 }
 @end
 
@@ -58,9 +59,9 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 - (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
 	JSObjectRef object = JSObjectMake(ctx, NULL, NULL);
 	for(NSString *key in self) {
-		JSStringRef keyString = (JSStringRef)CFMakeCollectable(JSStringCreateWithCFString((CFStringRef)key));
+		id keyString = (__bridge_transfer id)JSStringCreateWithCFString((__bridge CFStringRef)key);
 		JSValueRef value = [[self objectForKey:key] JavaScriptRepresentationWithContext:ctx];
-		JSObjectSetProperty(ctx, object, keyString, value, kJSPropertyAttributeNone, NULL);
+		JSObjectSetProperty(ctx, object, (__bridge JSStringRef)keyString, value, kJSPropertyAttributeNone, NULL);
 	}
 	return object;
 }
@@ -87,7 +88,7 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 @end
 
 
-#define JSSTR(x) ((JSStringRef)CFMakeCollectable(JSStringCreateWithCFString(CFSTR(x))))
+#define JSSTR(x) (JSStringCreateWithCFString(CFSTR(x)))
 
 
 @implementation WAJSONParser
@@ -100,15 +101,21 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 			return [NSNumber numberWithBool:JSValueToBoolean(ctx, value)];
 		case kJSTypeNumber:
 			return [NSNumber numberWithDouble:JSValueToNumber(ctx, value, NULL)];
-		case kJSTypeString:
-			return (id)CFMakeCollectable(JSStringCopyCFString(NULL, (JSStringRef)CFMakeCollectable(JSValueToStringCopy(ctx, value, NULL))));
+		case kJSTypeString: {
+			id string = (__bridge_transfer id)JSValueToStringCopy(ctx, value, NULL);
+			return (__bridge_transfer NSString*)JSStringCopyCFString(NULL, (__bridge JSStringRef)string);
+		}
 		case kJSTypeObject: {
 			JSObjectRef object = (JSObjectRef)value;
-			JSValueRef constructor = JSEvaluateScript(ctx, JSSTR("Array"), NULL, NULL, 0, NULL);
+			JSStringRef script = JSSTR("Array");
+			JSValueRef constructor = JSEvaluateScript(ctx, script, NULL, NULL, 0, NULL);
+			CFRelease(script);
 			
 			if(JSValueIsInstanceOfConstructor(ctx, value, (JSObjectRef)constructor, NULL)) {
 				NSMutableArray *array = [NSMutableArray array];
-				JSValueRef lengthValue = JSObjectGetProperty(ctx, object, JSSTR("length"), NULL);
+				JSStringRef script = JSSTR("length");
+				JSValueRef lengthValue = JSObjectGetProperty(ctx, object, script, NULL);
+				CFRelease(script);
 				unsigned length = JSValueToNumber(ctx, lengthValue, NULL);
 				
 				for(unsigned i=0; i<length; i++) {					
@@ -123,7 +130,7 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 				for(size_t i=0; i<count; i++) {
 					JSStringRef name = JSPropertyNameArrayGetNameAtIndex(names, i);
 					JSValueRef indexValue = JSObjectGetProperty(ctx, object, name, NULL);
-					NSString *key = (NSString*)NSMakeCollectable(JSStringCopyCFString(NULL, name));
+					NSString *key = (__bridge_transfer NSString*)JSStringCopyCFString(NULL, name);
 					id dictValue = [self objectFromJSValue:indexValue context:ctx];
 					[dict setObject:dictValue forKey:key];
 				}
@@ -138,7 +145,7 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 + (id)objectFromJSON:(NSString*)JSON {
 	NSParameterAssert(JSON);
 	JSGlobalContextRef ctx = JSGlobalContextCreate(NULL);
-	JSStringRef source = (JSStringRef)JSStringCreateWithCFString((CFStringRef)JSON);
+	JSStringRef source = JSStringCreateWithCFString((__bridge CFStringRef)JSON);
 	
 	JSValueRef value = JSValueMakeFromJSONString(ctx, source);
 	CFRelease(source);

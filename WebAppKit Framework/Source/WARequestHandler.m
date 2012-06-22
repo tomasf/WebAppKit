@@ -21,19 +21,18 @@
 	return NO;
 }
 
+
 - (WARequestHandler*)handlerForRequest:(WARequest*)req {
 	return self;
 }
 
-- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp {
-}
 
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(GCDAsyncSocket*)sock {
 	[self handleRequest:req response:resp];
 }
 
-- (void)connectionDidClose {
-	
-}
+
+- (void)handleRequest:(WARequest*)req response:(WAResponse*)resp {}
+- (void)connectionDidClose {}
 
 @end

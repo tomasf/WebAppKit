@@ -1,0 +1,2 @@
+@interface WebApp : WAApplication
+@end

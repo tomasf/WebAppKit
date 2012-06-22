@@ -14,9 +14,6 @@
 @end
 
 
-
-@interface WAJSONParser : NSObject {
-
-}
+@interface WAJSONParser : NSObject
 + (id)objectFromJSON:(NSString*)JSON;
 @end

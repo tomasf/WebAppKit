@@ -12,7 +12,10 @@
 
 
 NSString *WAGenerateUUIDString(void) {
-	return NSMakeCollectable(CFUUIDCreateString(NULL, CFMakeCollectable(CFUUIDCreate(NULL))));
+	CFUUIDRef UUID = CFUUIDCreate(NULL);
+	NSString *string = (__bridge_transfer NSString*)CFUUIDCreateString(NULL, UUID);
+	CFRelease(UUID);
+	return string;
 }
 
 

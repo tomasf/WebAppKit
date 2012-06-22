@@ -6,18 +6,9 @@
 //  Copyright 2010 Lighthead Software. All rights reserved.
 //
 
-
-#import "GCDAsyncSocket.h"
-
-@class WAServer, WARequestHandler, WARequest, WAResponse;
+@class WAServer, GCDAsyncSocket;
 
 
-@interface WAServerConnection : NSObject <GCDAsyncSocketDelegate> {
-	GCDAsyncSocket *socket;
-	WAServer *server;
-	
-	WARequestHandler *currentRequestHandler;
-}
-
-- (id)initWithSocket:(GCDAsyncSocket*)s server:(WAServer*)serv;
+@interface WAServerConnection : NSObject
+- (id)initWithSocket:(GCDAsyncSocket*)socket server:(WAServer*)server;
 @end

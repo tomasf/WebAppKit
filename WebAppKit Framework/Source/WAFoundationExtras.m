@@ -44,11 +44,12 @@
 @implementation NSString (WAExtras)
 
 - (NSString*)HTMLEscapedString {
-	self = [self stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
-	self = [self stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
-	self = [self stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
-	self = [self stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
-	return self;
+	NSString *newString = self;
+	newString = [newString stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
+	newString = [newString stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
+	newString = [newString stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+	newString = [newString stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+	return newString;
 }
 
 
@@ -58,7 +59,7 @@
 
 
 - (NSString*)URIEscape {
-	return NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8));
+	return (__bridge_transfer NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)self, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
 }
 
 
@@ -143,8 +144,8 @@
 #if LION
 	NSData *encodedData = [string dataUsingEncoding:NSASCIIStringEncoding];
 	SecTransformRef transform = SecDecodeTransformCreate(kSecBase64Encoding, NULL);
-	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (CFTypeRef)encodedData, NULL);
-	NSData *output = NSMakeCollectable(SecTransformExecute(transform, NULL));
+	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (__bridge CFTypeRef)encodedData, NULL);
+	NSData *output = (__bridge_transfer NSData*)SecTransformExecute(transform, NULL);
 	CFRelease(transform);
 	return output;
 	
@@ -174,8 +175,8 @@
 - (NSString*)base64String {
 #if LION
 	SecTransformRef transform = SecEncodeTransformCreate(kSecBase64Encoding, NULL);
-	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (CFTypeRef)self, NULL);
-	NSData *output = NSMakeCollectable(SecTransformExecute(transform, NULL));
+	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (__bridge CFTypeRef)self, NULL);
+	NSData *output = (__bridge_transfer NSData*)SecTransformExecute(transform, NULL);
 	CFRelease(transform);
 	return [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
 
@@ -193,7 +194,7 @@
 	// Get the resulting data
 	char *outputBuffer;
 	long outputLength = BIO_get_mem_data(context, &outputBuffer);	
-	NSString *encodedString = [[[NSString alloc] initWithBytes:outputBuffer length:outputLength encoding:NSASCIIStringEncoding] autorelease];
+	NSString *encodedString = [[NSString alloc] initWithBytes:outputBuffer length:outputLength encoding:NSASCIIStringEncoding];
 	BIO_free_all(context);
 	return encodedString;
 #endif
@@ -255,7 +256,7 @@
 
 // Avoids NSURL's stupid behavior of stripping trailing slashes in -path
 - (NSString*)realPath {
-	return NSMakeCollectable(CFURLCopyPath((CFURLRef)self));	
+	return (__bridge_transfer NSString*)CFURLCopyPath((__bridge CFURLRef)self);	
 }
 
 @end

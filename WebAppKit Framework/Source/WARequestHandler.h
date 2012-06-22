@@ -8,9 +8,7 @@
 
 @class WARequest, WAResponse, GCDAsyncSocket;
 
-@interface WARequestHandler : NSObject {
-}
-
+@interface WARequestHandler : NSObject
 - (BOOL)canHandleRequest:(WARequest*)req;
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp;
 - (void)handleRequest:(WARequest*)req response:(WAResponse*)resp socket:(GCDAsyncSocket*)sock;

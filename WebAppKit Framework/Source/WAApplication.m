@@ -22,18 +22,39 @@ static const NSString *WAHTTPServerExternalAccessKey = @"WAHTTPServerExternalAcc
 
 
 int WAApplicationMain() {
-	Class appClass = NSClassFromString([[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSPrincipalClass"]);
-	if(!appClass) {
-		NSLog(@"WAApplicationMain() requires NSPrincipalClass to be set in Info.plist. Set it to your WAApplication subclass or call +run yourself.");
-		return 1;
+	@autoreleasepool {
+		Class appClass = NSClassFromString([[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSPrincipalClass"]);
+		if(!appClass) {
+			NSLog(@"WAApplicationMain() requires NSPrincipalClass to be set in Info.plist. Set it to your WAApplication subclass or call +run yourself.");
+			return 1;
+		}
+		return [appClass run];
 	}
-	return [appClass run];
 }
 
 
 
+@interface WAApplication ()
+@property(strong) WAServer *server;
+
+@property(strong) NSMutableArray *requestHandlers;
+@property(strong) NSMutableSet *currentHandlers;
+
+@property(strong, readwrite) WARequest *request;
+@property(strong, readwrite) WAResponse *response;
+
+- (WARequestHandler*)handlerForRequest:(WARequest*)req;
+@end
+
+
+
 @implementation WAApplication
-@synthesize request, response, sessionGenerator=standardSessionGenerator;
+@synthesize server=_server;
+@synthesize requestHandlers=_requestHandlers;
+@synthesize currentHandlers=_currentHandlers;
+@synthesize request=_request;
+@synthesize response=_response;
+@synthesize sessionGenerator=_sessionGenerator;
 
 
 + (uint16_t)port {
@@ -62,19 +83,27 @@ int WAApplicationMain() {
 	NSLog(@"WebAppKit started on port %hu", port);
 	NSLog(@"http://localhost:%hu/", port);
 	
-	for(;;)
+	for(;;) @autoreleasepool {
 		[[NSRunLoop currentRunLoop] run];
+	}
 }
 
 
 - (id)initWithPort:(NSUInteger)port interface:(NSString*)interface {
-	self = [super init];
-	requestHandlers = [NSMutableArray array];
-	server = [[WAServer alloc] initWithPort:port interface:interface delegate:self];
-	currentHandlers = [NSMutableSet set];
+	if(!(self = [super init])) return nil;
+	
+	__weak WAApplication *weakSelf = self;
+	
+	self.requestHandlers = [NSMutableArray array];
+	self.server = [[WAServer alloc] initWithPort:port interface:interface];
+	self.server.requestHandlerFactory = ^(WARequest *request){
+		return [weakSelf handlerForRequest:request];
+	};
+	
+	self.currentHandlers = [NSMutableSet set];
 	
 	NSError *error;
-	if(![server start:&error]) {
+	if(![self.server start:&error]) {
 		NSLog(@"Failed to start server: %@", error);
 		return nil;
 	}
@@ -90,8 +119,8 @@ int WAApplicationMain() {
 
 
 - (void)invalidate {
-	[server invalidate];
-	server = nil;
+	[self.server invalidate];
+	self.server = nil;
 	[self.sessionGenerator invalidate];
 	self.sessionGenerator = nil;
 }
@@ -104,12 +133,12 @@ int WAApplicationMain() {
 
 
 - (void)addRequestHandler:(WARequestHandler*)handler {
-	[requestHandlers addObject:handler];
+	[self.requestHandlers addObject:handler];
 }
 
 
 - (void)removeRequestHandler:(WARequestHandler*)handler {
-	[requestHandlers removeObject:handler];
+	[self.requestHandlers removeObject:handler];
 }
 
 
@@ -126,16 +155,12 @@ int WAApplicationMain() {
 
 
 - (WARequestHandler*)handlerForRequest:(WARequest*)req {
-	for(WARequestHandler *handler in requestHandlers)
+	for(WARequestHandler *handler in self.requestHandlers)
 		if([handler canHandleRequest:req])
 			return [handler handlerForRequest:req];
 	return [self fallbackHandler];
 }
 
-
-- (WARequestHandler*)server:(WAServer*)server handlerForRequest:(WARequest*)req {
-	return [self handlerForRequest:req];
-}
 
 
 
@@ -154,18 +179,20 @@ int WAApplicationMain() {
 
 
 - (void)setRequest:(WARequest*)req response:(WAResponse*)resp {
-	request = req;
-	response = resp;
+	self.request = req;
+	self.response = resp;
 }
 
 
 - (void)preprocess {}
 - (void)postprocess {}
 
+
 - (WASession*)session {
 	if(!self.sessionGenerator)
 		[NSException raise:NSGenericException format:@"The session property cannot be used without first setting a sessionGenerator."];
 	return [self.sessionGenerator sessionForRequest:self.request response:self.response];
 }
+
 
 @end

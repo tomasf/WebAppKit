@@ -10,14 +10,26 @@
 #import "WAResponse.h"
 #import "WARequest.h"
 
+@interface WAStaticFileHandler ()
+@property(copy) NSString *file;
+@property BOOL enableCaching;
+@end
+
+
+
 @implementation WAStaticFileHandler
-@synthesize statusCode;
+@synthesize file=_file;
+@synthesize enableCaching=_enableCaching;
+@synthesize statusCode=_statusCode;
+
 
 - (id)initWithFile:(NSString*)path enableCaching:(BOOL)useHTTPCache {
-	self = [super init];
-	file = [path copy];
-	enableCaching = useHTTPCache;
-	statusCode = 200;
+	if(!(self = [super init])) return nil;
+	
+	self.file = path;
+	self.enableCaching = useHTTPCache;
+	self.statusCode = 200;
+	
 	return self;
 }
 
@@ -26,10 +38,12 @@
 + (NSString*)UTIForFile:(NSString*)file {
 	FSRef ref;
 	if(FSPathMakeRef((const uint8_t*)[file fileSystemRepresentation], &ref, false) != noErr) return nil;
-	NSDictionary *values = nil;
-	if(LSCopyItemAttributes(&ref, kLSRolesViewer, (CFArrayRef)[NSArray arrayWithObject:(id)kLSItemContentType], (CFDictionaryRef*)&values) != noErr) return nil;
-	NSMakeCollectable(values);
-	return [values objectForKey:(id)kLSItemContentType];
+	CFDictionaryRef values = nil;
+	if(LSCopyItemAttributes(&ref, kLSRolesViewer, (__bridge CFArrayRef)[NSArray arrayWithObject:(__bridge id)kLSItemContentType], &values) != noErr) return nil;
+	
+	NSString *type = (__bridge_transfer NSString*)CFDictionaryGetValue(values, kLSItemContentType);
+	if(values) CFRelease(values);
+	return type;
 }
 
 
@@ -37,31 +51,32 @@
 	NSString *defaultType = @"application/octet-stream";
 	NSString *UTI = [self UTIForFile:file];
 	if(!UTI) return defaultType;
-	NSString *mediaType = (NSString*)UTTypeCopyPreferredTagWithClass((CFStringRef)UTI, kUTTagClassMIMEType);
+	NSString *mediaType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)UTI, kUTTagClassMIMEType);
 	if(!mediaType) return defaultType;
-	return NSMakeCollectable(mediaType);
+	return mediaType;
 }
 
 
 - (void)handleRequest:(WARequest *)req response:(WAResponse *)resp {
 	resp.statusCode = self.statusCode;
-	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:file error:NULL];
+	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:self.file error:NULL];
 	NSDate *modificationDate = [attributes fileModificationDate];
 		
 	BOOL notModified = req.conditionalModificationDate && [req.conditionalModificationDate timeIntervalSinceDate:modificationDate] >= 0;
 	
-	if(notModified && enableCaching) {
+	if(notModified && self.enableCaching) {
 		resp.statusCode = 304;
 		resp.hasBody = NO;
 		[resp finish];
 		return;
 	}
 	
-	resp.mediaType = [[self class] mediaTypeForFile:file];
-	if(enableCaching) resp.modificationDate = modificationDate;
+	resp.mediaType = [[self class] mediaTypeForFile:self.file];
+	if(self.enableCaching) resp.modificationDate = modificationDate;
 	
-	[resp appendBodyData:[NSData dataWithContentsOfFile:file]];
+	[resp appendBodyData:[NSData dataWithContentsOfFile:self.file]];
 	[resp finish];
 }
+
 
 @end

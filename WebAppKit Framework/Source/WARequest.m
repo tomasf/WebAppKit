@@ -12,23 +12,51 @@
 #import "WAMultipartReader.h"
 #import "WAUploadedFile.h"
 #import "WAMultipartPart.h"
+#import "WAUploadedFile.h"
+#import "WAPrivate.h"
 
 static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 
 @interface WARequest () <GCDAsyncSocketDelegate, WAMultipartReaderDelegate>
+@property(readwrite, copy) NSString *HTTPVersion;
+@property(readwrite, copy) NSString *method;
+@property(readwrite, copy) NSString *path;
+@property(readwrite, copy) NSString *clientAddress;
+@property(readwrite, nonatomic, copy) NSDictionary *headerFields;
+@property(readwrite, copy) NSString *query;
+@property(readwrite, copy) NSDictionary *queryParameters;
+@property(readwrite, copy) NSDictionary *bodyParameters;
+@property(readwrite, copy) NSDictionary *uploadedFilesMapping;
+@property(readwrite, copy) NSDictionary *cookies;
+@property(readwrite, copy) NSArray *byteRanges;
+@property(readwrite, copy) NSData *body;
+
+@property(strong) WAMultipartReader *multipartReader;
+
+@property(copy) void(^completionHandler)(BOOL validity);
 @end
 
-@interface WAUploadedFile (Private)
-- (id)initWithPart:(WAMultipartPart*)part;
-- (void)invalidate;
-@end
+
 
 
 
 @implementation WARequest
-@synthesize method, path, headerFields, queryParameters, POSTParameters, cookies, HTTPVersion, clientAddress, byteRanges, query;
+@synthesize HTTPVersion=_HTTPVersion;
+@synthesize method=_method;
+@synthesize path=_path;
+@synthesize clientAddress=_clientAddress;
+@synthesize headerFields=_headerFields;
+@synthesize query=_query;
+@synthesize queryParameters=_queryParameters;
+@synthesize bodyParameters=_bodyParameters;
+@synthesize uploadedFilesMapping=_uploadedFilesMapping;
+@synthesize cookies=_cookies;
+@synthesize byteRanges=_byteRanges;
+@synthesize body=_body;
+@synthesize multipartReader=_multipartReader;
+@synthesize completionHandler=_completionHandler;
 
 
 + (NSDictionary*)dictionaryFromQueryParameters:(NSString*)query encoding:(NSStringEncoding)enc {
@@ -49,7 +77,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 		value = [value stringByReplacingPercentEscapesUsingEncoding:enc];
 		
 		if(!name || !value) {
-			NSLog(@"Warning: FTRequest failed to decode query parameter string. Try setting inputEncoding to match the query parameter contents.");
+			NSLog(@"Warning: WARequest failed to decode query parameter string.");
 			continue;
 		}
 		
@@ -79,61 +107,62 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	NSMutableDictionary *newFields = [NSMutableDictionary dictionary];
 	for(NSString *name in fields)
 		[newFields setObject:[fields objectForKey:name] forKey:[name lowercaseString]];
-	headerFields = newFields;
+	_headerFields = newFields;
 }
 
 
-- (id)initWithHTTPMessage:(CFHTTPMessageRef)message {
+- (id)initWithHTTPMessage:(id /*CFHTTPMessageRef*/)httpMessage {
 	if(!(self = [super init])) return nil;
 	
-	method = NSMakeCollectable(CFHTTPMessageCopyRequestMethod(message));
+	CFHTTPMessageRef message = (__bridge CFHTTPMessageRef)httpMessage;
 	
-	HTTPVersion = NSMakeCollectable(CFHTTPMessageCopyVersion(message));
-	NSURL *requestURL = NSMakeCollectable(CFHTTPMessageCopyRequestURL(message));
-	path = [[requestURL realPath] copy];
-	if(!path) return nil;
+	self.method = (__bridge_transfer NSString*)CFHTTPMessageCopyRequestMethod(message);
+	self.HTTPVersion = (__bridge_transfer NSString*)CFHTTPMessageCopyVersion(message);
+	NSURL *requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(message);
+	self.path = [requestURL realPath];
+	if(!self.path) return nil;
 	
-	queryParameters = [[[self class] dictionaryFromQueryParameters:[requestURL query] encoding:NSUTF8StringEncoding] copy];
-	query = [[requestURL query] copy];
+	self.queryParameters = [[self class] dictionaryFromQueryParameters:[requestURL query] encoding:NSUTF8StringEncoding];
+	self.query = [requestURL query];
 	
-	[self setHeaderFields:NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message))];
+	[self setHeaderFields:(__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(message)];
 	NSString *cookieString = [self valueForHeaderField:@"Cookie"];
 	if(cookieString) {
 		NSSet *cookieSet = [WACookie cookiesFromHeaderValue:cookieString];
 		NSMutableDictionary *cookieDict = [NSMutableDictionary dictionary];
 		for(WACookie *cookie in cookieSet)
 			[cookieDict setObject:cookie forKey:cookie.name];
-		cookies = [cookieDict copy];
+		self.cookies = [cookieDict copy];
 	}
 	
 	NSString *rangeString = [self valueForHeaderField:@"Range"];
-	if(rangeString) byteRanges = [[[self class] byteRangesFromHeaderFieldValue:rangeString] copy];
+	if(rangeString) self.byteRanges = [[self class] byteRangesFromHeaderFieldValue:rangeString];
 	
 	return self;
 }
 
 
 - (id)initWithHeaderData:(NSData*)data {
-	CFHTTPMessageRef message = (CFHTTPMessageRef)CFMakeCollectable(CFHTTPMessageCreateEmpty(NULL, true));
-	CFHTTPMessageAppendBytes(message, [data bytes], [data length]);
-	if(!CFHTTPMessageIsHeaderComplete(message))
+	id message = (__bridge_transfer id)CFHTTPMessageCreateEmpty(NULL, true);
+	CFHTTPMessageAppendBytes((__bridge CFHTTPMessageRef)message, [data bytes], [data length]);
+	if(!CFHTTPMessageIsHeaderComplete((__bridge CFHTTPMessageRef)message))
 		return nil;
 	return [self initWithHTTPMessage:message];
 }
 
 
 - (NSString*)description {
-	return [NSString stringWithFormat:@"<%@ %p: %@ %@>", [self class], self, method, path];
+	return [NSString stringWithFormat:@"<%@ %p: %@ %@>", [self class], self, self.method, self.path];
 }
 
 
 - (NSString*)valueForQueryParameter:(NSString*)name {
-	return [queryParameters objectForKey:name];
+	return [self.queryParameters objectForKey:name];
 }
 
 
 - (NSString*)valueForHeaderField:(NSString*)fieldName {
-	return [headerFields objectForKey:[fieldName lowercaseString]];
+	return [self.headerFields objectForKey:[fieldName lowercaseString]];
 }
 
 
@@ -144,13 +173,13 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
-- (NSString*)valueForPOSTParameter:(NSString*)name {
-	return [POSTParameters objectForKey:name];
+- (NSString*)valueForBodyParameter:(NSString*)name {
+	return [self.bodyParameters objectForKey:name];
 }
 
 
 - (WACookie*)cookieForName:(NSString*)name {
-	return [cookies objectForKey:name];
+	return [self.cookies objectForKey:name];
 }
 
 
@@ -163,7 +192,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 - (NSURL*)URL {
 	NSString *scheme = NO ? @"https" : @"http";
-	return [[[NSURL alloc] initWithScheme:scheme host:self.host path:self.path] autorelease];
+	return [[NSURL alloc] initWithScheme:scheme host:self.host path:self.path];
 }
 
 
@@ -182,7 +211,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 - (void)readBodyFromSocket:(GCDAsyncSocket*)socket completionHandler:(void(^)(BOOL validity))handler {
-	clientAddress = [[socket connectedHost] copy];
+	self.clientAddress = socket.connectedHost;
 	uint64_t contentLength = [[self valueForHeaderField:@"Content-Length"] longLongValue];
 	BOOL hasBody = contentLength || [self valueForHeaderField:@"Transfer-Encoding"];
 	
@@ -200,7 +229,8 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 			handler(NO);
 			return;
 		}
-		multipartReader = [[WAMultipartReader alloc] initWithSocket:socket boundary:boundary delegate:self];
+		self.multipartReader = [[WAMultipartReader alloc] initWithSocket:socket boundary:boundary delegate:self];
+	
 	}else if([contentType isEqual:@"application/x-www-form-urlencoded"]) {
 	
 		if(contentLength > WARequestMaxStaticBodyLength) {
@@ -213,11 +243,23 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 			return;
 		}
 		[socket readDataToLength:contentLength withTimeout:-1 tag:0];
+	
 	}else{
-		handler(NO);
-		return;
+		if(contentLength > WARequestMaxStaticBodyLength) {
+			handler(NO);
+			return;
+		}
+		[socket setDelegate:self];
+		if(contentLength == 0) {
+			self.body = [NSData data];
+			handler(YES);
+			return;
+		}
+		
+		[socket readDataToLength:contentLength withTimeout:-1 tag:0];
+		
 	}
-	completionHandler = [handler copy];
+	self.completionHandler = [handler copy];
 }
 
 
@@ -249,30 +291,37 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 		}
 	}
 	
-	uploadedFiles = files;
-	POSTParameters = POSTValues;
-	
-	completionHandler(YES);
+	self.uploadedFilesMapping = files;
+	self.bodyParameters = POSTValues;
+	self.completionHandler(YES);
 }
 
+
 - (void)multipartReaderFailed:(WAMultipartReader *)reader {
-	completionHandler(NO);
+	self.completionHandler(NO);
+}
+
+
+- (NSString*)mediaType {
+	return [self valueForHeaderField:@"Content-Type" parameters:NULL];
 }
 
 
 - (void)handleBodyData:(NSData*)data {
-	NSString *type = [self valueForHeaderField:@"Content-Type"];
-	if([type hasPrefix:@"application/x-www-form-urlencoded"]) { // jesus. fix
+	NSString *type = self.mediaType;
+	if([type isCaseInsensitiveLike:@"application/x-www-form-urlencoded"]) {
 		NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-		POSTParameters = [[[self class] dictionaryFromQueryParameters:string encoding:NSUTF8StringEncoding] copy];
+		self.bodyParameters = [[[self class] dictionaryFromQueryParameters:string encoding:NSUTF8StringEncoding] copy];
+	}else{
+		self.body = data;
 	}
 }
 
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
 	[self handleBodyData:data];
-	completionHandler(YES);
-	completionHandler = nil;
+	self.completionHandler(YES);
+	self.completionHandler = nil;
 }
 
 
@@ -291,7 +340,9 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
+
 #pragma mark Acceped Media Types
+
 
 - (NSArray*)acceptedMediaTypes {
 	NSString *string = [self valueForHeaderField:@"Accept"];
@@ -336,14 +387,15 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	return NO;
 }
 
+
 - (NSSet*)uploadedFiles {
-	return [NSSet setWithArray:[uploadedFiles allValues]];
+	return [NSSet setWithArray:[self.uploadedFilesMapping allValues]];
 }
+
 
 - (WAUploadedFile*)uploadedFileForName:(NSString*)name {
-	return [uploadedFiles objectForKey:name];
+	return [self.uploadedFilesMapping objectForKey:name];
 }
-
 
 #pragma mark Authentication
 
@@ -439,7 +491,6 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
-
 - (WAAuthenticationScheme)authenticationScheme {
 	NSString *auth = [self valueForHeaderField:@"Authorization"];
 	if(!auth) return WANoneAuthenticationScheme;
@@ -450,7 +501,9 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 }
 
 
+
 #pragma mark Byte Ranges
+
 
 + (WAByteRange)rangeFromValue:(NSValue*)value {
 	WAByteRange range;
@@ -483,6 +536,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 			return NSOrderedSame;
 	}];
 }
+
 
 + (NSArray*)canonicalRanges:(NSArray*)ranges {
 	ranges = [self sortedRanges:ranges];
