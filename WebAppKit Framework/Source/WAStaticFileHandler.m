@@ -41,7 +41,7 @@
 	CFDictionaryRef values = nil;
 	if(LSCopyItemAttributes(&ref, kLSRolesViewer, (__bridge CFArrayRef)[NSArray arrayWithObject:(__bridge id)kLSItemContentType], &values) != noErr) return nil;
 	
-	NSString *type = (__bridge_transfer NSString*)CFDictionaryGetValue(values, kLSItemContentType);
+	NSString *type = (__bridge NSString*)CFDictionaryGetValue(values, kLSItemContentType);
 	if(values) CFRelease(values);
 	return type;
 }

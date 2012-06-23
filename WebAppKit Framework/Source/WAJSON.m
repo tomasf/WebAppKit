@@ -39,8 +39,10 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 
 @implementation NSString (WAJSON)
 - (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
-	id string = (__bridge_transfer id)JSStringCreateWithCFString((__bridge CFStringRef)self);
-	return JSValueMakeString(ctx, (__bridge JSStringRef)string);
+	JSStringRef string = JSStringCreateWithCFString((__bridge CFStringRef)self);
+	JSValueRef value = JSValueMakeString(ctx, string);
+	JSStringRelease(string);
+	return value;
 }
 @end
 
@@ -56,15 +58,20 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 
 
 @implementation NSDictionary (WAJSON)
+
 - (JSValueRef)JavaScriptRepresentationWithContext:(JSContextRef)ctx {
 	JSObjectRef object = JSObjectMake(ctx, NULL, NULL);
 	for(NSString *key in self) {
-		id keyString = (__bridge_transfer id)JSStringCreateWithCFString((__bridge CFStringRef)key);
+		if(![key isKindOfClass:[NSString class]]) return NULL;
+		
+		JSStringRef keyString = JSStringCreateWithCFString((__bridge CFStringRef)key);
 		JSValueRef value = [[self objectForKey:key] JavaScriptRepresentationWithContext:ctx];
-		JSObjectSetProperty(ctx, object, (__bridge JSStringRef)keyString, value, kJSPropertyAttributeNone, NULL);
+		JSObjectSetProperty(ctx, object, keyString, value, kJSPropertyAttributeNone, NULL);
+		JSStringRelease(keyString);
 	}
 	return object;
 }
+
 @end
 
 
@@ -102,20 +109,22 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 		case kJSTypeNumber:
 			return [NSNumber numberWithDouble:JSValueToNumber(ctx, value, NULL)];
 		case kJSTypeString: {
-			id string = (__bridge_transfer id)JSValueToStringCopy(ctx, value, NULL);
-			return (__bridge_transfer NSString*)JSStringCopyCFString(NULL, (__bridge JSStringRef)string);
+			JSStringRef jsString = JSValueToStringCopy(ctx, value, NULL);
+			NSString *string = (__bridge_transfer NSString*)JSStringCopyCFString(NULL, jsString);
+			JSStringRelease(jsString);
+			return string;
 		}
 		case kJSTypeObject: {
 			JSObjectRef object = (JSObjectRef)value;
 			JSStringRef script = JSSTR("Array");
 			JSValueRef constructor = JSEvaluateScript(ctx, script, NULL, NULL, 0, NULL);
-			CFRelease(script);
+			JSStringRelease(script);
 			
 			if(JSValueIsInstanceOfConstructor(ctx, value, (JSObjectRef)constructor, NULL)) {
 				NSMutableArray *array = [NSMutableArray array];
 				JSStringRef script = JSSTR("length");
 				JSValueRef lengthValue = JSObjectGetProperty(ctx, object, script, NULL);
-				CFRelease(script);
+				JSStringRelease(script);
 				unsigned length = JSValueToNumber(ctx, lengthValue, NULL);
 				
 				for(unsigned i=0; i<length; i++) {					
@@ -148,7 +157,7 @@ JSON <--[JavaScriptCore]--> Javascript Objects <--[WAJSON]--> Cocoa Objects
 	JSStringRef source = JSStringCreateWithCFString((__bridge CFStringRef)JSON);
 	
 	JSValueRef value = JSValueMakeFromJSONString(ctx, source);
-	CFRelease(source);
+	JSStringRelease(source);
 	if(!value) {
 		JSGlobalContextRelease(ctx);
 		return nil;
