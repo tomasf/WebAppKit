@@ -12,4 +12,7 @@
 @property NSUInteger statusCode;
 
 - (id)initWithFile:(NSString*)path enableCaching:(BOOL)useHTTPCache;
+
++ (NSString*)mediaTypeForFileExtension:(NSString*)extension;
++ (void)setMediaType:(NSString*)mediaType forFileExtension:(NSString*)extension;
 @end

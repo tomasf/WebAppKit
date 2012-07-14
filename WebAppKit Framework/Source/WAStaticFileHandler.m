@@ -10,6 +10,9 @@
 #import "WAResponse.h"
 #import "WARequest.h"
 
+static NSMutableDictionary *extensionMediaTypeMapping;
+
+
 @interface WAStaticFileHandler ()
 @property(copy) NSString *file;
 @property BOOL enableCaching;
@@ -21,6 +24,21 @@
 @synthesize file=_file;
 @synthesize enableCaching=_enableCaching;
 @synthesize statusCode=_statusCode;
+
+
++ (NSString*)mediaTypeForFileExtension:(NSString*)extension {
+	if(!extensionMediaTypeMapping) {
+		NSURL *mappingFileURL = [[NSBundle bundleForClass:[WAStaticFileHandler class]] URLForResource:@"MediaTypes" withExtension:@"plist"];
+		extensionMediaTypeMapping = [NSMutableDictionary dictionaryWithContentsOfURL:mappingFileURL];
+	}
+	
+	return [extensionMediaTypeMapping objectForKey:extension];
+}
+
+
++ (void)setMediaType:(NSString*)mediaType forFileExtension:(NSString*)extension {
+	[extensionMediaTypeMapping setObject:mediaType forKey:extension];
+}
 
 
 - (id)initWithFile:(NSString*)path enableCaching:(BOOL)useHTTPCache {
@@ -48,6 +66,12 @@
 
 
 + (NSString*)mediaTypeForFile:(NSString*)file {
+	NSString *extension = [file pathExtension];
+	if(extension) {
+		NSString *mediaType = [[self class] mediaTypeForFileExtension:extension];
+		if(mediaType) return mediaType;
+	}
+	
 	NSString *defaultType = @"application/octet-stream";
 	NSString *UTI = [self UTIForFile:file];
 	if(!UTI) return defaultType;
