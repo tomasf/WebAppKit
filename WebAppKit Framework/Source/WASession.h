@@ -23,4 +23,7 @@
 
 - (BOOL)validateRequestTokenForParameter:(NSString*)parameterName;
 - (BOOL)validateRequestToken;
+
+- (id)objectForKeyedSubscript:(id)key;
+- (void)setObject:(id)value forKeyedSubscript:(id)key;
 @end

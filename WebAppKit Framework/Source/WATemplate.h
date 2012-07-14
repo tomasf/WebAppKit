@@ -28,5 +28,8 @@
 - (void)setValue:(id)value forKey:(NSString*)key;
 - (id)valueForKey:(NSString*)key;
 
+- (void)setObject:(id)value forKeyedSubscript:(id)key;
+- (id)objectForKeyedSubscript:(id)key;
+
 - (NSString*)result;
 @end

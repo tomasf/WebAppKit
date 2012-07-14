@@ -96,6 +96,16 @@ static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 }
 
 
+- (void)setObject:(id)value forKeyedSubscript:(id)key {
+	[self setValue:value forKey:key];
+}
+
+
+- (id)objectForKeyedSubscript:(id)key {
+	return [self valueForKey:key];
+}
+
+
 - (void)removeValueForKey:(NSString*)key {
 	[self.database executeUpdate:@"DELETE FROM `values` WHERE token = ? AND `key` = ?", self.token, key];
 }
