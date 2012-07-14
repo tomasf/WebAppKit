@@ -243,6 +243,16 @@ static NSMutableDictionary *WANamedTemplates;
 }
 
 
+- (void)setObject:(id)value forKeyedSubscript:(id)key {
+	[self setValue:value forKey:key];
+}
+
+
+- (id)objectForKeyedSubscript:(id)key {
+	return [self valueForKey:key];
+}
+
+
 #pragma mark Parsing
 
 - (TLStatement*)scanText:(TFStringScanner*)scanner endToken:(NSString**)outEndToken {
