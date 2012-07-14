@@ -20,18 +20,17 @@ extern int WAApplicationMain();
 @property(readonly, nonatomic) WASession *session;
 
 + (int)run;
-- (id)initWithPort:(NSUInteger)port;
-- (id)initWithPort:(NSUInteger)port interface:(NSString*)interface;
 
+
+- (id)init;
+- (BOOL)start:(NSError**)error;
 - (void)invalidate;
 
-- (void)setup;
+- (void)preprocess;
+- (void)postprocess;
 
 - (WARoute*)addRouteSelector:(SEL)sel HTTPMethod:(NSString*)method path:(NSString*)path;
 
 - (void)addRequestHandler:(WARequestHandler*)handler;
 - (void)removeRequestHandler:(WARequestHandler*)handler;
-
-- (void)preprocess;
-- (void)postprocess;
 @end

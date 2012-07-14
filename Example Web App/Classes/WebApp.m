@@ -3,9 +3,11 @@
 @implementation WebApp
 
 
-- (void)setup {
-	// -setup is run on launch. Here, you can declare routes, set up Core Data MOCs, load resources, etc.
-	[self addRouteSelector:@selector(index) HTTPMethod:@"GET" path:@"/"];
+- (id)init {
+	if((self = [super init])) {
+		[self addRouteSelector:@selector(index) HTTPMethod:@"GET" path:@"/"];
+	}
+	return self;
 }
 
 

@@ -35,7 +35,7 @@ int WAApplicationMain() {
 
 
 @interface WAApplication ()
-@property(strong) WAServer *server;
+@property(strong, nonatomic) WAServer *server;
 
 @property(strong) NSMutableArray *requestHandlers;
 @property(strong) NSMutableSet *currentHandlers;
@@ -72,13 +72,21 @@ int WAApplicationMain() {
 
 + (int)run {
 	uint16_t port = [self port];
-	if(!port) return 1;
+	if(!port) return EXIT_FAILURE;
 	NSString *interface = [self enableExternalAccess] ? nil : @"localhost";
-	WAApplication *app = [[self alloc] initWithPort:port interface:interface];
+	
+	WAApplication *app = [[self alloc] init];
+	app.server = [[WAServer alloc] initWithPort:port interface:interface];
 	
 	NSString *publicDir = [[NSBundle bundleForClass:self] pathForResource:@"public" ofType:nil]; 
 	WADirectoryHandler *publicHandler = [[WADirectoryHandler alloc] initWithDirectory:publicDir requestPath:@"/"];
 	[app addRequestHandler:publicHandler];
+	
+	NSError *error;
+	if(![app start:&error]) {
+		NSLog(@"*** Exiting. [%@ start:] failed: %@", NSStringFromClass(self), error);
+		return EXIT_FAILURE;
+	}
 	
 	NSLog(@"WebAppKit started on port %hu", port);
 	NSLog(@"http://localhost:%hu/", port);
@@ -89,32 +97,29 @@ int WAApplicationMain() {
 }
 
 
-- (id)initWithPort:(NSUInteger)port interface:(NSString*)interface {
+- (id)init {
 	if(!(self = [super init])) return nil;
-	
-	__weak WAApplication *weakSelf = self;
-	
-	self.requestHandlers = [NSMutableArray array];
-	self.server = [[WAServer alloc] initWithPort:port interface:interface];
-	self.server.requestHandlerFactory = ^(WARequest *request){
-		return [weakSelf handlerForRequest:request];
-	};
-	
+
+	self.requestHandlers = [NSMutableArray array];	
 	self.currentHandlers = [NSMutableSet set];
-	
-	NSError *error;
-	if(![self.server start:&error]) {
-		NSLog(@"Failed to start server: %@", error);
-		return nil;
-	}
 	
 	[self setup];
 	return self;
 }
 
 
-- (id)initWithPort:(NSUInteger)port {
-	return [self initWithPort:port interface:@"localhost"];
+- (void)setServer:(WAServer *)server {
+	_server = server;
+	
+	__weak WAApplication *weakSelf = self;
+	self.server.requestHandlerFactory = ^(WARequest *request){
+		return [weakSelf handlerForRequest:request];
+	};
+}
+
+
+- (BOOL)start:(NSError**)error {
+	return [self.server start:error];
 }
 
 
@@ -130,6 +135,14 @@ int WAApplicationMain() {
 
 
 #pragma mark Request Handlers
+
+
+- (WARequestHandler*)handlerForRequest:(WARequest*)req {
+	for(WARequestHandler *handler in self.requestHandlers)
+		if([handler canHandleRequest:req])
+			return [handler handlerForRequest:req];
+	return [self fallbackHandler];
+}
 
 
 - (void)addRequestHandler:(WARequestHandler*)handler {
@@ -152,15 +165,6 @@ int WAApplicationMain() {
 	handler.statusCode = 404;
 	return handler;
 }
-
-
-- (WARequestHandler*)handlerForRequest:(WARequest*)req {
-	for(WARequestHandler *handler in self.requestHandlers)
-		if([handler canHandleRequest:req])
-			return [handler handlerForRequest:req];
-	return [self fallbackHandler];
-}
-
 
 
 
