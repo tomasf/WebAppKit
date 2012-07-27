@@ -21,7 +21,7 @@
 @implementation TLExpression
 
 - (id)evaluateWithScope:(TLScope*)scope {
-	[NSException raise:NSInternalInconsistencyException format:@"%s needs to be overridden in %@", _cmd, [self class]];
+	[NSException raise:NSInternalInconsistencyException format:@"%@ needs to be overridden in %@", NSStringFromSelector(_cmd), [self class]];
 	return nil;
 }
 

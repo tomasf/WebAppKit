@@ -284,7 +284,7 @@ static NSMutableDictionary *WANamedTemplates;
 		
 	}else if([token isEqual:@"debug"]) {
 		if(![[scanner scanToken] isEqual:@">"])
-			[NSException raise:WATemplateParseException format:@"Expected > after <%debug, but found something else."];
+			[NSException raise:WATemplateParseException format:@"Expected > after <%%debug, but found something else."];
 		return [[WADebugStatement alloc] init];
 		
 	
@@ -385,18 +385,18 @@ static NSMutableDictionary *WANamedTemplates;
 		
 	}else if([token isEqual:@"content"]) {
 		if(![[scanner scanToken] isEqual:@">"])
-			[NSException raise:WATemplateParseException format:@"Expected > after <%content, but found something else."];
+			[NSException raise:WATemplateParseException format:@"Expected > after <%%content, but found something else."];
 		return [[WAPrintStatement alloc] initWithContent:[[TLIdentifier alloc] initWithName:WATemplateChildContentKey]];
 		
 	}else if([token isEqual:@"template"]) {
 		NSString *name = [[scanner scanToString:@">"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 		if(![[scanner scanToken] isEqual:@">"])
-			[NSException raise:WATemplateParseException format:@"Expected > after <%template %@, but found something else.", name];
+			[NSException raise:WATemplateParseException format:@"Expected > after <%%template %@, but found something else.", name];
 		return [[WASubTemplateStatement alloc] initWithTemplateName:name];
 		
 	}else if([token isEqual:@"token"]) {
 		if(![[scanner scanToken] isEqual:@">"])
-			[NSException raise:WATemplateParseException format:@"Expected > after <%token, but found something else."];
+			[NSException raise:WATemplateParseException format:@"Expected > after <%%token, but found something else."];
 		return [[WAPrintStatement alloc] initWithContent:[[TLIdentifier alloc] initWithName:WATemplateSessionTokenKey]];
 
 		
