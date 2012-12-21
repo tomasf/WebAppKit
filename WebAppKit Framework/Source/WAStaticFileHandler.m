@@ -21,10 +21,6 @@ static NSMutableDictionary *extensionMediaTypeMapping;
 
 
 @implementation WAStaticFileHandler
-@synthesize file=_file;
-@synthesize enableCaching=_enableCaching;
-@synthesize statusCode=_statusCode;
-
 
 + (NSString*)mediaTypeForFileExtension:(NSString*)extension {
 	if(!extensionMediaTypeMapping) {

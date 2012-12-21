@@ -35,11 +35,6 @@ static const NSTimeInterval WASessionDefaultLifespan = 31556926;
 
 
 @implementation WASession
-@synthesize request=_request;
-@synthesize response=_response;
-@synthesize name=_name;
-@synthesize token=_token;
-@synthesize database=_database;
 
 
 - (id)initWithDatabase:(FMDatabase*)database name:(NSString*)name token:(NSString*)token {

@@ -185,21 +185,33 @@
 		}
 
 		
-		// Scan for property keys (dot syntax)
-		if([scanner scanString:@"."]) {
-			NSMutableString *keyPath = [NSMutableString string];
-			
-			do {
-				if([keyPath length]) [keyPath appendString:@"."];
-				if([scanner scanString:@"@"]) [keyPath appendString:@"@"];
-				NSString *string = [scanner scanToken];
-				if(scanner.lastTokenType != TFTokenTypeIdentifier)
-					[NSException raise:TLParseException format:@"Expected key name after period, but found this: %@", string];
-				[keyPath appendString:string];
+		// Suffix operators
+		for(;;) {
+			// Dot syntax; key paths
+			if([scanner scanToken:@"."]) {
+				NSMutableString *keyPath = [NSMutableString string];
 				
-			}while([scanner scanString:@"."]);
-			
-			part = [[TLOperation alloc] initWithOperator:TLOperatorKeyPathSelection leftOperand:part rightOperand:[[TLObject alloc] initWithObject:keyPath]];
+				do {
+					if([keyPath length]) [keyPath appendString:@"."];
+					if([scanner scanString:@"@"]) [keyPath appendString:@"@"];
+					NSString *string = [scanner scanToken];
+					if(scanner.lastTokenType != TFTokenTypeIdentifier)
+						[NSException raise:TLParseException format:@"Expected key name after period, but found this: %@", string];
+					[keyPath appendString:string];
+					
+				}while([scanner scanString:@"."]);
+				
+				part = [[TLOperation alloc] initWithOperator:TLOperatorKeyPathSelection leftOperand:part rightOperand:[[TLObject alloc] initWithObject:keyPath]];
+				
+			// Subscripting
+			}else if([scanner scanToken:@"["]) {
+				TLExpression *subscript = [self parseExpression:scanner];
+				
+				if(![scanner scanToken:@"]"])
+					[NSException raise:TLParseException format:@"Expected ] after subscript expression, but found this horse dung: %@", [scanner scanToken]];
+				
+				part = [[TLOperation alloc] initWithOperator:TLOperatorSubscript leftOperand:part rightOperand:subscript];
+			}else break;
 		}
 		
 		

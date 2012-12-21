@@ -16,6 +16,7 @@
 @interface WAResponse (Private)
 - (id)initWithRequest:(WARequest*)req socket:(GCDAsyncSocket*)sock;
 - (void)finishWithErrorString:(NSString*)error;
+- (void)sendHeader;
 @property(copy) void(^completionHandler)(BOOL keepAlive);
 @end
 

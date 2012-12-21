@@ -22,11 +22,6 @@
 
 
 @implementation WAServer
-@synthesize socket=_socket;
-@synthesize connections=_connections;
-@synthesize requestHandlerFactory=_requestHandlerFactory;
-@synthesize interface=_interface;
-@synthesize port=_port;
 
 
 - (id)initWithPort:(NSUInteger)port interface:(NSString*)interface {

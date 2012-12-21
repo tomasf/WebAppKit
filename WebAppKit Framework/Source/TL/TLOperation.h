@@ -13,6 +13,7 @@ typedef enum {
 	
 	// Suffix
 	TLOperatorKeyPathSelection,
+	TLOperatorSubscript,
 	
 	// Prefix
 	TLOperatorNegation,

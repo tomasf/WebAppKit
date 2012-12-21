@@ -18,7 +18,6 @@
 static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
-
 @interface WARequest () <GCDAsyncSocketDelegate, WAMultipartReaderDelegate>
 @property(readwrite, copy) NSString *HTTPVersion;
 @property(readwrite, copy) NSString *method;
@@ -40,23 +39,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 
-
-
 @implementation WARequest
-@synthesize HTTPVersion=_HTTPVersion;
-@synthesize method=_method;
-@synthesize path=_path;
-@synthesize clientAddress=_clientAddress;
-@synthesize headerFields=_headerFields;
-@synthesize query=_query;
-@synthesize queryParameters=_queryParameters;
-@synthesize bodyParameters=_bodyParameters;
-@synthesize uploadedFilesMapping=_uploadedFilesMapping;
-@synthesize cookies=_cookies;
-@synthesize byteRanges=_byteRanges;
-@synthesize body=_body;
-@synthesize multipartReader=_multipartReader;
-@synthesize completionHandler=_completionHandler;
 
 
 + (NSDictionary*)dictionaryFromQueryParameters:(NSString*)query encoding:(NSStringEncoding)enc {
@@ -108,6 +91,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 	for(NSString *name in fields)
 		[newFields setObject:[fields objectForKey:name] forKey:[name lowercaseString]];
 	_headerFields = newFields;
+	
 }
 
 

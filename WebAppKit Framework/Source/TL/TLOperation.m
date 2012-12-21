@@ -18,6 +18,7 @@ typedef struct {
 
 static TLOperatorInfo operatorInfo[] = {
 	{TLOperatorKeyPathSelection, nil, 0},
+	{TLOperatorSubscript, nil, 0},
 	{TLOperatorNegation, nil, 0},
 	
 	{TLOperatorMultiplication, @"*", 1},
@@ -138,12 +139,21 @@ static NSUInteger operatorCount = sizeof(operatorInfo)/sizeof(operatorInfo[0]);
 }
 
 
+- (id)objectForSubscript:(id)key ofObject:(id)object {
+	if([key isKindOfClass:[NSNumber class]])
+		return [object objectAtIndexedSubscript:[key unsignedIntegerValue]];
+	else
+		return [object objectForKeyedSubscript:key];
+}
+
+
 - (id)objectByApplyingOperator:(TLOperator)op object:(id)lhs object2:(id)rhs {
 	BOOL boolValue = NO;
 	
 	switch(op) {
 		case TLOperatorInvalid: [NSException raise:TLRuntimeException format:@"Invalid operator"];
 		case TLOperatorKeyPathSelection: return [lhs valueForKeyPath:rhs];
+		case TLOperatorSubscript: return [self objectForSubscript:rhs ofObject:lhs];
 		
 		case TLOperatorAddition: return [lhs TL_add:rhs];
 		case TLOperatorSubtraction: return [lhs TL_subtract:rhs];

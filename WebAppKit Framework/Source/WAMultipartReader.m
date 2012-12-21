@@ -19,7 +19,6 @@ static const uint64_t WAMPRMaxPartHeaderLength = 10000;
 static const uint64_t WAMPRMaxPartBodyChunkLength = 10000;
 
 @interface WAMultipartReader ()
-- (void)readInitialBoundary;
 @end
 
 

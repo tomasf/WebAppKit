@@ -22,11 +22,6 @@
 
 @property(strong, readwrite) NSDictionary *headerFields;
 @property(strong, readwrite) NSDictionary *cookies;
-
-- (NSDictionary*)preparedHeaderFields;
-- (BOOL)needsBody;
-- (void)sendBodyChunk:(NSData*)data;
-- (void)sendTerminationChunk;
 @end
 
 
@@ -34,21 +29,6 @@
 	NSMutableDictionary *_headerFields;
 	NSMutableDictionary *_cookies;
 }
-@synthesize request=_request;
-@synthesize socket=_socket;
-@synthesize completionHandler=_completionHandler;
-@synthesize body=_body;
-@synthesize hasSentHeader=_hasSentHeader;
-
-@synthesize statusCode=_statusCode;
-@synthesize bodyEncoding=_bodyEncoding;
-@synthesize progressive=_progressive;
-@synthesize mediaType=_mediaType;
-@synthesize modificationDate=_modificationDate;
-@synthesize hasBody=_hasBody;
-@synthesize headerFields=_headerFields;
-@synthesize cookies=_cookies;
-@synthesize allowedOrigins=_allowedOrigins;
 
 
 - (id)initWithRequest:(WARequest*)request socket:(GCDAsyncSocket*)socket {
@@ -86,7 +66,7 @@
 
 - (void)requireProgressiveHeaderNotSent {
 	if(self.progressive && self.hasSentHeader)
-		[NSException raise:@"WAResponseHeaderAlreadySentException" format:@"You can't modify the header after it has been sent."];
+		[NSException raise:@"WAResponseHeaderAlreadySentException" format:@"You can't modify or re-send the header after it has been sent."];
 }
 
 

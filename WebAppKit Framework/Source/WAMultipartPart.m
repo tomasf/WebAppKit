@@ -10,9 +10,16 @@
 
 static const uint64_t WAMultipartPartMaxBodyBufferLength = 1000000;
 
+@interface WAMultipartPart ()
+@property(readwrite, copy) NSDictionary *headerFields;
+@property(readwrite, strong) NSMutableData *mutableData;
+@property(readwrite, copy) NSString *temporaryFile;
+@property(strong) NSFileHandle *fileHandle;
+@end
+
+
 
 @implementation WAMultipartPart
-@synthesize headerFields, data, temporaryFile;
 
 - (id)initWithHeaderData:(NSData*)headerData {
 	self = [super init];
@@ -29,39 +36,44 @@ static const uint64_t WAMultipartPartMaxBodyBufferLength = 1000000;
 		[fields setObject:value forKey:key];
 	}
 	
-	headerFields = fields;
-	data = [NSMutableData data];
+	self.headerFields = fields;
+	self.mutableData = [NSMutableData data];
 	return self;
 }
 
 
+- (NSData*)data {
+	return self.mutableData;
+}
+
+
 - (void)switchToFile {
-	temporaryFile = [NSTemporaryDirectory() stringByAppendingPathComponent:WAGenerateUUIDString()];
-	[[NSFileManager defaultManager] createFileAtPath:temporaryFile contents:data attributes:[NSDictionary dictionary]];
-	data = nil;
-	fileHandle = [NSFileHandle fileHandleForWritingAtPath:temporaryFile];
-	[fileHandle seekToEndOfFile];
+	self.temporaryFile = [NSTemporaryDirectory() stringByAppendingPathComponent:WAGenerateUUIDString()];
+	[[NSFileManager defaultManager] createFileAtPath:self.temporaryFile contents:self.mutableData attributes:[NSDictionary dictionary]];
+	self.mutableData = nil;
+	self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.temporaryFile];
+	[self.fileHandle seekToEndOfFile];
 }
 
 
 - (void)appendData:(NSData*)bodyData {
-	if(data) {
-		[data appendData:bodyData];
-		if([data length] > WAMultipartPartMaxBodyBufferLength) {
+	if(self.mutableData) {
+		[self.mutableData appendData:bodyData];
+		if([self.mutableData length] > WAMultipartPartMaxBodyBufferLength) {
 			[self switchToFile];
 		}
 	}else{
-		[fileHandle writeData:bodyData];
+		[self.fileHandle writeData:bodyData];
 	}
 }
 
 - (void)finish {
-	if(fileHandle) {
-		[fileHandle truncateFileAtOffset:[fileHandle offsetInFile]-2]; // strip CRLF
-		[fileHandle closeFile];
-		fileHandle = nil;
+	if(self.fileHandle) {
+		[self.fileHandle truncateFileAtOffset:[self.fileHandle offsetInFile]-2]; // strip CRLF
+		[self.fileHandle closeFile];
+		self.fileHandle = nil;
 	}else{
-		[data setLength:[data length]-2];
+		[self.mutableData setLength:[self.mutableData length]-2];
 	}
 }
 

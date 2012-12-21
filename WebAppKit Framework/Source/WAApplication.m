@@ -42,19 +42,11 @@ int WAApplicationMain() {
 
 @property(strong, readwrite) WARequest *request;
 @property(strong, readwrite) WAResponse *response;
-
-- (WARequestHandler*)handlerForRequest:(WARequest*)req;
 @end
 
 
 
 @implementation WAApplication
-@synthesize server=_server;
-@synthesize requestHandlers=_requestHandlers;
-@synthesize currentHandlers=_currentHandlers;
-@synthesize request=_request;
-@synthesize response=_response;
-@synthesize sessionGenerator=_sessionGenerator;
 
 
 + (uint16_t)port {

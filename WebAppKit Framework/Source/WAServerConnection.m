@@ -26,9 +26,6 @@
 
 
 @implementation WAServerConnection
-@synthesize socket=_socket;
-@synthesize server=_server;
-@synthesize currentRequestHandler=_currentRequestHandler;
 
 
 - (id)initWithSocket:(GCDAsyncSocket*)socket server:(WAServer*)server {

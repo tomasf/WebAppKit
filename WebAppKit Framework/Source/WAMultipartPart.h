@@ -7,18 +7,12 @@
 //
 
 
-@interface WAMultipartPart : NSObject {
-	NSDictionary *headerFields;
-	NSMutableData *data;
-	NSString *temporaryFile;
-	NSFileHandle *fileHandle;
-}
-
+@interface WAMultipartPart : NSObject
 - (id)initWithHeaderData:(NSData*)headerData;
 - (void)appendData:(NSData*)bodyData;
 - (void)finish;
 
-@property(readonly) NSDictionary *headerFields;
-@property(readonly) NSData *data;
-@property(readonly) NSString *temporaryFile;
+@property(readonly, copy) NSDictionary *headerFields;
+@property(readonly, copy) NSData *data;
+@property(readonly, copy) NSString *temporaryFile;
 @end

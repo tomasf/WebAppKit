@@ -30,11 +30,6 @@ static NSCharacterSet *wildcardComponentCharacters;
 
 
 @implementation WARoute
-@synthesize components=_components;
-@synthesize argumentWildcardMapping=_argumentWildcardMapping;
-@synthesize method=_method;
-@synthesize target=_target;
-@synthesize action=_action;
 
 
 + (void)initialize {

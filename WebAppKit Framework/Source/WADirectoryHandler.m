@@ -20,8 +20,6 @@
 
 
 @implementation WADirectoryHandler
-@synthesize directoryRoot=_directoryRoot;
-@synthesize requestPathRoot=_requestPathRoot;
 
 
 - (id)initWithDirectory:(NSString*)root requestPath:(NSString*)path {

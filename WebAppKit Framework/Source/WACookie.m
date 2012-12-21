@@ -10,12 +10,6 @@
 
 
 @implementation WACookie
-@synthesize name=_name;
-@synthesize value=_value;
-@synthesize path=_path;
-@synthesize domain=_domain;
-@synthesize expirationDate=_expirationDate;
-@synthesize secure=_secure;
 
 
 - (id)initWithName:(NSString*)cookieName value:(NSString*)cookieValue expirationDate:(NSDate*)date path:(NSString*)p domain:(NSString*)d {

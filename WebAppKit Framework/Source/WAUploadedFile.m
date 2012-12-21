@@ -38,7 +38,7 @@
 	
 	self.filename = [params objectForKey:@"filename"];
 	self.mediaType = [part.headerFields objectForKey:@"Content-Type"];
-	self.temporaryFileURL = [NSURL fileURLWithPath:part.temporaryFile];
+	self.temporaryFileURL = part.temporaryFile ? [NSURL fileURLWithPath:part.temporaryFile] : nil;
 	
 	if(!self.temporaryFileURL) {
 		self.temporaryFileURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:WAGenerateUUIDString()];
