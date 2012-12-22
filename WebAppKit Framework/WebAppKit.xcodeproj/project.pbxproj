@@ -22,7 +22,7 @@
 		C9EC0A9815064C34009B01DE /* WALegacy.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EC0A9615064C34009B01DE /* WALegacy.m */; };
 		E20B1A27131F252600948E4B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20B1A26131F252600948E4B /* JavaScriptCore.framework */; };
 		E20D577E140190130072BD6E /* TFCoreDataExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D577C140190130072BD6E /* TFCoreDataExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D577D140190130072BD6E /* TFCoreDataExtras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E20D577F140190130072BD6E /* TFCoreDataExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D577D140190130072BD6E /* TFCoreDataExtras.m */; };
 		E20D57D31403169D0072BD6E /* TFStringScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = E20D57D11403169D0072BD6E /* TFStringScanner.h */; };
 		E20D57D41403169D0072BD6E /* TFStringScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = E20D57D21403169D0072BD6E /* TFStringScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E21702C312C9286800DCE8FD /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E21702C212C9286800DCE8FD /* libicucore.dylib */; };
@@ -48,8 +48,6 @@
 		E275C41312E84FF100462191 /* WAUploadedFile.h in Headers */ = {isa = PBXBuildFile; fileRef = E275C41112E84FF100462191 /* WAUploadedFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E275C41412E84FF100462191 /* WAUploadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E275C41212E84FF100462191 /* WAUploadedFile.m */; };
 		E2B44A431598F64C007D687E /* MediaTypes.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2B44A421598F64C007D687E /* MediaTypes.plist */; };
-		E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B7A15912C3AC0D006BA324 /* WAJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B7A15A12C3AC0D006BA324 /* WAJSON.m */; };
 		E2CF9638135B99F9009BA912 /* TL.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF961E135B99F9009BA912 /* TL.h */; };
 		E2CF9639135B99F9009BA912 /* TL.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CF961F135B99F9009BA912 /* TL.m */; };
 		E2CF963A135B99F9009BA912 /* TLAssignment.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CF9620135B99F9009BA912 /* TLAssignment.h */; };
@@ -167,8 +165,6 @@
 		E275C41112E84FF100462191 /* WAUploadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAUploadedFile.h; path = Source/WAUploadedFile.h; sourceTree = "<group>"; };
 		E275C41212E84FF100462191 /* WAUploadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAUploadedFile.m; path = Source/WAUploadedFile.m; sourceTree = "<group>"; };
 		E2B44A421598F64C007D687E /* MediaTypes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MediaTypes.plist; sourceTree = "<group>"; };
-		E2B7A15912C3AC0D006BA324 /* WAJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAJSON.h; path = Source/WAJSON.h; sourceTree = "<group>"; };
-		E2B7A15A12C3AC0D006BA324 /* WAJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAJSON.m; path = Source/WAJSON.m; sourceTree = "<group>"; };
 		E2CF961E135B99F9009BA912 /* TL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TL.h; path = Source/TL/TL.h; sourceTree = "<group>"; };
 		E2CF961F135B99F9009BA912 /* TL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TL.m; path = Source/TL/TL.m; sourceTree = "<group>"; };
 		E2CF9620135B99F9009BA912 /* TLAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLAssignment.h; path = Source/TL/TLAssignment.h; sourceTree = "<group>"; };
@@ -300,8 +296,6 @@
 				E2DA8B2E12D2635F00B1EDE8 /* Application */,
 				E2DA8B2F12D2638E00B1EDE8 /* Templates */,
 				E21D234212BC606300277F2E /* Cookies */,
-				E2B7A15912C3AC0D006BA324 /* WAJSON.h */,
-				E2B7A15A12C3AC0D006BA324 /* WAJSON.m */,
 				E21D22AF12BC53CE00277F2E /* WAUtilities.h */,
 				E21D22B012BC53CE00277F2E /* WAUtilities.m */,
 				C9EC0A8D15063E03009B01DE /* WAPrivate.h */,
@@ -573,7 +567,6 @@
 				E2EAF1C712BAE00B00097E0B /* WACookie.h in Headers */,
 				E21D22B112BC53CE00277F2E /* WAUtilities.h in Headers */,
 				E21E76AA12C03DC80082E402 /* WALocalization.h in Headers */,
-				E2B7A15B12C3AC0D006BA324 /* WAJSON.h in Headers */,
 				E227EC4512D3B82F00C9B669 /* WASession.h in Headers */,
 				E227EC6812D3BA1B00C9B669 /* WASessionGenerator.h in Headers */,
 				E2F4F39212DB669F0058342E /* WAHTTPSupport.h in Headers */,
@@ -708,7 +701,6 @@
 				E2EAF1C812BAE00B00097E0B /* WACookie.m in Sources */,
 				E21D22B212BC53CE00277F2E /* WAUtilities.m in Sources */,
 				E21E76AB12C03DC80082E402 /* WALocalization.m in Sources */,
-				E2B7A15C12C3AC0D006BA324 /* WAJSON.m in Sources */,
 				E227EC4612D3B82F00C9B669 /* WASession.m in Sources */,
 				E227EC6912D3BA1B00C9B669 /* WASessionGenerator.m in Sources */,
 				E2F4F39312DB669F0058342E /* WAHTTPSupport.m in Sources */,

@@ -6,7 +6,4 @@
 #import <Foundation/Foundation.h>
 #import "WAFoundationExtras.h"
 #import "WAUtilities.h"
-#import "WAJSON.h"
 #endif
-
-#define LION (MAC_OS_X_VERSION_MIN_REQUIRED >= 1070)

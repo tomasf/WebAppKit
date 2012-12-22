@@ -7,30 +7,11 @@
 //
 
 #import "WAFoundationExtras.h"
-#import <openssl/md5.h>
-#import <openssl/bio.h>
-#import <openssl/evp.h>
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 
 
 @implementation NSDictionary (WAExtras)
-
-+ (id)dictionaryWithKeysAndObjects:(id)firstKey, ... {
-	va_list list;
-	va_start(list, firstKey);
-	NSString *key = firstKey;
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	while(key) {
-		NSString *value = va_arg(list, id);
-		if(value)
-			[dict setObject:value forKey:key];
-		key = va_arg(list, id);
-	}
-	va_end(list);
-	return dict;
-}
-
 
 - (NSDictionary*)dictionaryBySettingValue:(id)value forKey:(id)key {
 	NSMutableDictionary *dict = [self mutableCopy];
@@ -134,70 +115,28 @@
 
 
 - (NSData*)MD5Digest {
-	NSMutableData *digest = [NSMutableData dataWithLength:MD5_DIGEST_LENGTH];
+	NSMutableData *digest = [NSMutableData dataWithLength:CC_MD5_DIGEST_LENGTH];
 	CC_MD5([self bytes], [self length], [digest mutableBytes]);
 	return digest;
 }
 
 
 + (NSData*)dataByDecodingBase64:(NSString*)string {
-#if LION
 	NSData *encodedData = [string dataUsingEncoding:NSASCIIStringEncoding];
 	SecTransformRef transform = SecDecodeTransformCreate(kSecBase64Encoding, NULL);
 	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (__bridge CFTypeRef)encodedData, NULL);
 	NSData *output = (__bridge_transfer NSData*)SecTransformExecute(transform, NULL);
 	CFRelease(transform);
 	return output;
-	
-#else
-    NSData *encodedData = [[string stringByAppendingString:@"\n"] dataUsingEncoding:NSASCIIStringEncoding];
-    
-    BIO *command = BIO_new(BIO_f_base64());
-	BIO_set_flags(command, BIO_FLAGS_BASE64_NO_NL);
-    BIO *context = BIO_new_mem_buf((void *)[encodedData bytes], [encodedData length]);
-    context = BIO_push(command, context);
-	
-    // Encode all the data
-    NSMutableData *outputData = [NSMutableData data];
-    
-	int bufferSize = 256;
-    int len;
-    char inbuf[bufferSize];
-    while(len = BIO_read(context, inbuf, bufferSize))
-		[outputData appendBytes:inbuf length:len];
-	
-    BIO_free_all(context);
-	return outputData;
-#endif
 }
 
 
 - (NSString*)base64String {
-#if LION
 	SecTransformRef transform = SecEncodeTransformCreate(kSecBase64Encoding, NULL);
 	SecTransformSetAttribute(transform, kSecTransformInputAttributeName, (__bridge CFTypeRef)self, NULL);
 	NSData *output = (__bridge_transfer NSData*)SecTransformExecute(transform, NULL);
 	CFRelease(transform);
 	return [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
-
-#else
-	// Tell a context to encode base64
-	BIO *context = BIO_new(BIO_s_mem());
-	BIO *command = BIO_new(BIO_f_base64());
-	BIO_set_flags(command, BIO_FLAGS_BASE64_NO_NL);
-	context = BIO_push(command, context);
-	
-	// Encode data
-	BIO_write(context, [self bytes], [self length]);
-	BIO_flush(context);
-	
-	// Get the resulting data
-	char *outputBuffer;
-	long outputLength = BIO_get_mem_data(context, &outputBuffer);	
-	NSString *encodedString = [[NSString alloc] initWithBytes:outputBuffer length:outputLength encoding:NSASCIIStringEncoding];
-	BIO_free_all(context);
-	return encodedString;
-#endif
 }
 
 

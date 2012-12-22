@@ -7,7 +7,6 @@
 //
 
 @interface NSDictionary (WAExtras)
-+ (id)dictionaryWithKeysAndObjects:(id)firstKey, ...;
 - (NSDictionary*)dictionaryBySettingValue:(id)value forKey:(id)key;
 @end
 
@@ -43,8 +42,3 @@
 @interface NSURL (WAExtras)
 - (NSString*)realPath;
 @end
-
-#define $array(...) ((NSArray*)[NSArray arrayWithObjects:__VA_ARGS__, nil])
-#define $dict(...) ((NSDictionary*)[NSDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil])
-#define $marray(...) ((NSMutableArray*)[NSMutableArray arrayWithObjects:__VA_ARGS__, nil])
-#define $mdict(...) ((NSMutableDictionary*)[NSMutableDictionary dictionaryWithKeysAndObjects:__VA_ARGS__, nil])

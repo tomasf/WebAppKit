@@ -330,7 +330,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 - (NSArray*)acceptedMediaTypes {
 	NSString *string = [self valueForHeaderField:@"Accept"];
-	if(!string) return $array(@"*/*");
+	if(!string) return @[@"*/*"];
 	
 	NSMutableArray *types = [NSMutableArray array];
 	NSScanner *scanner = [NSScanner scannerWithString:string];
@@ -378,7 +378,7 @@ static const uint64_t WARequestMaxStaticBodyLength = 1000000;
 
 
 - (WAUploadedFile*)uploadedFileForName:(NSString*)name {
-	return [self.uploadedFilesMapping objectForKey:name];
+	return self.uploadedFilesMapping[name];
 }
 
 #pragma mark Authentication
