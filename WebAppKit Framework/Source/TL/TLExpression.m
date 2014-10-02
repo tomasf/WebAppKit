@@ -117,7 +117,7 @@
 				
 				case 'x': {
 					NSString *hex = [scanner scanForLength:2];
-					unsigned value;
+					unsigned value = 0;
 					if(!hex || ![[NSScanner scannerWithString:hex] scanHexInt:&value])
 						[NSException raise:TLParseException format:@"Expected hex value following \\x, but found: %@", hex];
 					c = (uint8_t)value;
@@ -126,7 +126,7 @@
 					
 				case 'u': {
 					NSString *hex = [scanner scanForLength:4];
-					unsigned value;
+					unsigned value = 0;
 					if(!hex || ![[NSScanner scannerWithString:hex] scanHexInt:&value])
 						[NSException raise:TLParseException format:@"Expected hex value following \\u, but found: %@", hex];
 					c = (unichar)value;
@@ -217,7 +217,7 @@
 		
 		// Apply prefix operators
 		for(NSString *token in [prefixTokens reverseObjectEnumerator]) {
-			TLOperator op;
+			TLOperator op = TLOperatorInvalid;
 			if([token isEqual:@"!"]) op = TLOperatorNegation;
 			part = [[TLOperation alloc] initWithOperator:op leftOperand:part rightOperand:nil];
 		}

@@ -138,7 +138,7 @@ static NSCharacterSet *wildcardComponentCharacters;
 
 
 
-- (id)callIdFunction:(IMP)function target:(id)target action:(SEL)action arguments:(__strong id *)strings count:(NSUInteger)argc {
+- (id)callIdFunction:(id(*)(id,SEL,...))function target:(id)target action:(SEL)action arguments:(__strong id *)strings count:(NSUInteger)argc {
 	switch(argc) {
 		case 0: return function(target, action);
 		case 1: return function(target, action, strings[0]);
@@ -189,7 +189,7 @@ static NSCharacterSet *wildcardComponentCharacters;
 	
 	if(hasReturnValue) {
 		IMP idFunction = method_getImplementation(actionMethod);
-		id value = [self callIdFunction:idFunction target:target action:action arguments:strings count:numWildcards];
+		id value = [self callIdFunction:(id(*)(id,SEL,...))idFunction target:target action:action arguments:strings count:numWildcards];
 		
 		if([value isKindOfClass:[WATemplate class]])
 			[response appendString:[value result]];

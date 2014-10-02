@@ -98,7 +98,7 @@ NSUInteger TLArgumentCountForSelector(SEL selector) {
 	NSMethodSignature *signature = [object methodSignatureForSelector:selector];
 	
 	if([arguments count] == 0 && strcmp([signature methodReturnType], @encode(id)) == 0)
-		return objc_msgSend(object, selector); // Fast path
+		return ((id(*)(id,SEL))objc_msgSend)(object, selector); // Fast path
 	
 	
 	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
